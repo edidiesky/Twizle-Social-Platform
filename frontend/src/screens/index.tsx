@@ -1,10 +1,13 @@
-import Home from './Home'
+
+import { lazy } from 'react';
+
+const Home = lazy(() => import("./Home"));
+const Auth = lazy(() => import("./Auth"));
 import LayoutIndex from './Layout'
-import SingleIndex from './Single'
-import ShopIndex from './Shop'
 export {
     Home,
     LayoutIndex,
+    Auth
     // SingleIndex,
     // ShopIndex
 }

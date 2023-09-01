@@ -3,12 +3,12 @@ import { styled } from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitter } from 'react-icons/bs'
 import { AnimatePresence } from 'framer-motion';
-import Link from 'next/link'
+import {Link} from 'react-router-dom'
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import RegsiterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
-import UsernameModal from "components/modals/UsernameModal";
-import ProfilePictureModal from "components/modals/ProfilePicture";
+import UsernameModal from "../modals/UsernameModal";
+import ProfilePictureModal from "../modals/ProfilePicture";
 
 const Regsiters: React.FC = () => {
   const [registermodal, setRegisterModal] = useState(false)
