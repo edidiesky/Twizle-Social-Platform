@@ -7,7 +7,7 @@ const InputTextField = styled(TextField)(({ theme }) => ({
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
     border: '1px solid var(--border)',
-    fontFamily: 'CustomFont2_light, sans-serif',
+    fontFamily: 'Nunito, sans-serif',
 
     '& fieldset': {
       borderColor: 'transparent',
@@ -24,24 +24,24 @@ const InputTextField = styled(TextField)(({ theme }) => ({
   },
   '& .MuiOutlinedInput-input': {
     padding: '20px 10px',
-    fontSize: '16px',
+    fontSize: '18px',
     fontWeight: '400',
-    fontFamily: 'CustomFont2_light, sans-serif',
+    fontFamily: 'Nunito, sans-serif',
     color: "var(--dark-1)"
 
   },
   '& .MuiInputLabel-root': {
     fontSize: '17px',
     fontWeight: '400',
-    color:'var(--dark-1)'
+    color: 'var(--dark-1)'
   },
   '& .MuiInputLabel-root.Mui-focused': {
     // Styles when the form is focused
     color: 'var(--blue-1)',
-    fontWeight: '600',
+    fontWeight: '400',
   },
   '& .MuiInputLabel-shrink': {
-    transform: 'translate(12px, 6px) scale(0.75)',
+    transform: 'translate(12px, 7px) scale(0.7)',
     color: 'var(--blue-1)', fontWeight: "normal"
   },
 }));
@@ -56,7 +56,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type EditInputTypes = {
   state?: string;
   label?: string;
-  setState?: SetStateProp<Object>;
+  setState?: (val: string) => void;
   // bio?: string;
   // setBio?: SetStateProp<string>;
   // location?: string;

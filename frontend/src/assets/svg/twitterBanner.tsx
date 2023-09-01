@@ -1,11 +1,12 @@
 import React from 'react';
-const TwitterIcon: React.FC = () => {
+const TwitterBanner: React.FC = () => {
     return (
         <svg viewBox="0 0 24 24"
             aria-hidden="true"
             style={{
-                width: "30px",
-                height: "30px",
+                width: "100%",
+                height: "50%",
+                maxHeight: "380px",
                 color: "var(--dark-1)",
                 position: "relative",
                 fill: "currentcolor",
@@ -22,4 +23,4 @@ const TwitterIcon: React.FC = () => {
 
 
 
-export default TwitterIcon
+export default TwitterBanner

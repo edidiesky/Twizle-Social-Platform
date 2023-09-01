@@ -5,7 +5,7 @@ import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
-import { useAppSelector } from "hooks/reduxtoolkit";
+import { useAppSelector } from "../../hooks/reduxtoolkit";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -31,6 +31,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
       animate={{ opacity: 1, visibility: "visible" }}
     >
       <div className="backdrop" onClick={() => setModal(false)}></div>
+
 
       <motion.div
         variants={slideUp}
@@ -284,11 +285,12 @@ const RegisterModalStyles = styled(motion.div)`
   border-top-right-radius:20px;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+    max-width: 80vw;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1rem 3rem var(--backdrop);
     position: relative;
     min-height: 60rem;
     border-radius:20px;

@@ -18,7 +18,13 @@ export default function App() {
           </Suspense>
           }
           />
-          <Route path="register" element={<Suspense fallback={< >Hi</>}>
+          <Route path="i/flow/signup" element={<Suspense fallback={< >Hi</>}>
+            <Auth />
+          </Suspense>
+          }
+          />
+          {/* login route */}
+          <Route path="i/flow/login" element={<Suspense fallback={< >Hi</>}>
             <Auth />
           </Suspense>
           }
