@@ -7,7 +7,7 @@ const Top: React.FC<TopProps> = () => {
     return (
         <TopStyles className="w-100">
             <div style={{ paddingTop: "1rem" }} className='flex column gap-3'>
-                <h2 className="fs-24 text-bold w-90 auto text-dark">Home</h2>
+                <h2 style={{fontWeight:"800"}} className="fs-24 text-extra-bold w-90 auto text-dark">Home</h2>
                 <div className="w-100 flex item-center">
                     <div className="flex-1 tab text-center fs-16 text-dark text-bold tab-1">
                         <div className="spans text-center">For You</div>

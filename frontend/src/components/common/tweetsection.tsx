@@ -120,8 +120,8 @@ const TweetFormSectionStyles = styled.div`
         padding: 1rem ;
         color:var(--dark-1);
         &::placeholder {
-            font-size: 24px;
-            font-family: "CustomFont2_light", sans-serif;
+            font-size: 20px;
+            font-family: "Nunito", sans-serif;
             color:var(--grey-1);
             font-weight: 400;
         }
