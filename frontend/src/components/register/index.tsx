@@ -10,17 +10,20 @@ import LoginModal from "../modals/LoginModal";
 import UsernameModal from "../modals/UsernameModal";
 import ProfilePictureModal from "../modals/ProfilePicture";
 import TwitterBanner from "../../assets/svg/twitterBanner";
+import { useAppSelector } from "../../hooks/reduxtoolkit";
 
 const Regsiters: React.FC = () => {
+  const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
+
   const [registermodal, setRegisterModal] = useState(false)
   const [loginmodal, setLoginModal] = useState(false)
-  const [username, seUsername] = useState(false)
+  const [username, setUsername] = useState(false)
   const [profile, setProfile] = useState(false)
   return (
     <RegsiterStyles style={{ overflow: "hidden" }}>
       {/* register modal */}
       <AnimatePresence
-        initial={"false"}
+        initial={false}
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
@@ -29,7 +32,7 @@ const Regsiters: React.FC = () => {
       </AnimatePresence>
       {/* login modal */}
       <AnimatePresence
-        initial={"false"}
+        initial={false}
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
@@ -38,17 +41,17 @@ const Regsiters: React.FC = () => {
       </AnimatePresence>
       {/* username modal */}
       <AnimatePresence
-        initial={"false"}
+        initial={false}
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {username && <UsernameModal modal={username}
-          setModal={seUsername} />}
+        {registerisSuccess && <UsernameModal modal={username}
+          setModal={setUsername} />}
       </AnimatePresence>
 
       {/* profile modal */}
       <AnimatePresence
-        initial={"false"}
+        initial={false}
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >

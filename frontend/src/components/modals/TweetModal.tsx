@@ -7,12 +7,11 @@ import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import TweetFormSection from "../common/tweetsection";
 
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
   type?: string;
-  setModal: SetStateProp<Boolean>;
+  setModal: (val: Boolean) => void;
 }
 
 const TweetModal: React.FC<modalType> = ({ modal, setModal, type }) => {

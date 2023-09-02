@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BsTwitter } from 'react-icons/bs'
-import Link from 'next/link'
 import { slideUp } from "../utils/framer";
-import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
+import TwitterIcon from "../../assets/svg/twitter";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -26,7 +25,7 @@ const UsernameModal: React.FC<modalType> = ({ modal, setModal }) => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      <div className="backdrop" onClick={() => setModal(false)}></div>
+      <div className="backdrop"></div>
 
       <motion.div
         variants={slideUp}
@@ -39,7 +38,7 @@ const UsernameModal: React.FC<modalType> = ({ modal, setModal }) => {
 
         <div className="flex column justify-center item-center">
           <div style={{ marginTop: "10px" }} className="icon flex item-center justify-center">
-            <BsTwitter fontSize={'45px'} color='var(--blue-1)' />
+            <TwitterIcon />
           </div>
           <div className="center_content h-100 justify-space w-85 py-1 auto flex gap-1 column">
             <div className="hidden w-85 auto">
@@ -88,7 +87,7 @@ const UsernameModalStyles = styled(motion.div)`
   .formwraper {
     padding-bottom: 3rem;
   }
-  . {
+  .icons {
     width:6rem !important;
     height:6rem !important;
   }
@@ -254,11 +253,12 @@ const UsernameModalStyles = styled(motion.div)`
   border-top-right-radius:20px;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+   max-width: 80vw;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1rem 3rem var(--backdrop);
     position: relative;
     min-height: 60rem;
     border-radius:20px;

@@ -13,7 +13,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
-  setModal: SetStateProp<Boolean>;
+  setModal: (val: string) => void;
 }
 
 const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {

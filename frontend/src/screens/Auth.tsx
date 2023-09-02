@@ -6,6 +6,7 @@ import Auth from '../components/register';
 const AuthIndex: React.FC = () => {
   return (
     <AuthStyles>
+      {/* <Meta */}
       <Auth />
     </AuthStyles>
   )

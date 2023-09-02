@@ -29,7 +29,7 @@
   --blue-1: rgb(29, 155, 240);
   --grey-2: rgb(239, 243, 244);
   --white: #fff;
-  --border: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.24);
   --dark-grey: rgb(15, 20, 25);
   --top: rgba(255, 255, 255, 0.65);
   --dark-grey-hover: #f9f9f9d3;
@@ -291,7 +291,7 @@ button {
 
 .text-extra-bold {
   font-family: "Nunito", sans-serif;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .text-bold {

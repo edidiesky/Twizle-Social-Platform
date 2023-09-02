@@ -12,7 +12,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
-  setModal: SetStateProp<Boolean>;
+  setModal: (val: string) => void;
 }
 
 const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
@@ -264,7 +264,8 @@ const RegisterModalStyles = styled(motion.div)`
   border-top-right-radius:20px;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+    max-width: 80vw;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: var(--white);

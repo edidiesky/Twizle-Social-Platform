@@ -6,12 +6,14 @@ import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
 import { useAppSelector } from "../../hooks/reduxtoolkit";
+import LoaderIndex from "../loaders";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
+
 type modalType = {
   modal?: Boolean;
-  setModal: SetStateProp<Boolean>;
+  setModal: (val: Boolean) => void;
 }
 
 const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
@@ -20,7 +22,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
   const [password, setPassword] = useState('');
   const [index, setIndex] = useState(0);
 
-  const { registerisLoading } = useAppSelector(store => store.auth)
+  const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
   // console.log(registerisLoading)
 
   return (
@@ -30,7 +32,10 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      <div className="backdrop" onClick={() => setModal(false)}></div>
+      {
+        registerisLoading && <LoaderIndex />
+      }
+      <div className="backdrop"></div>
 
 
       <motion.div
@@ -96,7 +101,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
             <div className="w-85 formwraper auto flex column gap-3">
 
               <h4 className="fs-30 text-dark text-extra-bold">Create your account</h4>
-              <div className="flex w-100 column" style={{ gap: "10px" }}>
+              <div className="flex w-100 column" style={{ gap: "20px" }}>
                 <FormInput state={name} label={'Name'} setState={setName} />
                 <FormInput state={email} label={'Email'} setState={setEmail} />
                 <FormInput state={password} label={'Password'} setState={setPassword} />

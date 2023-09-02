@@ -6,6 +6,7 @@ import {
   Home,
   LayoutIndex,
 } from "./screens";
+import ProtectRoute from "./utils/ProtectRoute";
 
 export default function App() {
   const [height, setHeight] = useState(0);
@@ -14,7 +15,9 @@ export default function App() {
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
           <Route index element={<Suspense fallback={< >Hi</>}>
-            <Home />
+            <ProtectRoute>
+              <Home />
+            </ProtectRoute>
           </Suspense>
           }
           />
