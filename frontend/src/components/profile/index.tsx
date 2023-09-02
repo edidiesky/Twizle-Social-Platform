@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
             <LeftSidebarIndex />
             {/* control the update modal */}
             <AnimatePresence
-                initial="false"
+                initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >

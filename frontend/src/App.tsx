@@ -5,6 +5,7 @@ import {
   Auth,
   Home,
   LayoutIndex,
+  Profile,
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -30,6 +31,13 @@ export default function App() {
           {/* login route */}
           <Route path="i/flow/login" element={<Suspense fallback={<Preloader/>}>
             <Auth />
+          </Suspense>
+          }
+          />
+
+          {/* user profile route */}
+          <Route path=":name" element={<Suspense fallback={<Preloader />}>
+            <Profile />
           </Suspense>
           }
           />
