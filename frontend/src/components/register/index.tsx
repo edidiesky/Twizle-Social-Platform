@@ -27,7 +27,7 @@ const Regsiters: React.FC = () => {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {registermodal && <RegsiterModal modal={registermodal}
+        {registermodal && !registerisSuccess && <RegsiterModal modal={registermodal}
           setModal={setRegisterModal} />}
       </AnimatePresence>
       {/* login modal */}

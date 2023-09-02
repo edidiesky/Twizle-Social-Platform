@@ -22,7 +22,9 @@ export const registerUser = createAsyncThunk<{
   async (registerData, { rejectWithValue }) => {
     try {
       const response = await axios.post(Registerurl, registerData);
-      if (response.status === 201) {
+      if (response.status === 200) {
+        localStorage.setItem("User", JSON.stringify(response.data.user));
+        localStorage.setItem("Usertoken", response.data.token);
         return response.data;
       } else {
         return rejectWithValue(response.data.error);
@@ -46,9 +48,13 @@ export const loginUser = createAsyncThunk<{
     try {
 
       const response = await axios.post(Loginurl, loginData);
-      localStorage.setItem("User", JSON.stringify(response.data.user));
-      localStorage.setItem("Usertoken", response.data.token);
-      return response.data;
+      if (response.status === 200) {
+        localStorage.setItem("User", JSON.stringify(response.data.user));
+        localStorage.setItem("Usertoken", response.data.token);
+        return response.data;
+      } else {
+        return rejectWithValue(response.data.error);
+      }
     } catch (err) {
       const error: AxiosError<KnownError> = err as any;
       if (!error.response) {

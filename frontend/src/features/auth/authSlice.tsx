@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
 import { loginUser, registerUser } from './authReducer'
 
+
+const userData = JSON.parse(localStorage.getItem("User") || 'false');
+const userToken = localStorage.getItem("Usertoken");
 // Define a type for the slice state
 interface authState {
   value: number,
@@ -22,9 +24,9 @@ interface authState {
 // Define the initial state using that type
 const initialState: authState = {
   value: 0,
-  userInfo: '',
+  userInfo: userData ? userData:'',
   users: [],
-  token: "",
+  token: userToken ? userToken:"",
 
   registerisLoading: false,
   registerisSuccess: false,
