@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BsTwitter } from 'react-icons/bs'
-import { slideUp } from "../utils/framer";
+import { slideUp } from "../utils/framer"
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
 import TwitterIcon from "../../assets/svg/twitter";
+import { useAppDispatch } from "../../hooks/reduxtoolkit";
+import { UpdateProfile } from "../../features/auth/authReducer";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -17,6 +19,11 @@ type modalType = {
 const UsernameModal: React.FC<modalType> = ({ modal, setModal }) => {
 
   const [username, setUsername] = useState('');
+  const dispatch = useAppDispatch()
+
+  const handleUpdateUserName = () => {
+    dispatch(UpdateProfile({ display_name: username }))
+  }
 
   return (
     <UsernameModalStyles
@@ -62,7 +69,7 @@ const UsernameModal: React.FC<modalType> = ({ modal, setModal }) => {
           </div>
         </div>
         <div className="flex w-85 py-2 auto item-center justify-center">
-          <div className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">Skip For Now</div>
+          <div onClick={handleUpdateUserName} className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">Skip For Now</div>
         </div>
 
       </motion.div>

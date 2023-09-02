@@ -64,7 +64,7 @@ const Regsiters: React.FC = () => {
         <TwitterBanner />
       </div>
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
-        <div className="w-85 auto h-100 flex item-start justify-center gap-2 column">
+        <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
           <div className="flex column gap-2">
             <h1 className="text-dark">Happening now</h1>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
@@ -85,7 +85,7 @@ const Regsiters: React.FC = () => {
             <div onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
             <h5 className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
           </div>
-          <div style={{marginTop:"3rem"}} className="flex authWrapper column gap-2">
+          <div style={{ marginTop: "3rem" }} className="flex authWrapper column gap-2">
             <h4 className="fs-18 text-extra-bold">Already have an account?</h4>
             <div onClick={() => setLoginModal(true)} className="authBtn w-100 gap-2 flex fs-16 text-dark item-center">
               <div className="w-100 text-center">Sign in</div>{" "}
@@ -104,8 +104,20 @@ const RegsiterStyles = styled.div`
   min-height: 100vh;
   @media (max-width:980px) {
     display: flex;
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
+    align-items: center;
+    justify-content: center;
     gap: 5rem;
+  }
+  .auth_right_content {
+     @media (max-width:780px) {
+    display: flex;
+    /* flex-direction: column-reverse; */
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    width: 100%;
+  }
   }
   .auth_right {
     justify-content: space-around;

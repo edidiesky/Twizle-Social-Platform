@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { loginUser, registerUser } from './authReducer'
+import { UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -19,14 +19,24 @@ interface authState {
   loginisLoading?: Boolean,
   loginisSuccess?: Boolean,
   loginisError?: Boolean,
+
+  userprofileisLoading?: Boolean,
+  userprofileisSuccess?: Boolean,
+  userprofileisError?: Boolean,
+
+  alertText?: string,
+  showAlert?: Boolean,
+  alertType?: string,
+
+
 }
 
 // Define the initial state using that type
 const initialState: authState = {
   value: 0,
-  userInfo: userData ? userData:'',
+  userInfo: userData ? userData : '',
   users: [],
-  token: userToken ? userToken:"",
+  token: userToken ? userToken : "",
 
   registerisLoading: false,
   registerisSuccess: false,
@@ -35,6 +45,15 @@ const initialState: authState = {
   loginisLoading: false,
   loginisSuccess: false,
   loginisError: false,
+
+
+  userprofileisLoading: false,
+  userprofileisSuccess: false,
+  userprofileisError: false,
+
+  alertText: '',
+  showAlert: false,
+  alertType: '',
 
 }
 
@@ -68,6 +87,9 @@ export const authSlice = createSlice({
       state.registerisSuccess = false
       state.registerisError = true
       state.registerisLoading = false
+      state.alertText = action.payload || ''
+      state.showAlert = true
+      state.alertType = 'danger'
     })
 
     // registration build case
@@ -83,6 +105,29 @@ export const authSlice = createSlice({
       state.registerisSuccess = false
       state.registerisError = true
       state.registerisLoading = false
+      state?.alertText = action?.payload || ''
+      state.showAlert = true
+      state.alertType = 'danger'
+    })
+
+    builder.addCase(UpdateProfile.pending, (state, action) => {
+      state.userprofileisLoading = true
+    })
+    builder.addCase(UpdateProfile.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      state.userprofileisLoading = false
+      state.userDetails = action.payload
+      state.alertText = 'Profile Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(UpdateProfile.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.userprofileisLoading = false
+      state.alertText = action.payload || ''
+      state.showAlert = true
+      state.alertType = 'danger'
     })
   },
 })

@@ -26,6 +26,7 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
   const Tempuser = {
     email,
     password: hashedpassword,
+    name
   };
   const user = await User.create(Tempuser);
 
