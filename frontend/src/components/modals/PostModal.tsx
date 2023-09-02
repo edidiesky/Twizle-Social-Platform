@@ -5,7 +5,11 @@ import styleds from "styled-components";
 import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
-import TweetFormSection from "../common/tweetsection";
+import PostFormSection from "../common/tweetsection";
+import MediaIcon from "../../assets/svg/media";
+import GiIcon from "../../assets/svg/gif";
+import ScheduleIcon from "../../assets/svg/schedule";
+import PollIcon from "../../assets/svg/poll";
 
 
 type modalType = {
@@ -14,10 +18,10 @@ type modalType = {
   setModal: (val: Boolean) => void;
 }
 
-const TweetModal: React.FC<modalType> = ({ modal, setModal, type }) => {
+const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
   return (
-    <TweetModalStyles
+    <PostModalStyles
       as={motion.div}
       initial={{ opacity: 0, visibility: "hidden" }}
       exit={{ opacity: 0, visibility: "hidden" }}
@@ -33,53 +37,56 @@ const TweetModal: React.FC<modalType> = ({ modal, setModal, type }) => {
         className={"deleteCard shadow gap-2"}
       >
         {/* top of the feed */}
-        <div className="top w-100 flex">
+        <div className="top w-100 flex column gap-2">
           <div className="w-90 auto">
             <div className="icons text-dark flex item-center justify-center">
               <RxCross2 fontSize={'20px'} />
             </div>
           </div>
-        </div>
-        {/* original feed */}
-        <div className="tweet_content w-100">
-          <div className="w-90 auto flex item-start gap-1">
-            <div className="image_wrapper">
-              <div className="image_gradient"></div>
-              <img src="/images/johanna-richardson.jpg" alt="" className="avatar_profile" />
-            </div>
-            <div className="flex flex-1 column gap-1">
-              <div className="flex w-85 column flex-1" style={{ gap: '.7rem' }}>
-                <h4 className="fs-18 text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
-                  Wizarad
-                  <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                  <span className="text-light fs-16 text-grey block">@wiz102_263</span>
-                  <span className="text-light fs-16 text-grey block">· 10h</span>
-                </h4>
-                <h5 className="w-90 text-light family1 fs-18">
-                  Japan abeg na 😭😭
-
-                  Zambia wake up
-                  Zambia wake up
-                  Zambia wake up
-                  Zambia wake up
-                </h5>
-                <span className="text-light fs-16 text-grey block">Replying to <span className="text-blue">Wizarab10</span> </span>
 
 
+          <div className="flex w-100 column gap-1">
+            <div className="w-90 auto flex item-start gap-1">
+              <div className="image_wrapper">
+                <img src={"https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg"} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                <div className="image_gradient"></div>
+              </div>
+              <div className="area flex-1">
+                <textarea placeholder='What is Happening' className="text w-100"></textarea>
               </div>
             </div>
+           
+            <div className="flex bottom w-90 auto item-center justify-space">
+              <div className="flex item-center">
+                <div className="icons flex item-center justify-center">
+                  <MediaIcon />
+                </div> <div className="icons flex item-center justify-center">
+                  <GiIcon />
+                </div>
+                <div className="icons flex item-center justify-center">
+                  <ScheduleIcon />
+                </div>
+                <div className="icons flex item-center justify-center">
+                  <PollIcon />
+                </div>
+                <div className="icons flex item-center justify-center">
+                  <GiIcon />
+                </div>
+              </div>
+              <div className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
+            </div>
           </div>
+
         </div>
-        <TweetFormSection />
 
       </motion.div>
-    </TweetModalStyles>
+    </PostModalStyles>
     // <h2>hello</h2>
   );
 }
-export default TweetModal
+export default PostModal
 
-const TweetModalStyles = styleds(motion.div)`
+const PostModalStyles = styleds(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -89,11 +96,36 @@ const TweetModalStyles = styleds(motion.div)`
   align-items: start;
   justify-content: center;
   top: 0;
-  .area {
-    height: 8rem !important;
-/* border-bottom: 1px solid rgba(0,0,0,.1); */
-
+.bottom {
+    border-top: 1px solid var(--border);
+    padding:10px 0;
+    padding-bottom:6px;
 }
+.btn.btn-3 {
+  background:var(--blue-1);
+}
+
+.area {
+        height: 17rem;
+
+    }
+        .text {
+        resize: none;
+        border:none;
+        outline:none;
+        font-size: 20px;
+        font-family: inherit;
+        font-weight: 400;
+        background-color: transparent;
+        padding: 1rem ;
+        color:var(--dark-1);
+        &::placeholder {
+            font-size: 23px;
+            font-family: "Nunito", sans-serif;
+            color:var(--grey-1);
+            font-weight: 400;
+        }
+    }
 
   .image_wrapper {
       width:5rem;

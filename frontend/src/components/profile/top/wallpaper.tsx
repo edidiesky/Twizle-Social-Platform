@@ -5,7 +5,7 @@ const WallpaperIndex: React.FC = () => {
   return (
     <WallpaperStyles>
       <div className="image_wrapper">
-        <img src="./images/john-mileham.jpg" alt="" className="avatar_profile" />
+        <img src="https://i.pinimg.com/236x/36/d5/5d/36d55d4351eaa9be39de78c2ed522e27.jpg" alt="" className="avatar_profile" />
         <div className="image_gradient"></div>
       </div>
     </WallpaperStyles>
@@ -47,7 +47,7 @@ const WallpaperStyles = styled.div`
       border-radius:50%;
       /* transform: translateY(-100%); */
       position: absolute;
-      
+      object-fit: cover;
     }
     }
 

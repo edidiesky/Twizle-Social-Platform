@@ -40,19 +40,18 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
           <div className="w-90 auto flex item-center justify-space item-center">
             <div className="flex item-center gap-3 py-1">
               <div className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
-              <h3 className="fs-20 text-bold">Edit profile</h3>
+              <h3 className="fs-20 text-extra-bold">Edit profile</h3>
             </div>
             <div className=" flex item-center justify-end">
               <div className="btn btn-3 fs-14 text-bold text-white">Save</div>
             </div>
           </div>
         </div>
-        <div className="center_content flex column">
+        <div className="center_content flex gap-2 column">
           <div className="w-100 profile_background flex item-center justify-center">
-
           </div>
           <div className="image_wrapper">
-            <img src="./images/john-mileham.jpg" alt="" className="avatar_profile" />
+            <img src="https://i.pinimg.com/236x/e6/33/ee/e633eefbeb77cd4323a1557d33c91c83.jpg" alt="" className="avatar_profile" />
             <div className="image_gradient"></div>
           </div>
           <div className="w-90 formwraper auto flex column gap-2">
@@ -204,15 +203,17 @@ const DeleteContainer = styleds(motion.div)`
       border-radius:50%;
       /* transform: translateY(-100%); */
       position: absolute;
+      object-fit:cover;
       
     }
   .profile_background {
     background-color: #B2B2B2;
-    height: 20rem;
+    height: 200px;
     position:relative;
+    
   }
   .btn-3 {
-        padding: 1rem 2rem;
+    padding: 1rem 2rem;
   }
   .icon {
   }
@@ -261,22 +262,23 @@ const DeleteContainer = styleds(motion.div)`
     width: 100%;
   }
   .authtop {
-    background-color: rgba(255, 255, 255, 0.875);
+  background-color: rgba(255, 255, 255, 0.875);
   z-index: 3000;
-  backdrop-filter: blur(54px);
+  backdrop-filter: blur(14px);
   position:sticky;
   left:0;
   top:0;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+    max-width: 80vw;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.1);
     position: relative;
-    height: 60rem;
+   height: 650px;
     overflow: auto;
 
     @media (max-width:980px) {
@@ -286,16 +288,6 @@ const DeleteContainer = styleds(motion.div)`
       width: 90%;
     }
 
-  }
-  .deleteCard_wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 20px;
-    position: relative;
-    height: 60rem;
-    overflow: auto;
   }
   .center_content {
     background: #fff;

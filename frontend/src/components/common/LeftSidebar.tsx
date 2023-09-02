@@ -15,6 +15,7 @@ import ListIcon from '../../assets/svg/leftsidebaricons/list';
 import CommunitiesIcon from '../../assets/svg/leftsidebaricons/communities';
 import BadgeIcon from '../../assets/svg/leftsidebaricons/badge';
 import ProfileIcon from '../../assets/svg/leftsidebaricons/profile';
+import PostModal from '../modals/PostModal';
 const list = [
     {
         title: "Home",
@@ -74,7 +75,7 @@ const LeftSidebarIndex = () => {
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
-                {tweet && <TweetModal modal={tweet} setModal={setTweet} />}
+                {tweet && <PostModal modal={tweet} setModal={setTweet} />}
             </AnimatePresence>
             <LeftSidebarStyles>
 
