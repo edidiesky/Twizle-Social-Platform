@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BsImages, BsEmojiSmile } from 'react-icons/bs'
-import TwitterIcon from '../../assets/svg/twitter';
+import GiIcon from '../../assets/svg/gif';
 import MediaIcon from '../../assets/svg/media';
 import ScheduleIcon from '../../assets/svg/schedule';
 import PollIcon from '../../assets/svg/poll';
@@ -25,7 +25,7 @@ const TweetFormSection = () => {
                             <div className="icons flex item-center justify-center">
                                 <MediaIcon />
                             </div> <div className="icons flex item-center justify-center">
-                                <TwitterIcon />
+                                <GiIcon />
                             </div>
                             <div className="icons flex item-center justify-center">
                                 <ScheduleIcon />
@@ -34,7 +34,7 @@ const TweetFormSection = () => {
                                 <PollIcon />
                             </div>
                             <div className="icons flex item-center justify-center">
-                                <TwitterIcon />
+                                <GiIcon />
                             </div>
                         </div>
                         <div className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>

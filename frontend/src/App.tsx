@@ -7,6 +7,7 @@ import {
   LayoutIndex,
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
+import Preloader from "./components/loaders/preloader";
 
 export default function App() {
   const [height, setHeight] = useState(0);
@@ -14,20 +15,20 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
-          <Route index element={<Suspense fallback={< >Hi</>}>
+          <Route index element={<Suspense fallback={<Preloader/>}>
             <ProtectRoute>
               <Home />
             </ProtectRoute>
           </Suspense>
           }
           />
-          <Route path="i/flow/signup" element={<Suspense fallback={< >Hi</>}>
+          <Route path="i/flow/signup" element={<Suspense fallback={<Preloader/>}>
             <Auth />
           </Suspense>
           }
           />
           {/* login route */}
-          <Route path="i/flow/login" element={<Suspense fallback={< >Hi</>}>
+          <Route path="i/flow/login" element={<Suspense fallback={<Preloader/>}>
             <Auth />
           </Suspense>
           }

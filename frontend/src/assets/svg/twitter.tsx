@@ -4,8 +4,8 @@ const TwitterIcon: React.FC = () => {
         <svg viewBox="0 0 24 24"
             aria-hidden="true"
             style={{
-                width: "40px",
-                height: "40px",
+                width: "80px",
+                height: "80px",
                 color: "var(--dark-1)",
                 position: "relative",
                 fill: "currentcolor",
