@@ -48,23 +48,24 @@ export const flip = {
 
 export const slideUp = {
   hidden: {
-    transform: "translateY('300%)",
-    opacity: 1,
-   
+    transform: "translateY(100%)",
+    opacity: 0,
+    transition: {
+      delay: 0.3,
+    },
   },
   visible: {
     transform: "translateY(0)",
     opacity: 1,
     transition: {
-      duration: 0.3,
-      type: "spring",
-      damping: 26,
-      stiffness: 600,
+      duration: 0.6,
     },
   },
   exit: {
-    transform: "translateY(300%)",
-    opacity: 1,
-   
+    transform: "translateY(100%)",
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
   },
 };

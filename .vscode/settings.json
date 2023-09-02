@@ -1,0 +1,10 @@
+{
+  "typescript.tsdk": "backend/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdkVersion": "3.9.7",
+  "typescript.tscPath": "backend/node_modules/typescript/bin/tsc",
+  "typescript.tsserverPath": "backend/node_modules/typescript/bin/tsserver",
+  "typescript.tscOptions": {
+    "project": "backend/tsconfig.json"
+  }
+}

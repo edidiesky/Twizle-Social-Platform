@@ -38,25 +38,25 @@ const Message: React.FC<messageprops> = ({
 const MessageContent = styled.div`
   min-width: 260px;
   padding: 1.2rem 2rem;
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
-  background-color: rgb(3, 116, 192);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+  background-color: var(--blue-1);
   z-index: 10000;
-  border-radius: 40px;
+  border-radius: 4px;
   font-size: 16px;
   font-weight: 600;
   color: var(--white);
   transition: all 0.6s;
   text-align:center;
   position:fixed;
-  top:-100%;
+  /* top:-100%; */
   left:50%;
   transform:translateX(-50%);
   /* transform: translateY(-1000%); */
-  /* top: 5%; */
+  top: -10005%;
 
   &.active {
-    transform: translateY(100%);
-  }
+    top: 5%;
+  } 
   &.danger {
     background-color: var(--red);
     color: #fff;

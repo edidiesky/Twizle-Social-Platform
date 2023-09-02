@@ -5,8 +5,9 @@ import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
-import { useAppSelector } from "../../hooks/reduxtoolkit";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import LoaderIndex from "../loaders";
+import { registerUser } from "../../features/auth/authReducer";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -23,7 +24,13 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
   const [index, setIndex] = useState(0);
 
   const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
+  const dispatch = useAppDispatch()
   // console.log(registerisLoading)
+
+  const HandleRegisterUser = () => {
+    // e.preventDefault()
+    dispatch(registerUser({ email, name, password }))
+  }
 
   return (
     <RegisterModalStyles
@@ -112,7 +119,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
                 </div> */}
               </div>
             </div>
-            <div className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
+                <div onClick={HandleRegisterUser} className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
             </div>
           </div>
         }

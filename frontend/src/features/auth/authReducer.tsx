@@ -1,46 +1,60 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const Registerurl: string = "/api/v1/auth/register";
 const Loginurl = "/api/v1/auth/login";
 
-interface RegisterData {
-    username?: string;
-    email?: string;
-    password?: string;
-  }
-  
+type RegisterData =  {
+  name?: string;
+  email?: string;
+  password?: string;
+}
 
-export const registerUser = createAsyncThunk(
+type KnownError = {
+  errorMessage: string;
+}
+
+export const registerUser = createAsyncThunk<{
+  rejectValue: KnownError,
+ 
+}, RegisterData>(
   "registerUser",
-  async (registerData:RegisterData, thunkAPI) => {
+  async (registerData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(Registerurl, registerData);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-      );
+      const response = await axios.post(Registerurl, registerData);
+      if (response.status === 201) {
+        return response.data;
+      } else {
+        return rejectWithValue(response.data.error);
+      }
+      // console.log(registerData)
+    } catch (err) {
+      const error: AxiosError<KnownError> = err as any;
+      if (!error.response) {
+        throw err;
+      }
+
     }
   }
 );
 
-export const loginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk<{
+  rejectValue: KnownError,
+}, RegisterData>(
   "loginUser",
-  async (loginData:RegisterData, thunkAPI) => {
+  async (loginData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(Loginurl, loginData);
-      localStorage.setItem("User", JSON.stringify(data.user));
-      localStorage.setItem("Usertoken", data.token);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-      );
+
+      const response = await axios.post(Loginurl, loginData);
+      localStorage.setItem("User", JSON.stringify(response.data.user));
+      localStorage.setItem("Usertoken", response.data.token);
+      return response.data;
+    } catch (err) {
+      const error: AxiosError<KnownError> = err as any;
+      if (!error.response) {
+        throw err;
+      }
+
     }
   }
 );
