@@ -8,7 +8,8 @@ type RegisterData = {
   name?: string;
   email?: string;
   password?: string;
-  display_name?: string
+  display_name?: string,
+  _id?:string
 }
 
 type KnownError = {
@@ -25,7 +26,7 @@ export const registerUser = createAsyncThunk<{
       const response = await axios.post(Registerurl, registerData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data;
+      return response.data.user;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -46,7 +47,7 @@ export const loginUser = createAsyncThunk<{
       const response = await axios.post(Loginurl, loginData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data;
+      return response.data.user;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -67,15 +68,15 @@ export const UpdateProfile = createAsyncThunk<{
 
     try {
       const { auth } = getState() as { auth: { userInfo: Object, token: string } };
+      // console.log(auth.token)
+      // console.log(profiledata?._id)
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
         },
       };
-      // const { _id } = auth.userInfo;
-      // console.log()
       const response = await axios.put(
-        `/api/v1/user/profile/${auth.userInfo?._id}`,
+        `/api/v1/user/profile/${profiledata?._id}`,
         profiledata,
         config
       );

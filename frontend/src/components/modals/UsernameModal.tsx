@@ -6,24 +6,38 @@ import { slideUp } from "../utils/framer"
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
 import TwitterIcon from "../../assets/svg/twitter";
-import { useAppDispatch } from "../../hooks/reduxtoolkit";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { UpdateProfile } from "../../features/auth/authReducer";
+import { useNavigate } from "react-router-dom";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
-type modalType = {
-  modal?: Boolean;
-  setModal: SetStateProp<Boolean>;
-}
 
-const UsernameModal: React.FC<modalType> = ({ modal, setModal }) => {
+
+const UsernameModal = () => {
+
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState('');
+  const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
+
   const dispatch = useAppDispatch()
 
   const handleUpdateUserName = () => {
-    dispatch(UpdateProfile({ display_name: username }))
+    dispatch(UpdateProfile({ display_name: username, _id: userInfo?._id }))
   }
+
+  // navigate home if update profile is succesfull
+  useEffect(() => {
+    if (userprofileisSuccess) {
+      setTimeout(() => {
+        navigate('/')
+      }, 4000);
+
+      return () => clearTimeout(navigate('/'), 4000)
+
+    }
+  }, [userprofileisSuccess])
 
   return (
     <UsernameModalStyles

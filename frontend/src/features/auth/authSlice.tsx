@@ -7,9 +7,8 @@ const userData = JSON.parse(localStorage.getItem("User") || 'false');
 const userToken = localStorage.getItem("Usertoken");
 // Define a type for the slice state
 interface authState {
-  value: number,
-  userInfo?: Object,
-  userDetails?: Object,
+  userInfo?: any,
+  userDetails?: {},
   users?: [],
   token?: string,
   registerisLoading?: Boolean,
@@ -24,7 +23,7 @@ interface authState {
   userprofileisSuccess?: Boolean,
   userprofileisError?: Boolean,
 
-  alertText?: string,
+  alertText?: any,
   showAlert?: Boolean,
   alertType?: string,
 
@@ -33,8 +32,8 @@ interface authState {
 
 // Define the initial state using that type
 const initialState: authState = {
-  value: 0,
-  userInfo: userData ? userData : '',
+  userInfo: userData ? userData : "",
+  userDetails:  {},
   users: [],
   token: userToken ? userToken : "",
 
@@ -62,15 +61,8 @@ export const authSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
+    clearUserProfile: (state, action) => {
+      state = initialState
     },
   },
   extraReducers: (builder) => {
@@ -81,15 +73,16 @@ export const authSlice = createSlice({
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.registerisSuccess = true
       state.registerisLoading = false
-      state.userDetails = action.payload
+      state.userInfo = action.payload
     })
     builder.addCase(registerUser.rejected, (state, action) => {
       state.registerisSuccess = false
       state.registerisError = true
       state.registerisLoading = false
-      state.alertText = action.payload || ''
       state.showAlert = true
       state.alertType = 'danger'
+      state.alertText = action.payload
+
     })
 
     // registration build case
@@ -99,15 +92,16 @@ export const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.registerisSuccess = true
       state.registerisLoading = false
-      state.userDetails = action.payload
+      state.userInfo = action.payload
     })
     builder.addCase(loginUser.rejected, (state, action) => {
       state.registerisSuccess = false
       state.registerisError = true
       state.registerisLoading = false
-      state?.alertText = action?.payload || ''
       state.showAlert = true
       state.alertType = 'danger'
+      state.alertText = action.payload
+
     })
 
     builder.addCase(UpdateProfile.pending, (state, action) => {
@@ -116,7 +110,7 @@ export const authSlice = createSlice({
     builder.addCase(UpdateProfile.fulfilled, (state, action) => {
       state.userprofileisSuccess = true
       state.userprofileisLoading = false
-      state.userDetails = action.payload
+      state.userInfo = action.payload
       state.alertText = 'Profile Update succesfully'
       state.showAlert = true
       state.alertType = 'success'
@@ -125,14 +119,15 @@ export const authSlice = createSlice({
       state.userprofileisSuccess = false
       state.userprofileisError = true
       state.userprofileisLoading = false
-      state.alertText = action.payload || ''
       state.showAlert = true
       state.alertType = 'danger'
+      state.alertText = action.payload
+
     })
   },
 })
 
-export const { increment, decrement, incrementByAmount } = authSlice.actions
+export const { clearUserProfile } = authSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.auth.value
