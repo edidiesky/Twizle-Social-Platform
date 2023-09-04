@@ -157,13 +157,14 @@ const FeedCardStyles = styled.div`
                 visibility: visible;
                 width: 100%;
                 transition: all .4s;
+                border-radius:5px;
                 @media (max-width:400px) {
                 padding:1.7rem 2rem;
 
                 }
                 &:hover {
                    /* background-color: #f1f1f1; */
-                   background-color: var(--dark-grey-hover);
+                   background-color: var(--grey-hover);
 
                }
             }

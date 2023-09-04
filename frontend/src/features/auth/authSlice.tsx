@@ -87,17 +87,17 @@ export const authSlice = createSlice({
 
     // registration build case
     builder.addCase(loginUser.pending, (state, action) => {
-      state.registerisLoading = true
+      state.loginisLoading = true
     })
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.registerisSuccess = true
-      state.registerisLoading = false
+      state.loginisSuccess = true
+      state.loginisLoading = false
       state.userInfo = action.payload
     })
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.registerisSuccess = false
-      state.registerisError = true
-      state.registerisLoading = false
+      state.loginisSuccess = false
+      state.loginisError = true
+      state.loginisLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload

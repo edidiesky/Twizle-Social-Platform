@@ -179,7 +179,8 @@ const PostModalStyles = styleds(motion.div)`
     width: 100%;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+    max-width: 80vw;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     background: var(--white);

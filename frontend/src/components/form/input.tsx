@@ -56,6 +56,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type EditInputTypes = {
   state?: string;
   label?: string;
+  type?: string;
   setState?: (val: string) => void;
   // bio?: string;
   // setBio?: SetStateProp<string>;
@@ -71,7 +72,7 @@ type EditInputTypes = {
 type FormInputProps = EditInput & EditInputTypes;
 
 
-const FormInput: React.FC<FormInputProps> = ({ types, setState, state, label }) => {
+const FormInput: React.FC<FormInputProps> = ({ types, type, setState, state, label }) => {
   const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (setState) {
       setState(e.target.value);
@@ -81,6 +82,7 @@ const FormInput: React.FC<FormInputProps> = ({ types, setState, state, label }) 
   return (
     <InputTextField
       label={label}
+      type={type}
       variant="outlined"
       fullWidth
       value={state}

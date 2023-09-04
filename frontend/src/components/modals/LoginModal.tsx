@@ -7,6 +7,10 @@ import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
+import { loginUser } from "../../features/auth/authReducer";
+import LoaderIndex from "../loaders";
+import { useNavigate } from "react-router-dom";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -16,10 +20,30 @@ type modalType = {
 }
 
 const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [index, setIndex] = useState(0);
+  const { loginisLoading, loginisSuccess } = useAppSelector(store => store.auth)
+
+  const dispatch = useAppDispatch()
+
+
+  const handleLoginUser = () => {
+    // e.preventDefault()
+    dispatch(loginUser({ email, password }))
+  }
+
+  useEffect(() => {
+    if (loginisSuccess) {
+      setTimeout(() => {
+        navigate('/')
+      }, 4000);
+
+      return () => clearTimeout(navigate('/'), 4000)
+
+    }
+  }, [loginisSuccess])
 
   return (
     <RegisterModalStyles
@@ -28,6 +52,9 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
+      {
+        loginisLoading && <LoaderIndex />
+      }
       <div className="backdrop" onClick={() => setModal(false)}></div>
 
       <motion.div
@@ -43,81 +70,38 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
             <div className="flex item-center gap-3 py-1">
               <div onClick={() => setModal(false)} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
             </div>
-            {
-              index === 1 ? <h4 className="fs-20 text-dark text-extra-bold">
-                Step 1 of 2</h4> : index === 2 ? <h4 className="fs-20 text-dark text-extra-bold">
-                  Step 2 of 2</h4> : ''
-            }
           </div>
+        </div> <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
+          <div style={{ width: "70%" }} className="hidden w-85 auto">
+            <div className="w-85 auto">
+              <Message showAlert={false} alertText={'Hello Hi are u fine'} /></div>
+          </div>
+          <div className="w-85 formwraper auto flex column gap-3">
+            <h4 className="fs-35 text-dark text-center text-extra-bold text-light">Sign in to Twitter</h4>
+            <div className="flex w-100 column" style={{ gap: "10px" }}>
+              <div className="flex w-100 column gap-2 item-start">
+                <div className="authBtn gap-2 flex fs-16 text-dark item-center">
+                  <FcGoogle fontSize={"24px"} />{" "}
+                  <div className="w-100 text-center">Continue with Google</div>{" "}
+                </div>
+
+                <div className="authBtn gap-2 flex fs-16 text-dark item-center">
+                  <FaGithub fontSize={"24px"} />{" "}
+                  <div className="w-100 text-center">Continue with Github</div>{" "}
+                </div>
+              </div>
+              <div className="option">or</div>
+
+
+              <FormInput state={email} label={'Email'} setState={setEmail} />
+              <FormInput state={password} type='password' label={'Password'} setState={setPassword} />
+
+            </div>
+            <div onClick={handleLoginUser} className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+            </div>
+          </div>
+
         </div>
-        {
-          index === 1 ? <div className="center_content h-100 justify-space w-85 py-1 auto flex column">
-
-            <div className="w-85 formwraper auto flex column gap-3">
-              <h4 className="fs-35 text-extra-bold">Customize your experience</h4>
-              <div className="flex w-100 column gap-2">
-                <div className="flex column gap-1">
-                  <h5 className="fs-24 py-2 text-extra-bold"> Track where you see Twitter content across the web
-                    <span className="text-light fs-16 py-1 block text-dark">
-                      Twitter uses this data to personalize your experience. This web browsing history will never be stored with your name, email, or phone number.
-                    </span>
-
-
-                  </h5>
-                </div>
-                <h5 className="fs-16 text-light text-grey">By signing up, you agree to our Terms, Privacy Policy, and Cookie Use. Twitter may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy. Learn more</h5>
-              </div>
-            </div>
-            <div className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
-          </div> : index === 2 ? <div className="center_content h-100 justify-space w-85 py-2 auto flex column">
-
-            <div className="w-85 formwraper auto flex column gap-3">
-              <h4 className="fs-30 text-extra-bold">Create your account</h4>
-              <div className="flex w-100 column gap-2">
-                <FormInput state={name} label={'Name'} setState={setName} />
-                <FormInput state={name} label={'Name'} setState={setName} />
-                <div className="flex column gap-1">
-                  <h5 className="fs-16 py-2 text-extra-bold">  Date of birth
-                    <span className="text-light py-1 block text-grey">This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</span>
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
-          </div> : <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
-            <div style={{width:"70%"}} className="hidden w-85 auto">
-              <div className="w-85 auto">
-                <Message showAlert={false} alertText={'Hello Hi are u fine'} /></div>
-            </div>
-            <div className="w-85 formwraper auto flex column gap-3">
-              <h4 className="fs-35 text-dark text-center text-light">Sign in to Twitter</h4>
-              <div className="flex w-100 column" style={{ gap: "10px" }}>
-                <div className="flex w-100 column gap-2 item-start">
-                  <div className="authBtn gap-2 flex fs-16 text-dark item-center">
-                    <FcGoogle fontSize={"24px"} />{" "}
-                    <div className="w-100 text-center">Continue with Google</div>{" "}
-                  </div>
-
-                  <div className="authBtn gap-2 flex fs-16 text-dark item-center">
-                    <FaGithub fontSize={"24px"} />{" "}
-                    <div className="w-100 text-center">Continue with Github</div>{" "}
-                  </div>
-                </div>
-                <div className="option">or</div>
-
-
-                <FormInput state={email} label={'Email'} setState={setEmail} />
-                <FormInput state={password} label={'Password'} setState={setPassword} />
-
-              </div>
-              <div className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
-              </div>
-            </div>
-
-          </div>
-        }
       </motion.div>
     </RegisterModalStyles>
     // <h2>hello</h2>
@@ -144,7 +128,7 @@ const RegisterModalStyles = styled(motion.div)`
   .btn.btn-1 {
     padding:1rem 2rem !important;
     &:hover {
-      background-color: var(--dark-grey-hover) !important;
+      background-color: var(--grey-hover) !important;
     }
   }
   .label {
