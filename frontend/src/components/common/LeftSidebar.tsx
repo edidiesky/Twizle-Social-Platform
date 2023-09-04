@@ -16,6 +16,7 @@ import CommunitiesIcon from '../../assets/svg/leftsidebaricons/communities';
 import BadgeIcon from '../../assets/svg/leftsidebaricons/badge';
 import ProfileIcon from '../../assets/svg/leftsidebaricons/profile';
 import PostModal from '../modals/PostModal';
+import { useAppSelector } from '../../hooks/reduxtoolkit';
 const list = [
     {
         title: "Home",
@@ -66,8 +67,9 @@ const list = [
 ]
 
 const LeftSidebarIndex = () => {
-    const username = 'Edidie tried Coding'
     const [tweet, setTweet] = useState(false)
+    const { userInfo } = useAppSelector(store => store.auth)
+
     return (
         <>
             <AnimatePresence
@@ -108,10 +110,15 @@ const LeftSidebarIndex = () => {
                     </div>
                     <div className="w-85 auto">
                         <div style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
-                            <img src="https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg" alt="images-avatar" className="avatar" />
+                            {
+                                userInfo?.image ?
+                                    <img src={userInfo?.image} alt="images-avatar" className="avatar" />
+                                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                            }
                             <h4 className="fs-16 text-dark text-bold text-start">
-                                {username}
-                                <span className="block text-grey text-light fs-16">@edidiesky</span>
+                                {userInfo?.name}
+                                <span className="block text-grey text-light fs-16">@{userInfo?.display_name}</span>
                             </h4>
                         </div>
                     </div>

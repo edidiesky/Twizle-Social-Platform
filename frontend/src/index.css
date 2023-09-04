@@ -1,12 +1,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100;200;300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 @font-face {
   font-family: "CustomFont_Medium";
   src: url("./assets/ClashDisplay-Bold.otf") format("opentype");
 }
+
+@font-face {
+  font-family: "CustomFont_Bold";
+  src: url("./assets/FontsFree-Net-Segoe-UI-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "CustomFont_Normal";
+  src: url("./assets/FontsFree-Net-Segoe-UI.ttf") format("truetype");
+}
+
+
+
 
 * {
   text-decoration: none;
@@ -55,9 +67,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--white);
-  font-family: "Nunito", sans-serif;
+  font-family: "CustomFont_Normal", sans-serif;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 20px;
   color: var(--dark-1);
   /* letter-spacing: .4px; */
 }
@@ -80,7 +92,7 @@ body {
 }
 
 .family1 {
-  font-family: "Nunito", sans-serif;
+  font-family:  sans-serif;
 }
 
 .shadow {
@@ -290,17 +302,19 @@ button {
 }
 
 .text-extra-bold {
-  font-family: "Nunito", sans-serif;
-  font-weight: 800;
+  font-family: "CustomFont_Bold", sans-serif;
+  font-weight: 700;
 }
 
 .text-bold {
   font-weight: 600;
-  font-family: "Nunito", sans-serif;
+  font-family: "CustomFont_Bold", sans-serif;
+
 }
 
 .text-light {
-  font-family: "Nunito", sans-serif;
+  font-family: "CustomFont_Normal", sans-serif;
+
   font-weight: 500;
 }
 
