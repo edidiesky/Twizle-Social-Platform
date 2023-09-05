@@ -22,7 +22,10 @@ const GetAllTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
 });
 
 const GetSingleTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  res.status(200).send('Get user Tweet');
+  const tweet = await UserTweet.findById({_id:req.params.id})
+    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+
+  res.status(200).json({ tweet });
 });
 
 //PRIVATE

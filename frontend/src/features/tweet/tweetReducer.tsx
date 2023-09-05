@@ -123,7 +123,7 @@ export const DeleteTweet = createAsyncThunk<{
 // GetTweet Details
 export const GetSingleTweetDetails = createAsyncThunk<{
   rejectValue: KnownError,
-}, {name?:any}>(
+}>(
   "GetDetails",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -136,7 +136,7 @@ export const GetSingleTweetDetails = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/tweet/Details/${Detailsdata}`,
+        `/api/v1/tweet/${Detailsdata}`,
         config
       );
       return response.data.tweet;

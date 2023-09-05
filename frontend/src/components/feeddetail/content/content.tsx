@@ -9,9 +9,18 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi'
 
 import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
 import { LiaRetweetSolid } from 'react-icons/lia'
+import { useAppDispatch } from '../../../hooks/reduxtoolkit';
+import { GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
+import { useParams } from 'react-router-dom';
 
 
 const PostDetailsContent: React.FC = () => {
+    const {id} = useParams()
+    console.log(id)
+    const dispatch = useAppDispatch()
+    React.useEffect(()=> {
+        dispatch(GetSingleTweetDetails(id))
+    }, [id])
     return (
         <PostDetailsContentStyles>
             <Top />

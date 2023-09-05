@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
-import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
-import { LiaRetweetSolid } from 'react-icons/lia'
 import Search from './Search';
 import { chatData } from '../../../data/chatData';
+import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { Link } from 'react-router-dom';
 type Rightbar = {
     types?: String
 }
@@ -16,6 +15,8 @@ const images = [
 ]
 
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
+    const { tweetDetails } = useAppSelector(store => store.tweet)
+
     return (
         <RightSidebarStyles>
             <div className="wrapper w-100 flex column">
@@ -36,16 +37,26 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             <h3 className="text-extra-bold text_dark_grey w-100 auto">
                                 Relevant People</h3>
                             <div className="w-100 flex item-start justify-space gap-1">
-                                <div className="image_wrapper">
+                                
+                                    <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
+                                        <div className="image_gradient"></div>
+                                        {
+                                            tweetDetails?.tweet_user_id?.profile_image_url ?
+                                                <img src={tweetDetails?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                                : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                                        }
+                                    </Link>
+                                {/* <div className="image_wrapper">
                                     <img src={'https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg'} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                     <div className="image_gradient"></div>
-                                </div>
+                                </div> */}
                                 <div className="flex-1 flex column" style={{ gap: ".6rem" }}>
                                     <div className="w-100 flex item-center justify-space">
                                         <h4 className="fs-16 text-extra-bold flex column" style={{ gap: ".2rem" }}>
-                                            Nai_SmaeTech
+                                                {tweetDetails?.tweet_user_id?.display_name}
                                             <span className="block fs-16 text-grey text-light">
-                                                @name_sake103
+                                                    @{tweetDetails?.tweet_user_id?.name}
                                             </span>
                                         </h4>
                                         <div className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
@@ -53,11 +64,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                     </div>
                                     {/* about */}
                                     <h4 className="fs-16 text-light text-dark">
-                                        Building http://TechPad.ink,
-                                        @contentreio
-                                        | Founder
-                                        @master_backend
-                                        | Author of http://EnterpriseVue.dev | I help you become a great Backend Engineer and make money
+                                            {tweetDetails?.tweet_user_id?.bio}
                                     </h4>
                                 </div>
                             </div>
@@ -165,6 +172,7 @@ const RightSidebarStyles = styled.div`
       height:100%;
       border-radius:50%;
       /* transform: translateY(-100%); */
+      z-index: 30;
       position: absolute;
       background:rgba(0,0,0,.3);
       opacity:0;

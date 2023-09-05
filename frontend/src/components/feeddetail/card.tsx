@@ -1,34 +1,20 @@
-import { feedcardtype } from '@/types/feedtype';
+
 import { BiSolidBadgeCheck } from 'react-icons/bi'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
-
-import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
-import { LiaRetweetSolid } from 'react-icons/lia'
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import TweetModal from '../modals/TweetModal';
-
-const postfeedDetails = {
-    tweet_id: 15,
-    user_id: 15,
-    profile_name: "The champion",
-    username: "mhasnneye",
-    tweet_text: 'Happy birthday wizkid ',
-    timestamp: "07/25/2022",
-    retweet_count: 292,
-    favorite_count: 299,
-    is_verified: false,
-    tweet_image: ['https://pbs.twimg.com/media/F1kSXZwXgAEm9lu?format=jpg&name=small'],
-    image: "/images/boris-khentov.jpg",
-    location: "Agodim",
-}
+import { useAppSelector } from '../../hooks/reduxtoolkit';
+import { Link } from 'react-router-dom';
 
 const PostFeedCard = () => {
     const [tweet, setTweet] = useState(false)
+    const { tweetDetails } = useAppSelector(store => store.tweet)
+
     const [drop, setDrop] = useState(false)
     return (
-        <FeedCardStyles key={postfeedDetails.tweet_id}>
+        <FeedCardStyles key={tweetDetails?.tweet_id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
                 <ul onClick={() => setDrop(false)} className="flex column w-100 fs-14 text-bold">
@@ -42,7 +28,7 @@ const PostFeedCard = () => {
                 </ul>
             </div>
             <AnimatePresence
-                initial="false"
+                initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
@@ -53,27 +39,33 @@ const PostFeedCard = () => {
             <div className="flex w-90 auto item-start justify-space feed_card_wrapper gap-1">
                 <div className="flex column gap-1">
                     <div className="flex-1 item-start flex gap-1">
-                        <div className="image_wrapper">
-                            <img src={postfeedDetails.image} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                        <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
                             <div className="image_gradient"></div>
-                        </div>
+                            {
+                                tweetDetails?.tweet_user_id?.profile_image_url ?
+                                    <img src={tweetDetails?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                            }
+                        </Link>
+
                         <div className="flex column flex-1" style={{ gap: '.3rem' }}>
                             <h4 className="fs-18 text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
-                                {postfeedDetails.profile_name}
+                                {tweetDetails?.tweet_user_id?.display_name}
                                 <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
 
                             </h4>
-                            <span className="text-light fs-16 text-grey block">@{postfeedDetails.username}</span>
+                            <span className="text-light fs-16 text-grey block">@{tweetDetails?.tweet_user_id?.name}</span>
 
                         </div>
                     </div>
                     <div className="flex-w-100 column gap-1">
                         <h5 style={{ paddingBottom: "1rem" }} className="text-light family1 fs-18">
-                            {postfeedDetails.tweet_text}
+                            {tweetDetails?.tweet_text}
                         </h5>
                         <div className="w-100 wrapper">
                             {
-                                postfeedDetails.tweet_image.map((x, index) => {
+                                tweetDetails?.tweet_image.map((x, index) => {
                                     return <img key={index} style={{ borderRadius: "10px" }} src={x} alt="" className="w-100 h-100" />
                                 })
                             }
