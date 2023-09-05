@@ -12,5 +12,14 @@ export type feedcardtype = {
     tweet_image: string[];
     image: string;
     location: string;
-    profile_name: string
+    profile_name: string;
+    tweet_user_id:{
+        _id:string;
+        display_name: string;
+        name: string;
+        bio:string;
+        profile_image_url:string;
+        tweet_text:string;
+        
+    }
 }

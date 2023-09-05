@@ -31,7 +31,7 @@ const FeedCard = (props: feedcardtype) => {
                 </ul>
             </div>
             <AnimatePresence
-                initial="false"
+                initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
@@ -43,12 +43,18 @@ const FeedCard = (props: feedcardtype) => {
                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
             </div>
             <Link to={`/${props.username}/status/${props.tweet_id}`} className="flex w-90 auto item-start feed_card_wrapper gap-1">
-                <img src={props.image} alt="" className="avatar" />
+
+                {
+                    props?.tweet_user_id?.profile_image_url ?
+                        <img src={props?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar" />
+                        : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                }
                 <div className="flex column flex-1" style={{ gap: '.3rem' }}>
-                    <h4 className="fs-18 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
-                        {props.profile_name}
+                    <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
+                        {props?.tweet_user_id?.display_name}
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                        <span style={{fontSize:"16px"}} className="text-light text-dark ">@{props.username}</span>
+                        <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
                     </h4>
                     <h5 style={{ paddingBottom: "1rem"}} className="text_dark_grey text-light family1">
                         {props.tweet_text}

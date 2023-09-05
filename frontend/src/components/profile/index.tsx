@@ -44,7 +44,7 @@ const Profile: React.FC = () => {
                     modal && <AuthModal modal={modal} setModal={setModal} />
                 }
             </AnimatePresence>
-            <div className="flex flex-1 wrap column ">
+            <div className="flex flex-1 wraps column ">
                 <div className="flex column">
                     <Top />
                     <WallpaperIndex />
@@ -129,9 +129,10 @@ const ProfileStyles = styled.div`
             }
         }
     }
-    .wrap {
+    .wraps {
         border-right : 1px solid rgba(0,0,0,.1);
         border-left : 1px solid rgba(0,0,0,.1);
+        height:100vh;
         @media (max-width:980px) {
     border-right : 1px solid rgba(0,0,0,.1);
 

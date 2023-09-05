@@ -15,7 +15,7 @@ type KnownError = {
 export const getAllTweet = createAsyncThunk<{
   rejectValue: KnownError,
 
-}, tweetdatatype>(
+}>(
   "getAllTweet",
   async (_, { rejectWithValue }) => {
     try {

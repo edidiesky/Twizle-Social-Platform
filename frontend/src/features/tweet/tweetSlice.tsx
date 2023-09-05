@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { GetTimeLinetweet, UpdateTweet, getAllTweet, GetSingleTweetDetails, CreateTweet, DeleteTweet } from './tweetReducer'
+import { UpdateTweet, getAllTweet, GetSingleTweetDetails, CreateTweet, DeleteTweet } from './tweetReducer'
 
 // Define a type for the tweet state
 interface tweetState {
@@ -46,7 +46,7 @@ export const tweetSlice = createSlice({
   initialState,
   reducers: {
     cleartweet: (state, action) => {
-      state = initialState
+      
     },
   },
   extraReducers: (builder) => {
@@ -146,25 +146,6 @@ export const tweetSlice = createSlice({
       state.alertType = 'success'
     })
     builder.addCase(UpdateTweet.rejected, (state, action) => {
-      state.tweetisSuccess = false
-      state.tweetisError = true
-      state.tweetisLoading = false
-      state.showAlert = true
-      state.alertType = 'danger'
-      state.alertText = action.payload
-
-    })
-
-    builder.addCase(GetTimeLinetweet.pending, (state, action) => {
-      state.tweetisLoading = true
-    })
-    builder.addCase(GetTimeLinetweet.fulfilled, (state, action) => {
-      state.tweetisSuccess = true
-      state.tweetisLoading = false
-      state.tweetDetails = action.payload
-      
-    })
-    builder.addCase(GetTimeLinetweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
       state.tweetisLoading = false
