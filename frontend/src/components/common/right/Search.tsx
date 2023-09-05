@@ -6,7 +6,7 @@ import styled from "styled-components";
 const Search: React.FC = () => {
   return (
     <SearchContainer>
-      <div className="w-90 auto flex column gap-1">
+      <div className="w-85 auto flex column gap-1">
         <form action="" className="w-90 family1 auto flex item-center gap-2">
           <BsSearch color="var(--dark-1)" />
           <input

@@ -21,7 +21,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
         <RightSidebarStyles>
             <div className="wrapper w-100 flex column">
                 <Search />
-                <div className="w-90 auto flex column gap-2">
+                <div className="w-85 auto flex column gap-2">
                     {
                         types === 'profile' && <div className="image_wrappers w-90 auto">
                             {

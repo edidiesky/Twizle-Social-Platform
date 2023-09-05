@@ -6,7 +6,12 @@ import User from "../models/User";
 // GET All User
 //  Public
 const GetAllUser = asyncHandler(async (req: Request, res: Response) => {
-  res.status(200).send('Get user User');
+    const user = await User.find({});
+    if (!user) {
+      res.status(404);
+      throw new Error("The user does not exist");
+    }
+    res.status(200).json({ user });
 
 });
 

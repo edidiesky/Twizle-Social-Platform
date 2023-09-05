@@ -126,4 +126,38 @@ export const GetUserProfile = createAsyncThunk<{
 );
 
 
+// Getuser profile
+export const GetAllUserProfile = createAsyncThunk<{
+  rejectValue: KnownError,
+}>(
+  "get all user profile",
+  async (_, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/user`,
+        config
+      );
+      return response.data.user;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+
+
+
 
