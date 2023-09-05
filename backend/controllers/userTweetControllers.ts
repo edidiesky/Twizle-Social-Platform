@@ -43,7 +43,7 @@ const CreateTweet = asyncHandler(async (req: CustomInterface, res: Response) => 
 
   // create the tweet
   const tweet = await UserTweet.create({
-    tweet_user_id:req.user.userId,
+    tweet_user_id:req.user?.userId,
     tweet_image, 
     tweet_text
   })
