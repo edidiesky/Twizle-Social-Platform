@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import WallpaperIndex from './top/wallpaper';
 import ProfileBottomIndex from './top/bottom';
@@ -8,13 +8,26 @@ import Top from './top/top';
 import Feed from '../common/feed/feed';
 import AuthModal from '../modals/EditProfileModal';
 import { AnimatePresence } from 'framer-motion';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import { GetUserProfile } from '../../features/auth/authReducer';
+import { useParams } from 'react-router-dom';
 
 type Rightbar = {
     type: String
 }
 
 const Profile: React.FC = () => {
+    const { name } = useParams()
+    // console.log(name)
     const [modal, setModal] = React.useState(false)
+
+    const { loginisLoading, loginisSuccess } = useAppSelector(store => store.auth)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(GetUserProfile(name))
+    }, [name])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
@@ -29,7 +42,7 @@ const Profile: React.FC = () => {
                     modal && <AuthModal modal={modal} setModal={setModal} />
                 }
             </AnimatePresence>
-            <div className="flex flex-1 wrap column gap-2">
+            <div className="flex flex-1 wrap column ">
                 <div className="flex column">
                     <Top />
                     <WallpaperIndex />
@@ -38,8 +51,9 @@ const Profile: React.FC = () => {
                 <div className="w-100 flex column">
                     <div className="w-100 flex item-center text-bold fs-16 profilelist">
                         <div className="flex-1 active profileTag"><div className="tag">Tweets</div></div>
-                        <div className="flex-1 profileTag">Tweets</div>
-                        <div className="flex-1 profileTag">Tweets</div>
+                        <div className="flex-1 profileTag">Replies</div>
+                        <div className="flex-1 profileTag">Media</div>
+                        <div className="flex-1 profileTag">Likes</div>
                     </div>
                     <Feed />
                 </div>

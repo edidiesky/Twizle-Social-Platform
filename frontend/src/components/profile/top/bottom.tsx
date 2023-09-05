@@ -1,13 +1,19 @@
 import React from 'react';
+import moment from 'moment'
 import styled from 'styled-components';
 import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5'
 import { PiSuitcaseSimple } from 'react-icons/pi'
+import { useAppSelector } from '../../../hooks/reduxtoolkit';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
   setModal?: SetStateProp<Boolean>;
 }
 
 const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
+  const { userDetails } = useAppSelector(store => store.auth)
+
+  const date = moment(userDetails?.createdAt).format('MMM YYYY')
+
   return (
     <ProfileBottomStyles className='flex column gap-1'>
       <div className="w-90 auto flex item-center justify-space">
@@ -15,30 +21,48 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
       </div>
       <div className="w-90 flex column  gap-2 auto">
         {/* username and  */}
-        <h3 className="fs-20 text-extra-bold">Eddie tried coding
-          <div className="block fs-18 text-grey text-light">@edidiesky</div>
+        <h3 className="fs-24 text-extra-bold">{userDetails?.name}
+          <div style={{marginTop:"4px"}} className="block fs-18 text-grey text-light">@{userDetails?.display_name}</div>
         </h3>
-        <h4 className="fs-16 text-light">Typescript || React.js || Node.js || Nextjs developer - A curious developer | You can visit my portfolio website to see how curious a developer I am</h4>
+        {
+          userDetails?.bio && <h4 className="fs-16 text-light">
+            {
+              userDetails?.bio
+            }
+          </h4>
+        }
+
+
         {/* ocupation date location */}
         <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-1">
+          {
+            userDetails?.profession && <div className="flex item-center" style={{ gap: ".5rem" }}>
+              <PiSuitcaseSimple fontSize={'20px'} />
+              {
+                userDetails?.profession
+              }
+            </div>
+          }
+          {/* users country */}
+          {
+            userDetails?.country && <div className="flex item-center" style={{ gap: ".5rem" }}>
+              <IoLocationOutline fontSize={'20px'} color={'var(--dark-1)'} />
+              {
+                userDetails?.country
+              }
+            </div>
+          }
           <div className="flex item-center" style={{ gap: ".5rem" }}>
-            <PiSuitcaseSimple fontSize={'20px'} />
-            Science & Technology
-          </div>
-          <div className="flex item-center" style={{ gap: ".5rem" }}>
-            <IoLocationOutline fontSize={'20px'} color={'var(--dark-1)'} />
-            Nigeria
-          </div><div className="flex item-center" style={{ gap: ".5rem" }}>
             <IoCalendarOutline fontSize={'20px'} />
-            Joined January 2022
+            Joined {date}
           </div>
         </div>
         {/* followers followings */}
         <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-3">
           <div className="text-bold flex item-center" style={{ gap: ".5rem" }}>
-            24 <div className="text-light">Following</div>
+            {userDetails?.following_count || 0} <div className="text-light">Following</div>
           </div> <div className="text-bold flex item-center" style={{ gap: ".5rem" }}>
-            204 <div className=" text-light">Followers</div>
+            {userDetails?.followers_count || 0} <div className=" text-light">Followers</div>
           </div>
         </div>
       </div>
@@ -48,7 +72,7 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
 
 const ProfileBottomStyles = styled.div`
     width: 100%;
-    padding-top:1rem;
+    padding-top:2rem;
 
     position: relative;
     .avatar_profile {

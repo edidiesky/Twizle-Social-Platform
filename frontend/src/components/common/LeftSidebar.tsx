@@ -17,63 +17,66 @@ import BadgeIcon from '../../assets/svg/leftsidebaricons/badge';
 import ProfileIcon from '../../assets/svg/leftsidebaricons/profile';
 import PostModal from '../modals/PostModal';
 import { useAppSelector } from '../../hooks/reduxtoolkit';
-const list = [
-    {
-        title: "Home",
-        path: '/',
-        icon: <HomeIcon />
-    }, {
-        title: "Explore",
-        path: '/explore',
-        icon: <SearchIcon />
-    }, {
-        title: "Notifications",
-        path: '',
-        icon: <NotificationIcon />
 
-    }, {
-        title: "Messages",
-        path: '/conversation',
-        icon: <MessageIcon />
-
-    }, {
-        title: "Lists",
-        path: '',
-        icon: <ListIcon />
-
-    },
-    {
-        title: "Communities",
-        path: '',
-        icon: <CommunitiesIcon />
-
-    }, {
-        title: "Verified",
-        path: '',
-        icon: <BadgeIcon />
-
-    },
-    {
-        title: "Profile    ",
-        path: '/edidie',
-        icon: <ProfileIcon />
-
-    }, {
-        title: "More",
-        path: '',
-        icon: <CiCircleMore />
-
-    },
-]
 
 const LeftSidebarIndex = () => {
     const [tweet, setTweet] = useState(false)
     const { userInfo } = useAppSelector(store => store.auth)
 
+
+    const list = [
+        {
+            title: "Home",
+            path: '/',
+            icon: <HomeIcon />
+        }, {
+            title: "Explore",
+            path: '/explore',
+            icon: <SearchIcon />
+        }, {
+            title: "Notifications",
+            path: '',
+            icon: <NotificationIcon />
+
+        }, {
+            title: "Messages",
+            path: '/conversation',
+            icon: <MessageIcon />
+
+        }, {
+            title: "Lists",
+            path: '',
+            icon: <ListIcon />
+
+        },
+        {
+            title: "Communities",
+            path: '',
+            icon: <CommunitiesIcon />
+
+        }, {
+            title: "Verified",
+            path: '',
+            icon: <BadgeIcon />
+
+        },
+        {
+            title: "Profile    ",
+            path: `/${userInfo?.display_name}`,
+            icon: <ProfileIcon />
+
+        }, {
+            title: "More",
+            path: '',
+            icon: <CiCircleMore />
+
+        },
+    ]
+
     return (
         <>
             <AnimatePresence
-                initial="false"
+                initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
@@ -238,13 +241,13 @@ const LeftSidebarStyles = styled.div`
     margin: 0;
    
     &:hover {
-  background-color: var(--dark-grey-hover);
+  background-color: var(--grey-hover);
  
   }
   }
   
   &:hover {
-  background-color: var(--dark-grey-hover);
+  background-color: var(--grey-hover);
  
   }
   h4 {

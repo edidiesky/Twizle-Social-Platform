@@ -9,7 +9,7 @@ type RegisterData = {
   email?: string;
   password?: string;
   display_name?: string,
-  _id?:string
+  _id?: string
 }
 
 type KnownError = {
@@ -60,6 +60,7 @@ export const loginUser = createAsyncThunk<{
 
 
 
+// update user profile
 export const UpdateProfile = createAsyncThunk<{
   rejectValue: KnownError,
 }, RegisterData>(
@@ -91,5 +92,38 @@ export const UpdateProfile = createAsyncThunk<{
     }
   }
 );
+
+
+// Getuser profile
+export const GetUserProfile = createAsyncThunk<{
+  rejectValue: KnownError,
+}, {name?:any}>(
+  "GetProfile",
+  async (profiledata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
+    
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/user/profile/${profiledata}`,
+        config
+      );
+      return response.data.user;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
 
 

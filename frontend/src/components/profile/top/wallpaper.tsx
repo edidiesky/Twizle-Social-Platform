@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../../hooks/reduxtoolkit';
 
 const WallpaperIndex: React.FC = () => {
+  const { userDetails } = useAppSelector(store => store.auth)
+
   return (
     <WallpaperStyles>
       <div className="image_wrapper">
-        <img src="https://i.pinimg.com/236x/36/d5/5d/36d55d4351eaa9be39de78c2ed522e27.jpg" alt="" className="avatar_profile" />
-        <div className="image_gradient"></div>
+        {
+          userDetails?.image ?
+            <img src={userDetails?.image} alt="images-avatar" className="avatar_profile" />
+            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+        }  <div className="image_gradient"></div>
       </div>
     </WallpaperStyles>
   )
