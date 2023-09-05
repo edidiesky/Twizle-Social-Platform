@@ -11,7 +11,7 @@ const GetAllUser = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const GetSingleUser = asyncHandler(async (req: Request, res: Response) => {
-  const user = await User.findOne({ display_name: req.params.id });
+  const user = await User.findOne({ name: req.params.id });
   if (!user) {
     res.status(404);
     throw new Error("The user does not exist");

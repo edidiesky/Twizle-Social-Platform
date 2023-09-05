@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Top from '../feedtop/top';
 import PostDetailsComments from './comments';
-import TweetFormSection from '@/components/common/tweetsection';
+import TweetFormSection from '../../common/tweetsection';
 import PostFeedCard from '../card';
 import { BiSolidBadgeCheck } from 'react-icons/bi'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'

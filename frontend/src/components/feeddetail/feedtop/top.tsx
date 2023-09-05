@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import Link from 'next/link';
+import { Link } from 'react-router-dom'
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
@@ -13,7 +13,7 @@ const Top: React.FC<modalType> = ({ setModal }) => {
 
             <div className='flex item-center gap-2 w-90 auto'>
                 {/* <h2 className="fs-30">Top bar</h2> */}
-                <Link href={'/'} className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></Link>
+                <Link to={'/'} className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></Link>
                 <h3 className="fs-24 text-bold text-dark">Tweets
                 </h3>
             </div>

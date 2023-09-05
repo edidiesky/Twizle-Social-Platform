@@ -6,14 +6,23 @@ import GiIcon from '../../assets/svg/gif';
 import MediaIcon from '../../assets/svg/media';
 import ScheduleIcon from '../../assets/svg/schedule';
 import PollIcon from '../../assets/svg/poll';
+import { useAppSelector } from '../../hooks/reduxtoolkit';
 
 const TweetFormSection = () => {
+    const { userInfo } = useAppSelector(store => store.auth)
+
 
     return (
         <TweetFormSectionStyles>
             <div className="w-100 flex item-start gap-1">
                 <div className="image_wrapper">
-                    <img src={"https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg"} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                    {
+                        userInfo?.image ?
+                            <img src={userInfo?.image} alt="images-avatar" className="avatar_profile" />
+                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                    }
+                    
                     <div className="image_gradient"></div>
                 </div>
                 <div className="flex flex-1 column gap-1">

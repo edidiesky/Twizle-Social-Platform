@@ -1,6 +1,6 @@
 export type feedcardtype = {
 
-    tweet_id: number;
+    _id: string;
     user_id: number;
     username: string;
     tweet_text: string;

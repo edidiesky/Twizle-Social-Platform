@@ -6,6 +6,7 @@ import {
   Home,
   LayoutIndex,
   Profile,
+  TweetDetailIndex
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -40,8 +41,17 @@ export default function App() {
             <Profile />
           </Suspense>
           }
+          
           />
         </Route>
+
+        {/* tweet detail  route */}
+        <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
+          <TweetDetailIndex />
+        </Suspense>
+        }
+        />
+
       </Routes>
     </div>
   );

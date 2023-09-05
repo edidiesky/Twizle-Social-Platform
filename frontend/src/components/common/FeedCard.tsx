@@ -19,7 +19,7 @@ const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
     const [drop, setDrop] = useState(false)
     return (
-        <FeedCardStyles key={props.tweet_id}>
+        <FeedCardStyles key={props._id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
                 <ul style={{ fontSize: "14.6px" }} onClick={() => setDrop(false)} className="flex column w-100 text-bold">
@@ -42,21 +42,24 @@ const FeedCard = (props: feedcardtype) => {
             <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
             </div>
-            <Link to={`/${props.username}/status/${props.tweet_id}`} className="flex w-90 auto item-start feed_card_wrapper gap-1">
+            <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex w-90 auto item-start feed_card_wrapper gap-1">
+                <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
+                    <div className="image_gradient"></div>
+                    {
+                        props?.tweet_user_id?.profile_image_url ?
+                            <img src={props?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
-                {
-                    props?.tweet_user_id?.profile_image_url ?
-                        <img src={props?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar" />
-                        : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+                    }
+                </Link>
 
-                }
-                <div className="flex column flex-1" style={{ gap: '.3rem' }}>
+                <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex column flex-1" style={{ gap: '.3rem' }}>
                     <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
                         {props?.tweet_user_id?.display_name}
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                         <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
                     </h4>
-                    <h5 style={{ paddingBottom: "1rem"}} className="text_dark_grey text-light family1">
+                    <h5 style={{ paddingBottom: "1rem" }} className="text_dark_grey text-light family1">
                         {props.tweet_text}
                     </h5>
                     <div className="w-100 wrapper">
@@ -67,7 +70,7 @@ const FeedCard = (props: feedcardtype) => {
                         }
                     </div>
 
-                </div>
+                </Link>
             </Link>
             <div className="flex item-center w-85 auto gap-2">
                 <div style={{ marginTop: ".6rem" }} className="flex item-center w-85 auto gap-2">
@@ -109,6 +112,33 @@ const FeedCardStyles = styled.div`
     border-bottom: 1px solid var(--border);
     &:hover {
         background-color: var(--dark-grey-hover);
+    }
+     .image_wrapper {
+      width:5rem;
+      height:5rem;
+      position: relative;
+      &:hover {
+        .image_gradient{
+          opacity:1;
+        }
+      }
+      .image_gradient {
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      z-index: 200;
+      position: absolute;
+      background:rgba(0,0,0,.5);
+      opacity:0;
+      transition:all .5s;
+    }
+    .avatar_profile {
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      position: absolute;
+      object-fit: cover;
+    }
     }
     h5 {
         font-weight: 600;

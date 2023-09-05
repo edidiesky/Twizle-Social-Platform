@@ -38,7 +38,7 @@ const TopStyles = styled.div`
     &.tab-1 {
         &:hover {
             /* background-color: #e9e9e9; */
-            background-color: rgba(231, 233, 234, 0.1);
+            background-color: var(--grey-hover);
         }
         .spans {
             width: max-content;
@@ -53,7 +53,7 @@ const TopStyles = styled.div`
                 background-color: var(--blue-1);
                 height: 4px;
                 border-radius: 10px;
-                bottom: -80%;
+                bottom: -100%;
             }
         }
     }

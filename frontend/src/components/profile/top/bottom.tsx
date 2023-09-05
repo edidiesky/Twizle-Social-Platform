@@ -22,7 +22,7 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
       <div className="w-90 flex column  gap-2 auto">
         {/* username and  */}
         <h3 className="fs-24 text-extra-bold">{userDetails?.name}
-          <div style={{marginTop:"4px"}} className="block fs-18 text-grey text-light">@{userDetails?.display_name}</div>
+          <div style={{marginTop:"10px"}} className="block fs-18 text-grey text-light">@{userDetails?.display_name}</div>
         </h3>
         {
           userDetails?.bio && <h4 className="fs-16 text-light">
