@@ -38,9 +38,9 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
     if (loginisSuccess) {
       setTimeout(() => {
         navigate('/')
-      }, 4000);
+      }, 3000);
 
-      return () => clearTimeout(navigate('/'), 4000)
+      return () => clearTimeout(navigate('/'), 3000)
 
     }
   }, [loginisSuccess])
@@ -77,7 +77,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
               <Message showAlert={false} alertText={'Hello Hi are u fine'} /></div>
           </div>
           <div className="w-85 formwraper auto flex column gap-3">
-            <h4 className="fs-35 text-dark text-center text-extra-bold text-light">Sign in to Twitter</h4>
+            <h4 className="fs-35 text-dark text-center text-extra-bold">Sign in to Twitter</h4>
             <div className="flex w-100 column" style={{ gap: "10px" }}>
               <div className="flex w-100 column gap-2 item-start">
                 <div className="authBtn gap-2 flex fs-16 text-dark item-center">
@@ -253,7 +253,7 @@ const RegisterModalStyles = styled(motion.div)`
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1rem 3rem var(--backdrop);
     position: relative;
     min-height: 60rem;
     border-radius:20px;

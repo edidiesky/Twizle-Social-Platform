@@ -25,7 +25,7 @@ const InputTextField = styled(TextField)(({ theme }) => ({
   },
   '& .MuiOutlinedInput-input': {
     padding: '18px 10px',
-    fontSize: '17px',
+    fontSize: '16px',
     fontWeight: 'light',
     fontFamily: "CustomFont_Normal, sans- serif",
 
@@ -33,7 +33,7 @@ const InputTextField = styled(TextField)(({ theme }) => ({
 
   },
   '& .MuiInputLabel-root': {
-    fontSize: '17px',
+    fontSize: '16px',
     fontWeight: 'light',
     color: 'var(--dark-1)'
   },
