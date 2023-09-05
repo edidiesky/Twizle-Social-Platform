@@ -5,8 +5,8 @@ const app = express();
 import mongoose from "mongoose";
 
 // import Listing from "./models/Listing";
-import User from "./models/User.js";
-import userdata from "./data/userdata.js";
+import User from "./models/User";
+import userdata from "./data/userdata";
 
 const mongoUrl = process.env.MONGO_URL;
 if (!mongoUrl) {

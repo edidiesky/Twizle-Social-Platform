@@ -21,6 +21,8 @@ const UserTweetSchema = new mongoose.Schema(
       required: true,
       default: []
     },
+    retweet_count: { type: Number },
+    favorite_count: { type: Number }
   },
   { timestamps: true }
 );

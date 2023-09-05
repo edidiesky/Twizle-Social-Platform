@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "server": "node ./index.ts",
+    "data:import": "ts-node seeder.ts",
     "dev": "nodemon ./index.ts",
     "build": "tsc -p ."
   },
