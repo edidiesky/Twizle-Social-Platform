@@ -21,8 +21,8 @@ export const feedData = [
   {
     tweet_id: 15,
     tweet_user_id: 15,
-    profile_name: "robert_sefton0",
-    username: "robert_sefton0",
+    profile_name: "Edgar Allen Poe",
+    username: "Edgar Allen Poe",
     tweet_text: '50 ChatGPT prompts that will grow your business and save you hours of work [Bookmark for later] 1. Create a Social Media Content Plan',
     timestamp: "07/25/2022",
     retweet_count: 292,

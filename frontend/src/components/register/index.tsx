@@ -66,7 +66,7 @@ const Regsiters: React.FC = () => {
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
         <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
           <div className="flex column gap-2">
-            <h1 className="text-dark">Happening now</h1>
+            <h1 className="text-dark text-bold">Happening now</h1>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
           </div>
           <div className="flex authWrapper column w-100 gap-1">
@@ -131,10 +131,7 @@ const RegsiterStyles = styled.div`
   
   h1 {
     font-size: 70px;
-    /* font-weight: 700; */
-    font-weight: 900;
-  font-family: "CustomFont_Medium", sans-serif;
-
+    font-weight: bolder;
 
 
 

@@ -15,13 +15,13 @@ app.use(express.json());
 
 
 // routes
-// import usertweetRoute from "./routes/userTweetRoute";
+import usertweetRoute from "./routes/userTweetRoute";
 import userRoute from "./routes/userRoute";
 import authRoute from "./routes/authRoute";
 
 
 // routes
-// app.use("/api/v1/tweet", usertweetRoute);
+app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);
 

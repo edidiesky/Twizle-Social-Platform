@@ -6,7 +6,9 @@ import mongoose from "mongoose";
 
 // import Listing from "./models/Listing";
 import User from "./models/User";
+import UserTweet from "./models/UserTweet";
 import userdata from "./data/userdata";
+import {timelineData} from "./data/timelineData";
 
 const mongoUrl = process.env.MONGO_URL;
 if (!mongoUrl) {
@@ -18,7 +20,8 @@ mongoose.connection.on('error', (error: Error) => console.log('Error'))
 
 const importData = async () => {
   try {
-    await User.insertMany(userdata);
+    // await User.insertMany(userdata);
+    await UserTweet.insertMany(timelineData);
     console.log("Data Imported!");
     process.exit();
   } catch (error) {

@@ -7,7 +7,8 @@ const InputTextField = styled(TextField)(({ theme }) => ({
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
     border: '1px solid var(--border)',
-    fontFamily: 'Nunito, sans-serif',
+    fontFamily: "CustomFont_Normal, sans- serif",
+
 
     '& fieldset': {
       borderColor: 'transparent',
@@ -23,22 +24,23 @@ const InputTextField = styled(TextField)(({ theme }) => ({
     },
   },
   '& .MuiOutlinedInput-input': {
-    padding: '20px 10px',
-    fontSize: '18px',
-    fontWeight: '400',
-    fontFamily: 'Nunito, sans-serif',
+    padding: '18px 10px',
+    fontSize: '17px',
+    fontWeight: 'light',
+    fontFamily: "CustomFont_Normal, sans- serif",
+
     color: "var(--dark-1)"
 
   },
   '& .MuiInputLabel-root': {
     fontSize: '17px',
-    fontWeight: '400',
+    fontWeight: 'light',
     color: 'var(--dark-1)'
   },
   '& .MuiInputLabel-root.Mui-focused': {
     // Styles when the form is focused
     color: 'var(--blue-1)',
-    fontWeight: '400',
+    fontWeight: 'light',
   },
   '& .MuiInputLabel-shrink': {
     transform: 'translate(12px, 7px) scale(0.7)',

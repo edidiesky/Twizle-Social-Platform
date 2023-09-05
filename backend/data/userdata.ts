@@ -1,12 +1,18 @@
+import bcrypt from "bcryptjs";
+
+
+
 const userdata = [
+    // edgar
     {
-        "username": "robert_sefton0",
-        "display_name": "Robert Sefton",
-        "email":"robert_sefton0@gmail.com",
-        "password":"12345",
+        "username": "allenakinkunle123",
+        "display_name": "Edgar Allen Poe",
+        "email": "allenakinkunle123@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "Building http://TechPad.ink, @contentreio| Founder @master_backend | Author of http://EnterpriseVue.dev | I help you become a great Backend Engineer and make money",
         "profile_banners": "",
-        "website": "linktr.ee/robert_sefton0",
+        "website": "linktr.ee/allenakinkunle123",
         "followers_count": 0,
         "following_count": 0,
         "tweets_count": 0,
@@ -16,28 +22,31 @@ const userdata = [
         "language": "English",
         "profession": "Entrepreneur"
     },
+    // eddy
     {
-        "username": "pedrosanders_",
-        "display_name": "Pedros Sander",
-        "email":"pedrosanders_@gmail.com",
-        "password":"12345",
+        "username": "bigEDDY",
+        "display_name": "Big Eddy",
+        "email": "bigEDDY@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "Founder at @fonoster . Building the open-source alternative to Twilio.",
         "location": "World",
         "profile_banners": "https://pbs.twimg.com/profile_banners/739107184148107264/1688746705/600x200",
-        "website": "linktr.ee/pedrosanders_",
+        "website": "linktr.ee/bigEDDY",
         "followers_count": 0,
         "following_count": 0,
         "tweets_count": 0,
         "createdAt": "8/15/2002",
         "verified": false,
-        "profile_image_url": "https://i.pinimg.com/236x/e6/33/ee/e633eefbeb77cd4323a1557d33c91c83.jpg",
-        "language": "Spanish"
+        "profile_image_url": "",
+        "language": ["English"]
     },
     {
         "username": "daominique",
         "display_name": "dom",
-        "email":"daominique@gmail.com",
-        "password":"12345",
+        "email": "daominique@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "Teacher 👨🏻‍🏫 to Tech 👨🏻‍💻 in 1.5 yrs ~ Fullstack SWE ~ C#/.Net ~ SQL ~ Python ~ DevOps ~ Ironman Triathlon ‘24 🏊🏼‍♂️🚴🏼‍♂️🏃🏻~ Coram Deo 🕊️",
         "location": "Colorados, USA",
         "profile_banners": "https://pbs.twimg.com/profile_banners/739107184148107264/1688746705/600x200",
@@ -48,13 +57,14 @@ const userdata = [
         "createdAt": "8/15/2002",
         "verified": false,
         "profile_image_url": "https://i.pinimg.com/236x/d6/fb/a8/d6fba80c63c6852632a91ac7edb2aa07.jpg",
-        "language": "Spanish"
+        "language": ["Spanish"]
     },
     {
         "username": "DeniTechh",
         "display_name": "denis",
-        "email":"DeniTechh@gmail.com",
-        "password":"12345",
+        "email": "DeniTechh@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "I’m a  @DevAtTheBeachh. ????? @Hashnode.  Building @SetupsProject s4 n&w @_buildspace • Become a (better) developer: http://denitech.dev/#/portal/signup",
         "location": "HashNode",
         "profile_banners": "https://pbs.twimg.com/profile_banners/1440785614673113093/1691059305/600x200",
@@ -71,8 +81,9 @@ const userdata = [
     {
         "username": "Stiverst",
         "display_name": "striver_79",
-        "email":"striver_79@gmail.com",
-        "password":"12345",
+        "email": "striver_79@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "Engineer @ Google | Founder - tUF| Youtuber (300K+ Subs) | Angular, Java | Cricket Enthusiast | http://Ex-Media.net, Amazon",
         "location": "India",
         "profile_banners": "https://pbs.twimg.com/profile_banners/1440785614673113093/1691059305/600x200",
@@ -90,8 +101,9 @@ const userdata = [
     {
         "username": "googleafrica",
         "display_name": "Google in Africa",
-        "email":"googleafrica@gmail.com",
-        "password":"12345",
+        "email": "googleafrica@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "bio": "Building the tools for Africa's digital transformation.",
         "location": "Sub Saharan Africa",
         "profile_banners": "https://pbs.twimg.com/profile_banners/1440785614673113093/1691059305/600x200",
@@ -108,8 +120,9 @@ const userdata = [
     // daily mail
     {
         "username": "DailyMailUK",
-        "email":"DailyMailUK@gmail.com",
-        "password":"12345",
+        "email": "DailyMailUK@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
         "display_name": "Daily Mail U.K",
         "bio": "For the latest updates on breaking news visit our website: http://dailymail.co.uk 🇬🇧",
         "location": "London, UK",

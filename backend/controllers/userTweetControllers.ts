@@ -1,11 +1,14 @@
 // import bcrypt from "bcryptjs";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
-import UserTweet from "../server/models/UserTweet";
+import UserTweet from "../models/UserTweet";
 // GET All UserTweet
 //  Public
 const GetAllTweet = asyncHandler(async (req: Request, res: Response) => {
-  res.status(200).send('Get user Tweet');
+  const tweet = await UserTweet.find()
+    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+
+  res.status(200).json({ tweet });
 
 });
 
