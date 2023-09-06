@@ -36,6 +36,7 @@ const RePostATweet = asyncHandler(async (req: CustomInterface, res: Response) =>
   const newttweet = await UserTweet.create({
     "tweet_text": tweet.tweet_text, 
     "tweet_image": tweet.tweet_image,
+    tweet_user_id:req.user?.userId
   })
 
   // check if the userid is included in the tweet like array
@@ -71,7 +72,7 @@ const GetSingleTweet = asyncHandler(async (req: ExpressRequest, res: Response) =
 // GET 
 // Get user's tweet
 const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const tweet = await UserTweet.findOne({ tweet_user_id: req.user?.userId })
+  const tweet = await UserTweet.find({ tweet_user_id: req.user?.userId })
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
   if (!tweet) {
     res.status(404);
@@ -82,13 +83,13 @@ const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) =>
 });
 
 
-//PRIVATE
+//PUT
 // ADMIN
 const UpdateTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
   res.status(200).send('Get user Tweet');
 });
 
-//PRIVATE
+//PUT
 // User
 const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   // get the user id
@@ -117,16 +118,8 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
 });
 
 
-//PRIVATE
-// User
-const QuoteATweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  res.status(200).send('QuoteATweet a Tweet');
-});
-
-
-
-
-// POST CreateTweet UserTweet
+// POST 
+// CreateTweet UserTweet
 // Private
 const CreateTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   // check for empty values
@@ -162,20 +155,14 @@ const DeleteTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
   res.status(200).send('Tweet has been deleted successfully');
 
 })
-const GetTopRatedTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  res.status(200).send('Create user Tweet');
-
-})
 
 export {
-  GetTopRatedTweet,
   CreateTweet,
   DeleteTweet,
-  UpdateTweet,
+  UpdateTweet,  
   GetAllTweet,
   GetSingleTweet,
   LikeAndUnlikeATweet,
-  QuoteATweet,
   RePostATweet,
   GetUserTweet
 };
