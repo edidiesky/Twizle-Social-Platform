@@ -52,7 +52,7 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
                 <div className="image_gradient"></div>
               </div>
               <div className="area flex-1">
-                <textarea placeholder='What is Happening' className="text w-100"></textarea>
+                <textarea placeholder='What is Happening' className="text text-light w-100"></textarea>
               </div>
             </div>
            
@@ -106,7 +106,7 @@ const PostModalStyles = styleds(motion.div)`
 }
 
 .area {
-        height: 17rem;
+        height: 14rem;
 
     }
         .text {
@@ -120,16 +120,15 @@ const PostModalStyles = styleds(motion.div)`
         padding: 1rem ;
         color:var(--dark-1);
         &::placeholder {
-            font-size: 23px;
-            font-family: "Nunito", sans-serif;
+            font-size: 20px;
             color:var(--grey-1);
             font-weight: 400;
         }
     }
 
   .image_wrapper {
-      width:5rem;
-      height:5rem;
+      width:4rem;
+      height:4rem;
       position: relative;
       border-radius:50%;
       cursor:pointer;
