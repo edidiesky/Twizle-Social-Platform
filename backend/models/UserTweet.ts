@@ -16,6 +16,10 @@ const UserTweetSchema = new mongoose.Schema(
       required: true,
       default: []
     },
+    tweet_likes: {
+      type: Array,
+      default: []
+    },
     retweet_count: { type: Number },
     favorite_count: { type: Number }
   },

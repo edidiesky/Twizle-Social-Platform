@@ -5,14 +5,12 @@ import { NextFunction, Request as ExpressRequest, Response } from "express";
 
 interface CustomInterface extends ExpressRequest {
   user?: {
-    role?: string;
     userId?: string;
-    username?: string;
     // Add other properties related to the user if needed
   };
 }
 
-const authMiddleware = (err: Error, req: CustomInterface, res: Response, next: NextFunction) => {
+const authMiddleware = ( req: CustomInterface, res: Response, next: NextFunction) => {
   //check for the token
   const authenticationheader = req.headers.authorization;
 
@@ -34,14 +32,14 @@ const authMiddleware = (err: Error, req: CustomInterface, res: Response, next: N
   // Verify the token being gotten from the header
   const jwtCode:Secret = 'hello'
   try {
-    const Verifiedtoken = jwt.verify(token, jwtCode);
-    if (!Verifiedtoken) {
+    const { userId }: JwtPayload = jwt.verify(token, jwtCode) as JwtPayload
+    if (!userId) {
       res.status(403).json({ messsage: "Please provide a valid token" });
     }
 
-    const { userId, role, username } = Verifiedtoken as JwtPayload
+    // const { userId, } = Verifiedtoken
 
-    req.user = { userId, role, username };
+    req.user = { userId };
     next();
   } catch (err) {
     res.status(403).json({ messsage: "Not authorized to access this route" });
@@ -51,7 +49,7 @@ const authMiddleware = (err: Error, req: CustomInterface, res: Response, next: N
 // middleware for only admin
 
 const adminMiddleware = (err: Error, req: CustomInterface, res: Response, next: NextFunction) => {
-  if (!req.user || req.user.role !== "admin") {
+  if (!req.user) {
     res.status(403).json({ message: "You can't access this route" });
   } else {
     next();
