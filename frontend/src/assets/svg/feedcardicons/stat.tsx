@@ -5,9 +5,9 @@ type iconType = {
 const StatIcon: React.FC<iconType> = ({ isClicked }) => {
     return (
         <span style={{
-            width: "20px",
+            width: "1.25em",
             color: "var(--grey-3)",
-            height: "20px",
+            height: "1.25em",
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",
             display: "inline-block",

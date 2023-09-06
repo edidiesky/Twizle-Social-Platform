@@ -5,10 +5,9 @@ type iconType = {
 const DownloadIcon: React.FC<iconType> = ({ isClicked }) => {
     return (
         <span style={{
-            width: "18px",
-            height: "18px",
+            width: "1.25em",
             color: "var(--grey-3)",
-
+            height: "1.25em",
 
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",

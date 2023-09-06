@@ -18,6 +18,7 @@ import MuteIcon from '../../assets/svg/dropdownicons/mute';
 const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
     const [drop, setDrop] = useState(false)
+    const [quote, setQuote] = useState(false)
     return (
         <FeedCardStyles key={props._id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
@@ -59,7 +60,7 @@ const FeedCard = (props: feedcardtype) => {
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                         <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
                     </h4>
-                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px",lineHeight:"20px" }} className="text_dark_grey text-light family1">
+                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
                         {props.tweet_text}
                     </h5>
                     <div className="w-100 wrapper">
@@ -74,28 +75,36 @@ const FeedCard = (props: feedcardtype) => {
             </Link>
             <div className="flex item-center w-85 auto gap-2">
                 <div style={{ marginTop: ".6rem" }} className="flex item-center w-85 auto gap-2">
-                    <div className="flex w-100 item-center fs-14 text-light feedtags_wrapper text-dark">
+                    <div className="flex w-100 item-center fs-14 text-light justify-space feedtags_wrapper text-dark">
                         <div onClick={() => setTweet(true)} className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
                                 <MessageIcon />
                             </div>
-                            23
+                            {/* 23 */}
                         </div>
-                        <div className="flex iconwrapper justify-center text_2 item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon2 flex item-center justify-center">
+                        <div className="flex iconwrapper relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                            <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
+                                <div onClick={() => setQuote(false)} className="dropdown_background"></div>
+                                <ul style={{ fontSize: "14px" }} onClick={() => setQuote(false)} className="flex column w-100 text-bold">
+                                    <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
+                                        <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
+                                    <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1"><div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                </ul>
+                            </div>
+                            <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
                                 <RetweetIcon />
                             </div>
-                            144
+                            {/* 144 */}
                         </div><div className="flex iconwrapper justify-center text-3 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon3 flex item-center justify-center">
                                 <LikeIcon />
                             </div>
-                            23
+                            {/* 23 */}
                         </div><div className="flex iconwrapper justify-center item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
                                 <StatIcon />
                             </div>
-                            123
+                            {/* 123 */}
                         </div>
                     </div>
 
@@ -107,7 +116,8 @@ const FeedCard = (props: feedcardtype) => {
 
 const FeedCardStyles = styled.div`
     width: 100%;
-    padding: 1.5rem .7rem;
+    padding: 1.7rem .7rem;
+    padding-bottom:.6rem;
    position: relative;
     border-bottom: 1px solid var(--border);
     &:hover {
@@ -152,6 +162,7 @@ const FeedCardStyles = styled.div`
     }
     .dropdownCard {
         position: absolute;
+
         right: 2%;
         top: 8px;
         z-index: 40;
@@ -164,6 +175,37 @@ const FeedCardStyles = styled.div`
         transition: all .3s;    
         opacity:0;
         visibility: hidden;
+        &.card1 {
+            width: 130px;
+        right: -40%;
+        &.active {
+             @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        }
+        @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        
+   ul {
+
+            li {
+                padding:.7rem 2.4rem;
+            }}
+            &.active {
+            height: 100px;
+            }
+        }
         @media (max-width:500px) {
         width: 300px;
 
@@ -201,7 +243,7 @@ const FeedCardStyles = styled.div`
                 }
                 &:hover {
                    /* background-color: #f1f1f1; */
-                   background-color: var(--grey-hover);
+                   background-color: var(--dark-grey-hover);
 
                }
             }
@@ -293,8 +335,8 @@ li {
             }
         }
        .icons {
-        width: 4rem;
-        height: 4rem;
+        width: 3.5rem;
+        height: 3.5rem;
         border-radius: 50%;
         transition: all .5s;
 
