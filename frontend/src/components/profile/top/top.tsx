@@ -2,23 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { CircularProgress } from '@material-ui/core';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
-  }
-  
-const Top: React.FC<modalType> = ({setModal}) => {
+}
+
+const Top: React.FC<modalType> = ({ setModal }) => {
     const { userDetails } = useAppSelector(store => store.auth)
+    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     return (
         <TopStyles className="w-100">
-       
+
             <div className='flex item-center gap-2 w-90 auto'>
                 {/* <h2 className="fs-30">Top bar</h2> */}
                 <div className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></div>
                 <h3 className="fs-20 text-extra-bold text-dark">{userDetails?.name}
-                    <span className="block fs-14 text-light text-dark">
-                        401 Tweets</span>
+                    <span style={{marginTop:"4px"}} className="flex item-center gap-1 fs-14 text-light text-dark">
+                        {
+                            tweetisLoading ? <div className="flex justify-center">
+                                <CircularProgress style={{ width: '15px', height: '15px', fontSize: '15px' }} color="primary" />
+                            </div> : <>
+                                {tweets.length} {" "}
+                            </>
+                        }Tweets</span>
                 </h3>
             </div>
 

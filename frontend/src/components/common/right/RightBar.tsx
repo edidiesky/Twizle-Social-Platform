@@ -6,6 +6,7 @@ import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GetAllUserProfile } from '../../../features/auth/authReducer';
+import { CircularProgress } from '@mui/material';
 type Rightbar = {
     types?: String
 }
@@ -18,12 +19,12 @@ const images = [
 
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
-    const { users } = useAppSelector(store => store.auth)
+    const { users, userprofileisLoading } = useAppSelector(store => store.auth)
     const dispatch = useDispatch()
 
-    React.useEffect(()=> {
+    React.useEffect(() => {
         dispatch(GetAllUserProfile())
-    },[])
+    }, [])
 
     return (
         <RightSidebarStyles>
@@ -45,16 +46,16 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             <h3 className="text-extra-bold text_dark_grey w-100 auto">
                                 Relevant People</h3>
                             <div className="w-100 flex item-start justify-space gap-1">
-                                
-                                    <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
-                                        <div className="image_gradient"></div>
-                                        {
-                                            tweetDetails?.tweet_user_id?.profile_image_url ?
-                                                <img src={tweetDetails?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
-                                                : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
-                                        }
-                                    </Link>
+                                <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
+                                    <div className="image_gradient"></div>
+                                    {
+                                        tweetDetails?.tweet_user_id?.profile_image_url ?
+                                            <img src={tweetDetails?.tweet_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                                    }
+                                </Link>
                                 {/* <div className="image_wrapper">
                                     <img src={'https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg'} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                     <div className="image_gradient"></div>
@@ -62,9 +63,9 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                 <div className="flex-1 flex column" style={{ gap: ".6rem" }}>
                                     <div className="w-100 flex item-center justify-space">
                                         <h4 className="fs-16 text-extra-bold flex column" style={{ gap: ".2rem" }}>
-                                                {tweetDetails?.tweet_user_id?.display_name}
+                                            {tweetDetails?.tweet_user_id?.display_name}
                                             <span className="block fs-16 text-grey text-light">
-                                                    @{tweetDetails?.tweet_user_id?.name}
+                                                @{tweetDetails?.tweet_user_id?.name}
                                             </span>
                                         </h4>
                                         <div className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
@@ -72,7 +73,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                     </div>
                                     {/* about */}
                                     <h4 className="fs-16 text-light text-dark">
-                                            {tweetDetails?.tweet_user_id?.bio}
+                                        {tweetDetails?.tweet_user_id?.bio}
                                     </h4>
                                 </div>
                             </div>
@@ -88,31 +89,38 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             Who to follow</h3>
                         <div className="flex column w-100">
                             {
-                                users?.slice(1, 4).map((x, index) => {
-                                    return <div key={index} className="w-100 list flex item-center justify-space">
-                                        <div className="flex item-center gap-1">
-                                            <Link to={`/${x?.name}`} className="image_wrapper">
-                                                <div className="image_gradient"></div>
-                                                {
-                                                    x?.profile_image_url ?
-                                                        <img src={x?.profile_image_url} alt="images-avatar" className="avatar_profile" />
-                                                        : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+                                userprofileisLoading ? <div className="flex justify-center">
+                                    <CircularProgress style={{ width: '30px', height: '30px', fontSize: '15px' }} color="primary" />
+                                </div> : <>
+                                    {
+                                        users?.slice(1, 4).map((x, index) => {
+                                            return <div key={index} className="w-100 list flex item-center justify-space">
+                                                <div className="flex item-center gap-1">
+                                                    <Link to={`/${x?.name}`} className="image_wrapper">
+                                                        <div className="image_gradient"></div>
+                                                        {
+                                                            x?.profile_image_url ?
+                                                                <img src={x?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                                                : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
-                                                }
-                                            </Link>
+                                                        }
+                                                    </Link>
 
-                                            <h4 className="fs-16 text_dark_grey text-bold flex column" style={{ gap: ".2rem" }}>
-                                                {x.display_name}
-                                                <span className="block fs-14 text-dark text-light">
-                                                    {x.name}
-                                                </span>
-                                            </h4>
-                                        </div>
-                                        <div className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
+                                                    <h4 className="fs-16 text_dark_grey text-bold flex column" style={{ gap: ".2rem" }}>
+                                                        {x.display_name}
+                                                        <span className="block fs-14 text-dark text-light">
+                                                            {x.name}
+                                                        </span>
+                                                    </h4>
+                                                </div>
+                                                <div className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
 
-                                    </div>
-                                })
+                                            </div>
+                                        })
+                                    }
+                                </>
                             }
+
                         </div>
                     </div>
                     <div className="flex item-center text-dark w-90 auto fs-16 text-light flex-wrap" style={{ gap: "1rem", paddingBottom: "2rem" }}>
@@ -244,7 +252,7 @@ const RightSidebarStyles = styled.div`
         gap: 1rem;
 
         &:hover {
-            background-color:var(--dark-grey-hover);
+            background-color:rgb(239, 243, 244);
         }
     }
     .verfiy_wrapper {
