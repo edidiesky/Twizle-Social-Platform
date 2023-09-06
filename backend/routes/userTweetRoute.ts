@@ -16,7 +16,7 @@ import {
 } from "../controllers/userTweetControllers";
 
 router.get("/", GetAllTweet);
-router.get("/user", authMiddleware, GetUserTweet);
+router.get("/user/:id", authMiddleware, GetUserTweet);
 router.post("/", authMiddleware, CreateTweet);
 router.route('/like/:id').put(authMiddleware, LikeAndUnlikeATweet)
 router.route('/repost/:id').post(authMiddleware, RePostATweet)

@@ -9,7 +9,7 @@ const userToken = localStorage.getItem("Usertoken");
 interface authState {
   userInfo?: any,
   userDetails?: any,
-  users?:any,
+  users?: any,
   token?: string,
   registerisLoading?: Boolean,
   registerisSuccess?: Boolean,
@@ -33,7 +33,7 @@ interface authState {
 // Define the initial state using that type
 const initialState: authState = {
   userInfo: userData ? userData : "",
-  userDetails:  null,
+  userDetails: null,
   users: [],
   token: userToken ? userToken : "",
 
@@ -62,7 +62,24 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     clearUserProfile: (state, action) => {
-      state = initialState
+      state.registerisLoading = false
+      state.registerisSuccess = false
+      state.registerisError = false
+      state.users = []
+      state.userDetails = []
+
+      state.loginisLoading = false
+      state.loginisSuccess = false
+      state.loginisError = false
+
+
+      state.userprofileisLoading = false
+      state.userprofileisSuccess = false
+      state.userprofileisError = false
+
+      state.alertText = ''
+      state.showAlert = false
+      state.alertType = ''
     },
   },
   extraReducers: (builder) => {
@@ -132,7 +149,7 @@ export const authSlice = createSlice({
       state.userprofileisSuccess = true
       state.userprofileisLoading = false
       state.userDetails = action.payload
-      
+
     })
     builder.addCase(GetUserProfile.rejected, (state, action) => {
       state.userprofileisSuccess = false

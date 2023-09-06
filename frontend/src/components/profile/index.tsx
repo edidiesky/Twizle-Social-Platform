@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { CircularProgress } from '@mui/material';
 import WallpaperIndex from './top/wallpaper';
 import ProfileBottomIndex from './top/bottom';
 import RightSidebarIndex from '../common/right/RightBar';
 import LeftSidebarIndex from '../common/LeftSidebar';
 import Top from './top/top';
-import Feed from '../common/feed/feed';
 import AuthModal from '../modals/EditProfileModal';
 import { AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { GetUserProfile } from '../../features/auth/authReducer';
 import { useParams } from 'react-router-dom';
+import { clearUserProfile } from '../../features/auth/authSlice';
+import { GetUserTweet } from '../../features/tweet/tweetReducer';
+import { feedcardtype } from '../../types/feedtype';
+import FeedCard from '../common/FeedCard';
 
 type Rightbar = {
     type: String
@@ -24,12 +28,20 @@ const Profile: React.FC = () => {
     const [modal, setModal] = React.useState(false)
 
     const { userDetails } = useAppSelector(store => store.auth)
+    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        dispatch(clearUserProfile({payload: "any"}))
         dispatch(GetUserProfile(name))
     }, [name])
+
+    useEffect(() => {
+        if(userDetails?._id) {
+            dispatch(GetUserTweet(userDetails?._id))
+        }
+    }, [userDetails?._id])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
@@ -66,13 +78,25 @@ const Profile: React.FC = () => {
                         </div>
                     </div>
                     {
-                        !feed ? <div className="flex w-85 auto py-2 item-center justify-center">
+                        tweets?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
                             <h2 style={{lineHeight:"1.3", width:"60%"}} className="fs-30 w-85 auto text-bold">
                                 @{userDetails?.display_name} hasn’t posted
 
                                 <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                             </h2>
-                        </div> : <Feed />
+                        </div> : <div className="w-100">
+                                {
+                                    tweetisLoading ? <div className="flex py-2 w-100 justify-center">
+                                        <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
+                                    </div> : <>
+                                        {
+                                            tweets?.map((value: feedcardtype) => {
+                                                return <FeedCard {...value} key={value.tweet_id} />
+                                            })
+                                        }
+                                    </>
+                                }
+                        </div>
                     }
 
                 </div>

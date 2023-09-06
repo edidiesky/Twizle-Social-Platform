@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { UpdateTweet, getAllTweet, GetSingleTweetDetails, CreateTweet, DeleteTweet } from './tweetReducer'
+import {
+  UpdateTweet,
+  getAllTweet,
+  GetSingleTweetDetails,
+  CreateTweet,
+  DeleteTweet,
+  LikeAndUnlikeATweet,
+  GetUserTweet,
+  RePostATweet
+} from './tweetReducer'
 
 // Define a type for the tweet state
 interface tweetState {
@@ -23,7 +32,7 @@ interface tweetState {
 
 // Define the initial state of the tweet using that type
 const initialState: tweetState = {
-  tweetDetails:  null,
+  tweetDetails: null,
   tweets: [],
 
   tweetisLoading: false,
@@ -46,7 +55,14 @@ export const tweetSlice = createSlice({
   initialState,
   reducers: {
     cleartweet: (state, action) => {
-      
+        state.tweetDetails = null
+        state.tweets = []
+        state.tweetisLoading = false
+        state.tweetisSuccess = false
+        state.tweetisError = false
+        state.alertText = ''
+        state.showAlert = false
+        state.alertType = ''
     },
   },
   extraReducers: (builder) => {
@@ -130,10 +146,6 @@ export const tweetSlice = createSlice({
 
     })
 
-
-
-
-
     builder.addCase(UpdateTweet.pending, (state, action) => {
       state.tweetisLoading = true
     })
@@ -146,6 +158,74 @@ export const tweetSlice = createSlice({
       state.alertType = 'success'
     })
     builder.addCase(UpdateTweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+    // like and unlike slices
+    builder.addCase(LikeAndUnlikeATweet.pending, (state, action) => {
+      state.tweetisLoading = true
+    })
+    builder.addCase(LikeAndUnlikeATweet.fulfilled, (state, action) => {
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.tweetDetails = action.payload
+      state.alertText = 'Tweet Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(LikeAndUnlikeATweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+
+    // Get all tweet of user slices
+    builder.addCase(GetUserTweet.pending, (state, action) => {
+      state.tweetisLoading = true
+    })
+    builder.addCase(GetUserTweet.fulfilled, (state, action) => {
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.tweets = action.payload
+      state.alertText = 'Tweet Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(GetUserTweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+
+    // Get all tweet of user slices
+    builder.addCase(RePostATweet.pending, (state, action) => {
+      state.tweetisLoading = true
+    })
+    builder.addCase(RePostATweet.fulfilled, (state, action) => {
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.tweetDetails = action.payload
+      state.alertText = 'Tweet created succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(RePostATweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
       state.tweetisLoading = false

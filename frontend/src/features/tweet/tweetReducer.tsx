@@ -90,8 +90,8 @@ export const UpdateTweet = createAsyncThunk<{
 // Deelete User tweet
 export const DeleteTweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, tweetdatatype>(
-  "delete tweet",
+}, {_id?:any}>(
+  "deletetweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
@@ -151,5 +151,97 @@ export const GetSingleTweetDetails = createAsyncThunk<{
   }
 );
 
+// Like and unlike a tweet
+export const LikeAndUnlikeATweet = createAsyncThunk<{
+  rejectValue: KnownError,
+}, {id?:any}>(
+  "LikeAndUnlikeATweet",
+  async (Detailsdata, { rejectWithValue, getState }) => {
 
+    try {
+      const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
+    
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.put(
+        `/api/v1/tweet/like/${Detailsdata}`,
+        config
+      );
+      return response.data.updateTweet;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+// Get User Tweet
+export const GetUserTweet = createAsyncThunk<{
+  rejectValue: KnownError,
+}, {_id?:any}>(
+  "GetUserTweet",
+  async (Detailsdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/tweet/user/${Detailsdata}`,
+        config
+      );
+      return response.data.tweet;
+      // console.log(Detailsdata)
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+// Like and unlike a tweet
+export const RePostATweet = createAsyncThunk<{
+  rejectValue: KnownError,
+}, tweetdatatype>(
+  "RePostATweet",
+  async (Detailsdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.post(
+        `/api/v1/tweet/repost/${Detailsdata?._id}`,
+        config
+      );
+      return response.data.tweet;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
 
