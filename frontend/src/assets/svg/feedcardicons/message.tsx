@@ -7,8 +7,7 @@ const MessageIcon: React.FC<iconType> = ({ isClicked }) => {
         <span style={{
             width: "20px",
             height: "20px",
-            color: "var(--dark-1)",
-
+            color: "var(--grey-3)",
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",
             display: "inline-block",

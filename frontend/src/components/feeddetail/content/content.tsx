@@ -12,6 +12,10 @@ import { LiaRetweetSolid } from 'react-icons/lia'
 import { useAppDispatch } from '../../../hooks/reduxtoolkit';
 import { GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
 import { useParams } from 'react-router-dom';
+import MessageIcon from '../../../assets/svg/feedcardicons/message';
+import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
+import LikeIcon from '../../../assets/svg/feedcardicons/like';
+import StatIcon from '../../../assets/svg/feedcardicons/stat';
 
 
 const PostDetailsContent: React.FC = () => {
@@ -28,57 +32,57 @@ const PostDetailsContent: React.FC = () => {
             <PostFeedCard />
             {/* data likes reviews comments */}
             <div className="flex-100 column gap-1 fs-18 text-light text-grey text-light">
-                <div className="flex bottom w-90 auto item-center gap-1">
+                <div className="flex bottom fs-15 w-90 auto item-center gap-1">
                     <span>7:24 AM · Jul 21, 2023</span>
-                    <span className="fs-16 text-grey text-light">·
-                        <span className="fs-16 text-bold text-dark">5,133</span>
+                    <span className="fs-14 text-grey text-light">·
+                        <span className="fs-14 text-bold text-dark">5,133</span>
                         {" "}
                         Views
                     </span>
                 </div>
                 <div className="flex bottom w-90 auto item-center gap-2 flex-wrap">
-                    <span className="fs-16 text-grey text-light">
-                        <span className="fs-16 text-bold text-dark">50</span>
+                    <span className="fs-15 text-grey text-light">
+                        <span className="fs-15 text-bold text-dark">50</span>
                         {" "}
                         Retweets
-                    </span> <span className="fs-16 text-grey text-light">
-                        <span className="fs-16 text-bold text-dark">500</span>
+                    </span> <span className="fs-15 text-grey text-light">
+                        <span className="fs-15 text-bold text-dark">500</span>
                         {" "}
                         Quotes
-                    </span> <span className="fs-16 text-grey text-light">
-                        <span className="fs-16 text-bold text-dark">5</span>
+                    </span> <span className="fs-15 text-grey text-light">
+                        <span className="fs-15 text-bold text-dark">5</span>
                         {" "}
                         Likes
                     </span>
-                    <span className="fs-16 text-grey text-light">
-                        <span className="fs-16 text-bold text-dark">15</span>
+                    <span className="fs-15 text-grey text-light">
+                        <span className="fs-15 text-bold text-dark">15</span>
                         {" "}
                         Bookmarks
                     </span>
                 </div>
-                <div className="flex w-90 auto justify-space bottom item-center w-90 gap-2">
-                    <div className="flex item-center w-85 auto justify-space fs-14 text-light feedtags_wrapper">
-                        <div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
+                <div className="flex w-90 auto justify-space bottom bottom1 item-center w-90 gap-2">
+                    <div className="flex w-85 auto item-center fs-14 text-light feedtags_wrapper text-dark">
+                        <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
-                                <HiOutlineChatBubbleOvalLeft />
+                                <MessageIcon />
                             </div>
                             23
                         </div>
-                        <div className="flex iconwrapper text_2 item-center" style={{ gap: ".3rem" }}>
+                        <div className="flex iconwrapper flex-1 justify-center text_2 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon2 flex item-center justify-center">
-                                <LiaRetweetSolid fontSize={'24px'} />
+                                <RetweetIcon />
                             </div>
                             144
-                        </div><div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <HiOutlineChatBubbleOvalLeft />
+                        </div><div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                            <div className="icons icon3 flex item-center justify-center">
+                                <LikeIcon />
                             </div>
                             23
-                        </div><div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
+                        </div><div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
-                                <HiOutlineChatBubbleOvalLeft />
+                                <StatIcon />
                             </div>
-                            23
+                            123
                         </div>
                     </div>
                     {/* <div className="flex iconwrapper item-center fs-16 text-light" style={{ gap: ".3rem" }}>
@@ -103,13 +107,18 @@ const PostDetailsContentStyles = styled.div`
         min-height: 100vh;
 
         .bottom {
-            padding:2rem 0;
+            padding:1.5rem 0;
             border-bottom : 1px solid var(--border);
-
+            &.bottom1 {
+                padding: .6rem 0;
+            }
+        }
+        .fs-15 {
+            font-size: 15px;
         }
         .iconwrapper {
         transition: all .5s;
-            font-size: 17px;
+            font-size: 14px;
         cursor: pointer;
         @media (max-width:380px) {
             font-size: 13px;

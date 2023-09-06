@@ -35,6 +35,7 @@
 }
 :root {
   --grey-1: rgb(113, 118, 123);
+  --grey-3:rgb(83, 100, 113);
   --dark-1: rgb(0, 0, 0);
   --primary: #e4c590;
   --background_2: #0e0d0c;
@@ -50,6 +51,8 @@
 }
 /* :root {
   --white: rgb(0, 0, 0);
+  --grey-3:#eff3f4;
+
   --dark-1: #eff3f4;
   --dark-grey: #eff3f4;
   --dark-grey-hover: #f9f9f90f;

@@ -87,7 +87,7 @@ const FeedCardStyles = styled.div`
     width: 100%;
    position: relative;
     padding: 1.5rem .7rem;
-    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
     &:hover {
         /* background-color: #f1f1f1; */
         background-color: var(--dark-grey-hover);

@@ -4,6 +4,8 @@ import Search from './Search';
 import { chatData } from '../../../data/chatData';
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { GetAllUserProfile } from '../../../features/auth/authReducer';
 type Rightbar = {
     types?: String
 }
@@ -16,12 +18,18 @@ const images = [
 
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
+    const { users } = useAppSelector(store => store.auth)
+    const dispatch = useDispatch()
+
+    React.useEffect(()=> {
+        dispatch(GetAllUserProfile())
+    },[])
 
     return (
         <RightSidebarStyles>
             <div className="wrapper w-100 flex column">
                 <Search />
-                <div className="w-85 auto flex column gap-2">
+                <div className="w-90 auto flex column gap-2">
                     {
                         types === 'profile' && <div className="image_wrappers w-90 auto">
                             {
@@ -80,18 +88,23 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             Who to follow</h3>
                         <div className="flex column w-100">
                             {
-                                chatData.slice(0, 3).map((x, index) => {
+                                users?.slice(1, 4).map((x, index) => {
                                     return <div key={index} className="w-100 list flex item-center justify-space">
                                         <div className="flex item-center gap-1">
-                                            <div className="image_wrapper">
+                                            <Link to={`/${x?.name}`} className="image_wrapper">
                                                 <div className="image_gradient"></div>
-                                                <img src={x.image} alt="" className="avatar" />
-                                            </div>
+                                                {
+                                                    x?.profile_image_url ?
+                                                        <img src={x?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                                        : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
-                                            <h4 className="fs-16 text_dark_grey text-extra-bold flex column" style={{ gap: ".2rem" }}>
-                                                {x.name}
-                                                <span className="block fs-14 text-grey text-light">
-                                                    {x.username}
+                                                }
+                                            </Link>
+
+                                            <h4 className="fs-16 text_dark_grey text-bold flex column" style={{ gap: ".2rem" }}>
+                                                {x.display_name}
+                                                <span className="block fs-14 text-dark text-light">
+                                                    {x.name}
                                                 </span>
                                             </h4>
                                         </div>
@@ -157,8 +170,8 @@ const RightSidebarStyles = styled.div`
     }
   }
   .image_wrapper {
-      width:5rem;
-      height:5rem;
+      width:4rem;
+      height:4rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
@@ -207,8 +220,9 @@ const RightSidebarStyles = styled.div`
     .wrapper {
         margin: 0 auto;
         position: sticky;
-    top: 0%;
-    height: 100%;
+        top: 0%;
+        height: 100%;
+        padding-right: 2rem;
         /* width: 93%; */
 
         @media (max-width:1080px) {

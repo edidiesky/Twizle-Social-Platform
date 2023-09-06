@@ -6,10 +6,8 @@ const RetweetIcon: React.FC<iconType> = ({ isClicked }) => {
     return (
         <span style={{
             width: "20px",
+            color: "var(--grey-3)",
             height: "20px",
-            color: "var(--dark-1)",
-
-
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",
             display: "inline-block",

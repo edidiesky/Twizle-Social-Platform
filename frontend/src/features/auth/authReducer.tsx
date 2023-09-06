@@ -130,7 +130,7 @@ export const GetUserProfile = createAsyncThunk<{
 export const GetAllUserProfile = createAsyncThunk<{
   rejectValue: KnownError,
 }>(
-  "get all user profile",
+  "getalluserprofile",
   async (_, { rejectWithValue, getState }) => {
 
     try {
