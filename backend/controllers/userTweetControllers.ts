@@ -21,14 +21,66 @@ const GetAllTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
 
 });
 
+// GET All UserTweet
+//  Public
+const RePostATweet = asyncHandler(async (req: CustomInterface, res: Response) => {
+  // // find the tweet to be retweeted
+  const tweet = await UserTweet.findOne({ _id: req.params.id })
+    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+  if (!tweet) {
+    res.status(404);
+    throw new Error("The Tweet does not exist");
+  }
+
+  // create a new tweet
+  const newttweet = await UserTweet.create({
+    "tweet_text": tweet.tweet_text, 
+    "tweet_image": tweet.tweet_image,
+  })
+
+  // check if the userid is included in the tweet like array
+  const userIdIncludedInTweetLikesArray = tweet.retweets.includes(req.user?.userId)
+  if (!userIdIncludedInTweetLikesArray) {
+    await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { retweets: req.user?.userId } }, { new: true })
+
+  } else {
+    await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { retweets: req.user?.userId } }, { new: true })
+
+
+  }
+
+
+  res.status(200).json({ tweet });
+
+});
+
 // GET 
 // Get single tweet
 const GetSingleTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
   const tweet = await UserTweet.findById({ _id: req.params.id })
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
+  if (!tweet) {
+    res.status(404);
+    throw new Error("The Tweet does not exist");
+  }
 
   res.status(200).json({ tweet });
 });
+
+
+// GET 
+// Get user's tweet
+const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
+  const tweet = await UserTweet.findOne({ tweet_user_id: req.user?.userId })
+    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+  if (!tweet) {
+    res.status(404);
+    throw new Error("The Tweet does not exist");
+  }
+
+  res.status(200).json({ tweet });
+});
+
 
 //PRIVATE
 // ADMIN
@@ -55,7 +107,7 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_likes: userid } }, { new: true })
     res.status(200).json({ updateTweet });
   } else {
-    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } },{new:true})
+    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
     res.status(200).json({ updateTweet });
 
   }
@@ -70,14 +122,6 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
 const QuoteATweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
   res.status(200).send('QuoteATweet a Tweet');
 });
-
-
-//PRIVATE
-// User
-const RePostATweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  res.status(200).send('RePostATweet a Tweet');
-});
-
 
 
 
@@ -132,5 +176,6 @@ export {
   GetSingleTweet,
   LikeAndUnlikeATweet,
   QuoteATweet,
-  RePostATweet
+  RePostATweet,
+  GetUserTweet
 };

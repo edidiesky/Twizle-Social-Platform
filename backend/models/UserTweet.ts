@@ -9,16 +9,23 @@ const UserTweetSchema = new mongoose.Schema(
     },
     tweet_text: {
       type: String,
-      required: true,
+      // required: true,
     },
     tweet_image: {
       type: Array,
-      required: true,
+      // required: true,
       default: []
     },
     tweet_likes: {
       type: Array,
       default: []
+    },
+    retweets: {
+      type: Array,
+      default: []
+    },
+    retweet_tweet_id: {
+      type: String,
     },
     retweet_count: { type: Number },
     favorite_count: { type: Number }
