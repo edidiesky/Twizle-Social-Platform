@@ -59,7 +59,7 @@ const FeedCard = (props: feedcardtype) => {
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                         <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
                     </h4>
-                    <h5 style={{ paddingBottom: "1rem" }} className="text_dark_grey text-light family1">
+                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px",lineHeight:"20px" }} className="text_dark_grey text-light family1">
                         {props.tweet_text}
                     </h5>
                     <div className="w-100 wrapper">

@@ -32,7 +32,7 @@ const TopStyles = styled.div`
   position: sticky;
   top: 0;
   background-color: var(--top);
-  z-index: 30;
+  z-index: 300;
   /* padding: 1rem 0; */
   backdrop-filter: blur(12px);
   padding:1rem 0;

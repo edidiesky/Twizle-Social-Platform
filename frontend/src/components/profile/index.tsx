@@ -57,12 +57,13 @@ const Profile: React.FC = () => {
                 }
             </AnimatePresence>
             <div className="flex flex-1 wraps column ">
+                <Top />
                 <div className="flex column">
-                    <Top />
+                    
                     <WallpaperIndex />
                     <ProfileBottomIndex setModal={setModal} />
                 </div>
-                <div className="w-100 flex column">
+                <div className="w-100 flex py-2 column">
                     <div className="w-100 flex item-center text-bold fs-16 profilelist">
                         <div className="flex-1 profileTag">
                             <div onClick={() => setTab(0)} className={tab === 0 ? "tag active" : "tag text-light"}>Tweets</div>
@@ -156,7 +157,7 @@ const ProfileStyles = styled.div`
     .wraps {
         border-right : 1px solid rgba(0,0,0,.1);
         border-left : 1px solid rgba(0,0,0,.1);
-        height:100vh;
+        min-height: 100vh;
         @media (max-width:980px) {
     border-right : 1px solid rgba(0,0,0,.1);
 
