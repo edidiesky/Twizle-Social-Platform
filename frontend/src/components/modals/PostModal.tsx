@@ -10,6 +10,8 @@ import MediaIcon from "../../assets/svg/media";
 import GiIcon from "../../assets/svg/gif";
 import ScheduleIcon from "../../assets/svg/schedule";
 import PollIcon from "../../assets/svg/poll";
+import WorldIcon from "../../assets/svg/world";
+import { useAppSelector } from "../../hooks/reduxtoolkit";
 
 
 type modalType = {
@@ -19,6 +21,8 @@ type modalType = {
 }
 
 const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
+
+  const {userInfo} = useAppSelector(store=> store.auth)
 
   return (
     <PostModalStyles
@@ -47,15 +51,25 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
           <div className="flex w-100 column gap-1">
             <div className="w-90 auto flex item-start gap-1">
-              <div className="image_wrapper">
-                <img src={"https://i.pinimg.com/236x/c1/d9/07/c1d907446b77689dd88526dc65042dee.jpg"} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
-                <div className="image_gradient"></div>
-              </div>
-              <div className="area flex-1">
-                <textarea placeholder='What is Happening' className="text text-light w-100"></textarea>
+            
+                {
+                  userInfo?.image ?
+                    <img src={userInfo?.image} alt="images-avatar" className="avatar" />
+                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                }
+          
+              <div className="area flex column gap-1 flex-1 item-start">
+                <div style={{ color: "rgb(29, 155, 240)", fontSize:"15px"}} className="replyBtn1 text-light">Everyone</div>
+                <textarea placeholder='What is Happening?!' className="text text-light w-100"></textarea>
               </div>
             </div>
-           
+            <div className="w-90 auto flex item-start">
+              <div style={{gap:"5px"}} className="flex replyBtn item-center gap-1">
+                <WorldIcon/>
+                <span style={{ color:"rgb(29, 155, 240)", fontSize:"13px"}} className="fs-12 text-bold">Everyone can reply</span>
+              </div>
+            </div>
             <div className="flex bottom w-90 auto item-center justify-space">
               <div className="flex item-center">
                 <div className="icons flex item-center justify-center">
@@ -76,7 +90,6 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
               <div className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
             </div>
           </div>
-
         </div>
 
       </motion.div>
@@ -96,6 +109,21 @@ const PostModalStyles = styleds(motion.div)`
   align-items: start;
   justify-content: center;
   top: 0;
+  .replyBtn {
+    padding:4px 10px;
+    border-radius:20px;
+    &:hover {
+      background:rgba(29, 155, 240, 0.1);
+    }
+  }
+   .replyBtn1 {
+    padding:2px 15px;
+    border-radius:20px;
+    border:1px solid rgba(0,0,0,.4);
+    &:hover {
+      background:rgba(29, 155, 240, 0.1);
+    }
+  }
 .bottom {
     border-top: 1px solid var(--border);
     padding:10px 0;
@@ -106,12 +134,13 @@ const PostModalStyles = styleds(motion.div)`
 }
 
 .area {
-        height: 14rem;
+  
 
     }
         .text {
         resize: none;
         border:none;
+        height: 10rem;
         outline:none;
         font-size: 20px;
         font-family: inherit;
@@ -120,42 +149,20 @@ const PostModalStyles = styleds(motion.div)`
         padding: 1rem ;
         color:var(--dark-1);
         &::placeholder {
-            font-size: 20px;
+            font-size: 24px;
             color:var(--grey-1);
-            font-weight: 400;
+            font-weight: light;
         }
     }
 
-  .image_wrapper {
-      width:4rem;
-      height:4rem;
-      position: relative;
-      border-radius:50%;
-      cursor:pointer;
-      &:hover {
-        .image_gradient{
-          opacity:1;
-        }
-      }
+  .avatar {
+        width: 4rem !important;
+        height: 4rem !important;
+        border-radius: 50%;
+        object-fit: cover;
+    
     }
-    .image_gradient {
-      width:100%;
-      height:100%;
-      border-radius:50%;
-      position: absolute;
-      background:rgba(0,0,0,.2);
-      opacity:0;
-      z-index:20;
-      transition:all .5s;
-    }
-    .avatar_profile {
-      width:100%;
-      height:100%;
-      border-radius:50%;
-      /* transform: translateY(-100%); */
-      position: absolute;
-      
-    }
+
   .profile_background {
     background-color: #B2B2B2;
     height: 20rem;
@@ -178,7 +185,7 @@ const PostModalStyles = styleds(motion.div)`
     width: 100%;
   }
   .deleteCard {
-    max-width: 80vw;
+    max-width: 600px;
     min-width: 600px;
     display: flex;
     flex-direction: column;
