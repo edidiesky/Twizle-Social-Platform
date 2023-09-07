@@ -192,7 +192,7 @@ export const tweetSlice = createSlice({
 
     // Get all tweet of user slices
     builder.addCase(GetUserTweet.pending, (state, action) => {
-      state.tweetisLoading = true
+      // state.tweetisLoading = true
     })
     builder.addCase(GetUserTweet.fulfilled, (state, action) => {
       state.tweetisSuccess = true

@@ -160,14 +160,19 @@ export const LikeAndUnlikeATweet = createAsyncThunk<{
 
     try {
       const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
         },
       };
+      // const response = await axios.put(
+      //   `/api/v1/tweet/like/${Detailsdata}`,
+      //   config
+      // );
+      // return response.data.updateTweet;
       const response = await axios.put(
-        `/api/v1/tweet/like/${Detailsdata}`,
+        `/api/v1/tweet/like/${Detailsdata}`,null,
         config
       );
       return response.data.updateTweet;

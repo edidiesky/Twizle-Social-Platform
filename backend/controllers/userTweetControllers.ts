@@ -105,10 +105,13 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
   // check if the userid is included in the tweet like array
   const userIdIncludedInTweetLikesArray = tweet.tweet_likes.includes(userid)
   if (!userIdIncludedInTweetLikesArray) {
-    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_likes: userid } }, { new: true })
+    let updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_likes: userid } }, { new: true })
+    updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { favorite_count: updateTweet?.tweet_likes.length } }, { new: true })
     res.status(200).json({ updateTweet });
   } else {
-    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
+    let updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
+    // updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { favorite_count: updateTweet?.tweet_likes?.length - 1 } }, { new: true })
+
     res.status(200).json({ updateTweet });
 
   }

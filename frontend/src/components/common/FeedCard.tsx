@@ -14,11 +14,17 @@ import FollowIcon from '../../assets/svg/dropdownicons/follow';
 import ReportIcon from '../../assets/svg/dropdownicons/report';
 import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
+import { useAppDispatch } from '../../hooks/reduxtoolkit';
+import { LikeAndUnlikeATweet } from '../../features/tweet/tweetReducer';
 
 const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
     const [drop, setDrop] = useState(false)
     const [quote, setQuote] = useState(false)
+    const dispatch = useAppDispatch()
+    const handleLikeTweet =()=> {
+        dispatch(LikeAndUnlikeATweet(props?._id))
+    }
     return (
         <FeedCardStyles key={props._id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
@@ -95,7 +101,8 @@ const FeedCard = (props: feedcardtype) => {
                                 <RetweetIcon />
                             </div>
                             {/* 144 */}
-                        </div><div className="flex iconwrapper justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                        </div>
+                        <div onClick={handleLikeTweet} className="flex iconwrapper justify-center text-3 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon3 flex item-center justify-center">
                                 <LikeIcon />
                             </div>
@@ -165,7 +172,7 @@ const FeedCardStyles = styled.div`
 
         right: 2%;
         top: 8px;
-        z-index: 40;
+        z-index: 20;
         cursor: pointer;
         width: 370px;
         border-radius: 10px;
