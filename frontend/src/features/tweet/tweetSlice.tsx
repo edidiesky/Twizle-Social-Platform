@@ -127,11 +127,11 @@ export const tweetSlice = createSlice({
     // DeleteTweet slice
 
     builder.addCase(DeleteTweet.pending, (state, action) => {
-      state.tweetisLoading = true
+     
     })
     builder.addCase(DeleteTweet.fulfilled, (state, action) => {
-      state.tweetisSuccess = true
-      state.tweetisLoading = false
+    
+      state.tweets = state.tweets.filter((x) => x._id !== action.payload);
     })
     builder.addCase(DeleteTweet.rejected, (state, action) => {
       state.tweetisSuccess = false

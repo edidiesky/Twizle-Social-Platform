@@ -15,15 +15,17 @@ import ReportIcon from '../../assets/svg/dropdownicons/report';
 import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
-import { LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
+import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
 import ShareIcon from '../../assets/svg/feedcardicons/share';
 import DeleteIcon from '../../assets/svg/dropdownicons/delete';
+import DeleteModal from '../modals/DeleteModal';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
 
     const [tweet, setTweet] = useState(false)
+    const [deletemodal, setDeleteModal] = useState(false)
     const [drop, setDrop] = useState(false)
     const [quote, setQuote] = useState(false)
     const [like, setLike] = useState(false)
@@ -37,22 +39,37 @@ const FeedCard = (props: feedcardtype) => {
         dispatch(RePostATweet(props?._id))
     }
     const likes = props?.tweet_likes?.length
+    const handleDeleteTweet =()=> {
+        dispatch(DeleteTweet(props?._id))
+        setDeleteModal(false)
+    }
+   const handledeleteModal=()=> {
+        setDeleteModal(true) 
+        setDrop(false)
+    }
 
     return (
         <FeedCardStyles key={props._id}>
+            <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+            >
+                {deletemodal && <DeleteModal handleDeleteTweet={handleDeleteTweet} modal={deletemodal} setModal={setDeleteModal} />}
+            </AnimatePresence>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
-                <ul style={{ fontSize: "14.6px" }} onClick={() => setDrop(false)} className="flex column w-100 text-bold">
+                <ul style={{ fontSize: "14.6px" }}  className="flex column w-100 text-bold">
                     {
-                        checkifUser && <li style={{ color: "rgb(244, 33, 46)" }} className="flex text-extra-bold item-center gap-1">
+                        checkifUser && <li onClick={handledeleteModal} style={{ color: "rgb(244, 33, 46)" }} className="flex text-extra-bold item-center gap-1">
                             <DeleteIcon />Delete</li>
                     }
 
-                    <li className="flex item-center gap-1"><IntrestIcon /> Not interested in this tweet</li>
-                    <li className="flex item-center gap-1"><FollowIcon />  Follow Alexander</li>
-                    <li className="flex item-center gap-1"><MuteIcon /> Mute Alexander</li>
-                    <li className="flex item-center gap-1"><BlockIcon /> Block Alexander</li>
-                    <li className="flex item-center gap-1"><ReportIcon /> Report tweet</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><IntrestIcon /> Not interested in this tweet</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><FollowIcon />  Follow Alexander</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><MuteIcon /> Mute Alexander</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><BlockIcon /> Block Alexander</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><ReportIcon /> Report tweet</li>
                 </ul>
             </div>
             <AnimatePresence

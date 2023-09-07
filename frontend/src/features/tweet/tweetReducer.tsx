@@ -6,6 +6,14 @@ type tweetdatatype = {
   tweet_text?: string;
   tweet_image?: any;
   _id?: string;
+  tweet_user_id: {
+    _id?: string;
+    display_name?: string;
+    name?: string;
+    bio?: string;
+    profile_image_url?: string;
+
+  }
 }
 
 type KnownError = {
@@ -96,7 +104,7 @@ export const UpdateTweet = createAsyncThunk<{
 // Deelete User tweet
 export const DeleteTweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:any}>(
+}, { _id?: string }>(
   "deletetweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -110,10 +118,10 @@ export const DeleteTweet = createAsyncThunk<{
         },
       };
       await axios.delete(
-        `/api/v1/tweet/${Detailsdata?._id}`,
+        `/api/v1/tweet/${Detailsdata}`,
         config
       );
-      // return Detailsdata?._id;
+      return Detailsdata;
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

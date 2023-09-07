@@ -7,9 +7,9 @@ const DeleteIcon: React.FC<iconType> = ({ isClicked }) => {
         <span style={{
             width: "19px",
             height: "19px",
-            color: "rgb(244, 33, 46)",
+            color: "var(--red)",
             position: "relative",
-            fill: "rgb(244, 33, 46)",
+            fill: "var(--red)",
             display: "inline-block",
         }}>
             <svg viewBox="0 0 24 24"
