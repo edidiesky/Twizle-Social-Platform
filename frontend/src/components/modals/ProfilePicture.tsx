@@ -263,8 +263,9 @@ const ProfilePictureModalStyles = styled(motion.div)`
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem rgba(255, 255, 255, 0.4);
     position: relative;
+    box-shadow:var(--shadow);
+
     min-height: 60rem;
     border-radius:20px;
     border-top-right-radius:20px;

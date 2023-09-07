@@ -276,8 +276,9 @@ const DeleteContainer = styleds(motion.div)`
     flex-direction: column;
     background: #fff;
     border-radius: 20px;
-    box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.1);
     position: relative;
+    box-shadow:var(--shadow);
+
    height: 650px;
     overflow: auto;
 

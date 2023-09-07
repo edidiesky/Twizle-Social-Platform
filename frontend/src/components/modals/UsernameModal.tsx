@@ -279,9 +279,10 @@ const UsernameModalStyles = styled(motion.div)`
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem var(--backdrop);
     position: relative;
     min-height: 60rem;
+    box-shadow:var(--shadow);
+
     border-radius:20px;
     border-top-right-radius:20px;
     justify-content:space-between;

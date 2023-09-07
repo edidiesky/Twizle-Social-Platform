@@ -14,31 +14,40 @@ import FollowIcon from '../../assets/svg/dropdownicons/follow';
 import ReportIcon from '../../assets/svg/dropdownicons/report';
 import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
-import { useAppDispatch } from '../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
 import ShareIcon from '../../assets/svg/feedcardicons/share';
+import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 
 const FeedCard = (props: feedcardtype) => {
+    const { userDetails, userInfo } = useAppSelector(store => store.auth)
+    const checkifUser = props?.tweet_user_id?._id === userInfo?._id
+
     const [tweet, setTweet] = useState(false)
     const [drop, setDrop] = useState(false)
     const [quote, setQuote] = useState(false)
     const [like, setLike] = useState(false)
     const dispatch = useAppDispatch()
-    const handleLikeTweet =()=> {
-        
+    const handleLikeTweet = () => {
+
         dispatch(LikeAndUnlikeATweet(props?._id))
     }
     const handleRepostTweet = () => {
         setQuote(false)
         dispatch(RePostATweet(props?._id))
     }
-    const likes = props?.tweet_likes?.length 
-    
+    const likes = props?.tweet_likes?.length
+
     return (
         <FeedCardStyles key={props._id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
                 <ul style={{ fontSize: "14.6px" }} onClick={() => setDrop(false)} className="flex column w-100 text-bold">
+                    {
+                        checkifUser && <li style={{ color: "rgb(244, 33, 46)" }} className="flex text-extra-bold item-center gap-1">
+                            <DeleteIcon />Delete</li>
+                    }
+
                     <li className="flex item-center gap-1"><IntrestIcon /> Not interested in this tweet</li>
                     <li className="flex item-center gap-1"><FollowIcon />  Follow Alexander</li>
                     <li className="flex item-center gap-1"><MuteIcon /> Mute Alexander</li>
@@ -137,7 +146,7 @@ const FeedCard = (props: feedcardtype) => {
                     </div>
                 </div>
             </div>
-           
+
         </FeedCardStyles>
     )
 }
@@ -197,14 +206,14 @@ const FeedCardStyles = styled.div`
         cursor: pointer;
         width: 370px;
         border-radius: 10px;
-        box-shadow: 0 4px 10px var(--border);
+        box-shadow: var(--shadow);
         background-color: var(--white);
         height: 0;
         transition: all .3s;    
         opacity:0;
         visibility: hidden;
         &.card1 {
-            width: 130px;
+        width: 130px;
         right: -40%;
         &.active {
              @media (max-width:500px)  {
@@ -231,7 +240,8 @@ const FeedCardStyles = styled.div`
                 padding:.7rem 2.4rem;
             }}
             &.active {
-            height: 100px;
+            max-height: 130px;
+             height: fit-content;
             }
         }
         @media (max-width:500px) {
@@ -248,10 +258,12 @@ const FeedCardStyles = styled.div`
             background-color: transparent;
         }
         &.active {
-            height: 250px;
+              height: 300px;
+             min-height: fit-content;
+
             @media (max-width:400px) {
-        width: 310px;
-        height: 250px;
+            width: 310px;
+        height: fit-content;
 
         }
             opacity:1;

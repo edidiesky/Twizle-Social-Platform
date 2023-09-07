@@ -153,8 +153,9 @@ const TweetModalStyles = styleds(motion.div)`
     flex-direction: column;
     background: var(--white);
     border-radius: 14px;
-    box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.3);
     position: relative;
+    box-shadow:var(--shadow);
+
     padding:1rem 0;
     margin-top:2rem;
   }

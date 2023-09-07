@@ -302,7 +302,7 @@ const RegisterModalStyles = styled(motion.div)`
     display: flex;
     flex-direction: column;
     background: var(--white);
-    box-shadow: 0 1rem 3rem var(--backdrop);
+    box-shadow:var(--shadow);
     position: relative;
     min-height: 60rem;
     border-radius:20px;

@@ -299,7 +299,8 @@ const PostModalStyles = styleds(motion.div)`
     flex-direction: column;
     background: var(--white);
     border-radius: 14px;
-    box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.3);
+    box-shadow:var(--shadow);
+
     position: relative;
     padding:1rem 0;
     margin-top:2rem;

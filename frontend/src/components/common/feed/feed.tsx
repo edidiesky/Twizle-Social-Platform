@@ -14,7 +14,7 @@ const Feed: React.FC = () => {
     React.useEffect(() => {
         dispatch(cleartweet({payload:"any"}))
         dispatch(getAllTweet())
-    }, [tweetDetails])
+    }, [])
 
     return (
         <div className="w-100 h-100">

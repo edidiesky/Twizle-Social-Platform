@@ -49,8 +49,9 @@
   --grey-hover: rgba(15, 20, 25, 0.1);
   --backdrop: rgba(0, 0, 0, 0.5);
   --red:red;
+  --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }
-/* :root {
+:root {
   --white: rgb(0, 0, 0);
   --grey-3:#eff3f4;
 
@@ -63,8 +64,10 @@
   --border: rgba(255, 255, 255, 0.11);
   --top:rgba(0, 0, 0, 0.65);
   --backdrop:(0, 0, 0, 0.65);
+  --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 
-} */
+
+}
 
 body {
   margin: 0;

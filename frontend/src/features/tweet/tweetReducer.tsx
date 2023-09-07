@@ -41,8 +41,6 @@ export const CreateTweet = createAsyncThunk<{
   async (tweetData, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState() as { auth: { token: string } };
-      // console.log(auth.token)
-      // console.log(Detailsdata?._id)
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -50,7 +48,8 @@ export const CreateTweet = createAsyncThunk<{
       };
       const response = await axios.post(tweeturl, tweetData, config);
       localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
-      return response.data.tweet;
+      return tweetData;
+      // console.log(tweetData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -161,7 +160,7 @@ export const GetSingleTweetDetails = createAsyncThunk<{
 // Like and unlike a tweet
 export const LikeAndUnlikeATweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, {id?:any}>(
+}, {id?:string}>(
   "LikeAndUnlikeATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -229,7 +228,7 @@ export const GetUserTweet = createAsyncThunk<{
 // Like and unlike a tweet
 export const RePostATweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, tweetdatatype>(
+}, {_id?:string}>(
   "RePostATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
