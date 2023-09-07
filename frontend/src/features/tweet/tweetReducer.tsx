@@ -227,7 +227,7 @@ export const RePostATweet = createAsyncThunk<{
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
+      const { auth } = getState() as { auth:{token: string } };
 
       const config = {
         headers: {
@@ -235,7 +235,8 @@ export const RePostATweet = createAsyncThunk<{
         },
       };
       const response = await axios.post(
-        `/api/v1/tweet/repost/${Detailsdata?._id}`,
+        `/api/v1/tweet/repost/${Detailsdata}`,
+        null,
         config
       );
       return response.data.tweet;

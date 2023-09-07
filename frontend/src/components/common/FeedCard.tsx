@@ -15,7 +15,7 @@ import ReportIcon from '../../assets/svg/dropdownicons/report';
 import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
 import { useAppDispatch } from '../../hooks/reduxtoolkit';
-import { LikeAndUnlikeATweet } from '../../features/tweet/tweetReducer';
+import { LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
 
 const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
@@ -26,6 +26,10 @@ const FeedCard = (props: feedcardtype) => {
     const handleLikeTweet =()=> {
         setLike(!like)
         dispatch(LikeAndUnlikeATweet(props?._id))
+    }
+    const handleRepostTweet = () => {
+        setQuote(false)
+        dispatch(RePostATweet(props?._id))
     }
     const likes = props?.tweet_likes?.length
     
@@ -95,8 +99,8 @@ const FeedCard = (props: feedcardtype) => {
                         <div className="flex iconwrapper relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
                             <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
                                 <div onClick={() => setQuote(false)} className="dropdown_background"></div>
-                                <ul style={{ fontSize: "14px" }} onClick={() => setQuote(false)} className="flex column w-100 text-bold">
-                                    <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
+                                <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
+                                    <li onClick={handleRepostTweet} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
                                         <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
                                     <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1"><div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
                                 </ul>
