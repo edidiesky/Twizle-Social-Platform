@@ -1,19 +1,19 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AnimatePresence } from 'framer-motion';
-import { BiSolidBadgeCheck } from 'react-icons/bi'
+import { CircularProgress } from '@mui/material';
+
 import styleds from "styled-components";
 import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
-import PostFormSection from "../common/tweetsection";
 import MediaIcon from "../../assets/svg/media";
 import GiIcon from "../../assets/svg/gif";
 import ScheduleIcon from "../../assets/svg/schedule";
 import PollIcon from "../../assets/svg/poll";
 import WorldIcon from "../../assets/svg/world";
-import { useAppSelector } from "../../hooks/reduxtoolkit";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import UploadImage from "./UploadImage";
-
+import { CreateTweet } from "../../features/tweet/tweetReducer";
 
 type modalType = {
   modal?: Boolean;
@@ -22,11 +22,42 @@ type modalType = {
 }
 
 const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
-
+  const [uploading, setUploading] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const dispatch = useAppDispatch()
   const { userInfo } = useAppSelector(store => store.auth)
+  const [text, setText] = useState<string>('')
+  const [images, setImages] = useState<string[]>([])
 
-  const [images, setImages] = useState(['./blog.jpg', './blog.jpg'])
+  const handleFileUpload = async(e:React.ChangeEvent<HTMLInputElement>) => {
+    // get the file
+    const file = e.target.files;
+    setUploading(true);
+    // create formdata
+    const formData = new FormData();
+    for (let i = 0; i < file.length; i++) {
+      formData.append("files", file[i]);
+    }
 
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/v1/upload", formData, config);
+
+      setImages(data.urls);
+      setAlert(true);
+      setUploading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handlePost = ()=> {
+    dispatch(CreateTweet({ tweet_image: images, tweet_text:text }))
+    setModal(false)
+  }
   return (
     <PostModalStyles
       as={motion.div}
@@ -46,7 +77,7 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
         {/* top of the feed */}
         <div className="top w-100 flex column gap-2">
           <div className="w-90 auto">
-            <div className="icons text-dark flex item-center justify-center">
+            <div onClick={() => setModal(false)} className="icons text-dark flex item-center justify-center">
               <RxCross2 fontSize={'20px'} />
             </div>
           </div>
@@ -64,8 +95,18 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
               <div style={{ gap: "6px" }} className="area flex column flex-1 item-start">
                 <div style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="replyBtn1 text-bold">Everyone</div>
-                <textarea placeholder='What is Happening?!' className="text text-light w-100"></textarea>
-                <div className="w-90 auto">
+                <textarea 
+                name={"text"}
+                value={text}
+                onChange={(e)=> setText(e.target.value)}
+                
+                placeholder='What is Happening?!' className="text text-light w-100"></textarea>
+                <div className="w-100 auto">
+                  {
+                    uploading && <div className="flex item-center py-2 justify-center">
+                      <CircularProgress style={{ width: '30px', height: '30px', fontSize: '15px' }} color="primary" />
+                    </div>
+                  }
                   {
                     images.length !== 0 && <UploadImage
                       images={images}
@@ -84,22 +125,78 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
             </div>
             <div className="flex bottom w-90 auto item-center justify-space">
               <div className="flex item-center">
-                <div className="icons flex item-center justify-center">
+                <label
+                  htmlFor="upload" className="icons flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
                   <MediaIcon />
-                </div> <div className="icons flex item-center justify-center">
+                </label> 
+                 <label
+                  htmlFor="upload" className="icons flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
                   <GiIcon />
-                </div>
-                <div className="icons flex item-center justify-center">
+                </label>
+                 <label
+                  htmlFor="upload" className="icons flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
                   <ScheduleIcon />
-                </div>
-                <div className="icons flex item-center justify-center">
+                </label>
+                 <label
+                  htmlFor="upload" className="icons flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
                   <PollIcon />
-                </div>
-                <div className="icons flex item-center justify-center">
+                </label>
+                 <label
+                  htmlFor="upload" className="icons flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
                   <GiIcon />
-                </div>
+                </label>
               </div>
-              <div className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
+              <div onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
             </div>
           </div>
         </div>

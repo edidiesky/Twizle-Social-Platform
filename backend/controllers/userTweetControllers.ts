@@ -14,7 +14,7 @@ interface CustomInterface extends ExpressRequest {
 // GET All UserTweet
 //  Public
 const GetAllTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  const tweet = await UserTweet.find()
+  const tweet = await UserTweet.find().sort("-createdAt")
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
 
   res.status(200).json({ tweet });

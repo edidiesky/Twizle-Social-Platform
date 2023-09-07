@@ -38,10 +38,17 @@ export const CreateTweet = createAsyncThunk<{
   rejectValue: KnownError,
 }, tweetdatatype>(
   "CreateTweet",
-  async (tweetData, { rejectWithValue }) => {
+  async (tweetData, { rejectWithValue, getState }) => {
     try {
-
-      const response = await axios.post(tweeturl, tweetData);
+      const { auth } = getState() as { auth: { token: string } };
+      // console.log(auth.token)
+      // console.log(Detailsdata?._id)
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.post(tweeturl, tweetData, config);
       localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
       return response.data.tweet;
     } catch (err: any) {

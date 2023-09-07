@@ -1,5 +1,4 @@
 import FeedCard from '../FeedCard';
-import { feedData } from '../../../data';
 import { feedcardtype } from '../../../types/feedtype';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,13 +8,13 @@ import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet } from '../../../features/tweet/tweetSlice';
 
 const Feed: React.FC = () => {
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { tweets, tweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
 
     React.useEffect(() => {
         dispatch(cleartweet({payload:"any"}))
         dispatch(getAllTweet())
-    }, [])
+    }, [tweetDetails])
 
     return (
         <div className="w-100 h-100">
@@ -27,7 +26,7 @@ const Feed: React.FC = () => {
                         </div> : <>
                             {
                                     tweets?.map((value: feedcardtype) => {
-                                    return <FeedCard {...value} key={value.tweet_id} />
+                                    return <FeedCard {...value} key={value?._id} />
                                 })
                             }
                         </>

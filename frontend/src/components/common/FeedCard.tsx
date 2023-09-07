@@ -16,6 +16,7 @@ import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
 import { useAppDispatch } from '../../hooks/reduxtoolkit';
 import { LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
+import ShareIcon from '../../assets/svg/feedcardicons/share';
 
 const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
@@ -24,14 +25,14 @@ const FeedCard = (props: feedcardtype) => {
     const [like, setLike] = useState(false)
     const dispatch = useAppDispatch()
     const handleLikeTweet =()=> {
-        setLike(!like)
+        
         dispatch(LikeAndUnlikeATweet(props?._id))
     }
     const handleRepostTweet = () => {
         setQuote(false)
         dispatch(RePostATweet(props?._id))
     }
-    const likes = props?.tweet_likes?.length
+    const likes = props?.tweet_likes?.length 
     
     return (
         <FeedCardStyles key={props._id}>
@@ -87,45 +88,56 @@ const FeedCard = (props: feedcardtype) => {
 
                 </Link>
             </Link>
-            <div className="flex item-center w-85 auto gap-2">
-                <div style={{ marginTop: ".6rem" }} className="flex item-center w-85 auto gap-2">
-                    <div className="flex w-100 item-center fs-14 text-light justify-space feedtags_wrapper text-dark">
-                        <div onClick={() => setTweet(true)} className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <MessageIcon />
+            <div className="w-100 flex item-center">
+                <div className="image_wrapper"></div>
+                <div className="flex item-center w-85 auto gap-2">
+                    <div style={{ marginTop: ".6rem" }} className="flex item-center w-90 auto gap-2">
+                        <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
+                            <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon1 flex item-center justify-center">
+                                    <MessageIcon />
+                                </div>
+                                {/* 23 */}
                             </div>
-                            {/* 23 */}
+                            <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                                <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
+                                    <div onClick={() => setQuote(false)} className="dropdown_background"></div>
+                                    <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
+                                        <li onClick={handleRepostTweet} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
+                                            <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
+                                        <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1"><div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                    </ul>
+                                </div>
+                                <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
+                                    <RetweetIcon />
+                                </div>
+                                {/* 144 */}
+                            </div>
+                            <div onClick={handleLikeTweet} className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon3 flex item-center justify-center">
+                                    <LikeIcon isClicked={likes >= 1} />
+                                </div>
+                                {likes}
+                                {/* 23 */}
+                            </div>
+                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon1 flex item-center justify-center">
+                                    <StatIcon />
+                                </div>
+                                {/* 123 */}
+                            </div>
+                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon1 flex item-center justify-center">
+                                    <ShareIcon />
+                                </div>
+                                {/* 123 */}
+                            </div>
                         </div>
-                        <div className="flex iconwrapper relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
-                            <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
-                                <div onClick={() => setQuote(false)} className="dropdown_background"></div>
-                                <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
-                                    <li onClick={handleRepostTweet} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
-                                        <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
-                                    <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1"><div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
-                                </ul>
-                            </div>
-                            <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
-                                <RetweetIcon />
-                            </div>
-                            {/* 144 */}
-                        </div>
-                        <div onClick={handleLikeTweet} className="flex iconwrapper justify-center text-3 item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon3 flex item-center justify-center">
-                                <LikeIcon isClicked={like} />
-                            </div>
-                            {likes}
-                            {/* 23 */}
-                        </div><div className="flex iconwrapper justify-center item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <StatIcon />
-                            </div>
-                            {/* 123 */}
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
+           
         </FeedCardStyles>
     )
 }

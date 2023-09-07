@@ -109,7 +109,7 @@ grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     }
     .imagegradient {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.1);
       z-index: 20;
       width: 100%;
       border-radius: inherit;
