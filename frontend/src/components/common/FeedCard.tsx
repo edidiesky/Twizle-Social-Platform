@@ -21,10 +21,14 @@ const FeedCard = (props: feedcardtype) => {
     const [tweet, setTweet] = useState(false)
     const [drop, setDrop] = useState(false)
     const [quote, setQuote] = useState(false)
+    const [like, setLike] = useState(false)
     const dispatch = useAppDispatch()
     const handleLikeTweet =()=> {
+        setLike(!like)
         dispatch(LikeAndUnlikeATweet(props?._id))
     }
+    const likes = props?.tweet_likes?.length
+    
     return (
         <FeedCardStyles key={props._id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
@@ -104,8 +108,9 @@ const FeedCard = (props: feedcardtype) => {
                         </div>
                         <div onClick={handleLikeTweet} className="flex iconwrapper justify-center text-3 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon3 flex item-center justify-center">
-                                <LikeIcon />
+                                <LikeIcon isClicked={like} />
                             </div>
+                            {likes}
                             {/* 23 */}
                         </div><div className="flex iconwrapper justify-center item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">

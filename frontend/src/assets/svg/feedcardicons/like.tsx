@@ -6,10 +6,10 @@ const LikeIcon: React.FC<iconType> = ({ isClicked }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-3)",
+            color: isClicked?'red': "var(--grey-3)",
             height: "1.25em",
             position: "relative",
-            fill: isClicked ? "blue" : "currentcolor",
+            fill: isClicked ? "var(--red)" : "currentcolor",
             display: "inline-block",
         }}>
             <svg viewBox="0 0 24 24"

@@ -10,6 +10,7 @@ export type feedcardtype = {
     favorite_count: number;
     is_verified: boolean;
     tweet_image: string[];
+    tweet_likes:string[];
     image: string;
     location: string;
     profile_name: string;

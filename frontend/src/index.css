@@ -48,6 +48,7 @@
   --dark-grey-hover: #f9f9f9d3;
   --grey-hover: #d0d0d0;
   --backdrop: rgba(0, 0, 0, 0.5);
+  --red:red;
 }
 /* :root {
   --white: rgb(0, 0, 0);
