@@ -12,6 +12,7 @@ import ScheduleIcon from "../../assets/svg/schedule";
 import PollIcon from "../../assets/svg/poll";
 import WorldIcon from "../../assets/svg/world";
 import { useAppSelector } from "../../hooks/reduxtoolkit";
+import UploadImage from "./UploadImage";
 
 
 type modalType = {
@@ -22,7 +23,9 @@ type modalType = {
 
 const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
-  const {userInfo} = useAppSelector(store=> store.auth)
+  const { userInfo } = useAppSelector(store => store.auth)
+
+  const [images, setImages] = useState(['./blog.jpg', './blog.jpg'])
 
   return (
     <PostModalStyles
@@ -51,23 +54,32 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
           <div className="flex w-100 column gap-1">
             <div className="w-90 auto flex item-start gap-1">
-            
-                {
-                  userInfo?.image ?
-                    <img src={userInfo?.image} alt="images-avatar" className="avatar" />
-                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
 
-                }
-          
-              <div className="area flex column gap-1 flex-1 item-start">
-                <div style={{ color: "rgb(29, 155, 240)", fontSize:"15px"}} className="replyBtn1 text-light">Everyone</div>
+              {
+                userInfo?.image ?
+                  <img src={userInfo?.image} alt="images-avatar" className="avatar" />
+                  : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+              }
+
+              <div style={{ gap: "6px" }} className="area flex column flex-1 item-start">
+                <div style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="replyBtn1 text-bold">Everyone</div>
                 <textarea placeholder='What is Happening?!' className="text text-light w-100"></textarea>
+                <div className="w-90 auto">
+                  {
+                    images.length !== 0 && <UploadImage
+                      images={images}
+                      setImages={setImages}
+                    />
+                  }
+
+                </div>
               </div>
             </div>
             <div className="w-90 auto flex item-start">
-              <div style={{gap:"5px"}} className="flex replyBtn item-center gap-1">
-                <WorldIcon/>
-                <span style={{ color:"rgb(29, 155, 240)", fontSize:"13px"}} className="fs-12 text-bold">Everyone can reply</span>
+              <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
+                <WorldIcon />
+                <span style={{ color: "rgb(29, 155, 240)", fontSize: "13px" }} className="fs-12 text-bold">Everyone can reply</span>
               </div>
             </div>
             <div className="flex bottom w-90 auto item-center justify-space">
@@ -140,7 +152,6 @@ const PostModalStyles = styleds(motion.div)`
         .text {
         resize: none;
         border:none;
-        height: 10rem;
         outline:none;
         font-size: 20px;
         font-family: inherit;
@@ -173,8 +184,8 @@ const PostModalStyles = styleds(motion.div)`
   }
   .icon {
   }
-  .icon:hover {
-    background-color: #ccc;
+  .icons:hover {
+  background:rgba(29, 155, 240, 0.1) !important;
   }
  
   .backdrop {
