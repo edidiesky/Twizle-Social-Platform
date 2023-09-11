@@ -48,4 +48,20 @@ router.post("/", upload.array("files", 4), async (req, res) => {
   }
 });
 
+router.post("/single", upload.single("files"), async (req, res) => {
+  try {
+    // req.files contains an array of uploaded files
+    const files: Express.Multer.File = req.file as Express.Multer.File;
+
+    const result = await cloudinaryModule.uploader.upload(files?.path);
+    // Optionally, you can respond with the URLs of the uploaded images
+    res.json({ success: true, message: "Images uploaded successfully", urls: result?.secure_url });
+  } catch (error) {
+    console.error("Error uploading images:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to upload images" });
+  }
+});
+
 export default router 

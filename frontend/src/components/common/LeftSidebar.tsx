@@ -123,9 +123,9 @@ const LeftSidebarIndex = () => {
                                     : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
 
                             }
-                            <h4 className="fs-16 text-dark text-bold text-start">
+                            <h4 className="fs-16 text-dark text-extra-bold text-start">
                                 {userInfo?.name}
-                                <span className="block text-grey text-light fs-16">@{userInfo?.display_name}</span>
+                                <span className="block text-grey text-light fs-14">@{userInfo?.display_name}</span>
                             </h4>
                         </div>
                     </div>

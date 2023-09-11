@@ -8,6 +8,7 @@ import CameraIcon from "../../assets/svg/camera";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { UpdateProfile } from "../../features/auth/authReducer";
 import LoaderIndex from "../loaders";
+import axios from "axios";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -18,6 +19,8 @@ type modalType = {
 
 const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
   const [auth, setAuth] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [bio, setBio] = useState('false');
   const [website, setWebsite] = useState('');
   const [name, setName] = useState('');
@@ -48,6 +51,32 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
       setBanner(profile_banners)
     }
   }, [setBio, setName, setLocation, setWebsite, setBanner])
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?:boolean) => {
+    // get the file
+    const file = e?.target?.files[0];
+    setUploading(true);
+    // create formdata
+    const formData = new FormData();
+    formData.append("files", file);
+
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/v1/upload/single", formData, config);
+   
+      
+      type ? setBanner(data.urls): setImage(data.urls);
+      setAlert(true);
+      setUploading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleUpdateProfile =()=> {
     dispatch(UpdateProfile({ 
       bio: bio, 
@@ -93,20 +122,40 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
           </div>
           <div className="w-100 authCenterWrapper h-100">
             <div className=" w-100 flex gap-2 column">
-              <div className="w-100 profile_background flex item-center justify-center">
+              <label htmlFor="upload" className="w-100 profile_background flex item-center justify-center">
                 {
                   banner && <img src={banner} alt="images-avatar" className="banner" />
 
                 }
+                <input
+                  type="file"
+                  id="upload"
+                  placeholder="Gig Image"
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                  onChange={(e)=> handleFileUpload(e, true)}
+                  multiple
+                  className="w-100"
+                />
                
                 <CameraIcon />
 
-              </div>
-              <div className="image_wrapper flex item-center justify-center">
+              </label>
+              <label htmlFor="upload" className="image_wrapper flex item-center justify-center">
                 <CameraIcon/>
+                <input
+                  type="file"
+                  id="upload"
+                  placeholder="Gig Image"
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                  onChange={handleFileUpload}
+                  multiple
+                  className="w-100"
+                />
                 <img src={image} alt="profile_image" className="avatar_profile" />
                 <div className="image_gradient"></div>
-              </div>
+              </label>
 
               <div className="w-90 formwraper auto flex column gap-2">
                 <FormInput state={name} label={'Name'} setState={setName} />
