@@ -112,7 +112,8 @@ const ProfileBottomStyles = styled.div`
   text-align: center;
   padding: 1rem 2rem;
   font-size:15px;
-  border:1px solid rgba(0,0,0,.1);
+  transition: all .4s;
+  border:1px solid rgb(207, 217, 222);
     cursor: pointer;
 
   &.followbtn {
@@ -120,7 +121,7 @@ const ProfileBottomStyles = styled.div`
     color:#fff;
     &:hover {
       opacity:.9;
-    background:var(--dark-1);
+    background:var(--dark-grey-hover);
 
     }
   }

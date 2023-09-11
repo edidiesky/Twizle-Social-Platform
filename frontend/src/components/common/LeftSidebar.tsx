@@ -18,11 +18,13 @@ import ProfileIcon from '../../assets/svg/leftsidebaricons/profile';
 import PostModal from '../modals/PostModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { GetAllUserProfile } from '../../features/auth/authReducer';
+import LoaderIndex from '../loaders';
 
 
 const LeftSidebarIndex = () => {
-    const [tweet, setTweet] = useState(false)
+    const [tweet, setTweet] = useState<boolean>(false)
     const { userInfo, userDetails } = useAppSelector(store => store.auth)
+    const { tweetisLoading } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
 
     React.useEffect(() => {
@@ -79,6 +81,9 @@ const LeftSidebarIndex = () => {
 
     return (
         <>
+        {
+                tweetisLoading && <LoaderIndex/>
+        }
             <AnimatePresence
                 initial={false}
                 exitBeforeEnter={true}

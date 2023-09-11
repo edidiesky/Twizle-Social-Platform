@@ -56,7 +56,7 @@ export const CreateTweet = createAsyncThunk<{
       };
       const response = await axios.post(tweeturl, tweetData, config);
       localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
-      return tweetData;
+      return response.data.tweet;
       // console.log(tweetData)
     } catch (err: any) {
       const message = err.response && err.response.data.message

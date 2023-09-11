@@ -87,11 +87,15 @@ export const tweetSlice = createSlice({
 
     // create user tweet
     builder.addCase(CreateTweet.pending, (state, action) => {
+      state.tweetisLoading = true
+
     })
     builder.addCase(CreateTweet.fulfilled, (state, action) => {
       state.tweets = [action.payload,...state.tweets]
       state.alertText = 'Tweet created succesfully'
       state.showAlert = true
+      state.tweetisLoading = false
+
       state.alertType = 'success'
     })
     builder.addCase(CreateTweet.rejected, (state, action) => {
