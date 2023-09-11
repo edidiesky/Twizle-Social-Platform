@@ -8,8 +8,15 @@ type RegisterData = {
   name?: string;
   email?: string;
   password?: string;
-  display_name?: string,
-  _id?: string
+  display_name?: string;
+  _id?: string;
+  image?: string;
+  location?: string;
+  profile_image_url?:string;
+  website?:string;
+  profession?: string;
+  profile_banners?: string;
+  bio?:string;
 }
 
 type KnownError = {
@@ -68,7 +75,7 @@ export const UpdateProfile = createAsyncThunk<{
   async (profiledata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { userInfo: Object, token: string } };
+      const { auth } = getState() as { auth: { userInfo: {_id:string}, token: string } };
       // console.log(auth.token)
       // console.log(profiledata?._id)
       const config = {
@@ -81,7 +88,7 @@ export const UpdateProfile = createAsyncThunk<{
         profiledata,
         config
       );
-      return response.data;
+      return response.data.updatedUser;
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

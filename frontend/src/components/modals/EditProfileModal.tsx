@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
+import CameraIcon from "../../assets/svg/camera";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
+import { UpdateProfile } from "../../features/auth/authReducer";
+import LoaderIndex from "../loaders";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -17,8 +21,44 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
   const [bio, setBio] = useState('false');
   const [website, setWebsite] = useState('');
   const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+  const [banner, setBanner] = useState('');
   const [location, setLocation] = useState('');
+  const dispatch = useAppDispatch()
+  const { userInfo, userprofileisLoading } = useAppSelector(store=> store.auth)
 
+  // get the user info from the slice and then update the profile
+  useEffect(()=> {
+    if(userInfo) {
+      const { 
+        name, 
+        bio, 
+        location, 
+        display_name,
+        profile_image_url ,
+        website,
+        profession, 
+        profile_banners
+      } = userInfo
+      setBio(bio)
+      setName(name)
+      setImage(profile_image_url)
+      setLocation(location)
+      setWebsite(website)
+      setBanner(profile_banners)
+    }
+  }, [setBio, setName, setLocation, setWebsite, setBanner])
+  const handleUpdateProfile =()=> {
+    dispatch(UpdateProfile({ 
+      bio: bio, 
+      website: website, 
+      name: name, 
+      profile_image_url: image,
+      profile_banners: banner,
+      location: location,
+      _id:userInfo?._id
+    }))
+  }
   return (
     <DeleteContainer
       as={motion.div}
@@ -35,6 +75,9 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
         exit={"exit"}
         className={"deleteCard shadow"}
       >
+        {
+          userprofileisLoading && <LoaderIndex/>
+        }
         {/* edit profile top */}
         <div className="edit_wrapper w-100">
           <div className="flex authtop w-100 auto ">
@@ -44,16 +87,24 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
                 <h3 className="fs-20 text-extra-bold">Edit profile</h3>
               </div>
               <div className=" flex item-center justify-end">
-                <div className="btn btn-3 fs-14 text-bold text-white">Save</div>
+                <div onClick={handleUpdateProfile} className="btn btn-3 fs-14 text-bold text-white">Save</div>
               </div>
             </div>
           </div>
           <div className="w-100 authCenterWrapper h-100">
             <div className=" w-100 flex gap-2 column">
               <div className="w-100 profile_background flex item-center justify-center">
+                {
+                  banner && <img src={banner} alt="images-avatar" className="banner" />
+
+                }
+               
+                <CameraIcon />
+
               </div>
-              <div className="image_wrapper">
-                <img src="https://i.pinimg.com/236x/e6/33/ee/e633eefbeb77cd4323a1557d33c91c83.jpg" alt="" className="avatar_profile" />
+              <div className="image_wrapper flex item-center justify-center">
+                <CameraIcon/>
+                <img src={image} alt="profile_image" className="avatar_profile" />
                 <div className="image_gradient"></div>
               </div>
 
@@ -86,6 +137,13 @@ const DeleteContainer = styled(motion.div)`
   position: fixed;
     left: 50%;
     transform: translateX(-50%);
+     .banner {
+        width:100%;
+      height:100%;
+      /* transform: translateY(-100%); */
+      position: absolute;
+      object-fit: cover;
+    }
     .authCenterWrapper {
       height:95%;
     }
@@ -201,7 +259,7 @@ const DeleteContainer = styled(motion.div)`
       /* transform: translateY(-100%); */
       position: absolute;
       background:rgba(0,0,0,.5);
-      opacity:0;
+      /* opacity:0; */
       transition:all .5s;
     }
     .avatar_profile {

@@ -5,18 +5,18 @@
 
 @font-face {
   font-family: "CustomFont_Bold";
-  src: url("./assets/chirp_bold.ttf") format("truetype");
+  src: url("./assets/fonts/chirp_bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "CustomFont_Normal";
-  src: url("./assets/chirp_regular.ttf") format("truetype");
+  src: url("./assets/fonts/chirp_regular.ttf") format("truetype");
 }
 
 
 @font-face {
   font-family: "CustomFont_Medium";
-  src: url("./assets/chirp_medium.ttf") format("truetype");
+  src: url("./assets/fonts/chirp_medium.ttf") format("truetype");
 }
 
 
