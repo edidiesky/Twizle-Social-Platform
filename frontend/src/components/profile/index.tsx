@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
     // console.log(name)
     const [modal, setModal] = React.useState<Boolean>(false)
 
-    const { userDetails } = useAppSelector(store => store.auth)
+    const { userDetails, userInfo } = useAppSelector(store => store.auth)
     const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
     useEffect(() => {
         dispatch(clearUserProfile({payload: "any"}))
         dispatch(GetUserProfile(name))
-    }, [name])
+    }, [name, userInfo])
 
     useEffect(() => {
         if(userDetails?._id) {

@@ -128,6 +128,7 @@ export const authSlice = createSlice({
       state.userprofileisSuccess = true
       state.userprofileisLoading = false
       state.userInfo = action.payload
+      state.userDetails = action.payload
       state.alertText = 'Profile Update succesfully'
       state.showAlert = true
       state.alertType = 'success'
