@@ -114,8 +114,8 @@ const LeftSidebarIndex = () => {
                     <div className="w-85 auto">
                         <div style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
                             {
-                                userInfo?.image ?
-                                    <img src={userInfo?.image} alt="images-avatar" className="avatar" />
+                                userInfo?.profile_image_url ?
+                                    <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
                                     : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
 
                             }
