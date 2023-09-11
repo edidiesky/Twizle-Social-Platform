@@ -52,8 +52,10 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
     }
   }, [setBio, setName, setLocation, setWebsite, setBanner])
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?:boolean) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?:string) => {
     // get the file
+    // console.log('file')
+
     const file = e?.target?.files[0];
     setUploading(true);
     // create formdata
@@ -70,7 +72,31 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
       const { data } = await axios.post("/api/v1/upload/single", formData, config);
    
       
-      type ? setBanner(data.urls): setImage(data.urls);
+      setImage(data.urls)
+      setAlert(true);
+      setUploading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // get the file
+    // console.log('banner')
+    const file = e?.target?.files[0];
+    setUploading(true);
+    // create formdata
+    const formData = new FormData();
+    formData.append("files", file);
+
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/v1/upload/single", formData, config);
+      setBanner(data.urls)
       setAlert(true);
       setUploading(false);
     } catch (err) {
@@ -112,7 +138,7 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
           <div className="flex authtop w-100 auto ">
             <div className="w-90 auto flex item-center justify-space item-center">
               <div className="flex item-center gap-3 py-1">
-                <div className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
+                <div onClick={() => setModal(false)} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
                 <h3 className="fs-20 text-extra-bold">Edit profile</h3>
               </div>
               <div className=" flex item-center justify-end">
@@ -122,30 +148,39 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
           </div>
           <div className="w-100 authCenterWrapper h-100">
             <div className=" w-100 flex gap-2 column">
-              <label htmlFor="upload" className="w-100 profile_background flex item-center justify-center">
+              <div className="w-100 profile_background flex item-center justify-center">
                 {
                   banner && <img src={banner} alt="images-avatar" className="banner" />
 
                 }
-                <input
-                  type="file"
-                  id="upload"
-                  placeholder="Gig Image"
-                  autoComplete="off"
-                  style={{ display: "none" }}
-                  onChange={(e)=> handleFileUpload(e, true)}
-                  multiple
-                  className="w-100"
-                />
                
-                <CameraIcon />
+                <label htmlFor="upload" style={{
+                  width: '5rem', height: "5rem",
+                  borderRadius: "50%",
+                  zIndex: "50",
+                  cursor: "pointer"
+                }} className="flex item-center justify-center">
+                  <input
+                    type="file"
+                    id="upload"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleBannerUpload}
+                    multiple
+                    className="w-100"
+                  />
+                  <CameraIcon />
+                </label>
+               
+                
 
-              </label>
-              <label htmlFor="upload" className="image_wrapper flex item-center justify-center">
+              </div>
+              <label htmlFor="upload_image" className="image_wrapper flex item-center justify-center">
                 <CameraIcon/>
                 <input
                   type="file"
-                  id="upload"
+                  id="upload_image"
                   placeholder="Gig Image"
                   autoComplete="off"
                   style={{ display: "none" }}
@@ -321,7 +356,7 @@ const DeleteContainer = styled(motion.div)`
       
     }
   .profile_background {
-    background-color: #B2B2B2;
+    background-color: rgb(207, 217, 222);
     height: 200px;
     position:relative;
   
