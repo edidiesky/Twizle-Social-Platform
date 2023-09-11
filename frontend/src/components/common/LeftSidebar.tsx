@@ -16,14 +16,18 @@ import CommunitiesIcon from '../../assets/svg/leftsidebaricons/communities';
 import BadgeIcon from '../../assets/svg/leftsidebaricons/badge';
 import ProfileIcon from '../../assets/svg/leftsidebaricons/profile';
 import PostModal from '../modals/PostModal';
-import { useAppSelector } from '../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import { GetAllUserProfile } from '../../features/auth/authReducer';
 
 
 const LeftSidebarIndex = () => {
     const [tweet, setTweet] = useState(false)
-    const { userInfo } = useAppSelector(store => store.auth)
+    const { userInfo, userDetails } = useAppSelector(store => store.auth)
+    const dispatch = useAppDispatch()
 
-
+    React.useEffect(() => {
+        dispatch(GetAllUserProfile())
+    }, [userInfo])
     const list = [
         {
             title: "Home",

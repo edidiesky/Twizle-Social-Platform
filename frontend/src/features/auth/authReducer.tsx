@@ -33,7 +33,7 @@ export const registerUser = createAsyncThunk<{
       const response = await axios.post(Registerurl, registerData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data.user;
+      return response.data;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -54,7 +54,7 @@ export const loginUser = createAsyncThunk<{
       const response = await axios.post(Loginurl, loginData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data.user;
+      return response.data;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message

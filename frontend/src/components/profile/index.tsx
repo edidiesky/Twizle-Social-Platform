@@ -27,21 +27,29 @@ const Profile: React.FC = () => {
     // console.log(name)
     const [modal, setModal] = React.useState<Boolean>(false)
 
-    const { userDetails, userInfo } = useAppSelector(store => store.auth)
+    const { userInfo,userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
     const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(clearUserProfile({payload: "any"}))
-        dispatch(GetUserProfile(name))
-    }, [name, userInfo])
+        if (name) {
+            dispatch(clearUserProfile({ payload: "any" }))
+            dispatch(GetUserProfile(name))
+        }
+        
+    }, [name])
+
+        // useEffect(() => {
+        //     dispatch(GetUserProfile(userInfo?.name))
+
+        // }, [ userprofileisSuccess])
 
     useEffect(() => {
-        if(userDetails?._id) {
-            dispatch(GetUserTweet(userDetails?._id))
+        if (userInfo?._id) {
+            dispatch(GetUserTweet(userInfo?._id))
         }
-    }, [userDetails?._id])
+    }, [userInfo?._id, userprofileisSuccess])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
@@ -59,7 +67,7 @@ const Profile: React.FC = () => {
             <div className="flex flex-1 wraps column ">
                 <Top />
                 <div className="flex column">
-                    
+
                     <WallpaperIndex />
                     <ProfileBottomIndex setModal={setModal} />
                 </div>
@@ -80,23 +88,23 @@ const Profile: React.FC = () => {
                     </div>
                     {
                         tweets?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
-                            <h2 style={{lineHeight:"1.3", width:"60%"}} className="fs-30 w-85 auto text-bold">
+                            <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-30 w-85 auto text-bold">
                                 @{userDetails?.display_name} hasn’t posted
 
                                 <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                             </h2>
                         </div> : <div className="w-100">
-                                {
-                                    tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                                        <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
-                                    </div> : <>
-                                        {
-                                            tweets?.map((value: feedcardtype) => {
-                                                return <FeedCard {...value} key={value._id} />
-                                            })
-                                        }
-                                    </>
-                                }
+                            {
+                                tweetisLoading ? <div className="flex py-2 w-100 justify-center">
+                                    <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
+                                </div> : <>
+                                    {
+                                        tweets?.map((value: feedcardtype) => {
+                                            return <FeedCard {...value} key={value._id} />
+                                        })
+                                    }
+                                </>
+                            }
                         </div>
                     }
 

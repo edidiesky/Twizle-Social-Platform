@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { CircularProgress } from '@mui/material';
 import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet } from '../../../features/tweet/tweetSlice';
+import { GetAllUserProfile } from '../../../features/auth/authReducer';
 
 const Feed: React.FC = () => {
     const { tweets, tweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
@@ -13,6 +14,7 @@ const Feed: React.FC = () => {
 
     React.useEffect(() => {
         dispatch(cleartweet({payload:"any"}))
+        dispatch(GetAllUserProfile())
         dispatch(getAllTweet())
     }, [])
 
