@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BsTwitter } from 'react-icons/bs'
-import Link from 'next/link'
+import {Link} from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
@@ -13,7 +13,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
-  setModal: (val: string) => void;
+  setModal: (val: Boolean) => void;
 }
 
 const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {

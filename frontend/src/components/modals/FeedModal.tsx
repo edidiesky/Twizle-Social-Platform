@@ -10,9 +10,9 @@ import TweetFormSection from "../common/tweetsection";
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
-  modal?: Boolean;
   type?: string;
-  setModal: SetStateProp<Boolean>;
+  modal?: Boolean;
+  setModal: (val: Boolean) => void;
 }
 
 const TweetModal: React.FC<modalType> = ({ modal, setModal, type }) => {

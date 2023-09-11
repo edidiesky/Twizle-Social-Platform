@@ -8,7 +8,8 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { BsThreeDots } from 'react-icons/bs';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
-  setModal?: SetStateProp<Boolean>;
+  modal?: Boolean;
+  setModal: (val: Boolean) => void;
 }
 
 const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
@@ -29,7 +30,7 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
          }
           {
             checkifUser ? <div className="profileBtn text-dark text-bold" onClick={() => setModal(true)}>Edit Profile</div>:
-        <div className="profileBtn followbtn text-dark text-bold">Follow User</div>
+        <div className="profileBtn followbtn text-dark text-bold">Follow</div>
           }
         </div>
       </div>

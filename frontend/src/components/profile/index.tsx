@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
-    const [modal, setModal] = React.useState(false)
+    const [modal, setModal] = React.useState<Boolean>(false)
 
     const { userDetails } = useAppSelector(store => store.auth)
     const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
@@ -92,7 +92,7 @@ const Profile: React.FC = () => {
                                     </div> : <>
                                         {
                                             tweets?.map((value: feedcardtype) => {
-                                                return <FeedCard {...value} key={value.tweet_id} />
+                                                return <FeedCard {...value} key={value._id} />
                                             })
                                         }
                                     </>

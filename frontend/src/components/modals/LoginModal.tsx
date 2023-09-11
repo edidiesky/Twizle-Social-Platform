@@ -16,7 +16,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
-  setModal: (val: string) => void;
+  setModal: (val: Boolean) => void;
 }
 
 const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {

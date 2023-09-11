@@ -6,8 +6,8 @@ const InputTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
-    border: '1px solid var(--border)',
-    fontFamily: "CustomFont_Normal, sans- serif",
+    border: '1px solid rgb(207, 217, 222)',
+    fontFamily: "CustomFont_Normal, sans-serif",
 
 
     '& fieldset': {
@@ -24,27 +24,31 @@ const InputTextField = styled(TextField)(({ theme }) => ({
     },
   },
   '& .MuiOutlinedInput-input': {
-    padding: '18px 10px',
-    fontSize: '16px',
-    fontWeight: 'light',
-    fontFamily: "CustomFont_Normal, sans- serif",
+    padding: '24px 10px',
+    paddingBottom:"7px",
+    
+    fontSize: '17px',
+    fontWeight: 'Normal',
+    fontFamily: "CustomFont_Normal, sans-serif",
 
     color: "var(--dark-1)"
 
   },
   '& .MuiInputLabel-root': {
-    fontSize: '16px',
-    fontWeight: 'light',
+    fontSize: '17px',
+    fontWeight: 'Normal',
     color: 'var(--dark-1)'
   },
   '& .MuiInputLabel-root.Mui-focused': {
     // Styles when the form is focused
-    color: 'var(--blue-1)',
-    fontWeight: 'light',
+    color: 'var(--dark-1)',
+    fontWeight: 'Normal',
+    fontFamily: "CustomFont_Normal, sans-serif",
+
   },
   '& .MuiInputLabel-shrink': {
-    transform: 'translate(12px, 7px) scale(0.7)',
-    color: 'var(--blue-1)', fontWeight: "normal"
+    transform: 'translate(12px, 7px) scale(0.8)',
+    color: 'var(--dark-1)', fontWeight: "normal"
   },
 }));
 

@@ -2,19 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100;200;300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
-@font-face {
-  font-family: "CustomFont_Medium";
-  src: url("./assets/ClashDisplay-Bold.otf") format("opentype");
-}
 
 @font-face {
   font-family: "CustomFont_Bold";
-  src: url("./assets/FontsFree-Net-Segoe-UI-Bold.ttf") format("truetype");
+  src: url("./assets/chirp_bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "CustomFont_Normal";
-  src: url("./assets/FontsFree-Net-Segoe-UI.ttf") format("truetype");
+  src: url("./assets/chirp_regular.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: "CustomFont_Medium";
+  src: url("./assets/chirp_medium.ttf") format("truetype");
 }
 
 

@@ -97,7 +97,7 @@ export const UpdateProfile = createAsyncThunk<{
 // Getuser profile
 export const GetUserProfile = createAsyncThunk<{
   rejectValue: KnownError,
-}, {name?:any}>(
+}>(
   "GetProfile",
   async (profiledata, { rejectWithValue, getState }) => {
 

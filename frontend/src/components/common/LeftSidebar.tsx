@@ -62,7 +62,7 @@ const LeftSidebarIndex = () => {
         },
         {
             title: "Profile    ",
-            path: `/${userInfo?.display_name}`,
+            path: `/${userInfo?.name}`,
             icon: <ProfileIcon />
 
         }, {

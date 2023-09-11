@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styleds from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
@@ -9,7 +9,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: Boolean;
-  setModal: SetStateProp<Boolean>;
+  setModal: (val: Boolean) => void;
 }
 
 const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
@@ -36,29 +36,34 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
         className={"deleteCard shadow"}
       >
         {/* edit profile top */}
-        <div className="flex authtop w-100 auto ">
-          <div className="w-90 auto flex item-center justify-space item-center">
-            <div className="flex item-center gap-3 py-1">
-              <div className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
-              <h3 className="fs-20 text-extra-bold">Edit profile</h3>
+        <div className="edit_wrapper w-100">
+          <div className="flex authtop w-100 auto ">
+            <div className="w-90 auto flex item-center justify-space item-center">
+              <div className="flex item-center gap-3 py-1">
+                <div className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
+                <h3 className="fs-20 text-extra-bold">Edit profile</h3>
+              </div>
+              <div className=" flex item-center justify-end">
+                <div className="btn btn-3 fs-14 text-bold text-white">Save</div>
+              </div>
             </div>
-            <div className=" flex item-center justify-end">
-              <div className="btn btn-3 fs-14 text-bold text-white">Save</div>
+          </div>
+          <div className="w-100 authCenterWrapper h-100">
+            <div className=" w-100 flex gap-2 column">
+              <div className="w-100 profile_background flex item-center justify-center">
+              </div>
+              <div className="image_wrapper">
+                <img src="https://i.pinimg.com/236x/e6/33/ee/e633eefbeb77cd4323a1557d33c91c83.jpg" alt="" className="avatar_profile" />
+                <div className="image_gradient"></div>
+              </div>
+
+              <div className="w-90 formwraper auto flex column gap-2">
+                <FormInput state={name} label={'Name'} setState={setName} />
+                <FormInput state={bio} label={'Bio'} types="textarea" setState={setBio} />
+                <FormInput state={location} label={'Location'} setState={setLocation} />
+                <FormInput state={website} label={'Website'} setState={setWebsite} />
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="center_content flex gap-2 column">
-          <div className="w-100 profile_background flex item-center justify-center">
-          </div>
-          <div className="image_wrapper">
-            <img src="https://i.pinimg.com/236x/e6/33/ee/e633eefbeb77cd4323a1557d33c91c83.jpg" alt="" className="avatar_profile" />
-            <div className="image_gradient"></div>
-          </div>
-          <div className="w-90 formwraper auto flex column gap-2">
-            <FormInput state={name} label={'Name'} setState={setName} />
-            <FormInput state={bio} label={'Bio'} types="textarea" setState={setBio} />
-            <FormInput state={location} label={'Location'} setState={setLocation} />
-            <FormInput state={website} label={'Website'} setState={setWebsite} />
           </div>
         </div>
       </motion.div>
@@ -68,7 +73,7 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
 }
 export default AuthModal
 
-const DeleteContainer = styleds(motion.div)`
+const DeleteContainer = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -81,9 +86,10 @@ const DeleteContainer = styleds(motion.div)`
   position: fixed;
     left: 50%;
     transform: translateX(-50%);
-  .formwraper {
-    padding-bottom: 3rem;
-  }
+    .authCenterWrapper {
+      height:95%;
+    }
+ 
   .label {
     width: 100%;
   display: flex;
@@ -179,8 +185,9 @@ const DeleteContainer = styleds(motion.div)`
       position: relative;
       border-radius:50%;
       cursor:pointer;
-      transform:translate(10%,-50%);
+      margin-top:-8rem;
       border:5px solid #fff;
+      margin-left:1rem;
       &:hover {
         .image_gradient{
           opacity:1;
@@ -210,7 +217,7 @@ const DeleteContainer = styleds(motion.div)`
     background-color: #B2B2B2;
     height: 200px;
     position:relative;
-    
+  
   }
   .btn-3 {
     padding: 1rem 2rem;
@@ -220,40 +227,7 @@ const DeleteContainer = styleds(motion.div)`
   .icon:hover {
     background-color: #ccc;
   }
-  .authBottom {
-    position: relative;
-    padding: 0 1rem;
-    /* padding-bottom: 1.6rem; */
 
-    .option {
-      width: 100%;
-      position: relative;
-      text-align: center;
-      padding: 0 1.4rem;
-      font-size: 14px;
-      color: var(--dark-1);
-      &::after {
-        width: 45%;
-        height: 0.4px;
-        content: "";
-        background-color: rgba(0, 0, 0, 0.5);
-        left: 0;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      &::before {
-        width: 45%;
-        height: 0.4px;
-        content: "";
-        background-color: rgba(0, 0, 0, 0.5);
-        right: 0;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-  }
   .backdrop {
     background: rgba(0, 0, 0, 0.3);
 
@@ -262,12 +236,12 @@ const DeleteContainer = styleds(motion.div)`
     width: 100%;
   }
   .authtop {
-  background-color: rgba(255, 255, 255, 0.875);
-  z-index: 3000;
-  backdrop-filter: blur(14px);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
   position:sticky;
   left:0;
   top:0;
+    z-index: 3000;
   }
   .deleteCard {
     max-width: 80vw;
@@ -278,9 +252,14 @@ const DeleteContainer = styleds(motion.div)`
     border-radius: 20px;
     position: relative;
     box-shadow:var(--shadow);
+    // padding-right:10px;
+    overflow:hidden;
+    .edit_wrapper {
+height: 600px;
+overflow:auto;
+    border-radius: 20px;
 
-   height: 650px;
-    overflow: auto;
+    }
 
     @media (max-width:980px) {
       width: 70%;
@@ -293,5 +272,6 @@ const DeleteContainer = styleds(motion.div)`
   .center_content {
     background: #fff;
     position: relative;
+      z-index: 2000;
   }
 `;
