@@ -8,14 +8,18 @@ import {
   DeleteTweet,
   LikeAndUnlikeATweet,
   GetUserTweet,
-  RePostATweet
+  RePostATweet,
+  getAllBookmarkedTweet,
+  BookMarkATweet
 } from './tweetReducer'
 
 // Define a type for the tweet state
 interface tweetState {
   tweetDetails?: any,
   tweets?: any,
+  bookmarks?: any,
   tweetisLoading?: Boolean,
+  isBookMarked?: Boolean,
   tweetisSuccess?: Boolean,
   tweetisError?: Boolean,
 
@@ -33,11 +37,15 @@ interface tweetState {
 // Define the initial state of the tweet using that type
 const initialState: tweetState = {
   tweetDetails: null,
+
   tweets: [],
+  bookmarks: [],
+
 
   tweetisLoading: false,
   tweetisSuccess: false,
   tweetisError: false,
+  isBookMarked:false,
 
   // tweetisLoading: false,
   // tweetisSuccess: false,
@@ -76,6 +84,25 @@ export const tweetSlice = createSlice({
       state.tweets = action.payload
     })
     builder.addCase(getAllTweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+    // bookmarks
+    builder.addCase(getAllBookmarkedTweet.pending, (state, action) => {
+      state.tweetisLoading = true
+    })
+    builder.addCase(getAllBookmarkedTweet.fulfilled, (state, action) => {
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.bookmarks = action.payload
+    })
+    builder.addCase(getAllBookmarkedTweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
       state.tweetisLoading = false
@@ -159,6 +186,30 @@ export const tweetSlice = createSlice({
       state.alertType = 'success'
     })
     builder.addCase(UpdateTweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+    builder.addCase(BookMarkATweet.pending, (state, action) => {
+      state.tweetisLoading = true
+    })
+    builder.addCase(BookMarkATweet.fulfilled, (state, action) => {
+      // handling bookmarks
+      // find the tweet
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
+      state.tweetDetails = action.payload.tweetdetails
+    
+      state.alertText = 'Tweet Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(BookMarkATweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
       state.tweetisLoading = false

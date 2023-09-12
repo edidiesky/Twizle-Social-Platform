@@ -16,6 +16,11 @@ type tweetdatatype = {
   }
 }
 
+interface BookMarkATweetPayload {
+  userIdIncludedInBookmarksArray: boolean;
+  tweetdetails: any;
+}
+
 type KnownError = {
   errorMessage: string;
 }
@@ -30,6 +35,25 @@ export const getAllTweet = createAsyncThunk<{
       const response = await axios.get(tweeturl);
       localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
       return response.data.tweet;
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+export const getAllBookmarkedTweet = createAsyncThunk<{
+  rejectValue: KnownError,
+
+}>(
+  "getAllBookmarkedTweet",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/api/v1/tweet/bookmark');
+    return response.data.bookmarkTweets;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -90,6 +114,46 @@ export const UpdateTweet = createAsyncThunk<{
         config
       );
       return response.data;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+// update User tweet
+export const BookMarkATweet = createAsyncThunk <BookMarkATweetPayload,{
+  rejectValue: KnownError,
+}>(
+  "BookMarkATweet",
+  async (Detailsdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { token: string } };
+      // console.log(auth.token)
+      // console.log(Detailsdata?._id)
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response1 = await axios.put(
+        `/api/v1/tweet/bookmark/${Detailsdata}`,
+        Detailsdata,
+        config
+      );
+     const response2 = await axios.get(
+        `/api/v1/tweet/${Detailsdata}`,
+        config
+      );
+      return {
+        tweetdetails: response2.data.tweet,
+        userIdIncludedInBookmarksArray: response1.data.userIdIncludedInBookmarksArray
+      };
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

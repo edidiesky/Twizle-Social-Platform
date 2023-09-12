@@ -135,11 +135,14 @@ const BookMarkATweet = asyncHandler(async (req: CustomInterface, res: Response) 
   const userIdIncludedInBookmarksArray = tweet.tweet_bookmarks.includes(userid)
   if (!userIdIncludedInBookmarksArray) {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_bookmarks: userid } }, { new: true })
-    res.status(200).json({ updateTweet });
+    const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
+
+    res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_bookmarks: userid } }, { new: true })
+  const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
 
-    res.status(200).json({ updateTweet });
+    res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
 
   }
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Top from '../feedtop/top';
 import PostDetailsComments from './comments';
@@ -9,8 +9,8 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi'
 
 import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
 import { LiaRetweetSolid } from 'react-icons/lia'
-import { useAppDispatch } from '../../../hooks/reduxtoolkit';
-import { GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
+import { BookMarkATweet, GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
 import { useParams } from 'react-router-dom';
 import MessageIcon from '../../../assets/svg/feedcardicons/message';
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
@@ -21,11 +21,19 @@ import BookmarkIcon from '../../../assets/svg/feedcardicons/bookmark';
 
 const PostDetailsContent: React.FC = () => {
     const {id} = useParams()
-    console.log(id)
+    const [bookmark, setBookMark] = useState<boolean>(false)
+    const { tweets, tweetDetails, isBookMarked } = useAppSelector(store=> store.tweet)
+    console.log(isBookMarked)
+    
     const dispatch = useAppDispatch()
     React.useEffect(()=> {
         dispatch(GetSingleTweetDetails(id))
     }, [id])
+    const handleBookMark=()=> {
+        setBookMark(!bookmark)
+        dispatch(BookMarkATweet(id))
+    }
+   
     return (
         <PostDetailsContentStyles>
             <Top />
@@ -81,17 +89,12 @@ const PostDetailsContent: React.FC = () => {
                             23
                         </div>
                         <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <BookmarkIcon type='large' />
+                            <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
+                                <BookmarkIcon isClicked={isBookMarked} type='large' />
                             </div>
                             123
                         </div>
-                        <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <StatIcon type='large' />
-                            </div>
-                            123
-                        </div>
+                       
                     </div>
                     {/* <div className="flex iconwrapper item-center fs-16 text-light" style={{ gap: ".3rem" }}>
                         <div className="icons icon1 flex item-center justify-center">

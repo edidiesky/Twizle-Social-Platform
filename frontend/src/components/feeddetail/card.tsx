@@ -13,6 +13,7 @@ const PostFeedCard = () => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
 
     const [drop, setDrop] = useState(false)
+   
     return (
         <FeedCardStyles key={tweetDetails?.tweet_id}>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
