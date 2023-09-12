@@ -86,7 +86,8 @@ const TweetModalStyles = styleds(motion.div)`
   position: fixed;
   left: 0;
   display: flex;
-  z-index: 3800;
+  z-index: 4800;
+
   align-items: start;
   justify-content: center;
   top: 0;

@@ -218,6 +218,8 @@ const DeleteContainer = styled(motion.div)`
   align-items: center;
   justify-content: center;
   top: 0;
+  z-index: 4800;
+
   position: fixed;
     left: 50%;
     transform: translateX(-50%);

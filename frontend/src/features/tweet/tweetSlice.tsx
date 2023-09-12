@@ -20,6 +20,7 @@ interface tweetState {
   tweetDetails?: any,
   tweets?: any,
   bookmarks?: any,
+  isLiked?: Boolean,
   tweetisLoading?: Boolean,
   isBookMarked?: Boolean,
   tweetisSuccess?: Boolean,
@@ -48,6 +49,7 @@ const initialState: tweetState = {
   tweetisSuccess: false,
   tweetisError: false,
   isBookMarked: false,
+  isLiked: false,
 
   // tweetisLoading: false,
   // tweetisSuccess: false,

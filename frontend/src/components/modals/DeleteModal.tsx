@@ -70,7 +70,7 @@ const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }
           <div className="w-85 formwraper auto flex column gap-1">
             <h4 className="fs-24 text-dark text-start text-bold">Delete Post?
             
-            <span className="block text-grey fs-16 text-light py-1">
+            <span className="block text-grey fs-15 text-light py-1">
                 This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from search results. 
             </span>
             </h4>
@@ -99,7 +99,7 @@ const DeleteModalStyles = styled(motion.div)`
     left: 50%;
     transform: translateX(-50%);
   display: flex;
-  z-index: 3800;
+  z-index: 4800;
   align-items: center;
   justify-content: center;
   top: 0;
