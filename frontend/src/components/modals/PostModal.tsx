@@ -16,9 +16,9 @@ import UploadImage from "./UploadImage";
 import { CreateTweet } from "../../features/tweet/tweetReducer";
 
 type modalType = {
-  modal?: Boolean;
+  modal?: boolean;
   type?: string;
-  setModal: (val: Boolean) => void;
+  setModal: (val: boolean) => void;
 }
 
 const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {

@@ -3,7 +3,7 @@ import { CiCircleMore } from 'react-icons/ci'
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import ActiveLink from './activelink'
 import TweetModal from '../modals/TweetModal'
 import { AnimatePresence } from 'framer-motion'
@@ -19,10 +19,12 @@ import PostModal from '../modals/PostModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { GetAllUserProfile } from '../../features/auth/authReducer';
 import LoaderIndex from '../loaders';
+import Moredropdown from './moredropdown';
 
 
 const LeftSidebarIndex = () => {
     const [tweet, setTweet] = useState<boolean>(false)
+    const [drop, setDrop] = useState<boolean>(false)
     const { userInfo, userDetails } = useAppSelector(store => store.auth)
     const { tweetisLoading } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
@@ -71,17 +73,12 @@ const LeftSidebarIndex = () => {
             path: `/${userInfo?.name}`,
             icon: <ProfileIcon />
 
-        }, {
-            title: "More",
-            path: '',
-            icon: <CiCircleMore />
-
         },
     ]
 
     return (
         <>
-        {/* {
+            {/* {
                 tweetisLoading && <LoaderIndex/>
         } */}
             <AnimatePresence
@@ -107,15 +104,23 @@ const LeftSidebarIndex = () => {
                                     list.map((x, index) => {
                                         return (
                                             <li className="list text-dark flex item-center gap-2 text-light" >
-                                                <ActiveLink hrefs={x.path}>
+                                                <NavLink className='text-dark flex item-center gap-2 text-light' to={x.path}>
                                                     {x.icon}
                                                     <span className='span'>{x.title}</span>
-                                                </ActiveLink>
+                                                </NavLink>
                                             </li>
                                         )
 
                                     })
                                 }
+                                <li className="list relative text-dark flex item-center gap-2 text-light" >
+                                    {drop && <Moredropdown setDrop={setDrop} />}
+                                   <div onClick={()=> setDrop(true)} className="w-100 flex w-100 item-center gap-2">
+                                        <CiCircleMore fontSize={'20px'} />
+                                        <span className='span'>More</span>
+                                   </div>
+
+                                </li>
                             </ul>
                             <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
                         </div>
@@ -147,6 +152,8 @@ const LeftSidebarStyles = styled.div`
     min-height: 100vh;
    position: sticky;
    top: 0;
+        z-index: 4000;
+
     /* overflow: hidden; */
     @media (max-width:1080px) {
         flex: 0 0 110px;
