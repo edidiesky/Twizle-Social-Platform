@@ -118,6 +118,50 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
   // console.log(userid)
 });
 
+//PUT
+// User
+const BookMarkATweet = asyncHandler(async (req: CustomInterface, res: Response) => {
+  // get the user id
+  const userid = req.user?.userId
+  // find the tweet
+  // check if the user Id is inclused in the likes array of the tweet
+  const tweet = await UserTweet.findOne({ _id: req.params.id })
+  if (!tweet) {
+    res.status(404);
+    throw new Error("The Tweet does not exist");
+  }
+
+  // check if the userid is included in the tweet like array
+  const userIdIncludedInBookmarksArray = tweet.tweet_bookmarks.includes(userid)
+  if (!userIdIncludedInBookmarksArray) {
+    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_bookmarks: userid } }, { new: true })
+    res.status(200).json({ updateTweet });
+  } else {
+    const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_bookmarks: userid } }, { new: true })
+
+    res.status(200).json({ updateTweet });
+
+  }
+});
+
+//PUT
+// User
+const getAllBookMarks = asyncHandler(async (req: CustomInterface, res: Response) => {
+  // get the user id
+  const userid = req.user?.userId
+  // find the tweet
+  // check if the user Id is inclused in the likes array of the tweet
+  const tweets = await UserTweet.find({ tweet_bookmarks : userid}).exec()
+  if (!tweets || tweets.length === 0) {
+    res.status(404);
+    throw new Error("No bookmarked tweets found");
+  }
+
+  // Return the bookmarked tweets
+  res.status(200).json({ bookmarkTweets: tweets });
+});
+
+
 
 // POST 
 // CreateTweet UserTweet
@@ -165,5 +209,7 @@ export {
   GetSingleTweet,
   LikeAndUnlikeATweet,
   RePostATweet,
-  GetUserTweet
+  GetUserTweet,
+  BookMarkATweet,
+  getAllBookMarks
 };

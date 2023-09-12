@@ -27,6 +27,10 @@ const UserTweetSchema = new mongoose.Schema(
     retweet_tweet_id: {
       type: String,
     },
+    tweet_bookmarks: {
+      type: Array,
+      default: []
+    },
     retweet_count: { type: Number },
     favorite_count: { type: Number }
   },
