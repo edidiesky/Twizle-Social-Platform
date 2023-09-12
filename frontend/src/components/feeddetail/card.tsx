@@ -116,9 +116,9 @@ const FeedCardStyles = styled.div`
         z-index: 40;
         cursor: pointer;
         width: 350px;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(255, 255, 255, 0.3);
-        background-color: var(--white);
+        box-shadow: var(--shadow);
+  border-radius: 10px;
+      background-color: var(--white);
         height: 0;
         transition: all .3s;    
         opacity:0;

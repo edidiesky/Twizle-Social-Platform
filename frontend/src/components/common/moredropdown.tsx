@@ -15,7 +15,7 @@ const Moredropdown: React.FC<propTypes> = ({ setDrop }) => {
 
         <ul style={{ fontSize: "14.6px" }} className="flex bottom column w-100 text-bold">
             <li onClick={() => setDrop(false)} className="flex item-center text-bold fs-20 text-dark gap-3">
-                <Link to={'/'} className="w-100 flex item-center text-bold fs-20 text-dark gap-3">
+                <Link to={'/i/bookmarks'} className="w-100 flex item-center text-bold fs-20 text-dark gap-3">
                     <BookmarkIcon />Bookmarks
                 </Link>
             </li>

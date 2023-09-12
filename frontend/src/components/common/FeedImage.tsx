@@ -45,7 +45,7 @@ const FeedImage: React.FC<uploadType> = ({ images }) => {
                     <div className="imageWrappers firstImageWrapper h-100 w-100">
                         <img src={images[0]} alt="" className="image w-100 h-100" />
 
-                        <div className="imagegradient w-100 h-100"></div>
+                        {/* <div className="imagegradient absolute w-100 h-100"></div> */}
                     </div>
                 </FeedImageStyles>
             </FeedImageWrapperStyles>
@@ -83,11 +83,16 @@ gap:3px;
 grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
 min-height: 30rem;
 border-radius: 16px;
+border:1px solid rgb(207, 217, 222);
+
 &.active {
     min-height: 100%;
     height: 100%;
+  border:1px solid rgb(207, 217, 222);
+
     .imageWrappers {
         border-radius: 16px;
+        position: relative;
         .image {
             border-radius: inherit;
         }

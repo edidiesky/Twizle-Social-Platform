@@ -6,7 +6,8 @@ import {
   Home,
   LayoutIndex,
   Profile,
-  TweetDetailIndex
+  TweetDetailIndex,
+  Bookmarks
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -26,6 +27,12 @@ export default function App() {
           />
           <Route path="i/flow/signup" element={<Suspense fallback={<Preloader/>}>
             <Auth />
+          </Suspense>
+          }
+          />
+          {/* bookmarks route */}
+          <Route path="i/bookmarks" element={<Suspense fallback={<Preloader />}>
+            <Bookmarks />
           </Suspense>
           }
           />

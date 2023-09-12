@@ -188,7 +188,7 @@ h2 {
   cursor: pointer;
 }
 .icons:hover {
-  background-color: var(--dark-grey-hover);
+  background-color: var(--grey-hover);
 }
 
 .input,
