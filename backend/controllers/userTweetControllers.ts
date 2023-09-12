@@ -57,15 +57,17 @@ const RePostATweet = asyncHandler(async (req: CustomInterface, res: Response) =>
 
 // GET 
 // Get single tweet
-const GetSingleTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
+const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   const tweet = await UserTweet.findById({ _id: req.params.id })
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
-  if (!tweet) {
+  const userIdIncludedInBookmarksArray = tweet?.tweet_bookmarks.includes(req?.user?.userId)
+
+    if (!tweet) {
     res.status(404);
     throw new Error("The Tweet does not exist");
   }
 
-  res.status(200).json({ tweet });
+  res.status(200).json({ tweet, userIdIncludedInBookmarksArray });
 });
 
 
@@ -74,7 +76,9 @@ const GetSingleTweet = asyncHandler(async (req: ExpressRequest, res: Response) =
 const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   const tweet = await UserTweet.find({ tweet_user_id: req.params.id }).sort("-createdAt")
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
-  if (!tweet) {
+ 
+ 
+    if (!tweet) {
     res.status(404);
     throw new Error("The Tweet does not exist");
   }
@@ -154,7 +158,8 @@ const getAllBookMarks = asyncHandler(async (req: CustomInterface, res: Response)
   const userid = req.user?.userId
   // find the tweet
   // check if the user Id is inclused in the likes array of the tweet
-  const tweets = await UserTweet.find({ tweet_bookmarks : userid}).exec()
+  const tweets = await UserTweet.find({ tweet_bookmarks: userid }).sort("-createdAt")
+    .populate("tweet_user_id", " username bio display_name name profile_image_url").exec()
   if (!tweets || tweets.length === 0) {
     res.status(404);
     throw new Error("No bookmarked tweets found");

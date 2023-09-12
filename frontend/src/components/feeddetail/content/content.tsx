@@ -92,7 +92,7 @@ const PostDetailsContent: React.FC = () => {
                             <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
                                 <BookmarkIcon isClicked={isBookMarked} type='large' />
                             </div>
-                            123
+                            {tweetDetails?.tweet_bookmarks?.length}
                         </div>
                        
                     </div>

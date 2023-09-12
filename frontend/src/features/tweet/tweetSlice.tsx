@@ -12,6 +12,8 @@ import {
   getAllBookmarkedTweet,
   BookMarkATweet
 } from './tweetReducer'
+const BookMarked = localStorage.getItem("isBookMarked");
+
 
 // Define a type for the tweet state
 interface tweetState {
@@ -45,7 +47,7 @@ const initialState: tweetState = {
   tweetisLoading: false,
   tweetisSuccess: false,
   tweetisError: false,
-  isBookMarked:false,
+  isBookMarked: false,
 
   // tweetisLoading: false,
   // tweetisSuccess: false,
@@ -63,14 +65,15 @@ export const tweetSlice = createSlice({
   initialState,
   reducers: {
     cleartweet: (state, action) => {
-        state.tweetDetails = null
-        state.tweets = []
-        state.tweetisLoading = false
-        state.tweetisSuccess = false
-        state.tweetisError = false
-        state.alertText = ''
-        state.showAlert = false
-        state.alertType = ''
+      state.tweetDetails = null
+      state.tweets = []
+      state.tweetisLoading = false
+      state.isBookMarked = false
+      state.tweetisSuccess = false
+      state.tweetisError = false
+      state.alertText = ''
+      state.showAlert = false
+      state.alertType = ''
     },
   },
   extraReducers: (builder) => {
@@ -118,7 +121,7 @@ export const tweetSlice = createSlice({
 
     })
     builder.addCase(CreateTweet.fulfilled, (state, action) => {
-      state.tweets = [action.payload,...state.tweets]
+      state.tweets = [action.payload, ...state.tweets]
       state.alertText = 'Tweet created succesfully'
       state.showAlert = true
       state.tweetisLoading = false
@@ -143,7 +146,8 @@ export const tweetSlice = createSlice({
     builder.addCase(GetSingleTweetDetails.fulfilled, (state, action) => {
       state.tweetisSuccess = true
       state.tweetisLoading = false
-      state.tweetDetails = action.payload
+      state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
+      state.tweetDetails = action.payload.tweetdetails
     })
     builder.addCase(GetSingleTweetDetails.rejected, (state, action) => {
       state.tweetisSuccess = false
@@ -158,10 +162,10 @@ export const tweetSlice = createSlice({
     // DeleteTweet slice
 
     builder.addCase(DeleteTweet.pending, (state, action) => {
-     
+
     })
     builder.addCase(DeleteTweet.fulfilled, (state, action) => {
-    
+
       state.tweets = state.tweets.filter((x) => x._id !== action.payload);
     })
     builder.addCase(DeleteTweet.rejected, (state, action) => {
@@ -204,7 +208,10 @@ export const tweetSlice = createSlice({
       state.tweetisLoading = false
       state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
       state.tweetDetails = action.payload.tweetdetails
-    
+
+      localStorage.setItem("isBookMarked", JSON.stringify(action.payload.userIdIncludedInBookmarksArray));
+
+
       state.alertText = 'Tweet Update succesfully'
       state.showAlert = true
       state.alertType = 'success'

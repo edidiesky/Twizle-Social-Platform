@@ -192,7 +192,7 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
                 <div className="image_gradient"></div>
               </label>
 
-              <div className="w-90 formwraper auto flex column gap-2">
+              <div style={{paddingBottom:"2rem"}} className="w-90 formwraper auto flex column gap-2">
                 <FormInput state={name} label={'Name'} setState={setName} />
                 <FormInput state={bio} label={'Bio'} types="textarea" setState={setBio} />
                 <FormInput state={location} label={'Location'} setState={setLocation} />

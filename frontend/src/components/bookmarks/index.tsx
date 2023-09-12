@@ -6,10 +6,7 @@ import LeftSidebarIndex from '../common/LeftSidebar';
 import Top from './top/top';
 import AuthModal from '../modals/EditProfileModal';
 import { AnimatePresence } from 'framer-motion';
-import { GetUserProfile } from '../../features/auth/authReducer';
-import { useParams } from 'react-router-dom';
-import { clearUserProfile } from '../../features/auth/authSlice';
-import { GetUserTweet } from '../../features/tweet/tweetReducer';
+import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
@@ -25,28 +22,13 @@ const Bookmarks: React.FC = () => {
     const [modal, setModal] = React.useState<Boolean>(false)
 
     const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (userInfo?.name) {
-            dispatch(clearUserProfile({ payload: "any" }))
-            dispatch(GetUserProfile(userInfo?.name))
-        }
-
-    }, [userInfo?.name])
-
-    // useEffect(() => {
-    //     dispatch(GetUserProfile(userInfo?.name))
-
-    // }, [ userprofileisSuccess])
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            dispatch(GetUserTweet(userInfo?._id))
-        }
-    }, [userInfo?._id, userprofileisSuccess])
+        dispatch(getAllBookmarkedTweet())
+    }, [])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
@@ -67,9 +49,9 @@ const Bookmarks: React.FC = () => {
                 <div className="w-100 flex py-2 column">
                    
                     {
-                        tweets?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
-                            <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-30 w-85 auto text-bold">
-                                @{userDetails?.display_name} hasn’t posted
+                        bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
+                            <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
+                                @{userDetails?.display_name} you have no bookmarks
 
                                 <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                             </h2>
@@ -79,7 +61,7 @@ const Bookmarks: React.FC = () => {
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
                                 </div> : <>
                                     {
-                                        tweets?.map((value: feedcardtype) => {
+                                        bookmarks?.map((value: feedcardtype) => {
                                             return <FeedCard {...value} key={value._id} />
                                         })
                                     }

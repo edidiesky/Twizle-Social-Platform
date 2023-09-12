@@ -50,9 +50,15 @@ export const getAllBookmarkedTweet = createAsyncThunk<{
 
 }>(
   "getAllBookmarkedTweet",
-  async (_, { rejectWithValue }) => {
+  async (tweetData, { rejectWithValue, getState }) => {
     try {
-      const response = await axios.get('/api/v1/tweet/bookmark');
+      const { auth } = getState() as { auth: { token: string } };
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get('/api/v1/tweet/bookmark', config);
     return response.data.bookmarkTweets;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -152,7 +158,7 @@ export const BookMarkATweet = createAsyncThunk <BookMarkATweetPayload,{
       );
       return {
         tweetdetails: response2.data.tweet,
-        userIdIncludedInBookmarksArray: response1.data.userIdIncludedInBookmarksArray
+        userIdIncludedInBookmarksArray: response2.data.userIdIncludedInBookmarksArray
       };
 
     } catch (err: any) {
@@ -199,7 +205,7 @@ export const DeleteTweet = createAsyncThunk<{
 
 
 // GetTweet Details
-export const GetSingleTweetDetails = createAsyncThunk<{
+export const GetSingleTweetDetails = createAsyncThunk < BookMarkATweetPayload,{
   rejectValue: KnownError,
 }>(
   "GetDetails",
@@ -217,7 +223,10 @@ export const GetSingleTweetDetails = createAsyncThunk<{
         `/api/v1/tweet/${Detailsdata}`,
         config
       );
-      return response.data.tweet;
+       return {
+        tweetdetails: response.data.tweet,
+        userIdIncludedInBookmarksArray: response.data.userIdIncludedInBookmarksArray
+      };
 
     } catch (err: any) {
       const message = err.response && err.response.data.message
