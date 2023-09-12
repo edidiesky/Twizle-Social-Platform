@@ -85,8 +85,15 @@ export const CreateTweet = createAsyncThunk<{
         },
       };
       const response = await axios.post(tweeturl, tweetData, config);
-      localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
-      return response.data.tweet;
+      if (response?.data?.tweet) {
+        const response2 = await axios.get(
+          `/api/v1/tweet/${response?.data?.tweet?._id}`,
+          config
+        );
+        localStorage.setItem("tweet", JSON.stringify(response2.data.tweet));
+        return response2.data.tweet;
+      }
+     
       // console.log(tweetData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
