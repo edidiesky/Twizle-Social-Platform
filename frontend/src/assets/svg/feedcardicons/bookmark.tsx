@@ -8,9 +8,9 @@ const BookmarkIcon: React.FC<iconType> = ({ isClicked, type }) => {
 
     return (
         <span style={{
-            width: "2.2rem",
+            width: "23px",
             color: "var(--grey-3)",
-            height: "2.2rem",
+            height: "23px",
             position: "relative",
             fill: isClicked ? 'var(--blue-1)' : "currentcolor",
             display: "inline-block",

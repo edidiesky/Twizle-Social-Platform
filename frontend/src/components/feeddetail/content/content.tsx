@@ -115,10 +115,10 @@ const PostDetailsContentStyles = styled.div`
         min-height: 100vh;
 
         .bottom {
-            padding:1.5rem 0;
+            padding:17px 0;
             border-bottom : 1px solid var(--border);
             &.bottom1 {
-                padding: .6rem 0;
+                padding: 10px 0;
             }
         }
         .fs-15 {

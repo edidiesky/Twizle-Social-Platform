@@ -24,7 +24,7 @@ const Feed: React.FC = () => {
                 <div className="flex w-100 column">
                     {
                         tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                            <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
+                            <CircularProgress style={{ width: '25px', height: '25px', fontSize: '25px' }} color="primary" />
                         </div> : <>
                             {
                                     tweets?.map((value: feedcardtype) => {
