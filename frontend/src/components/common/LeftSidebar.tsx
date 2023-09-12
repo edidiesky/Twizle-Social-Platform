@@ -81,9 +81,9 @@ const LeftSidebarIndex = () => {
 
     return (
         <>
-        {
+        {/* {
                 tweetisLoading && <LoaderIndex/>
-        }
+        } */}
             <AnimatePresence
                 initial={false}
                 exitBeforeEnter={true}

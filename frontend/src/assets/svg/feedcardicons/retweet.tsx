@@ -8,11 +8,11 @@ const RetweetIcon: React.FC<iconType> = ({ isClicked, type }) => {
     if(type === 'large') {
         return (
             <span style={{
-                width: "1.2em",
+                width: "2",
                 color: "var(--dark-1)",
-                height: "1.2em",
+                height: "2",
                 position: "relative",
-                fill: isClicked ? "blue" : "currentcolor",
+                fill:  "currentcolor",
                 display: "inline-block",
             }}>
                 <svg viewBox="0 0 24 24"
