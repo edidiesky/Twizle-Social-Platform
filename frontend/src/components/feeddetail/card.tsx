@@ -38,7 +38,7 @@ const PostFeedCard = () => {
             </AnimatePresence>
             <div className="flex w-90 auto item-start justify-space feed_card_wrapper gap-1">
                 <div className="flex column gap-1">
-                    <div className="flex-1 item-start flex gap-1">
+                    <div className="flex-1 item-center flex gap-1">
                         <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
                             <div className="image_gradient"></div>
                             {
@@ -49,13 +49,13 @@ const PostFeedCard = () => {
                             }
                         </Link>
 
-                        <div className="flex column flex-1" style={{ gap: '.3rem' }}>
-                            <h4 className="fs-18 text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
+                        <div className="flex column flex-1" style={{ gap: '.1rem' }}>
+                            <h4 className="fs-16 text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
                                 {tweetDetails?.tweet_user_id?.display_name}
                                 <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
 
                             </h4>
-                            <span className="text-light fs-16 text-grey block">@{tweetDetails?.tweet_user_id?.name}</span>
+                            <span className="text-light fs-14 text-grey block">@{tweetDetails?.tweet_user_id?.name}</span>
 
                         </div>
                     </div>

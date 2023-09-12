@@ -16,6 +16,7 @@ import MessageIcon from '../../../assets/svg/feedcardicons/message';
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
+import BookmarkIcon from '../../../assets/svg/feedcardicons/bookmark';
 
 
 const PostDetailsContent: React.FC = () => {
@@ -61,26 +62,33 @@ const PostDetailsContent: React.FC = () => {
                     </span>
                 </div>
                 <div className="flex w-90 auto justify-space bottom bottom1 item-center w-90 gap-2">
-                    <div className="flex w-85 auto item-center fs-14 text-light feedtags_wrapper text-dark">
+                    <div className="flex w-100 auto item-center fs-14 text-light feedtags_wrapper text-dark">
                         <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
-                                <MessageIcon />
+                                <MessageIcon type='large' />
                             </div>
                             23
                         </div>
                         <div className="flex iconwrapper flex-1 justify-center text_2 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon2 flex item-center justify-center">
-                                <RetweetIcon />
+                                <RetweetIcon type='large' />
                             </div>
                             144
                         </div><div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon3 flex item-center justify-center">
-                                <LikeIcon />
+                                <LikeIcon type='large' />
                             </div>
                             23
-                        </div><div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                        </div>
+                        <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
                             <div className="icons icon1 flex item-center justify-center">
-                                <StatIcon />
+                                <BookmarkIcon type='large' />
+                            </div>
+                            123
+                        </div>
+                        <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                            <div className="icons icon1 flex item-center justify-center">
+                                <StatIcon type='large' />
                             </div>
                             123
                         </div>

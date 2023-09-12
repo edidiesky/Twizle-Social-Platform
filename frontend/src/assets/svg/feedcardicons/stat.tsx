@@ -6,9 +6,9 @@ const StatIcon: React.FC<iconType> = ({ type }) => {
     if (type === 'large') {
         return (
             <span style={{
-                width: "2rem",
+                width: "2.5rem",
                 color: "var(--grey-3)",
-                height: "2rem",
+                height: "2.5rem",
 
                 position: "relative",
                 fill: "currentcolor",
