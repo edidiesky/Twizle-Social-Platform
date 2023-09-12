@@ -113,8 +113,8 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
             <div className="w-90 auto flex item-start gap-1">
 
               {
-                userInfo?.image ?
-                  <img src={userInfo?.image} alt="images-avatar" className="avatar" />
+                userInfo?.profile_image_url ?
+                  <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
                   : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
 
               }

@@ -215,10 +215,9 @@ const FeedCardStyles = styled.div`
     }
     .dropdownCard {
         position: absolute;
-
         right: 2%;
         top: 8px;
-        z-index: 20;
+        z-index: 2000;
         cursor: pointer;
         width: 370px;
         border-radius: 10px;

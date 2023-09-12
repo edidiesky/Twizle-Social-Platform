@@ -17,8 +17,8 @@ const TweetFormSection = () => {
             <div className="w-100 flex item-start gap-1">
                 <div className="image_wrapper">
                     {
-                        userInfo?.image ?
-                            <img src={userInfo?.image} alt="images-avatar" className="avatar_profile" />
+                        userInfo?.profile_image_url ?
+                            <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar_profile" />
                             : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
                     }
@@ -123,14 +123,14 @@ const TweetFormSectionStyles = styled.div`
         border:none;
         outline:none;
         font-size: 17px;
-        font-family: inherit;
+        font-family: "CustomFont_Normal", sans-serif;
         font-weight: 400;
         background-color: transparent;
         padding: 1rem ;
         color:var(--dark-1);
         &::placeholder {
-            font-size: 20px;
-            font-family: "Nunito", sans-serif;
+            font-size: 24px;
+            font-family: inherit;
             color:var(--grey-1);
             font-weight: 400;
         }

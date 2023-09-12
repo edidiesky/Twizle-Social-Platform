@@ -228,7 +228,7 @@ const LeftSidebarStyles = styled.div`
     .profilewrapper {
  border-radius: 40px;
   text-align: center;
-  padding: .6rem;
+  padding:1.5rem 1rem;
   gap:2px;
   margin-bottom: 1.5rem;
   cursor: pointer;
