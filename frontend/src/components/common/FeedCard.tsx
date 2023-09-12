@@ -19,6 +19,7 @@ import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet } from '../../features/t
 import ShareIcon from '../../assets/svg/feedcardicons/share';
 import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 import DeleteModal from '../modals/DeleteModal';
+import FeedImage from './FeedImage';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
@@ -106,9 +107,7 @@ const FeedCard = (props: feedcardtype) => {
                     </h5>
                     <div className="w-100 wrapper">
                         {
-                            props.tweet_image.map((x, index) => {
-                                return <img key={index} style={{ borderRadius: "10px" }} src={x} alt="" className="w-100 h-100" />
-                            })
+                            props.tweet_image && <FeedImage images={props.tweet_image} />
                         }
                     </div>
 
@@ -353,11 +352,11 @@ li {
             gap:1rem;
         }
     }
-    .wrapper {
+    /* .wrapper {
         grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
         display: grid;
         grid-gap: .5rem;
-    }
+    } */
     .iconwrapper {
         transition: all .5s;
         cursor: pointer;
