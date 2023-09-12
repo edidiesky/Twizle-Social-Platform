@@ -5,19 +5,16 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import FeedImage from '../common/FeedImage';
+import { CreateQuote } from '../../features/quote/quoteReducer';
 
 const QuoteFeedCard = () => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
 
-    const { userDetails, userInfo } = useAppSelector(store => store.auth)
-    const checkifUser = tweetDetails?.tweet_user_id?._id === userInfo?._id
-
-    const [tweet, setTweet] = useState<boolean>(false)
-    const [deletemodal, setDeleteModal] = useState<boolean>(false)
+    const { userInfo } = useAppSelector(store => store.auth)
     const [drop, setDrop] = useState<boolean>(false)
-    const [quote, setQuote] = useState<boolean>(false)
-    const [quotemodal, setQuoteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
+
+    
 
     return (
         <FeedCardStyles key={tweetDetails?._id}>
@@ -26,7 +23,7 @@ const QuoteFeedCard = () => {
                
             </div>
             <div  className="flex w-100 auto item-start feed_card_wrapper gap-1">
-                <div className="image_wrapper">
+                <div className="image_wrappers">
                     <div className="image_gradient"></div>
                     {
                         tweetDetails?.tweet_user_id?.profile_image_url ?
@@ -71,7 +68,7 @@ const FeedCardStyles = styled.div`
     &:hover {
         background-color: var(--dark-grey-hover);
     }
-     .image_wrapper {
+     .image_wrappers {
       width:2.6rem;
       height:2.6rem;
       position: relative;

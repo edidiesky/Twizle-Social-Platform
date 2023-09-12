@@ -7,7 +7,8 @@ import {
   LayoutIndex,
   Profile,
   TweetDetailIndex,
-  Bookmarks
+  Bookmarks,
+  QuoteIndex
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -33,6 +34,11 @@ export default function App() {
           {/* bookmarks route */}
           <Route path="i/bookmarks" element={<Suspense fallback={<Preloader />}>
             <Bookmarks />
+          </Suspense>
+          }
+          />
+          <Route path="i/quote/:id" element={<Suspense fallback={<Preloader />}>
+            <QuoteIndex />
           </Suspense>
           }
           />

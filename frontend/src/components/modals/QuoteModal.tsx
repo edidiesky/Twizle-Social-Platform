@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import UploadImage from "./UploadImage";
 import { CreateTweet, GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
 import QuoteFeedCard from "./QuoteCard";
+import { CreateQuote } from "../../features/quote/quoteReducer";
 
 type modalType = {
   modal?: boolean;
@@ -24,11 +25,12 @@ type modalType = {
 
 const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
   const dispatch = useAppDispatch()
-  const { tweetDetails } = useAppSelector(store => store.tweet)
+  
 
   React.useEffect(() => {
     dispatch(GetSingleTweetDetails(id))
   }, [id])
+  const { tweetDetails } = useAppSelector(store => store.tweet)
   const [uploading, setUploading] = useState(false);
   const [alert, setAlert] = useState(false);
   const { userInfo } = useAppSelector(store => store.auth)
@@ -61,10 +63,11 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
     }
   };
   const handlePost = () => {
-    dispatch(CreateTweet({
-      tweet_image: images,
-      tweet_text: text,
-      tweet_user_id: {
+    dispatch(CreateQuote({
+      quote_image: images,
+      quote_text: text,
+      _id: tweetDetails?._id,
+      quote_user_id: {
         _id: userInfo?._id,
         display_name: userInfo?.display_name,
         name: userInfo?.name,

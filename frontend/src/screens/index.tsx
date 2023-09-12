@@ -1,11 +1,11 @@
 
 import { lazy } from 'react';
-
 const Home = lazy(() => import("./Home"));
 const TweetDetailIndex = lazy(() => import("./TweetDetail"));
 const Auth = lazy(() => import("./Auth"));
 const Profile = lazy(() => import("./Profile"));
 const Bookmarks = lazy(() => import("./Bookmarks"));
+const QuoteIndex = lazy(() => import("./Quote"));
 import LayoutIndex from './Layout'
 export {
     Home,
@@ -13,7 +13,8 @@ export {
     Auth,
     Profile,
     TweetDetailIndex,
-    Bookmarks
+    Bookmarks,
+    QuoteIndex
     // SingleIndex,
     // ShopIndex
 }
