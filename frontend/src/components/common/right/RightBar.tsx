@@ -90,7 +90,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                         <div className="flex column w-100">
                             {
                                 userprofileisLoading ? <div className="flex justify-center">
-                                    <CircularProgress style={{ width: '30px', height: '30px', fontSize: '15px' }} color="primary" />
+                                    <CircularProgress style={{ width: '25px', height: '25px', fontSize: '15px' }} color="primary" />
                                 </div> : <>
                                     {
                                         users?.slice(1, 4).map((x, index) => {

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CircularProgress } from '@mui/material';
 
-import styleds from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
@@ -234,13 +234,13 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 }
 export default PostModal
 
-const PostModalStyles = styleds(motion.div)`
+const PostModalStyles = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;
   left: 0;
   display: flex;
-  z-index: 3800;
+  z-index: 5800;
   align-items: start;
   justify-content: center;
   top: 0;
@@ -313,7 +313,7 @@ const PostModalStyles = styleds(motion.div)`
  
   .backdrop {
     background: var(--backdrop);
-
+    z-index:200000;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -322,6 +322,8 @@ const PostModalStyles = styleds(motion.div)`
     max-width: 600px;
     min-width: 600px;
     display: flex;
+    z-index:210000;
+
     flex-direction: column;
     background: var(--white);
     border-radius: 14px;
