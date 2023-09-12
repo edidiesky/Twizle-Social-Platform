@@ -1,48 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
 import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
 import { LiaRetweetSolid } from 'react-icons/lia'
+import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
+import LikeIcon from '../../../assets/svg/feedcardicons/like';
+import StatIcon from '../../../assets/svg/feedcardicons/stat';
+import ShareIcon from '../../../assets/svg/feedcardicons/share';
+import MessageIcon from '../../../assets/svg/feedcardicons/message';
+import FollowIcon from '../../../assets/svg/dropdownicons/follow';
 
 const postcomments = [
     {
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'its not in js hence unusable',
-        image: "/images/boris-khentov.jpg",
+        image: "https://pbs.twimg.com/profile_images/1678538017898655744/NyiEWy6M_400x400.jpg",
         location: "Agodim",
     },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Its black and white, programs shold be colorful on black',
-        image: "/images/raoul-bhavnani.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Its black and white, programs shold be colorful on black',
-        image: "/images/raoul-bhavnani.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "mhasnneye",
-        username: "mhasnneye",
-        tweet_text: 'Its black and white, programs shold be colorful on black',
-        image: "/images/boris-khentov.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Lamine Mbacke",
-        username: "mhasnneye",
-        tweet_text: 'Its black and white, programs shold be colorful on black',
-        image: "/images/jon-mauney.jpg",
-        location: "Agodim",
-    }
+
 ]
 
 const PostDetailsComments: React.FC = () => {
+    const [drop, setDrop] = useState(false)
+    const [quote, setQuote] = useState(false)
+    const [tweet, setTweet] = useState(false)
+    const [like, setLike] = useState(false)
     return (
         <PostDetailsCommentsStyles className='w-100 flex column '>
             {
@@ -53,15 +36,15 @@ const PostDetailsComments: React.FC = () => {
                             <div className="image_gradient"></div>
                         </div>
 
-                        <div className="flex w-100 column gap-1">
+                        <div className="flex flex-1 column gap-1">
                             <div className="flex item-start justify-space gap-1 w-100 " style={{ gap: ".3rem" }}>
                                 <div className="flex column">
-                                    <h4 className="fs-16 text-bold flex item-center" style={{ gap: '.2rem' }}>
+                                    <h4 className="fs-16 text-bold flex item-center" style={{ gap: '.2rem', fontSize: "15px" }}>
                                         {x.profile_name}
                                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                        <span className="text-light fs-16 text-grey ">@{x.username}</span>
+                                        <span className="text-light fs-14 text-grey ">@{x.username}</span>
                                     </h4>
-                                    <h5 className="fs-16 text-light">{x.tweet_text}</h5>
+                                    <h5 style={{fontSize:"15px"}} className=" text-light">{x.tweet_text}</h5>
                                 </div>
 
                                 <div className="flex item-center justify-end">
@@ -71,32 +54,56 @@ const PostDetailsComments: React.FC = () => {
                                 </div>
 
                             </div>
-                            <div className="flex commenticon justify-space flex-1 item-center w-100 gap-2">
-                                <div className="flex w-100 item-center  text-light feedtags_wrapper">
-                                    <div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
-                                        <div className="icons icon1 flex item-center justify-center">
-                                            <HiOutlineChatBubbleOvalLeft />
+                            <div className="w-100 flex justify-space item-center">
+                               
+                                <div className="flex item-center w-100 auto gap-2">
+                                    <div style={{ marginTop: ".2rem" }} className="flex item-center w-90 auto gap-2">
+                                        <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
+                                            <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center" 
+                                            style={{ gap: ".3rem" }}>
+                                                <div className="icons icon1 flex item-center justify-center">
+                                                    <MessageIcon />
+                                                </div>
+                                                {/* 23 */}
+                                            </div>
+                                            <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                                                <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
+                                                    <div onClick={() => setQuote(false)} className="dropdown_background"></div>
+                                                    <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
+                                                        <li  style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
+                                                            <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
+                                                        <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1">
+                                                            <div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                                    </ul>
+                                                </div>
+                                                <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
+                                                    <RetweetIcon />
+                                                </div>
+                                                {/* 144 */}
+                                            </div>
+                                            <div  className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                                                <div className="icons icon3 flex item-center justify-center">
+                                                    <LikeIcon />
+                                                </div>
+                                                {/* {likes} */}
+                                                {/* 23 */}
+                                            </div>
+                                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                                <div className="icons icon1 flex item-center justify-center">
+                                                    <StatIcon />
+                                                </div>
+                                                {/* 123 */}
+                                            </div>
+                                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                                <div className="icons icon1 flex item-center justify-center">
+                                                    <ShareIcon />
+                                                </div>
+                                                {/* 123 */}
+                                            </div>
                                         </div>
-                                        23
-                                    </div>
-                                    <div className="flex iconwrapper text_2 item-center" style={{ gap: ".3rem" }}>
-                                        <div className="icons icon2 flex item-center justify-center">
-                                            <LiaRetweetSolid fontSize={'24px'} />
-                                        </div>
-                                        144
-                                    </div><div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
-                                        <div className="icons icon1 flex item-center justify-center">
-                                            <HiOutlineChatBubbleOvalLeft />
-                                        </div>
-                                        23
-                                    </div><div className="flex iconwrapper item-center" style={{ gap: ".3rem" }}>
-                                        <div className="icons icon1 flex item-center justify-center">
-                                            <BiBarChart />
-                                        </div>
-                                        123
+
                                     </div>
                                 </div>
-
                             </div>
 
                         </div>
@@ -206,6 +213,158 @@ h5 {
       
     }
     }
+     .dropdownCard {
+        position: absolute;
+
+        right: 2%;
+        top: 8px;
+        z-index: 20;
+        cursor: pointer;
+        width: 370px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        background-color: var(--white);
+        height: 0;
+        transition: all .3s;    
+        opacity:0;
+        visibility: hidden;
+        &.card1 {
+        width: 130px;
+        right: -40%;
+        &.active {
+             @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        }
+        @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        
+   ul {
+
+            li {
+                padding:.7rem 2.4rem;
+            }}
+            &.active {
+            max-height: 130px;
+             height: fit-content;
+            }
+        }
+        @media (max-width:500px) {
+        width: 300px;
+
+        }
+        .dropdown_background {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            z-index: 30;
+            top: 0;
+            left:0;
+            background-color: transparent;
+        }
+        &.active {
+              height: 300px;
+             min-height: fit-content;
+
+            @media (max-width:400px) {
+            width: 310px;
+        height: fit-content;
+
+        }
+            opacity:1;
+                visibility: visible;
+            ul {
+
+            li {
+                padding:1.5rem 2.4rem;
+                opacity:1;
+                visibility: visible;
+                width: 100%;
+                transition: all .4s;
+                border-radius:5px;
+                @media (max-width:400px) {
+                padding:1.7rem 2rem;
+
+                }
+                &:hover {
+                   /* background-color: #f1f1f1; */
+                   background-color: var(--dark-grey-hover);
+
+               }
+            }
+           }
+        }
+        ul {
+            z-index: 35;
+
+li { 
+    padding: 1.4rem;
+    opacity:0;
+    visibility: hidden;
+    width: 100%;
+    &:hover {
+       background-color: #f1f1f1;
+
+   }
+}
+}
+        
+    }
+        .iconwrapper {
+        transition: all .5s;
+        cursor: pointer;
+        color:rgb(113, 118, 123);
+        &:hover {
+            color:rgba(29, 156, 240, 0.835) ;
+            &.text-3 {
+                color:rgba(223, 0, 104, 0.861) ;
+
+            }
+            &.text_2 {
+
+                color:rgba(0, 186, 124, 0.802) ;
+
+            }
+            .icons.icon1 {
+                background-color: rgba(29,155,240,.1);
+                svg {
+                    color:rgba(29, 156, 240, 0.835) ;
+                }
+            }.icons.icon2 {
+                background-color: rgba(0,186,124,.1);
+                svg {
+                    color:rgba(0, 186, 124, 0.802) ;
+                }
+            }
+            .icons.icon3 {
+                background-color: rgba(249,24,128,.1);
+                svg {
+                    color:rgba(223, 0, 104, 0.861) ;
+                }
+            }
+        }
+       .icons {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        transition: all .5s;
+
+        svg {
+            font-size: 20px;
+        }
+    }
+}
     .postCard {
         width: 100%;
     padding: 1.5rem;

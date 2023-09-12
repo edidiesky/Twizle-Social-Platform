@@ -72,7 +72,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
 
                                     </div>
                                     {/* about */}
-                                    <h4 className="fs-16 text-light text-dark">
+                                    <h4 className="fs-15 text-light text-dark">
                                         {tweetDetails?.tweet_user_id?.bio}
                                     </h4>
                                 </div>
