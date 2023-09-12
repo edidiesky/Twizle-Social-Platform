@@ -143,7 +143,7 @@ export const tweetSlice = createSlice({
     // get single tweet slice
 
     builder.addCase(GetSingleTweetDetails.pending, (state, action) => {
-      state.tweetisLoading = true
+      // state.tweetisLoading = true
     })
     builder.addCase(GetSingleTweetDetails.fulfilled, (state, action) => {
       state.tweetisSuccess = true

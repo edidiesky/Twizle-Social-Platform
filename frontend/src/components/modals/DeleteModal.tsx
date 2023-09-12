@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
-  modal?: Boolean;
-  setModal: (value?:Boolean) => void;
+  modal?: boolean;
+  setModal: (value?:boolean) => void;
   handleDeleteTweet:()=> void;
 }
 

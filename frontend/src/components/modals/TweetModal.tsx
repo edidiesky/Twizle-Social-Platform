@@ -11,7 +11,7 @@ import TweetFormSection from "../common/tweetsection";
 type modalType = {
   modal?: Boolean;
   type?: string;
-  setModal: (val: Boolean) => void;
+  setModal: (val: boolean) => void;
 }
 
 const TweetModal: React.FC<modalType> = ({ modal, setModal, type }) => {

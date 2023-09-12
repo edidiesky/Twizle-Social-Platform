@@ -20,16 +20,17 @@ import ShareIcon from '../../assets/svg/feedcardicons/share';
 import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 import DeleteModal from '../modals/DeleteModal';
 import FeedImage from './FeedImage';
+import QuoteModal from '../modals/QuoteModal';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
 
-    const [tweet, setTweet] = useState(false)
-    const [deletemodal, setDeleteModal] = useState(false)
-    const [drop, setDrop] = useState(false)
-    const [quote, setQuote] = useState(false)
-    const [like, setLike] = useState(false)
+    const [tweet, setTweet] = useState<boolean>(false)
+    const [deletemodal, setDeleteModal] = useState<boolean>(false)
+    const [drop, setDrop] = useState<boolean>(false)
+    const [quote, setQuote] = useState<boolean>(false)
+    const [quotemodal, setQuoteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const handleLikeTweet = () => {
 
@@ -49,6 +50,10 @@ const FeedCard = (props: feedcardtype) => {
         setDrop(false)
     }
 
+    const handleQuoteModal = () => {
+        setQuoteModal(true)
+        setDrop(false)
+    }
     return (
         <FeedCardStyles key={props._id}>
             <AnimatePresence
@@ -57,6 +62,14 @@ const FeedCard = (props: feedcardtype) => {
                 onExitComplete={() => null}
             >
                 {deletemodal && <DeleteModal handleDeleteTweet={handleDeleteTweet} modal={deletemodal} setModal={setDeleteModal} />}
+            </AnimatePresence>
+
+            <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+            >
+                {quotemodal && <QuoteModal id={props?._id} modal={quotemodal} setModal={setQuoteModal} />}
             </AnimatePresence>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
@@ -130,7 +143,8 @@ const FeedCard = (props: feedcardtype) => {
                                     <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
                                         <li onClick={handleRepostTweet} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
                                             <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
-                                        <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1"><div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                        <li onClick={handleQuoteModal} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1">
+                                            <div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
                                     </ul>
                                 </div>
                                 <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">

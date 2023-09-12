@@ -13,23 +13,29 @@ import PollIcon from "../../assets/svg/poll";
 import WorldIcon from "../../assets/svg/world";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import UploadImage from "./UploadImage";
-import { CreateTweet } from "../../features/tweet/tweetReducer";
+import { CreateTweet, GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
+import QuoteFeedCard from "./QuoteCard";
 
 type modalType = {
   modal?: boolean;
-  type?: string;
+  id?: string;
   setModal: (val: boolean) => void;
 }
 
-const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
+const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
+  const dispatch = useAppDispatch()
+  const { tweetDetails } = useAppSelector(store => store.tweet)
+
+  React.useEffect(() => {
+    dispatch(GetSingleTweetDetails(id))
+  }, [id])
   const [uploading, setUploading] = useState(false);
   const [alert, setAlert] = useState(false);
-  const dispatch = useAppDispatch()
   const { userInfo } = useAppSelector(store => store.auth)
   const [text, setText] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
 
-  const handleFileUpload = async(e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // get the file
     const file = e.target.files;
     setUploading(true);
@@ -54,10 +60,10 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
       console.log(err);
     }
   };
-  const handlePost = ()=> {
-    dispatch(CreateTweet({ 
-      tweet_image: images, 
-      tweet_text:text,
+  const handlePost = () => {
+    dispatch(CreateTweet({
+      tweet_image: images,
+      tweet_text: text,
       tweet_user_id: {
         _id: userInfo?._id,
         display_name: userInfo?.display_name,
@@ -69,7 +75,7 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
     setModal(false)
   }
   return (
-    <PostModalStyles
+    <QuoteModalStyles
       as={motion.div}
       initial={{ opacity: 0, visibility: "hidden" }}
       exit={{ opacity: 0, visibility: "hidden" }}
@@ -86,7 +92,7 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
       >
         {/* top of the feed */}
         <div className="top w-100 flex column gap-2">
-          <div className="w-90 auto">
+          <div className="w-90 topHeader auto">
             <div onClick={() => setModal(false)} className="icons text-dark flex item-center justify-center">
               <RxCross2 fontSize={'20px'} />
             </div>
@@ -94,8 +100,8 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
 
           <div className="flex w-100 column gap-1">
-            <div className="w-90 auto flex item-start gap-1">
-
+            <div className="w-90  auto flex item-start gap-1">
+              {/* check if the profile image url exists */}
               {
                 userInfo?.profile_image_url ?
                   <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
@@ -105,12 +111,12 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
 
               <div style={{ gap: "6px" }} className="area flex column flex-1 item-start">
                 <div style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="replyBtn1 text-bold">Everyone</div>
-                <textarea 
-                name={"text"}
-                value={text}
-                onChange={(e)=> setText(e.target.value)}
-                
-                placeholder='What is Happening?!' className="text text-light w-100"></textarea>
+                <textarea
+                  name={"text"}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+
+                  placeholder='Add a Comment' className="text text-light w-100"></textarea>
                 <div className="w-100 auto">
                   {
                     uploading && <div className="flex item-center py-2 justify-center">
@@ -125,100 +131,106 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
                   }
 
                 </div>
+                <div className="w-100">
+                  <QuoteFeedCard />
+                </div>
               </div>
             </div>
-            <div className="w-90 auto flex item-start">
-              <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
-                <WorldIcon />
-                <span style={{ color: "rgb(29, 155, 240)", fontSize: "13px" }} className="fs-12 text-bold">Everyone can reply</span>
+            <div className="bottom w-100">
+              <div className="w-90 auto flex item-start">
+                <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
+                  <WorldIcon />
+                  <span style={{ color: "rgb(29, 155, 240)", fontSize: "13px" }} className="fs-12 text-bold">Everyone can reply</span>
+                </div>
+              </div>
+              <div className="flex w-90 auto item-center justify-space">
+                <div className="flex item-center">
+                  <label
+                    htmlFor="upload" className="icons flex item-center justify-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                      multiple
+                      className="w-100"
+                    />
+                    <MediaIcon />
+                  </label>
+                  <label
+                    htmlFor="upload" className="icons flex item-center justify-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                      multiple
+                      className="w-100"
+                    />
+                    <GiIcon />
+                  </label>
+                  <label
+                    htmlFor="upload" className="icons flex item-center justify-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                      multiple
+                      className="w-100"
+                    />
+                    <ScheduleIcon />
+                  </label>
+                  <label
+                    htmlFor="upload" className="icons flex item-center justify-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                      multiple
+                      className="w-100"
+                    />
+                    <PollIcon />
+                  </label>
+                  <label
+                    htmlFor="upload" className="icons flex item-center justify-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                      multiple
+                      className="w-100"
+                    />
+                    <GiIcon />
+                  </label>
+                </div>
+                <div onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
               </div>
             </div>
-            <div className="flex bottom w-90 auto item-center justify-space">
-              <div className="flex item-center">
-                <label
-                  htmlFor="upload" className="icons flex item-center justify-center">
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-100"
-                  />
-                  <MediaIcon />
-                </label> 
-                 <label
-                  htmlFor="upload" className="icons flex item-center justify-center">
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-100"
-                  />
-                  <GiIcon />
-                </label>
-                 <label
-                  htmlFor="upload" className="icons flex item-center justify-center">
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-100"
-                  />
-                  <ScheduleIcon />
-                </label>
-                 <label
-                  htmlFor="upload" className="icons flex item-center justify-center">
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-100"
-                  />
-                  <PollIcon />
-                </label>
-                 <label
-                  htmlFor="upload" className="icons flex item-center justify-center">
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-100"
-                  />
-                  <GiIcon />
-                </label>
-              </div>
-              <div onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
-            </div>
+           
           </div>
         </div>
 
       </motion.div>
-    </PostModalStyles>
+    </QuoteModalStyles>
     // <h2>hello</h2>
   );
 }
-export default PostModal
+export default QuoteModal
 
-const PostModalStyles = styled(motion.div)`
+const QuoteModalStyles = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -228,6 +240,12 @@ const PostModalStyles = styled(motion.div)`
   align-items: start;
   justify-content: center;
   top: 0;
+  overflow: hidden;
+  .top {
+    max-height: 600px;
+    overflow:auto;
+    border-radius: 20px;
+  }
   .replyBtn {
     padding:4px 10px;
     border-radius:20px;
@@ -243,10 +261,24 @@ const PostModalStyles = styled(motion.div)`
       background:rgba(29, 155, 240, 0.1);
     }
   }
+  .topHeader {
+      background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  position:sticky;
+  left:0;
+  top:0;
+    z-index: 3000;
+  }
 .bottom {
     border-top: 1px solid var(--border);
     padding:10px 0;
     padding-bottom:6px;
+      background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  position:sticky;
+  left:0;
+  bottom:0;
+    z-index: 3000;
 }
 .btn.btn-3 {
   background:var(--blue-1);
@@ -307,6 +339,7 @@ const PostModalStyles = styled(motion.div)`
     min-width: 600px;
     display: flex;
     z-index:210000;
+    overflow: hidden;
 
     flex-direction: column;
     background: var(--white);
