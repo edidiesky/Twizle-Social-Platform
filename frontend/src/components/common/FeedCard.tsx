@@ -107,7 +107,7 @@ const FeedCard = (props: feedcardtype) => {
                     </h5>
                     <div className="w-100 wrapper">
                         {
-                            props.tweet_image && <FeedImage images={props.tweet_image} />
+                            props.tweet_image?.length > 0 && <FeedImage images={props.tweet_image} />
                         }
                     </div>
 
