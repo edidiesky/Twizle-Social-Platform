@@ -74,6 +74,22 @@ const GetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) =
 });
 
 
+const GetSingleTweetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) => {
+  // find the tweetand aggregate the tweet data
+  const quote = await QuoteTweet.find({ tweet_id: req.params.id})
+  .populate('tweet_id', 'tweet_image tweet_text')
+    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+
+  // check if the quote exists
+  if (!quote) {
+    res.status(404);
+    throw new Error("These quote does not exists");
+  }
+  res.status(200).json({ quote });
+
+});
+
+
 //PRIVATE
 // User
 const GetSingleUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) => {
@@ -121,5 +137,6 @@ export {
   RePostATweet,
   LikeAndUnlikeAQuote,
   GetUsersQuote,
-  GetSingleUsersQuote
+  GetSingleUsersQuote,
+  GetSingleTweetUsersQuote
 };

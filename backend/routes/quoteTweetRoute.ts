@@ -10,11 +10,13 @@ import {
   LikeAndUnlikeAQuote,
   QuoteATweet,
   RePostATweet,
-  GetSingleUsersQuote
+  GetSingleUsersQuote,
+  GetSingleTweetUsersQuote
 } from "../controllers/quoteTweetControllers";
 
 router.get("", authMiddleware, GetUsersQuote);
 router.route('/like/:id').put(authMiddleware, LikeAndUnlikeAQuote)
+router.route('/tweet/:id').get(authMiddleware, GetSingleTweetUsersQuote)
 router.route('/:id').post(authMiddleware, QuoteATweet).get(authMiddleware, GetSingleUsersQuote)
 router.route('/repost/:id').post(authMiddleware, RePostATweet)
 
