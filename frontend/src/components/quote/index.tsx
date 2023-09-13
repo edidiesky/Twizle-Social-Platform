@@ -12,6 +12,7 @@ import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { useParams } from 'react-router-dom';
 import { GetSingleQuoteTweetDetails } from '../../features/quote/quoteReducer';
+import QuoteFeedCard from './QuoteCard';
 
 type Rightbar = {
     type: String
@@ -25,7 +26,7 @@ const Bookmarks: React.FC = () => {
     const [modal, setModal] = React.useState<Boolean>(false)
 
     const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { quotes, tweetisLoading } = useAppSelector(store => store.quotes)
 
     const dispatch = useAppDispatch()
 
@@ -52,9 +53,9 @@ const Bookmarks: React.FC = () => {
                 <div className="w-100 flex py-2 column">
                    
                     {
-                        bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
+                        quotes?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
                             <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
-                                @{userDetails?.display_name} you have no bookmarks
+                                @{userDetails?.display_name} you have no quotes
 
                                 <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                             </h2>
@@ -63,11 +64,7 @@ const Bookmarks: React.FC = () => {
                                 tweetisLoading ? <div className="flex py-2 w-100 justify-center">
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
                                 </div> : <>
-                                    {
-                                        bookmarks?.map((value: feedcardtype) => {
-                                            return <FeedCard {...value} key={value._id} />
-                                        })
-                                    }
+                                            <QuoteFeedCard/>
                                 </>
                             }
                         </div>

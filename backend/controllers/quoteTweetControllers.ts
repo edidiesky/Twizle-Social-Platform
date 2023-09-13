@@ -78,6 +78,7 @@ const GetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) =
 const GetSingleTweetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) => {
   // find the tweetand aggregate the tweet data
   const quote = await QuoteTweet.find({ tweet_id: req.params.id})
+  .sort("-createdAt")
   .populate('tweet_id', 'tweet_image tweet_text')
     .populate("tweet_user_id", " username bio display_name name profile_image_url").populate("quote_user_id", " username bio display_name name profile_image_url");
 

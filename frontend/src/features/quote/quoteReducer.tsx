@@ -134,7 +134,7 @@ export const DeleteQuote = createAsyncThunk<{
 export const GetSingleQuoteTweetDetails = createAsyncThunk < BookMarkAQuotePayload,{
   rejectValue: KnownError,
 }>(
-  "GetDetails",
+  "GetSingleQuoteTweetDetails",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {

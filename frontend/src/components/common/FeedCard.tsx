@@ -21,10 +21,27 @@ import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 import DeleteModal from '../modals/DeleteModal';
 import FeedImage from './FeedImage';
 import QuoteModal from '../modals/QuoteModal';
+import moment from 'moment';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
+    // const date = moment(props?.createdAt).format('h')
+
+    const createdAt = moment(props?.createdAt);
+    const now = moment();
+    const hoursDifference = now.diff(createdAt, 'hours');
+    const minsDifference = now.diff(createdAt, 'minutes');
+
+    let date;
+    if (hoursDifference < 1) {
+        date = `${minsDifference}min`;
+    }
+    else if (hoursDifference < 24) {
+        date = `${hoursDifference}hr`;
+    } else {
+        date = createdAt.format('MMMD');
+    }
 
     const [tweet, setTweet] = useState<boolean>(false)
     const [deletemodal, setDeleteModal] = useState<boolean>(false)
@@ -110,10 +127,12 @@ const FeedCard = (props: feedcardtype) => {
                 </Link>
 
                 <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex column flex-1" style={{ gap: '.3rem' }}>
-                    <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
+                    <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
                         {props?.tweet_user_id?.display_name}
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                         <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
+                        {/* <span sty></span> */}
+                        <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
                     </h4>
                     <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
                         {props.tweet_text}
@@ -216,6 +235,21 @@ const FeedCardStyles = styled.div`
       position: absolute;
       object-fit: cover;
     }
+    }
+    .date {
+        position: relative;
+        transform: translateX(10px);
+        &::after {
+            width: 2px;
+            content: '';
+            border-radius: 50%;
+            background-color: var(--grey-1);
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            height: 2px;
+            transform: translate(15px,-50%);
+        }
     }
     h5 {
         font-weight: 600;

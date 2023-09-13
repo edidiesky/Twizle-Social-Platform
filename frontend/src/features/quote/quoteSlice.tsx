@@ -106,7 +106,7 @@ export const quoteSlice = createSlice({
 
     })
     builder.addCase(CreateQuote.fulfilled, (state, action) => {
-      state.quotes = [action.payload, ...state.quotes]
+      state.quotes = action.payload
       state.alertText = 'Tweet created succesfully'
       state.showAlert = true
       state.tweetisLoading = false

@@ -14,6 +14,7 @@ export type feedcardtype = {
     image: string;
     location: string;
     profile_name: string;
+    createdAt?: string;
     tweet_user_id:{
         _id:string;
         display_name: string;
