@@ -23,6 +23,14 @@ const UserSchema = new mongoose.Schema(
     followers_count: {
       type: Number,
     },
+    followings: {
+      type: Array,
+      default: []
+    },
+    followers: {
+      type: Array,
+      default: []
+    },
     following_count: {
       type: Number,
     },
