@@ -54,7 +54,8 @@ const QuoteATweet = asyncHandler(async (req: CustomInterface, res: Response) => 
     tweet_user_id: req.user?.userId,
     quote_image,
     quote_text,
-    tweet_id:req.params.id
+    tweet_id:req.params.id,
+    quote_user_id: req.body.quote_user_id
   })
   res.status(200).json({ quote });
 });
@@ -78,7 +79,7 @@ const GetSingleTweetUsersQuote = asyncHandler(async (req: CustomInterface, res: 
   // find the tweetand aggregate the tweet data
   const quote = await QuoteTweet.find({ tweet_id: req.params.id})
   .populate('tweet_id', 'tweet_image tweet_text')
-    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+    .populate("tweet_user_id", " username bio display_name name profile_image_url").populate("quote_user_id", " username bio display_name name profile_image_url");
 
   // check if the quote exists
   if (!quote) {

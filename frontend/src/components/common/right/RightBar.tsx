@@ -79,11 +79,11 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             </div>
                         </div>
                     }
-                    {/* <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
-                            <h3 className="text-extra-bold">Get Verified</h3>
-                            <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features.</h4>
+                    <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
+                        <h3 className="text-extra-bold">Subscribe to Premium</h3>
+                        <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
                             <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
-                        </div> */}
+                        </div>
                     <div className="verfiy_wrapper wrapper2 w-90 auto flex column item-start">
                         <h3 className="text-extra-bold text_dark_grey w-90 auto">
                             Who to follow</h3>
@@ -123,7 +123,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
 
                         </div>
                     </div>
-                    <div className="flex item-center text-dark w-90 auto fs-16 text-light flex-wrap" style={{ gap: "1rem", paddingBottom: "2rem" }}>
+                    <div className="flex item-center text-dark w-90 auto fs-16 text-light flex-wrap" style={{ gap: ".5rem", paddingBottom: "2rem" }}>
                         <h5 className='text-light'>Terms of Service</h5>
                         <h5 className='text-light'>Privacy Policy</h5>
                         <h5 className='text-light'>Cookie Policy</h5>

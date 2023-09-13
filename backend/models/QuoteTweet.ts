@@ -7,6 +7,10 @@ const QuoteTweetSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    quote_user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     tweet_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "UserTweet",

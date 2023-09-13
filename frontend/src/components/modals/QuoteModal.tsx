@@ -67,13 +67,7 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
       quote_image: images,
       quote_text: text,
       _id: tweetDetails?._id,
-      quote_user_id: {
-        _id: userInfo?._id,
-        display_name: userInfo?.display_name,
-        name: userInfo?.name,
-        bio: userInfo?.bio,
-        profile_image_url: userInfo?.profile_image_url,
-      }
+      quote_user_id: tweetDetails?.tweet_user_id?._id,
     }))
     setModal(false)
   }

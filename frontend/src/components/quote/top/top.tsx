@@ -38,7 +38,7 @@ const TopStyles = styled.div`
   z-index: 300;
   /* padding: 1rem 0; */
   backdrop-filter: blur(12px);
-  padding:1rem 0;
+  padding:1.6rem 0;
   border-bottom: 1px solid var(--border);
   /* backdrop-filter: c; */
    .dropdownCard {

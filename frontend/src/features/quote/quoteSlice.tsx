@@ -4,7 +4,7 @@ import {
   // UpdateTweet,
   // getAllTweet,
   // GetSingleTweetDetails,
-  CreateQuote,
+  CreateQuote, GetSingleQuoteTweetDetails,
   // DeleteTweet,
   // LikeAndUnlikeATweet,
   // GetUserTweet,
@@ -125,24 +125,23 @@ export const quoteSlice = createSlice({
 
     // get single tweet slice
 
-    // builder.addCase(GetSingleTweetDetails.pending, (state, action) => {
-    //   // state.tweetisLoading = true
-    // })
-    // builder.addCase(GetSingleTweetDetails.fulfilled, (state, action) => {
-    //   state.tweetisSuccess = true
-    //   state.tweetisLoading = false
-    //   state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
-    //   state.tweetDetails = action.payload.tweetdetails
-    // })
-    // builder.addCase(GetSingleTweetDetails.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
+    builder.addCase(GetSingleQuoteTweetDetails.pending, (state, action) => {
+      // state.tweetisLoading = true
+    })
+    builder.addCase(GetSingleQuoteTweetDetails.fulfilled, (state, action) => {
+      state.tweetisSuccess = true
+      state.tweetisLoading = false
+      state.quotes = action.payload
+    })
+    builder.addCase(GetSingleQuoteTweetDetails.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
 
-    // })
+    })
 
     // DeleteTweet slice
 

@@ -6,14 +6,7 @@ type Quotedatatype = {
   quote_text?: string;
   quote_image?: any;
   _id?: string;
-  quote_user_id: {
-    _id?: string;
-    display_name?: string;
-    name?: string;
-    bio?: string;
-    profile_image_url?: string;
-
-  }
+  quote_user_id?:string;
 }
 
 interface BookMarkAQuotePayload {
@@ -33,7 +26,7 @@ export const getAllQuote = createAsyncThunk<{
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(Quoteurl);
-      localStorage.setItem("Quote", JSON.stringify(response.data.Quote));
+      localStorage.setItem("Quote", JSON.stringify(response.data.quote));
       return response.data.quote;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -138,7 +131,7 @@ export const DeleteQuote = createAsyncThunk<{
 
 
 // GetQuote Details
-export const GetSingleQuoteDetails = createAsyncThunk < BookMarkAQuotePayload,{
+export const GetSingleQuoteTweetDetails = createAsyncThunk < BookMarkAQuotePayload,{
   rejectValue: KnownError,
 }>(
   "GetDetails",
@@ -153,13 +146,10 @@ export const GetSingleQuoteDetails = createAsyncThunk < BookMarkAQuotePayload,{
         },
       };
       const response = await axios.get(
-        `/api/v1/quote/${Detailsdata}`,
+        `/api/v1/quote/tweet/${Detailsdata}`,
         config
       );
-       return {
-        Quotedetails: response.data.Quote,
-        userIdIncludedInBookmarksArray: response.data.userIdIncludedInBookmarksArray
-      };
+      return response.data.quote
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

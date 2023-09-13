@@ -11,7 +11,7 @@ import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
 import { LiaRetweetSolid } from 'react-icons/lia'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { BookMarkATweet, GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import MessageIcon from '../../../assets/svg/feedcardicons/message';
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
@@ -49,21 +49,21 @@ const PostDetailsContent: React.FC = () => {
                         Views
                     </span>
                 </div>
-                <div className="flex bottom w-90 auto item-center gap-2 flex-wrap">
-                    <span className="fs-15 text-grey text-light">
+                <div style={{borderBottom:"1px solid rgba(0,0,0,.1)"}} className="flex w-90 auto item-center gap-2 flex-wrap">
+                    <span className="fs-15 list text-grey text-light">
                         <span className="fs-15 text-bold text-dark">50</span>
                         {" "}
                         Retweets
-                    </span> <span className="fs-15 text-grey text-light">
+                    </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-15 list text-grey text-light">
                         <span className="fs-15 text-bold text-dark">500</span>
                         {" "}
                         Quotes
-                    </span> <span className="fs-15 text-grey text-light">
+                    </Link> <span className="fs-15 list text-grey text-light">
                         <span className="fs-15 text-bold text-dark">5</span>
                         {" "}
                         Likes
                     </span>
-                    <span className="fs-15 text-grey text-light">
+                    <span className="fs-15 list text-grey text-light">
                         <span className="fs-15 text-bold text-dark">15</span>
                         {" "}
                         Bookmarks
@@ -116,7 +116,15 @@ const PostDetailsContentStyles = styled.div`
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
         min-height: 100vh;
+        .list {
+        transition: all .5s;
+        cursor: pointer;
+            padding:15px 6px;
+            &:hover {
+                background-color: rgba(0,0,0,.08);
+            }
 
+        }
         .bottom {
             padding:17px 0;
             border-bottom : 1px solid var(--border);

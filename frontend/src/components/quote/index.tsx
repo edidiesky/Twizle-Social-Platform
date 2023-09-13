@@ -10,12 +10,15 @@ import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import { useParams } from 'react-router-dom';
+import { GetSingleQuoteTweetDetails } from '../../features/quote/quoteReducer';
 
 type Rightbar = {
     type: String
 }
 
 const Bookmarks: React.FC = () => {
+    const {id} = useParams()
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
@@ -27,8 +30,8 @@ const Bookmarks: React.FC = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getAllBookmarkedTweet())
-    }, [])
+        dispatch(GetSingleQuoteTweetDetails(id))
+    }, [id])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
