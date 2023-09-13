@@ -5,6 +5,7 @@ const TweetDetailIndex = lazy(() => import("./TweetDetail"));
 const Auth = lazy(() => import("./Auth"));
 const Profile = lazy(() => import("./Profile"));
 const Bookmarks = lazy(() => import("./Bookmarks"));
+const LogoutIndex = lazy(()=> import('./Logout'))
 const QuoteIndex = lazy(() => import("./Quote"));
 import LayoutIndex from './Layout'
 export {
@@ -14,7 +15,8 @@ export {
     Profile,
     TweetDetailIndex,
     Bookmarks,
-    QuoteIndex
+    QuoteIndex,
+    LogoutIndex
     // SingleIndex,
     // ShopIndex
 }

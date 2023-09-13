@@ -6,7 +6,7 @@ const InputTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
-    border: '1px solid rgb(207, 217, 222)',
+    border: '1px solid var(--border1)',
     fontFamily: "CustomFont_Normal, sans-serif",
 
 
@@ -56,7 +56,7 @@ const AreaTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
-    border: '1px solid rgb(207, 217, 222)',
+    border: '1px solid var(--border1)',
     fontFamily: "CustomFont_Normal, sans-serif",
 
 

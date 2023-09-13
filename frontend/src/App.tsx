@@ -8,6 +8,7 @@ import {
   Profile,
   TweetDetailIndex,
   Bookmarks,
+  LogoutIndex,
   QuoteIndex
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
@@ -19,31 +20,37 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
-          <Route index element={<Suspense fallback={<Preloader/>}>
+          <Route index element={<Suspense fallback={<Preloader />}>
             <ProtectRoute>
               <Home />
             </ProtectRoute>
           </Suspense>
           }
           />
-          <Route path="i/flow/signup" element={<Suspense fallback={<Preloader/>}>
-            <Auth />
+          <Route path="i/flow/signup" element={<Suspense fallback={<Preloader />}>
+            
+             <Auth />
           </Suspense>
           }
           />
           {/* bookmarks route */}
           <Route path="i/bookmarks" element={<Suspense fallback={<Preloader />}>
+            <ProtectRoute>
             <Bookmarks />
+            </ProtectRoute>
           </Suspense>
           }
           />
           <Route path="i/quote/:id" element={<Suspense fallback={<Preloader />}>
+            <ProtectRoute>
             <QuoteIndex />
+            </ProtectRoute>
           </Suspense>
           }
           />
           {/* login route */}
-          <Route path="i/flow/login" element={<Suspense fallback={<Preloader/>}>
+          <Route path="i/flow/login" element={<Suspense fallback={<Preloader />}>
+            
             <Auth />
           </Suspense>
           }
@@ -51,16 +58,29 @@ export default function App() {
 
           {/* user profile route */}
           <Route path=":name" element={<Suspense fallback={<Preloader />}>
+            <ProtectRoute>
             <Profile />
+            </ProtectRoute>
           </Suspense>
           }
-          
+
           />
         </Route>
 
         {/* tweet detail  route */}
         <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
+          <ProtectRoute>
           <TweetDetailIndex />
+          </ProtectRoute>
+        </Suspense>
+        }
+        />
+
+        {/* Logout route */}
+        <Route path="logout" element={<Suspense fallback={<Preloader />}>
+          <ProtectRoute>
+            <LogoutIndex />
+          </ProtectRoute>
         </Suspense>
         }
         />

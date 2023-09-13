@@ -259,7 +259,7 @@ const QuoteModalStyles = styled(motion.div)`
     }
   }
   .topHeader {
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: var(--top1);
   backdrop-filter: blur(12px);
   position:sticky;
   left:0;
@@ -270,7 +270,7 @@ const QuoteModalStyles = styled(motion.div)`
     border-top: 1px solid var(--border);
     padding:10px 0;
     padding-bottom:6px;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: var(--top1);
   backdrop-filter: blur(12px);
   position:sticky;
   left:0;
@@ -344,7 +344,6 @@ const QuoteModalStyles = styled(motion.div)`
     box-shadow:var(--shadow);
 
     position: relative;
-    padding:1rem 0;
     margin-top:2rem;
   }
 `;

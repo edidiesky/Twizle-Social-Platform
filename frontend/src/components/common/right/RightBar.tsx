@@ -286,7 +286,7 @@ const RightSidebarStyles = styled.div`
         gap: 1rem;
 
         &:hover {
-            background-color:rgb(239, 243, 244);
+            background-color:var(--grey-hover1);
         }
     }
     .verfiy_wrapper {

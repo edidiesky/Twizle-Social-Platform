@@ -373,14 +373,16 @@ const DeleteContainer = styled(motion.div)`
   }
 
   .backdrop {
-    background: rgba(0, 0, 0, 0.3);
-
+    background: var(--backdrop);
+    /* z-index: 300; */
     position: absolute;
     height: 100%;
     width: 100%;
   }
   .authtop {
-  background-color: rgba(255, 255, 255, 0.85);
+  /* background-color: rgba(255, 255, 255, 0.85); */
+      background-color: var(--top1);
+
   backdrop-filter: blur(12px);
   position:sticky;
   left:0;
@@ -392,7 +394,7 @@ const DeleteContainer = styled(motion.div)`
     min-width: 600px;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: var(--white);
     border-radius: 20px;
     position: relative;
     box-shadow:var(--shadow);

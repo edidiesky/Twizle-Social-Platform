@@ -20,11 +20,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { GetAllUserProfile } from '../../features/auth/authReducer';
 import LoaderIndex from '../loaders';
 import Moredropdown from './moredropdown';
+import Logoutdropdown from './logoutdropdown';
 
 
 const LeftSidebarIndex = () => {
     const [tweet, setTweet] = useState<boolean>(false)
     const [drop, setDrop] = useState<boolean>(false)
+    const [logout, setLogOut] = useState<boolean>(false)
     const { userInfo, userDetails } = useAppSelector(store => store.auth)
     const { tweetisLoading } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
@@ -125,8 +127,11 @@ const LeftSidebarIndex = () => {
                             <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
                         </div>
                     </div>
-                    <div className="w-85 auto">
-                        <div style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
+                    <div className="w-85 relative auto">
+                        {
+                            logout && <Logoutdropdown setDrop={setLogOut} />
+                        }
+                        <div onClick={()=> setLogOut(true)} style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
                             {
                                 userInfo?.profile_image_url ?
                                     <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
@@ -235,13 +240,13 @@ const LeftSidebarStyles = styled.div`
     .profilewrapper {
  border-radius: 40px;
   text-align: center;
-  padding:1.5rem 1rem;
+  padding:1.5rem .5rem;
   gap:2px;
   margin-bottom: 1.5rem;
   cursor: pointer;
   .avatar {
-        width: 4.5rem !important;
-        height: 4.5rem !important;
+        width: 4rem !important;
+        height: 4rem !important;
         border-radius: 50%;
         object-fit: cover;
     

@@ -84,7 +84,16 @@ export const authSlice = createSlice({
       state.showAlert = false
       state.alertType = ''
     },
+    ClearUserInfo: (state, action) => {
+      localStorage.removeItem("Usertoken");
+      localStorage.removeItem("User");
+      state.isLoading = false;
+      state.alertType = "";
+      state.showAlert = false;
+      state.alertText = "";
+    },
   },
+ 
   extraReducers: (builder) => {
     // registration build case
     builder.addCase(registerUser.pending, (state, action) => {
@@ -219,7 +228,7 @@ export const authSlice = createSlice({
   },
 })
 
-export const { clearUserProfile } = authSlice.actions
+export const { clearUserProfile, ClearUserInfo } = authSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.auth.value

@@ -45,15 +45,18 @@
   --grey-2: #f7f7f9;
   --white: #fff;
   --border: rgba(0, 0, 0, 0.06);
+  --border1: rgba(207, 217, 222,.9);
   --dark-grey: rgb(15, 20, 25);
   --top: rgba(255, 255, 255, 0.65);
+  --top1: rgba(255, 255, 255, 0.65);
   --dark-grey-hover: #f9f9f9d3;
   --grey-hover: rgba(15, 20, 25, 0.1);
+  --grey-hover1: rgb(239, 243, 244);
   --backdrop: rgba(0, 0, 0, 0.5);
   --red:rgb(244, 33, 46);
   --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }
-/* :root {
+:root {
   --white: rgb(0, 0, 0);
   --grey-3:#eff3f4;
 
@@ -61,13 +64,16 @@
   --dark-grey: #eff3f4;
   --dark-grey-hover: #f9f9f90f;
   --grey-hover: #f9f9f90f;
+  --grey-hover1: #f9f9f90b;
   --grey-2: #202327;
   --grey-1: rgb(113, 118, 123);
   --border: rgba(255, 255, 255, 0.1);
+  --border1: rgba(255, 255, 255, 0.2);
   --top:rgba(0, 0, 0, 0.65);
-  --backdrop:(0, 0, 0, 0.65);
-  --shadow:0 3px 10px rgba(255,255,255,.3);
-} */
+  --top1:rgba(0, 0, 0, 0.65);
+  --backdrop:rgba(49,59,69,.6);
+  --shadow:rgba(101, 119, 134, 0.056) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;;
+}
 
 body {
   margin: 0;
