@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
+import { FollowAndUnFollowAUser, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -14,6 +14,7 @@ interface authState {
   registerisLoading?: Boolean,
   registerisSuccess?: Boolean,
   registerisError?: Boolean,
+  usertoBefollowedInFllowingsArray?: boolean,
 
   loginisLoading?: Boolean,
   loginisSuccess?: Boolean,
@@ -35,6 +36,8 @@ const initialState: authState = {
   userInfo: userData ? userData : "",
   userDetails: null,
   users: [],
+  usertoBefollowedInFllowingsArray: false,
+
   token: userToken ? userToken : "",
 
   registerisLoading: false,
@@ -138,9 +141,7 @@ export const authSlice = createSlice({
       state.alertText = 'Profile Update succesfully'
       state.showAlert = true
       state.alertType = 'success'
-
       localStorage.setItem("User", JSON.stringify(action.payload));
-
     })
     builder.addCase(UpdateProfile.rejected, (state, action) => {
       state.userprofileisSuccess = false
@@ -149,7 +150,6 @@ export const authSlice = createSlice({
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload
-
     })
 
     builder.addCase(GetUserProfile.pending, (state, action) => {
@@ -171,7 +171,6 @@ export const authSlice = createSlice({
 
     })
 
-
     builder.addCase(GetAllUserProfile.pending, (state, action) => {
       state.userprofileisLoading = true
     })
@@ -182,6 +181,33 @@ export const authSlice = createSlice({
 
     })
     builder.addCase(GetAllUserProfile.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.userprofileisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+
+    builder.addCase(FollowAndUnFollowAUser.pending, (state, action) => {
+      // state.userprofileisLoading = true
+    })
+    builder.addCase(FollowAndUnFollowAUser.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      // state.userprofileisLoading = false
+      localStorage.setItem("User", JSON.stringify(action.payload.userInfo));
+
+      state.users = action.payload.user
+      state.userInfo = action.payload.userInfo
+      state.usertoBefollowedInFllowingsArray = action.payload.usertoBefollowedInFllowingsArray
+      state.alertText = 'Profile Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+
+    })
+    builder.addCase(FollowAndUnFollowAUser.rejected, (state, action) => {
       state.userprofileisSuccess = false
       state.userprofileisError = true
       state.userprofileisLoading = false

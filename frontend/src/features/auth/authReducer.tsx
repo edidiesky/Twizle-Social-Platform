@@ -9,31 +9,40 @@ type RegisterData = {
   email?: string;
   password?: string;
   display_name?: string;
+  usertoBefollowedInFllowingsArray?:boolean;
+  user?: any;
+  userInfo?: any;
+  token?: any;
   _id?: string;
   image?: string;
   location?: string;
-  profile_image_url?:string;
-  website?:string;
-  profession?: string;
+  profile_image_url?: string;
+  website?: string;
+  profession?: string;  
+  followings?: string[];
+  followers?: string[];
   profile_banners?: string;
-  bio?:string;
+  bio?: string;
 }
 
 type KnownError = {
   errorMessage: string;
 }
 
-export const registerUser = createAsyncThunk<{
+export const registerUser = createAsyncThunk<RegisterData, {
   rejectValue: KnownError,
 
-}, RegisterData>(
+}>(
   "registerUser",
   async (registerData, { rejectWithValue }) => {
     try {
       const response = await axios.post(Registerurl, registerData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data;
+      return {
+        token: response.data.token,
+        user: response.data.user
+      }
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -44,9 +53,9 @@ export const registerUser = createAsyncThunk<{
   }
 );
 
-export const loginUser = createAsyncThunk<{
+export const loginUser = createAsyncThunk<RegisterData, {
   rejectValue: KnownError,
-}, RegisterData>(
+}>(
   "loginUser",
   async (loginData, { rejectWithValue }) => {
     try {
@@ -54,7 +63,10 @@ export const loginUser = createAsyncThunk<{
       const response = await axios.post(Loginurl, loginData);
       localStorage.setItem("User", JSON.stringify(response.data.user));
       localStorage.setItem("Usertoken", response.data.token);
-      return response.data;
+      return {
+        token: response.data.token,
+        user: response.data.user
+      }
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -75,7 +87,7 @@ export const UpdateProfile = createAsyncThunk<{
   async (profiledata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { userInfo: {_id:string}, token: string } };
+      const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
       // console.log(auth.token)
       // console.log(profiledata?._id)
       const config = {
@@ -110,7 +122,7 @@ export const GetUserProfile = createAsyncThunk<{
 
     try {
       const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -131,6 +143,46 @@ export const GetUserProfile = createAsyncThunk<{
     }
   }
 );
+
+export const FollowAndUnFollowAUser = createAsyncThunk < RegisterData,{
+  rejectValue: KnownError,
+}>(
+  "FollowAndUnFollowAUser",
+  async (profiledata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.put(
+        `/api/v1/user/follow/${profiledata}`,
+        null,
+        config
+      );
+      const response2 = await axios.get(
+        `/api/v1/user`,
+        config
+      )
+      return {
+        user: response2.data.user,
+        usertoBefollowedInFllowingsArray: response.data.usertoBefollowedInFllowingsArray,
+        userInfo: response.data.updateUsers
+      };
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
 
 
 // Getuser profile

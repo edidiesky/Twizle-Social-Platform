@@ -5,7 +5,7 @@ import { chatData } from '../../../data/chatData';
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { GetAllUserProfile } from '../../../features/auth/authReducer';
+import { FollowAndUnFollowAUser, GetAllUserProfile } from '../../../features/auth/authReducer';
 import { CircularProgress } from '@mui/material';
 type Rightbar = {
     types?: String
@@ -19,12 +19,16 @@ const images = [
 
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
-    const { users, userprofileisLoading } = useAppSelector(store => store.auth)
+    const { users, userprofileisLoading, userInfo, usertoBefollowedInFllowingsArray } = useAppSelector(store => store.auth)
     const dispatch = useDispatch()
 
     React.useEffect(() => {
         dispatch(GetAllUserProfile())
     }, [])
+
+    const handleFollowUser = (id: string) => {
+        dispatch(FollowAndUnFollowAUser(id))
+    }
 
     return (
         <RightSidebarStyles>
@@ -82,8 +86,8 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                     <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
                         <h3 className="text-extra-bold">Subscribe to Premium</h3>
                         <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
-                            <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
-                        </div>
+                        <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
+                    </div>
                     <div className="verfiy_wrapper wrapper2 w-90 auto flex column item-start">
                         <h3 className="text-extra-bold text_dark_grey w-90 auto">
                             Who to follow</h3>
@@ -94,6 +98,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                 </div> : <>
                                     {
                                         users?.slice(1, 4).map((x, index) => {
+                                            const active = userInfo?.followings?.includes(x?._id)
                                             return <div key={index} className="w-100 list flex item-center justify-space">
                                                 <div className="flex item-center gap-1">
                                                     <Link to={`/${x?.name}`} className="image_wrapper">
@@ -113,7 +118,16 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                                         </span>
                                                     </h4>
                                                 </div>
-                                                <div className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
+                                                <div onClick={() => handleFollowUser(x?._id)}
+                                                    className={`btn ${active && `active`} text-extra-bold btn-3 fs-14 text-white`}>
+
+                                                    {
+                                                        active ? <span className="following">Following</span> : "Follow"
+                                                    }
+                                                    {
+                                                        active && <span className="unfollow">UnFollow</span>
+                                                    }
+                                                </div>
 
                                             </div>
                                         })
@@ -243,8 +257,28 @@ const RightSidebarStyles = styled.div`
     h3 {
         font-size: 20px;
     }
-    .btn-3 {
-        padding: 1rem 2rem;
+    .btn.btn-3 {
+        padding: .7rem 1.5rem;
+        &.active {
+            background-color: transparent !important;
+            color: var(--dark-1) !important;
+            border: 1px solid var(--border) !important;
+            &:hover {
+            border: 1px solid var(--red) !important;
+            background-color: #ffe7e7fa !important;
+
+                .unfollow {
+                display: block;
+            }
+            .following {
+                display: none;
+            }
+            }
+            .unfollow {
+                display: none;
+                color: var(--red);
+            }
+        }
     }
     .list {
         padding:.8rem 2rem;
