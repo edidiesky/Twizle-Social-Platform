@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useAppSelector } from "../hooks/reduxtoolkit";
 
 interface LayoutProps {
@@ -8,7 +7,8 @@ interface LayoutProps {
 }
 const ProtectRoute: React.FC<LayoutProps> = ({ children }) => {
   // const navigate = useNavigate()
-  const { registerisLoading, registerisSuccess, userInfo } = useAppSelector(store => store.auth)
+  const {userInfo } = useAppSelector(store => store.auth)
+  // protect the home page and other routes
   if (!userInfo) {
     return <Navigate to="/i/flow/login" />;
   }

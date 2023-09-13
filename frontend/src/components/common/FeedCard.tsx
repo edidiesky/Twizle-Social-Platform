@@ -159,11 +159,11 @@ const FeedCard = (props: feedcardtype) => {
                             <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
                                 <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
                                     <div onClick={() => setQuote(false)} className="dropdown_background"></div>
-                                    <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
-                                        <li onClick={handleRepostTweet} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
-                                            <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
-                                        <li onClick={handleQuoteModal} style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1">
-                                            <div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                    <ul className="flex column w-100 text-bold">
+                                        <li style={{gap:"10px"}} onClick={handleRepostTweet} className="flex fs-15 text-dark text-extra-bold justify-center item-center">
+                                            <div className=" flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
+                                        <li style={{gap:"10px"}} onClick={handleQuoteModal}  className="flex fs-15 text-dark text-extra-bold justify-center item-center">
+                                            <div className=" flex item-center justify-center"><FollowIcon /></div>Quote </li>
                                     </ul>
                                 </div>
                                 <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
@@ -269,15 +269,24 @@ const FeedCardStyles = styled.div`
         cursor: pointer;
         width: 370px;
         border-radius: 10px;
-        box-shadow: var(--shadow);
+        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
         background-color: var(--white);
         height: 0;
         transition: all .3s;    
         opacity:0;
         visibility: hidden;
         &.card1 {
-        width: 130px;
+        width: 110px;
         right: -40%;
+        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+        &.active {
+            ul {
+            li {
+                padding:1.2rem 1rem;
+            }
+        }
+        }
+       
         &.active {
              @media (max-width:500px)  {
             width: 130px;
@@ -356,7 +365,7 @@ const FeedCardStyles = styled.div`
             z-index: 35;
 
 li { 
-    padding: 1.4rem;
+    padding: 1.2rem;
     opacity:0;
     visibility: hidden;
     width: 100%;

@@ -11,10 +11,6 @@ import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 
-type Rightbar = {
-    type: String
-}
-
 const Bookmarks: React.FC = () => {
     const [tab, setTab] = useState(0)
     const feed = false
@@ -33,16 +29,6 @@ const Bookmarks: React.FC = () => {
         <ProfileStyles>
             {/* top bar of user profile */}
             <LeftSidebarIndex />
-            {/* control the update modal */}
-            <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
-            >
-                {
-                    modal && <AuthModal modal={modal} setModal={setModal} />
-                }
-            </AnimatePresence>
             <div className="flex flex-1 wraps column ">
                 <Top />
                
@@ -72,7 +58,7 @@ const Bookmarks: React.FC = () => {
 
                 </div>
             </div>
-            <RightSidebarIndex types={'profile'} />
+            <RightSidebarIndex />
             {/* User feeds */}
         </ProfileStyles>
     )

@@ -72,7 +72,7 @@ const Bookmarks: React.FC = () => {
 
                 </div>
             </div>
-            <RightSidebarIndex types={'profile'} />
+            <RightSidebarIndex/>
             {/* User feeds */}
         </ProfileStyles>
     )
