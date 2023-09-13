@@ -17,17 +17,22 @@ import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
 import BookmarkIcon from '../../../assets/svg/feedcardicons/bookmark';
+import { GetSingleQuoteTweetDetails } from '../../../features/quote/quoteReducer';
 
 
 const PostDetailsContent: React.FC = () => {
     const {id} = useParams()
     const [bookmark, setBookMark] = useState<boolean>(false)
-    const { tweets, tweetDetails, isBookMarked } = useAppSelector(store=> store.tweet)
+    const { tweets, tweetDetails, isBookMarked } = useAppSelector(store => store.tweet)
+    const { quotes } = useAppSelector(store => store.quotes)
     console.log(isBookMarked)
     
     const dispatch = useAppDispatch()
     React.useEffect(()=> {
         dispatch(GetSingleTweetDetails(id))
+    }, [id])
+    React.useEffect(() => {
+        dispatch(GetSingleQuoteTweetDetails(id))
     }, [id])
     const handleBookMark=()=> {
         setBookMark(!bookmark)
@@ -55,7 +60,7 @@ const PostDetailsContent: React.FC = () => {
                         {" "}
                         Retweets
                     </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-15 list text-grey text-light">
-                        <span className="fs-15 text-bold text-dark">500</span>
+                        <span className="fs-15 text-bold text-dark">{quotes?.length}</span>
                         {" "}
                         Quotes
                     </Link> <span className="fs-15 list text-grey text-light">
