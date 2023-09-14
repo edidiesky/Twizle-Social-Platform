@@ -128,9 +128,12 @@ const FeedCard = (props: feedcardtype) => {
 
                 <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex column flex-1" style={{ gap: '.3rem' }}>
                     <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                        {props?.tweet_user_id?.display_name}
-                        <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                        <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.tweet_user_id?.name}</span>
+                        <div className="tweet_user flex item-cener">
+                            {props?.tweet_user_id?.display_name}
+                            <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                            <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@{props?.tweet_user_id?.name}</span>
+                        </div>
+                       
                         {/* <span sty></span> */}
                         <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
                     </h4>
@@ -208,6 +211,22 @@ const FeedCardStyles = styled.div`
     border-bottom: 1px solid var(--border);
     &:hover {
         background-color: var(--dark-grey-hover);
+    }
+    .tweet_user {
+        overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* max-width: 250px; */
+  @media (max-width:580px) {
+    max-width: 290px;
+  }
+  @media (max-width:500px) {
+    max-width: 180px;
+  }
+   @media (max-width:380px) {
+    max-width: 150px;
+  }
+  
     }
      .image_wrapper {
       width:5rem;

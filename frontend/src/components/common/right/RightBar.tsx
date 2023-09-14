@@ -34,8 +34,9 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
         <RightSidebarStyles>
             <div className="wrapper w-100 flex column">
                 <Search />
+                
                 <div className="w-90 auto flex column gap-2">
-                    {
+                    {/* {
                         types === 'profile' && <div className="image_wrappers w-90 auto">
                             {
                                 images.map((x, index) => {
@@ -43,7 +44,12 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                 })
                             }
                         </div>
-                    }
+                    } */}
+                    <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
+                        <h3 className="text-extra-bold">Subscribe to Premium</h3>
+                        <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
+                        <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
+                    </div>
                     {
                         types === 'feeddetails' &&
                         <div className="feed_participant w-90 auto flex column gap-2">
@@ -83,11 +89,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             </div>
                         </div>
                     }
-                    <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
-                        <h3 className="text-extra-bold">Subscribe to Premium</h3>
-                        <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
-                        <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
-                    </div>
+                 
                     <div className="verfiy_wrapper wrapper2 w-90 auto flex column item-start">
                         <h3 className="text-extra-bold text_dark_grey w-90 auto">
                             Who to follow</h3>
