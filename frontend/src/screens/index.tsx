@@ -8,6 +8,8 @@ const Bookmarks = lazy(() => import("./Bookmarks"));
 const LogoutIndex = lazy(()=> import('./Logout'))
 const QuoteIndex = lazy(() => import("./Quote"));
 const MessageIndex = lazy(() => import('./Message'))
+const MessageList = lazy(() => import('../components/messages/list'))
+const MessageContent = lazy(() => import('../components/messages/content'))
 import LayoutIndex from './Layout'
 export {
     Home,
@@ -18,6 +20,9 @@ export {
     Bookmarks,
     QuoteIndex,
     LogoutIndex,
-    MessageIndex
+    MessageIndex,
+    MessageList,
+    MessageContent
+
     // ShopIndex
 }

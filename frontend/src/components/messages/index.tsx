@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import LeftSidebarIndex from '../common/LeftSidebar';
-import Content from './content/Content';
-
 const Message: React.FC = () => {
     return (
         <HomeStyles>
-            <LeftSidebarIndex />
-            <Content/>
+          {/* <Content/> */}
         </HomeStyles>
     )
 }

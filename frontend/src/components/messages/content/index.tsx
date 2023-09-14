@@ -171,12 +171,12 @@ const converstionData = [
 ];
 
 
-const ChatContent: React.FC = () => {
+const MessageContent: React.FC = () => {
   const [message, setMessage] = useState(false)
   return (
     <ChatContentStyles className='flex rightwrapper column gap-4 item-center justify-center'>
       <div className="chatWrapper w-100">
-        <Link href={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
+        <Link to={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
           <div className="flex column gap-1 item-center justify-center w-100">
             <div className="image_wrapper">
               <div className="image_gradient"></div>
@@ -382,4 +382,4 @@ height: 100vh;
   }
   `
 
-export default ChatContent
+export default MessageContent

@@ -60,12 +60,12 @@ const LeftContent: React.FC = () => {
                                         <div className="image_gradient"></div>
                                     </div>
                                     <div className="flex flex-1 column " style={{ gap: ".1rem" }}>
-                                        <h4 className="fs-16 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
+                                        <h4 className="fs-15 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
                                             {x.profile_name}
                                             <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                            <span className="text-light fs-16 text-grey ">@{x.username}</span>
+                                            <span className="text-light fs-14 text-grey ">@{x.username}</span>
                                         </h4>
-                                        <h5 className="fs-16 text-light text-grey">{x.tweet_text}</h5>
+                                        <h5 className="fs-15 text-light text-grey">{x.tweet_text}</h5>
 
                                     </div>
                                 </div>
@@ -110,8 +110,8 @@ const LeftContentStyles = styled.div`
     }
 
     .image_wrapper {
-      width:5rem;
-      height:5rem;
+      width:4rem;
+      height:4rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
@@ -156,7 +156,7 @@ const LeftContentStyles = styled.div`
         }
         .messageCard {
         width: 100%;
-    padding:1rem 1.5rem;
+    padding:1rem 2rem;
     &:hover {
         /* background-color: #f1f1f1; */
         background-color: var(--dark-grey-hover);
@@ -180,7 +180,7 @@ position: sticky;
             font-size: 20px;
         }
     }
-}
+
 
   `
 

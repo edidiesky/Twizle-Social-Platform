@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ChatContent from './chat';
-
-const RightContent: React.FC = () => {
-    const [message, setMessage] = useState(true)
+const ListContent: React.FC = () => {
     return (
-        <RightContentStyles className='flex item-center justify-center'>
-            {
-                !message ? <ChatContent /> : <div className="rightwrapper flex item-center justify-center column gap-1">
+        <ListStyles>
+            
+            <div className="rightwrapper flex item-center justify-center column gap-1">
                     <div className="flex column header gap-1 auto">
                         <h3 className="fs-35 text-extra-bold">Select a message
                             <span className="text-light py-2 block fs-16 text-grey">Choose from your existing conversations, start a new one, or just keep swimming.</span>
@@ -17,12 +14,12 @@ const RightContent: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            }
-        </RightContentStyles>
+            
+        </ListStyles>
     )
 }
 
-const RightContentStyles = styled.div`
+const ListStyles = styled.div`
         flex:1;
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
@@ -42,4 +39,4 @@ const RightContentStyles = styled.div`
   
   `
 
-export default RightContent
+export default ListContent

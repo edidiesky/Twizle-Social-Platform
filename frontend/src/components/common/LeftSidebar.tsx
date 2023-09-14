@@ -51,7 +51,7 @@ const LeftSidebarIndex = () => {
 
         }, {
             title: "Messages",
-            path: '/conversation',
+            path: '/messages',
             icon: <MessageIcon />
 
         }, {
