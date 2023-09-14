@@ -13,41 +13,6 @@ const messagecomments = [
         location: "Agodim",
     },
     {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a link',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
         profile_name: "mhasnneye",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
@@ -66,17 +31,20 @@ const messagecomments = [
 const LeftContent: React.FC = () => {
     return (
         <LeftContentStyles>
-            <div className="flex wrapper column py-1 w-100 column gap-2">
-                <div className="top w-90 auto flex item-center justify-space">
-                    <h3 className="fs-20 text-bold text-dark">Messages</h3>
-                    <div className="flex item-center justify-end">
-                        <div className="icons flex item-center justify-center">
-                            <FiSettings fontSize={'20px'} color='var(--dark-1)' />
-                        </div>
-                        <div className="icons flex item-center justify-center">
-                            <LuMailPlus fontSize={'20px'} color='var(--dark-1)' />
+            <div className="flex column w-100 column gap-2">
+                <div className="top1 w-100 auto ">
+                    <div className="w-90 auto flex item-center justify-space">
+                        <h3 className="fs-20 text-bold text-dark">Messages</h3>
+                        <div className="flex item-center justify-end">
+                            <div className="icons flex item-center justify-center">
+                                <FiSettings fontSize={'20px'} color='var(--dark-1)' />
+                            </div>
+                            <div className="icons flex item-center justify-center">
+                                <LuMailPlus fontSize={'20px'} color='var(--dark-1)' />
+                            </div>
                         </div>
                     </div>
+                 
                 </div>
                 <div className="search w-90 auto flex item-center justify-center gap-1">
                     <GoSearch fontSize={'20px'} color='var(--grey-1)' />
@@ -98,7 +66,7 @@ const LeftContent: React.FC = () => {
                                             <span className="text-light fs-16 text-grey ">@{x.username}</span>
                                         </h4>
                                         <h5 className="fs-16 text-light text-grey">{x.tweet_text}</h5>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -119,8 +87,6 @@ const LeftContentStyles = styled.div`
         cursor: pointer;
         flex:1;
         .wrapper {
-        overflow:auto;
-        height: 100%;
         }
         &:hover {
             color:rgba(29, 156, 240, 0.835) ;
@@ -141,17 +107,8 @@ const LeftContentStyles = styled.div`
                 }
             }
         }
-       .icons {
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50%;
-        transition: all .5s;
-
-        svg {
-            font-size: 20px;
-        }
     }
-}
+
     .image_wrapper {
       width:5rem;
       height:5rem;
@@ -205,6 +162,25 @@ const LeftContentStyles = styled.div`
         background-color: var(--dark-grey-hover);
     }
     }
+            .top1 {
+position: sticky;
+  top: 0;
+  background-color: var(--top);
+  z-index: 3000;
+  padding: 1rem 0;
+  backdrop-filter: blur(12px);
+        }
+       .icons {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        transition: all .5s;
+
+        svg {
+            font-size: 20px;
+        }
+    }
+}
 
   `
 
