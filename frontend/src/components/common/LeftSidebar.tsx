@@ -21,6 +21,7 @@ import { GetAllUserProfile } from '../../features/auth/authReducer';
 import LoaderIndex from '../loaders';
 import Moredropdown from './moredropdown';
 import Logoutdropdown from './logoutdropdown';
+import TwitterIcon from '../../assets/svg/twitter';
 
 
 const LeftSidebarIndex = () => {
@@ -98,7 +99,7 @@ const LeftSidebarIndex = () => {
                         <div className="flex w-100 column">
                             <div className="flex top w-100">
                                 <Link to={'/'} className="icon flex item-center justify-center">
-                                    <BsTwitter fontSize={'30px'} color='var(--blue-1)' />
+                                    <TwitterIcon type={'small'}/>
                                 </Link>
                             </div>
                             <ul className="flex w-100 column item-start">
@@ -204,7 +205,7 @@ const LeftSidebarStyles = styled.div`
     li {
   border-radius: 40px;
   text-align: center;
-  padding: 1.2rem 1rem;
+  padding: 1.15rem 1rem;
   padding-right: 2rem;
   font-size: 20px;
   @media (max-width:1180px) {

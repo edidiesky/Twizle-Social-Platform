@@ -10,7 +10,7 @@ type propTypes = {
 const Logoutdropdown: React.FC<propTypes> = ({ setDrop }) => {
     const { userInfo } = useAppSelector(store => store.auth)
 
-    return <Dropdown className="dropdown flex column">
+    return <Dropdown className="flex column">
         <div onClick={() => setDrop(false)} className="dropdown_background"></div>
         <ul className="flex drop w-100 column">
             <li onClick={() => setDrop(false)} className="fs-15 text-bold text-dark w-100 flex item-center justify-space">

@@ -113,7 +113,7 @@ const ProfileBottomStyles = styled.div`
   padding: 1rem 2rem;
   font-size:15px;
   transition: all .4s;
-  border:1px solid rgb(207, 217, 222);
+  border:1px solid var(--border1);
     cursor: pointer;
 
   &.followbtn {
