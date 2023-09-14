@@ -4,12 +4,13 @@ import "./index.css";
 import {
   Auth,
   Home,
-  LayoutIndex,
   Profile,
   TweetDetailIndex,
   Bookmarks,
   LogoutIndex,
-  QuoteIndex
+  QuoteIndex,
+  LayoutIndex,
+  MessageIndex
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -71,6 +72,14 @@ export default function App() {
         <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
           <ProtectRoute>
           <TweetDetailIndex />
+          </ProtectRoute>
+        </Suspense>
+        }
+        />
+        {/* messages routes */}
+        <Route path="messages" element={<Suspense fallback={<Preloader />}>
+          <ProtectRoute>
+            <MessageIndex />
           </ProtectRoute>
         </Suspense>
         }

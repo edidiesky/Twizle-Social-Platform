@@ -231,6 +231,7 @@ const PostModalStyles = styled(motion.div)`
   .replyBtn {
     padding:4px 10px;
     border-radius:20px;
+      background:rgba(29, 155, 240, 0.1);
     &:hover {
       background:rgba(29, 155, 240, 0.1);
     }
@@ -239,6 +240,8 @@ const PostModalStyles = styled(motion.div)`
     padding:2px 15px;
     border-radius:20px;
     border:1px solid rgba(0,0,0,.4);
+      background:rgba(29, 155, 240, 0.1);
+
     &:hover {
       background:rgba(29, 155, 240, 0.1);
     }

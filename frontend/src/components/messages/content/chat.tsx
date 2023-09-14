@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import {Link} from 'react-router-dom';
 import React, { useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";

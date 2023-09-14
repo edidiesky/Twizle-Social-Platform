@@ -7,10 +7,10 @@ const RightContent: React.FC = () => {
     return (
         <RightContentStyles className='flex item-center justify-center'>
             {
-                message ? <ChatContent /> : <div className="rightwrapper flex item-center justify-center column gap-1">
-                    <div className="flex column header gap-2 auto">
-                        <h3 className="fs-40 text-extra-bold">Select a message
-                            <span className="text-light block fs-16 text-grey">Choose from your existing conversations, start a new one, or just keep swimming.</span>
+                !message ? <ChatContent /> : <div className="rightwrapper flex item-center justify-center column gap-1">
+                    <div className="flex column header gap-1 auto">
+                        <h3 className="fs-35 text-extra-bold">Select a message
+                            <span className="text-light py-2 block fs-16 text-grey">Choose from your existing conversations, start a new one, or just keep swimming.</span>
                         </h3>
                         <div className="w-100 flex item-start">
                             <div className="btn btn-1 fs-16 text-white text-bold">New Messages</div>
@@ -26,7 +26,7 @@ const RightContentStyles = styled.div`
         flex:1;
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
-        min-height: 100vh;
+        height: 100vh;
         overflow:auto;
        
         .rightwrapper {

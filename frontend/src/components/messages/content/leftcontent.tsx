@@ -9,28 +9,49 @@ const messagecomments = [
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'Sent a link',
-        image: "/images/boris-khentov.jpg",
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
         location: "Agodim",
     },
     {
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
-        image: "/images/raoul-bhavnani.jpg",
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
         location: "Agodim",
     },
     {
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
-        image: "/images/raoul-bhavnani.jpg",
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
+        location: "Agodim",
+    },
+    {
+        profile_name: "Blair Dulder CPA™",
+        username: "mhasnneye",
+        tweet_text: 'Sent a link',
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
+        location: "Agodim",
+    },
+    {
+        profile_name: "Blair Dulder CPA™",
+        username: "mhasnneye",
+        tweet_text: 'Sent a tweet',
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
+        location: "Agodim",
+    },
+    {
+        profile_name: "Blair Dulder CPA™",
+        username: "mhasnneye",
+        tweet_text: 'Sent a tweet',
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
         location: "Agodim",
     },
     {
         profile_name: "mhasnneye",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
-        image: "/images/boris-khentov.jpg",
+        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
         location: "Agodim",
     },
     {
@@ -45,7 +66,7 @@ const messagecomments = [
 const LeftContent: React.FC = () => {
     return (
         <LeftContentStyles>
-            <div className="flex column py-1 w-100 column gap-2">
+            <div className="flex wrapper column py-1 w-100 column gap-2">
                 <div className="top w-90 auto flex item-center justify-space">
                     <h3 className="fs-20 text-bold text-dark">Messages</h3>
                     <div className="flex item-center justify-end">
@@ -91,12 +112,16 @@ const LeftContent: React.FC = () => {
 
 const LeftContentStyles = styled.div`
         flex:0 0 390px;
-        overflow:hidden;
-        max-height: 100vh;
+        overflow:auto;
+        height: 100vh;
         .iconwrapper {
         transition: all .5s;
         cursor: pointer;
         flex:1;
+        .wrapper {
+        overflow:auto;
+        height: 100%;
+        }
         &:hover {
             color:rgba(29, 156, 240, 0.835) ;
             &.text_2 {
