@@ -7,33 +7,8 @@ import { GoSearch } from 'react-icons/go'
 import { LuMailPlus } from 'react-icons/lu'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { GetSingleconversationDetails } from '../../../features/conversation/conversationReducer';
-import ListContent from '../list';
-const messagecomments = [
-    {
-        _id: 3,
-        profile_name: "Blair Dulder CPA™",
-        username: "mhasnneye",
-        tweet_text: 'Sent a link',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        _id: 1,
-        profile_name: "mhasnneye",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg",
-        location: "Agodim",
-    },
-    {
-        _id: 2,
-        profile_name: "Lamine Mbacke",
-        username: "mhasnneye",
-        tweet_text: 'Sent a tweet',
-        image: "/images/jon-mauney.jpg",
-        location: "Agodim",
-    }
-]
+import moment from 'moment';
+
 
 const LeftContent: React.FC = () => {
     const { id } = useParams()
@@ -84,6 +59,23 @@ const LeftContent: React.FC = () => {
                         </div> : <div className="w-100">
                             {
                                 conversation?.map((x, index) => {
+                                    const updatedAt = moment(x?.updatedAt);
+                                    const now = moment();
+                                    const hoursDifference = now.diff(updatedAt, 'hours');
+                                    const minsDifference = now.diff(updatedAt, 'minutes');
+
+                                    let date;
+                                    if (hoursDifference < 1) {
+                                        date = `${minsDifference}min`;
+                                    }
+                                    else if (hoursDifference < 24) {
+                                        date = `${hoursDifference}hr`;
+                                    } else if (hoursDifference > 24) {
+                                        date = updatedAt.format('MMMD');
+                                    } else {
+                                        date = updatedAt.format('MMMD');
+                                    }
+
                                     return x?.sender?._id !== userInfo?._id && <NavLink
                                         activeClassName="active"
                                         to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
@@ -92,11 +84,12 @@ const LeftContent: React.FC = () => {
                                                 <img src={x.sender?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                                 <div className="image_gradient"></div>
                                             </div>
-                                            <div className="flex flex-1 column " style={{ gap: ".1rem" }}>
-                                                <h4 className="fs-16 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
+                                            <div className="flex flex-1 column item-start" style={{ gap: ".4rem" }}>
+                                                <h4 className="fs-16 tweet_user text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
                                                     {x?.sender?.display_name}
                                                     <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                                                     <span className="text-light fs-14 text-grey">@{x?.sender?.name}</span>
+                                                    <span className="text-light date fs-15 text-grey">{date}</span>
                                                 </h4>
                                                 <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
 
@@ -107,6 +100,23 @@ const LeftContent: React.FC = () => {
                             }
                             {
                                 conversation?.map((x, index) => {
+                                    const updatedAt = moment(x?.updatedAt);
+                                    const now = moment();
+                                    const hoursDifference = now.diff(updatedAt, 'hours');
+                                    const minsDifference = now.diff(updatedAt, 'minutes');
+
+                                    let date;
+                                    if (hoursDifference < 1) {
+                                        date = `${minsDifference}min`;
+                                    }
+                                    else if (hoursDifference < 24) {
+                                        date = `${hoursDifference}hr`;
+                                    } else if (hoursDifference > 24) {
+                                        date = updatedAt.format('MMMD');
+                                    } else {
+                                        date = updatedAt.format('MMMD');
+                                    }
+
                                     return x?.receiver?._id !== userInfo?._id && <NavLink
                                         activeClassName="active"
                                         to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
@@ -115,11 +125,13 @@ const LeftContent: React.FC = () => {
                                                 <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                                 <div className="image_gradient"></div>
                                             </div>
-                                            <div className="flex flex-1 item-center column " style={{ gap: ".1rem" }}>
-                                                <h4 className="fs-16 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
-                                                    {x?.receiver?.display_name}
-                                                    <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                                    <span className="text-light fs-14 text-grey ">@{x?.receiver?.name}</span>
+                                            <div className="flex  flex-1 item-start column " style={{ gap: ".4rem" }}>
+                                                <h4 className="fs-16  text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
+                                                    <span className='tweet_user'>{x?.receiver?.display_name}</span>
+                                                    {/* <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span> */}
+                                                    <span className="text-light fs-14 tweet_user text-grey ">@{x?.receiver?.name}</span>
+                                                    <span className="text-light fs-15 text-grey date">{date}</span>
+
                                                 </h4>
                                                 <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
 
@@ -139,14 +151,46 @@ const LeftContent: React.FC = () => {
 }
 
 const LeftContentStyles = styled.div`
-        flex:0 0 390px;
+        flex:0 0 370px;
         overflow:auto;
         height: 100vh;
         /* background-color: red; */
+          .tweet_user {
+        overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
+  @media (max-width:580px) {
+    max-width: 290px;
+  }
+  @media (max-width:500px) {
+    max-width: 180px;
+  }
+   @media (max-width:380px) {
+    max-width: 150px;
+  }
+  
+    }
+    .date {
+        position: relative;
+        transform: translateX(10px);
+        &::after {
+            width: 2px;
+            content: '';
+            border-radius: 50%;
+            background-color: var(--grey-1);
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            height: 2px;
+            transform: translate(15px,-50%);
+        }
+    }
         .iconwrapper {
         transition: all .5s;
         cursor: pointer;
         flex:1;
+
         .wrapper {
         }
         &:hover {
@@ -217,7 +261,7 @@ const LeftContentStyles = styled.div`
         }
         .messageCard {
         width: 100%;
-    padding:1rem 2rem;
+    padding:1.5rem 2rem;
     &.active {
         background-color: #F4F6F7;
         position: relative;

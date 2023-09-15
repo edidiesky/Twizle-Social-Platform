@@ -9,7 +9,7 @@ const MessageIndex: React.FC = () => {
   return (
     <MessageStyles>
       <LeftSidebarIndex />
-      <div className="content flex">
+      <div className="content flex item-start">
         <LeftContent />
         <Outlet />
       </div>

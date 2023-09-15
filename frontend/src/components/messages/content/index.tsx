@@ -5,27 +5,39 @@ import { AiFillPicture } from "react-icons/ai";
 import { IoSend } from 'react-icons/io5'
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
-import { GetSinglemessageDetails } from '../../../features/message/messageReducer';
+import { Createmessage, GetSinglemessageDetails } from '../../../features/message/messageReducer';
+import moment from 'moment';
 
 
 
 const MessageContent: React.FC = () => {
-  const {id} = useParams()
+  const { id } = useParams()
+  const [messages, setMessages] = useState<string>('')
   const dispatch = useAppDispatch()
   const { message } = useAppSelector(store => store.message)
   const { userInfo } = useAppSelector(store => store.auth)
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(GetSinglemessageDetails(id))
   }, [id])
   // console.log(id?.split('-')[1], id?.split('-')[0])
+
+  const handleCreateMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    dispatch(Createmessage({
+      message: messages,
+      userId: userInfo?._id,
+      conversationId: id
+    }))
+    setMessages('')
+  }
   return (
     <ChatContentStyles className='flex flex-1 column item-center'>
       <div className="chatWrapper w-100">
         <div className="top2 w-100 auto ">
           <div className="w-90 auto flex item-center justify-space">
             <h3 className="fs-20 text-bold text-dark">Messages</h3>
-           
+
           </div>
 
         </div>
@@ -41,7 +53,7 @@ const MessageContent: React.FC = () => {
                 <span className="block fs-14 text-grey text-light">@SINF-163</span>
               </h4>
             </div>
-            <h4 className="w-100 auto text-center fs-14 text-light text-dark">
+            <h4 className="w-100 bio auto text-center fs-14 text-light text-dark">
               Software Engineer @ NetApp | Tweets about Tech, AI, productivity tools | Helping you to get into Tech | Let's connect.
             </h4>
             <h4 className="w-85 auto text-center fs-14 text-light text-grey">
@@ -54,74 +66,41 @@ const MessageContent: React.FC = () => {
           <div className="w-85 auto chatList column flex gap-2">
             {message?.map((x) => {
               const usermessage = x?.sender === userInfo?._id
+              const createdAt = moment(x?.createdAt).format('MMMM Do YYYY, h:mm a')
               return (
                 <div className="flex ">
                   <div className="chatCard flex w-100 column">
                     {
-                      usermessage ? <div className="flex column gap-1">
+                      !usermessage ? <div className="flex column gap-1">
                         <div className=" SenderChat">
-                          <h4 className="fs-16 text-grey text-light">
-                            {x.message}
+                          <h4 className="fs-14 text-grey text-light">
+                            {x?.message}
                           </h4>
                         </div>
                         <div className=" flex gap-1">
                           <h5 className="fs-14 text-light text-grey">
-                            Mar 19, 2023, 1:17 AM
+                            {createdAt}
                           </h5>
                         </div>
                       </div>
                         : <div className="flex revieverWrapper column gap-1">
-                          <div className="recieverChat">
-                            <h4 className="fs-16 text-grey text-light">
-                              {x.message}
-                            </h4>
+                          <div className="flex wrap revieverWrapper column">
+                            <div className="recieverChat">
+                              <h4 className="fs-14 text-white text-light">
+                                {x?.message}
+                              </h4>
+                            </div>
+
                           </div>
                           <div className=" flex gap-1">
                             <h5 className="fs-14 text-light text-grey">
-                              Mar 19, 2023, 1:17 AM
+                              {createdAt}
                             </h5>
                           </div>
+
                         </div>
                     }
 
-                    {/* {x.senderMessage.map((x, index) => {
-                      return (
-                        <div key={index} className="flex py-2 item-center family1 text-light">
-
-                          <div className="flex column gap-1">
-                            <div className=" SenderChat">
-                              <h4 className="fs-16 text-grey text-light">
-                                {x.text}
-                              </h4>
-                            </div>
-                            <div className=" flex gap-1">
-                              <h5 className="fs-14 text-light text-grey">
-                                Mar 19, 2023, 1:17 AM
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                    {x.recieverMessage.map((x, index) => {
-                      return (
-                        <div key={index} className="flex py-2 justify-end revieverWrapper item-end family1 text-light">
-
-                          <div className="flex column gap-1 item-end">
-                            <div className=" recieverChat">
-                              <h4 className="fs-16 text-white text-light">
-                                {x.text}
-                              </h4>
-                            </div>
-                            <div className=" flex gap-1">
-                              <h5 className="fs-14 text-end text-light text-grey">
-                                Mar 19, 2023, 1:17 AM
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })} */}
                   </div>
                 </div>
               );
@@ -130,7 +109,7 @@ const MessageContent: React.FC = () => {
         </div>
         {/* search */}
         <div className="form_wrapper w-100 auto">
-          <form action="" className="w-100 family1 auto flex item-center">
+          <form onSubmit={handleCreateMessage} action="" className="w-100 family1 auto flex item-center">
             <div className="flex item-center">
               <div className="icons flex item-center justify-center avatar">
                 <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
@@ -144,6 +123,9 @@ const MessageContent: React.FC = () => {
             </div>
             <input
               type="text"
+              value={messages}
+              name='messages'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessages(e.target.value)}
               placeholder="Aa"
               className="input fs-16 flex-1 text-dark family1"
             />
@@ -162,35 +144,70 @@ const ChatContentStyles = styled.div`
 height: 100vh;
     border-right : 1px solid var(--border);
 border-left : 1px solid var(--border);
-/* overflow:hidden; */
+overflow:hidden;
+    overflow: auto;
+
 /* background-color: red; */
+  .tweet_user {
+        overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* max-width: 250px; */
+  @media (max-width:580px) {
+    max-width: 290px;
+  }
+  @media (max-width:500px) {
+    max-width: 180px;
+  }
+   @media (max-width:380px) {
+    max-width: 150px;
+  }
+  
+    }
+.bio {
+  width: 60%;
+  @media (max-width:980px) {
+  width: 70%;
+
+  }
+   @media (max-width:480px) {
+  width: 90%;
+
+  }
+}
 .top2 {
 position: sticky;
   top: 0;
   background-color: var(--top);
-  /* z-index: 300; */
+  z-index: 300;
   padding: 2rem 0;
   backdrop-filter: blur(12px);
         }
         .chatWrap {
+          /* height: 85vh; */
+    overflow: auto;
+    height: 100vh;
+    padding-bottom: 15rem;
+    /* width: 85%;
+    height: 100vh; */
           background-color: var(--white);
         }
    .chatWrapper {
-    /* height: 85vh;
-    overflow: auto; */
-    /* width: 85%; */
-    height: 100%;
     border-right : 1px solid var(--border);
 border-left : 1px solid var(--border);
 overflow:auto;
+    height: 100vh;
+
+overflow:hidden;
+
    }
    .list {
 height: 100%;
     overflow: auto;
    }
       .image_wrapper {
-      width:8rem;
-      height:8rem;
+      width:6rem;
+      height:6rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
@@ -244,7 +261,8 @@ height: 100%;
   }
   .SenderChat,
   .recieverChat {
-    padding: 1.5rem 3rem;
+    padding: 1.5rem;
+    width: fit-content;
     @media (max-width: 980px) {
       background-color: #fff;
       padding: 2rem 4rem;
@@ -257,8 +275,10 @@ height: 100%;
   }
     .top {
     padding:5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
 
         &:hover {
+
         background-color: var(--grey-2);
     }
     }

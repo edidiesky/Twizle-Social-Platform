@@ -3,10 +3,11 @@ import axios, { AxiosError } from "axios";
 
 const messageurl: string = "/api/v1/message";
 type messagedatatype = {
-  message_text?: string;
+  message?: string;
   message_image?: any;
   _id?: string;
-  message_user_id?:string;
+  userId?: string;
+  conversationId?: string;
 }
 
 interface messagePayload {
@@ -54,11 +55,15 @@ export const Createmessage = createAsyncThunk<{
       };
       
         const response2 = await axios.post(
-          `/api/v1/message/${messageData?._id}`,
+          `/api/v1/message/${messageData?.conversationId}`,
           messageData,
           config
         );
-        return response2.data.message;
+      const response = await axios.get(
+        `/api/v1/message/${messageData?.conversationId}`,
+        config
+      )
+      return response.data.message;
     
      
       // console.log(messageData)
@@ -124,6 +129,7 @@ export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
         `/api/v1/message/${Detailsdata}`,
         config
       );
+     
       return response.data.message
 
     } catch (err: any) {
