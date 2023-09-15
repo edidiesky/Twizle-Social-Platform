@@ -20,7 +20,7 @@ const MessageIndex: React.FC = () => {
 
 
 const MessageStyles = styled.div`
- width: 100%;
+    width: 100%;
     display:flex;
     gap:1rem;
     /* height: 100vh;
@@ -38,7 +38,7 @@ const MessageStyles = styled.div`
         height: 100vh;
         /* background-color: red; */
         @media (max-width:980px) {
-    border-right : 1px solid var(--border);
+          border-right : 1px solid var(--border);
         }
     }
 `

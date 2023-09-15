@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 import { FiSettings } from 'react-icons/fi'
 import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
@@ -6,6 +7,7 @@ import { GoSearch } from 'react-icons/go'
 import { LuMailPlus } from 'react-icons/lu'
 const messagecomments = [
     {
+        _id:3,
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'Sent a link',
@@ -13,6 +15,7 @@ const messagecomments = [
         location: "Agodim",
     },
     {
+        _id:1,
         profile_name: "mhasnneye",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
@@ -20,6 +23,7 @@ const messagecomments = [
         location: "Agodim",
     },
     {
+        _id:2,
         profile_name: "Lamine Mbacke",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
@@ -44,7 +48,7 @@ const LeftContent: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                 
+
                 </div>
                 <div className="search w-90 auto flex item-center justify-center gap-1">
                     <GoSearch fontSize={'20px'} color='var(--grey-1)' />
@@ -53,7 +57,9 @@ const LeftContent: React.FC = () => {
                 <div className="flex column w-100">
                     {
                         messagecomments.map((x, index) => {
-                            return <div key={index} className="messageCard w-100 flex item-start justify-space">
+                            return <NavLink
+                                activeClassName="active"
+                                to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                 <div className="flex item-start gap-1">
                                     <div className="image_wrapper">
                                         <img src={x.image} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
@@ -69,7 +75,7 @@ const LeftContent: React.FC = () => {
 
                                     </div>
                                 </div>
-                            </div>
+                            </NavLink>
                         })
                     }
                 </div>
@@ -157,6 +163,19 @@ const LeftContentStyles = styled.div`
         .messageCard {
         width: 100%;
     padding:1rem 2rem;
+    &.active {
+        background-color: #F4F6F7;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--blue-1);
+            height: 100%;
+            right: 0;
+            top: 0;
+        }
+    }
     &:hover {
         /* background-color: #f1f1f1; */
         background-color: var(--dark-grey-hover);

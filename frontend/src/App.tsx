@@ -70,6 +70,22 @@ export default function App() {
           />
         </Route>
 
+        <Route path={"/messages"} element={<MessageIndex />}>
+          <Route index element={<Suspense fallback={<Preloader />}>
+            <ProtectRoute>
+              <MessageList />
+            </ProtectRoute>
+          </Suspense>
+          }
+          />
+          <Route path=":id" element={<Suspense fallback={<Preloader />}>
+
+            <MessageContent />
+          </Suspense>
+          }
+          />
+        </Route>
+
         {/* tweet detail  route */}
         <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
           <ProtectRoute>
@@ -79,23 +95,6 @@ export default function App() {
         }
         />
 
-        <Route path={"/messages"} element={<MessageIndex />}>
-
-          <Route index element={<Suspense fallback={<Preloader />}>
-            <ProtectRoute>
-              <MessageList />
-            </ProtectRoute>
-          </Suspense>
-          }
-          />
-          <Route path=":id" element={<Suspense fallback={<Preloader />}>
-            <ProtectRoute>
-              <MessageContent />
-            </ProtectRoute>
-          </Suspense>
-          }
-          />
-        </Route>
 
         {/* Logout route */}
         <Route path="logout" element={<Suspense fallback={<Preloader />}>

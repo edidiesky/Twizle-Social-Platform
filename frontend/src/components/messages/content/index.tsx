@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
@@ -174,30 +174,37 @@ const converstionData = [
 const MessageContent: React.FC = () => {
   const [message, setMessage] = useState(false)
   return (
-    <ChatContentStyles className='flex rightwrapper column gap-4 item-center justify-center'>
+    <ChatContentStyles className='flex w-100 column gap-4 item-center justify-center'>
       <div className="chatWrapper w-100">
-        <Link to={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
-          <div className="flex column gap-1 item-center justify-center w-100">
-            <div className="image_wrapper">
-              <div className="image_gradient"></div>
-              <img src="/images/raoul-bhavnani.jpg" alt="" className="avatar_profile" />
-            </div>
-            <h4 className="fs-20 text-center text-bold text-dark">Mohammed Asamin
-              <span className="block fs-16 text-grey text-light">@SINF-163</span>
-            </h4>
+        <div className="top2 w-100 auto ">
+          <div className="w-90 auto flex item-center justify-space">
+            <h3 className="fs-20 text-bold text-dark">Messages</h3>
+           
           </div>
-          <h4 className="w-100 auto text-center fs-16 text-light text-dark">
-            Software Engineer @ NetApp | Tweets about Tech, AI, productivity tools | Helping you to get into Tech | Let's connect.
-          </h4>
-          <h4 className="w-85 auto text-center fs-14 text-light text-grey">
 
-            Joined March 2017
-            ·
-            4,127 Followers
-          </h4>
-        </Link>
-        <div className="flex w-90 auto column gap-1">
-          <div className="w-100 chatList column flex gap-2">
+        </div>
+        <div className="flex w-100 auto list auto column gap-1">
+          <Link to={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
+            <div className="flex column gap-1 item-center justify-center w-100">
+              <div className="image_wrapper">
+                <div className="image_gradient"></div>
+                <img src="https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg" alt="" className="avatar_profile" />
+              </div>
+              <h4 className="fs-18 text-center text-bold text-dark">Mohammed Asamin
+                <span className="block fs-14 text-grey text-light">@SINF-163</span>
+              </h4>
+            </div>
+            <h4 className="w-100 auto text-center fs-15 text-light text-dark">
+              Software Engineer @ NetApp | Tweets about Tech, AI, productivity tools | Helping you to get into Tech | Let's connect.
+            </h4>
+            <h4 className="w-85 auto text-center fs-14 text-light text-grey">
+
+              Joined March 2017
+              ·
+              4,127 Followers
+            </h4>
+          </Link>
+          <div className="w-90 auto chatList column flex gap-2">
             {converstionData.map((x) => {
               return (
                 <div className="flex ">
@@ -247,27 +254,30 @@ const MessageContent: React.FC = () => {
           </div>
         </div>
         {/* search */}
-        <form action="" className="w-90 family1 auto flex item-center">
-          <div className="flex item-center">
-            <div className="icons flex item-center justify-center avatar">
-              <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
+        <div className="form_wrapper w-100 auto">
+          <form action="" className="w-100 family1 auto flex item-center">
+            <div className="flex item-center">
+              <div className="icons flex item-center justify-center avatar">
+                <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
+              </div>
+              <div className="icons flex item-center justify-center avatar">
+                <MdOutlineAddCircle className="fs-20" color={'var(--blue-1)'} />
+              </div>
+              <div className="icons flex item-center justify-center avatar">
+                <AiFillPicture className="fs-20" color={'var(--blue-1)'} />
+              </div>
             </div>
+            <input
+              type="text"
+              placeholder="Aa"
+              className="input fs-16 flex-1 text-dark family1"
+            />
             <div className="icons flex item-center justify-center avatar">
-              <MdOutlineAddCircle className="fs-20" color={'var(--blue-1)'} />
+              <IoSend className="fs-20" color={'var(--blue-1)'} />
             </div>
-            <div className="icons flex item-center justify-center avatar">
-              <AiFillPicture className="fs-20" color={'var(--blue-1)'} />
-            </div>
-          </div>
-          <input
-            type="text"
-            placeholder="Aa"
-            className="input fs-16 flex-1 text-dark family1"
-          />
-          <div className="icons flex item-center justify-center avatar">
-            <IoSend className="fs-20" color={'var(--blue-1)'} />
-          </div>
-        </form>
+          </form>
+        </div>
+
       </div>
     </ChatContentStyles>
   )
@@ -275,13 +285,31 @@ const MessageContent: React.FC = () => {
 
 const ChatContentStyles = styled.div`
 height: 100vh;
+overflow:hidden;
+.top2 {
+position: sticky;
+  top: 0;
+  background-color: var(--top);
+  /* z-index: 300; */
+  padding: 2rem 0;
+  backdrop-filter: blur(12px);
+        }
    .chatWrapper {
     /* height: 85vh;
     overflow: auto; */
+    width: 85%;
+    height: 100%;
+    border-right : 1px solid var(--border);
+border-left : 1px solid var(--border);
+overflow:auto;
+   }
+   .list {
+height: 82%;
+    overflow: auto;
    }
       .image_wrapper {
-      width:10rem;
-      height:10rem;
+      width:8rem;
+      height:8rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
@@ -357,18 +385,23 @@ height: 100vh;
     width: 4rem;
     height: 4rem;
   }
-  form {
-    position: sticky;
+  .form_wrapper {
+  background-color:var(--top);
+    z-index: 300;
+  backdrop-filter: blur(12px);
+    padding: .4rem 2rem;
+     position: sticky;
     bottom: -5%;
     left: 0;
+    form {
+   
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .4rem 2rem;
+    padding: .5rem 2rem;
     gap: 0.5rem;
-    background-color: var(--grey-2);
     border-radius: 40px;
-    z-index: 300;
+    background-color: #EFF3F4;
 
     .input {
       height: 3.8rem;
@@ -380,6 +413,8 @@ height: 100vh;
       padding: 0 2rem;
     }
   }
+  }
+
   `
 
 export default MessageContent
