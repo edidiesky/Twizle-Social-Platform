@@ -25,7 +25,7 @@ const MessageContent: React.FC = () => {
   }, [id])
   // console.log(id?.split('-')[1], id?.split('-')[0])
 
-  const handleCreateMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(Createmessage({
       message: messages,
@@ -92,7 +92,7 @@ const MessageContent: React.FC = () => {
           }
          
           <div className="w-85 auto chatList column flex gap-2">
-            {message?.map((x) => {
+            {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: {} | null | undefined; }) => {
               const usermessage = x?.sender === userInfo?._id
               const createdAt = moment(x?.createdAt).format('MMMM Do YYYY, h:mm a')
               return (
@@ -137,7 +137,7 @@ const MessageContent: React.FC = () => {
         </div>
         {/* search */}
         <div className="form_wrapper w-100 auto">
-          <form onSubmit={handleCreateMessage} action="" className="w-100 family1 auto flex item-center">
+          <form onSubmit={(e: React.FormEvent<HTMLFormElement>)=>handleCreateMessage(e)} action="" className="w-100 family1 auto flex item-center">
             <div className="flex item-center">
               <div className="icons flex item-center justify-center avatar">
                 <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
