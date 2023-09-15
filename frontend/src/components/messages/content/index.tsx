@@ -183,18 +183,18 @@ const MessageContent: React.FC = () => {
           </div>
 
         </div>
-        <div className="flex w-100 auto list auto column gap-1">
+        <div className="flex chatWrap w-100 auto list auto column gap-1">
           <Link to={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
             <div className="flex column gap-1 item-center justify-center w-100">
               <div className="image_wrapper">
                 <div className="image_gradient"></div>
                 <img src="https://i.pinimg.com/236x/80/5f/69/805f6966f9ff13b3dad64b3c10f823b8.jpg" alt="" className="avatar_profile" />
               </div>
-              <h4 className="fs-18 text-center text-bold text-dark">Mohammed Asamin
+              <h4 className="fs-16 text-center text-bold text-dark">Mohammed Asamin
                 <span className="block fs-14 text-grey text-light">@SINF-163</span>
               </h4>
             </div>
-            <h4 className="w-100 auto text-center fs-15 text-light text-dark">
+            <h4 className="w-100 auto text-center fs-14 text-light text-dark">
               Software Engineer @ NetApp | Tweets about Tech, AI, productivity tools | Helping you to get into Tech | Let's connect.
             </h4>
             <h4 className="w-85 auto text-center fs-14 text-light text-grey">
@@ -204,7 +204,7 @@ const MessageContent: React.FC = () => {
               4,127 Followers
             </h4>
           </Link>
-          <div className="w-90 auto chatList column flex gap-2">
+          <div className="w-85 auto chatList column flex gap-2">
             {converstionData.map((x) => {
               return (
                 <div className="flex ">
@@ -294,6 +294,9 @@ position: sticky;
   padding: 2rem 0;
   backdrop-filter: blur(12px);
         }
+        .chatWrap {
+          background-color: var(--white);
+        }
    .chatWrapper {
     /* height: 85vh;
     overflow: auto; */
@@ -321,6 +324,7 @@ height: 82%;
       .chatList{
         border-top: 1px solid rgba(0,0,0,.1);
         padding-top: 4rem;
+        padding-right: 2rem;
       }
       .image_gradient {
       width:100%;
