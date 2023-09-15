@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
@@ -173,6 +173,8 @@ const converstionData = [
 
 const MessageContent: React.FC = () => {
   const [message, setMessage] = useState(false)
+  const {id} = useParams()
+  console.log(id?.split('-')[1], id?.split('-')[0])
   return (
     <ChatContentStyles className='flex w-100 column gap-4 item-center justify-center'>
       <div className="chatWrapper w-100">
@@ -183,6 +185,7 @@ const MessageContent: React.FC = () => {
           </div>
 
         </div>
+        {/* chat user profile and messages */}
         <div className="flex chatWrap w-100 auto list auto column gap-1">
           <Link to={'/edidie'} className="top w-90 auto flex column item-center justify-center gap-2">
             <div className="flex column gap-1 item-center justify-center w-100">

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { CircularProgress } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
@@ -17,7 +18,7 @@ const Top: React.FC<modalType> = ({ setModal }) => {
 
             <div className='flex item-center gap-2 w-90 auto'>
                 {/* <h2 className="fs-30">Top bar</h2> */}
-                <div className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></div>
+                <Link to={'/'} className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></Link>
                 <h3 className="fs-20 text-extra-bold text-dark">{userDetails?.name}
                     <span style={{marginTop:"4px"}} className="flex item-center gap-1 fs-14 text-light text-dark">
                         {

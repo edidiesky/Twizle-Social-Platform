@@ -5,7 +5,7 @@ type propstypes = {
     types?: String;
 }
 
-const ChatCard: React.FC = (props: propstypes) => {
+const ChatCard: React.FC<propstypes> = ({types}) => {
     return (
         <ChatCardtStyles className='flex item-center SenderChat flex py-2 item-center family1 text-light justify-center'>
             <div className="flex gap-1">

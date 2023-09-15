@@ -6,6 +6,8 @@ import { PiSuitcaseSimple } from 'react-icons/pi'
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsThreeDots } from 'react-icons/bs';
+import { AiOutlineBell } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
   modal?: Boolean;
@@ -25,7 +27,8 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
          {
           !checkifUser && <>
               <div className="icons flex item-center justify-center"><BsThreeDots color='var(--dark-1)' fontSize={'20px'} /></div>
-              <div className="icons flex item-center justify-center"><HiOutlineMail color='var(--dark-1)' fontSize={'24px'} /></div>
+              <Link to={`/messages/${userDetails?._id}-${userInfo?._id}`} className="icons flex item-center justify-center"><HiOutlineMail color='var(--dark-1)' fontSize={'24px'} /></Link>
+              <div className="icons flex item-center justify-center"><AiOutlineBell color='var(--dark-1)' fontSize={'24px'} /></div>
           </>
          }
           {
