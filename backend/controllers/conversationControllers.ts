@@ -14,7 +14,8 @@ interface CustomInterface extends ExpressRequest {
 const createConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
   // const { userId } = req.user;
   const conversation = await Conversation.create({
-    affilates:[req.user?.userId, req.body.receiver]
+    sender: req.body?.sender,
+    receiver: req.body.receiver
   });
 
   res.status(200).json({ conversation });
@@ -23,25 +24,37 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
 // GET Review of the user conversation
 //  Public
 // send the conversation Id only
-const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  // get the role
+const getSingleUserConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
+  let userIdToRemove = "64f692e2374ae635be60219c"; // The _id to remove
 
-  const conversation = await Conversation.find(
-    {
-      affilates:{$in:[req.params.id]}
-    }
-  ).populate("affilates", " username bio display_name name profile_image_url");
+  const conversations = await Conversation.find({
+    $or: [{ sender: req.body?.userId }, { receiver: req.body?.userId }],
+  }).populate("sender", " username bio display_name name profile_image_url")
+    .populate("receiver", " username bio display_name name profile_image_url");
 
-  res.status(200).json({ conversation });
+  // // Filter out conversations where either sender or receiver has _id equal to userIdToRemove
+  // const filteredUserConversations = conversations?.filter(conversation => {
+  //   // let userIdToRemove = "64f692e2374ae635be60219c";
+  //   return (
+  //     conversation?.sender?._id !== req.body?.userId &&
+  //     conversation?.receiver?._id !== req.body?.userId
+  //   );
+  // });
+  res.status(200).json({ conversations })
 });
+
 
 // GET All Gig
 //  Public
 // send the conversation Id only
 const getAllConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  // const { Id } = req.params;
+  const { id } = req.params;
   // // find the Gig
-  const conversation = await Conversation.find({})
+  const conversation = await Conversation.
+    find({ $or: [{ sender: id }, { receiver: id }], })
+    .populate("sender", " username bio display_name name profile_image_url")
+    .populate("receiver", " username bio display_name name profile_image_url");
+
   if (!conversation) {
     res.status(404);
     throw new Error("Gig not found");
@@ -70,7 +83,7 @@ const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Respon
 
 export {
   createConversation,
-  getSingleConversation,
+  getSingleUserConversation,
   DeleteConversation,
   getAllConversation,
   UpdateConversation,

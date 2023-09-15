@@ -113,7 +113,7 @@ export const GetSingleconversationDetails = createAsyncThunk < conversationPaylo
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { conversationInfo: { _id: String }, token: string } };
+      const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
     
       const config = {
         headers: {
@@ -121,7 +121,7 @@ export const GetSingleconversationDetails = createAsyncThunk < conversationPaylo
         },
       };
       const response = await axios.get(
-        `/api/v1/conversation/tweet/${Detailsdata}`,
+        `/api/v1/conversation/${Detailsdata}`,
         config
       );
       return response.data.conversation

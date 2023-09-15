@@ -1,10 +1,12 @@
-import React from 'react';
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link, NavLink, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import { FiSettings } from 'react-icons/fi'
 import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
 import { GoSearch } from 'react-icons/go'
 import { LuMailPlus } from 'react-icons/lu'
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
+import { GetSingleconversationDetails } from '../../../features/conversation/conversationReducer';
 const messagecomments = [
     {
         _id:3,
@@ -33,6 +35,15 @@ const messagecomments = [
 ]
 
 const LeftContent: React.FC = () => {
+    const { id } = useParams()
+    const {userInfo} = useAppSelector(store=> store.auth)
+    // const userId = id?.split('-')[1]
+    // const recieverId = id?.split('-')[2]
+    // console.log(id?.split('-')[1], id?.split('-')[0])
+    const dispatch = useAppDispatch()
+    useEffect(()=> {
+        dispatch(GetSingleconversationDetails(userInfo?._id))
+    },[])
     return (
         <LeftContentStyles>
             <div className="flex column w-100 column gap-2">

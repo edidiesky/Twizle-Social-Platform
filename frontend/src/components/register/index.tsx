@@ -162,7 +162,7 @@ const RegsiterStyles = styled.div`
     }
   }
   .authBtn {
-    border: 1px solid var(--border);
+    border: 1px solid var(--border1);
     padding: .9rem 4rem;
     border-radius: 40px;
     width: 100%;

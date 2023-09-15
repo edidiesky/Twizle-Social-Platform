@@ -5,14 +5,14 @@ import {
 } from "../middleware/authentication";
 import {
   createConversation,
-  getSingleConversation,
+  getSingleUserConversation,
   DeleteConversation,
   getAllConversation,
   UpdateConversation,
 } from "../controllers/conversationControllers";
 
-router.get("/", authMiddleware, getAllConversation);
-router.get("/:id", authMiddleware, getSingleConversation);
+router.get("/:id", authMiddleware, getAllConversation);
+router.get("/", authMiddleware, getSingleUserConversation);
 router.post("/", authMiddleware, createConversation);
 
 

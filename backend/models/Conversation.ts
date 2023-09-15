@@ -3,10 +3,14 @@ import mongoose from "mongoose";
 // a structure of the Chat
 const ConversationSchema = new mongoose.Schema(
   {
-    affilates: {
-      type: Array, 
-      // required: true,
-    }
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    receiver: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
