@@ -38,7 +38,7 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
       role: user.role,
     },
     jwtcode,
-    { expiresIn: "2d" }
+    { expiresIn: "12d" }
   );
 
   res.status(200).json({ user, token });
@@ -71,7 +71,7 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
       role: user.role,
     },
     jwtcode,
-    { expiresIn: "2d" }
+    { expiresIn: "12d" }
   );
 
   res.status(200).json({ user, token });

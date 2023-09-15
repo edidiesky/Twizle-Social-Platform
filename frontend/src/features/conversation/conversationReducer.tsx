@@ -167,3 +167,37 @@ export const GetUserconversation = createAsyncThunk<{
     }
   }
 );
+
+
+
+// Get User conversation
+export const GetUserconversationDetails = createAsyncThunk<{
+  rejectValue: KnownError,
+}, { _id?: any }>(
+  "GetUserconversationDetails",
+  async (Detailsdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/conversation/${Detailsdata}`,
+        config
+      );
+      return response.data.conversation;
+      // console.log(Detailsdata)
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);

@@ -24,7 +24,7 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
 // GET Review of the user conversation
 //  Public
 // send the conversation Id only
-const getSingleUserConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
+const getUserConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
   let userIdToRemove = "64f692e2374ae635be60219c"; // The _id to remove
 
   const conversations = await Conversation.find({
@@ -38,11 +38,11 @@ const getSingleUserConversation = asyncHandler(async (req: CustomInterface, res:
 // GET All Gig
 //  Public
 // send the conversation Id only
-const getAllConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
+const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
   const { id } = req.params;
   // // find the Gig
   const conversation = await Conversation.
-    find({ $or: [{ sender: id }, { receiver: id }], })
+    findOne({_id:id })
     .populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
 
@@ -74,8 +74,8 @@ const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Respon
 
 export {
   createConversation,
-  getSingleUserConversation,
+  getUserConversation,
   DeleteConversation,
-  getAllConversation,
+  getSingleConversation,
   UpdateConversation,
 };

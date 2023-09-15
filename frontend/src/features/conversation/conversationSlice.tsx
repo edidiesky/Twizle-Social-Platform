@@ -5,6 +5,7 @@ import {
   Deleteconversation, 
   GetSingleconversationDetails, 
   GetUserconversation,
+  GetUserconversationDetails,
 } from './conversationReducer'
 const BookMarked = localStorage.getItem("isBookMarked");
 const conversation = JSON.parse(localStorage.getItem("conversation") || 'false');
@@ -159,26 +160,26 @@ export const conversationSlice = createSlice({
 
     })
 
-    // builder.addCase(Updateconversation.pending, (state, action) => {
-    //   state.conversationisLoading = true
-    // })
-    // builder.addCase(Updateconversation.fulfilled, (state, action) => {
-    //   state.conversationisSuccess = true
-    //   state.conversationisLoading = false
-    //   state.conversationDetails = action.payload
-    //   state.alertText = 'conversation Update succesfully'
-    //   state.showAlert = true
-    //   state.alertType = 'success'
-    // })
-    // builder.addCase(Updateconversation.rejected, (state, action) => {
-    //   state.conversationisSuccess = false
-    //   state.conversationisError = true
-    //   state.conversationisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
+    builder.addCase(GetUserconversationDetails.pending, (state, action) => {
+      state.conversationisLoading = true
+    })
+    builder.addCase(GetUserconversationDetails.fulfilled, (state, action) => {
+      state.conversationisSuccess = true
+      state.conversationisLoading = false
+      state.conversationDetails = action.payload
+      state.alertText = 'conversation Update succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
+    })
+    builder.addCase(GetUserconversationDetails.rejected, (state, action) => {
+      state.conversationisSuccess = false
+      state.conversationisError = true
+      state.conversationisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
 
-    // })
+    })
 
 
   },
