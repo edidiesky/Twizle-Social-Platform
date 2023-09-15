@@ -1,180 +1,24 @@
 import { Link, useParams } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { IoSend } from 'react-icons/io5'
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
+import { GetSinglemessageDetails } from '../../../features/message/messageReducer';
 
-const converstionData = [
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-  {
-    id: 1,
-    senderMessage: [
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "Hi Dear",
-      },
-      {
-        image:
-          "/images/johanna-richardson.jpg",
-        text: "How was your day",
-      },
-    ],
-    recieverMessage: [
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "I am fine",
-      },
-      {
-        image:
-          "https://fiverr-res.cloudinary.com/image/upload/t_profile_original,q_auto,f_auto/v1/attachments/profile/photo/56a09771086f0077fcfe38f13d80ff28-1639316525935/140c8b5f-0558-4460-8c47-c2ba3af3b736.jpg",
-        text: "How was the wekend",
-      },
-    ],
-  },
-];
 
 
 const MessageContent: React.FC = () => {
-  const [message, setMessage] = useState(false)
   const {id} = useParams()
-  console.log(id?.split('-')[1], id?.split('-')[0])
+  const dispatch = useAppDispatch()
+  const { message } = useAppSelector(store => store.message)
+  const { userInfo } = useAppSelector(store => store.auth)
+
+  useEffect(()=> {
+    dispatch(GetSinglemessageDetails(id))
+  }, [id])
+  // console.log(id?.split('-')[1], id?.split('-')[0])
   return (
     <ChatContentStyles className='flex flex-1 column item-center'>
       <div className="chatWrapper w-100">
@@ -208,11 +52,39 @@ const MessageContent: React.FC = () => {
             </h4>
           </Link>
           <div className="w-85 auto chatList column flex gap-2">
-            {converstionData.map((x) => {
+            {message?.map((x) => {
+              const usermessage = x?.sender === userInfo?._id
               return (
                 <div className="flex ">
-                  <div className="chatCard flex w-100 item-start column">
-                    {x.senderMessage.map((x, index) => {
+                  <div className="chatCard flex w-100 column">
+                    {
+                      usermessage ? <div className="flex column gap-1">
+                        <div className=" SenderChat">
+                          <h4 className="fs-16 text-grey text-light">
+                            {x.message}
+                          </h4>
+                        </div>
+                        <div className=" flex gap-1">
+                          <h5 className="fs-14 text-light text-grey">
+                            Mar 19, 2023, 1:17 AM
+                          </h5>
+                        </div>
+                      </div>
+                        : <div className="flex revieverWrapper column gap-1">
+                          <div className="recieverChat">
+                            <h4 className="fs-16 text-grey text-light">
+                              {x.message}
+                            </h4>
+                          </div>
+                          <div className=" flex gap-1">
+                            <h5 className="fs-14 text-light text-grey">
+                              Mar 19, 2023, 1:17 AM
+                            </h5>
+                          </div>
+                        </div>
+                    }
+
+                    {/* {x.senderMessage.map((x, index) => {
                       return (
                         <div key={index} className="flex py-2 item-center family1 text-light">
 
@@ -249,7 +121,7 @@ const MessageContent: React.FC = () => {
                           </div>
                         </div>
                       );
-                    })}
+                    })} */}
                   </div>
                 </div>
               );

@@ -121,7 +121,7 @@ export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
         },
       };
       const response = await axios.get(
-        `/api/v1/message/tweet/${Detailsdata}`,
+        `/api/v1/message/${Detailsdata}`,
         config
       );
       return response.data.message
