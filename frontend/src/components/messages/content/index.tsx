@@ -176,7 +176,7 @@ const MessageContent: React.FC = () => {
   const {id} = useParams()
   console.log(id?.split('-')[1], id?.split('-')[0])
   return (
-    <ChatContentStyles className='flex w-100 column gap-4 item-center justify-center'>
+    <ChatContentStyles className='flex flex-1 column item-center'>
       <div className="chatWrapper w-100">
         <div className="top2 w-100 auto ">
           <div className="w-90 auto flex item-center justify-space">
@@ -288,7 +288,8 @@ const MessageContent: React.FC = () => {
 
 const ChatContentStyles = styled.div`
 height: 100vh;
-overflow:hidden;
+/* overflow:hidden; */
+/* background-color: red; */
 .top2 {
 position: sticky;
   top: 0;
@@ -303,14 +304,14 @@ position: sticky;
    .chatWrapper {
     /* height: 85vh;
     overflow: auto; */
-    width: 85%;
+    /* width: 85%; */
     height: 100%;
     border-right : 1px solid var(--border);
 border-left : 1px solid var(--border);
 overflow:auto;
    }
    .list {
-height: 82%;
+height: 100%;
     overflow: auto;
    }
       .image_wrapper {
@@ -398,7 +399,7 @@ height: 82%;
   backdrop-filter: blur(12px);
     padding: .4rem 2rem;
      position: sticky;
-    bottom: -5%;
+    bottom: 0%;
     left: 0;
     form {
    

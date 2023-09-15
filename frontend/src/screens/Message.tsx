@@ -31,11 +31,12 @@ const MessageStyles = styled.div`
         margin: 0 auto;
     }
     .content {
-        flex:1;
+        /* flex:1; */
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
         overflow:auto;
         height: 100vh;
+        width: 72%;
         /* background-color: red; */
         @media (max-width:980px) {
           border-right : 1px solid var(--border);

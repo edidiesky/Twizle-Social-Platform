@@ -88,6 +88,7 @@ const LeftContentStyles = styled.div`
         flex:0 0 390px;
         overflow:auto;
         height: 100vh;
+        /* background-color: red; */
         .iconwrapper {
         transition: all .5s;
         cursor: pointer;
