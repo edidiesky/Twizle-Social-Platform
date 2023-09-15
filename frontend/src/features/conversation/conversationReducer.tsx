@@ -121,10 +121,10 @@ export const GetSingleconversationDetails = createAsyncThunk < conversationPaylo
         },
       };
       const response = await axios.get(
-        `/api/v1/conversation/${Detailsdata}`,
+        `/api/v1/conversation`,
         config
       );
-      return response.data.conversation
+      return response.data.conversations
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

@@ -28,18 +28,9 @@ const getSingleUserConversation = asyncHandler(async (req: CustomInterface, res:
   let userIdToRemove = "64f692e2374ae635be60219c"; // The _id to remove
 
   const conversations = await Conversation.find({
-    $or: [{ sender: req.body?.userId }, { receiver: req.body?.userId }],
+    $or: [{ sender: req.user?.userId }, { receiver: req.user?.userId }],
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
-
-  // // Filter out conversations where either sender or receiver has _id equal to userIdToRemove
-  // const filteredUserConversations = conversations?.filter(conversation => {
-  //   // let userIdToRemove = "64f692e2374ae635be60219c";
-  //   return (
-  //     conversation?.sender?._id !== req.body?.userId &&
-  //     conversation?.receiver?._id !== req.body?.userId
-  //   );
-  // });
   res.status(200).json({ conversations })
 });
 

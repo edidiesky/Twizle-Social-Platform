@@ -7,6 +7,7 @@ import {
   GetUserconversation,
 } from './conversationReducer'
 const BookMarked = localStorage.getItem("isBookMarked");
+const conversation = JSON.parse(localStorage.getItem("conversation") || 'false');
 
 
 // Define a type for the conversation state
@@ -35,7 +36,7 @@ interface conversationState {
 const initialState: conversationState = {
   conversationDetails: null,
 
-  conversation: [],
+  conversation: conversation ? conversation: [],
   bookmarks: [],
 
 
@@ -125,6 +126,8 @@ export const conversationSlice = createSlice({
     builder.addCase(GetSingleconversationDetails.fulfilled, (state, action) => {
       state.conversationisSuccess = true
       state.conversationisLoading = false
+      localStorage.setItem("conversation", JSON.stringify(action.payload))
+
       state.conversation = action.payload
     })
     builder.addCase(GetSingleconversationDetails.rejected, (state, action) => {

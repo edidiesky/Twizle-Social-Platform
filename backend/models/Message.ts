@@ -14,6 +14,9 @@ const MessageSchema = new mongoose.Schema(
     message: {
       type: String,
     },
+    isSender: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );

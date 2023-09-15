@@ -11,8 +11,11 @@ const ConversationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    lastMessage: {
+      type: String
+    }
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Conversation",ConversationSchema);
+export default mongoose.model("Conversation", ConversationSchema);

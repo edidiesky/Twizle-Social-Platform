@@ -9,6 +9,11 @@
 }
 
 @font-face {
+  font-family: "CustomFont_Heavy";
+  src: url("./assets/fonts/chirp_heavy.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "CustomFont_Normal";
   src: url("./assets/fonts/chirp_regular.ttf") format("truetype");
 }
@@ -82,7 +87,7 @@ body {
   background-color: var(--white);
   font-family: "CustomFont_Normal", sans-serif;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.2;
   color: var(--dark-1);
   /* letter-spacing: .4px; */
 }
@@ -315,7 +320,7 @@ button {
 }
 
 .text-extra-bold {
-  font-family: "CustomFont_Bold", sans-serif;
+  font-family: "CustomFont_Heavy", sans-serif;
   font-weight: 700;
 }
 

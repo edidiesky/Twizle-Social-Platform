@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request as ExpressRequest, Response } from "express";
 import Message from "../models/Message";
-
+import Conversation from "../models/Conversation";
 
 interface CustomInterface extends ExpressRequest {
   user?: {
@@ -14,13 +14,21 @@ interface CustomInterface extends ExpressRequest {
 // Create Message
 //  Public
 const createMessage = asyncHandler(async (req: CustomInterface, res: Response) => {
+  const userId = req.user?.userId
+  const userBodyId = req.body.userId
+  const conversationId = req.params.id
+  
   const message = await Message.create({
-    conversationId: req.params.id,
-    sender: req.user?.userId,
-    message: req.body.message
+    conversationId: conversationId,
+    sender: userId,
+    message: req.body.message,
+    isSender:userId === userBodyId? true: false
   });
+  await Conversation.findOneAndUpdate({ _id: conversationId }, {
+    lastMessage: req.body.message
+  }, { new: true })
 
-  res.status(200).json({ message });
+res.status(200).json({ message });
 })
 
 // GET

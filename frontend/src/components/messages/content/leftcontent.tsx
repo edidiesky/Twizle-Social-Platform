@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import { FiSettings } from 'react-icons/fi'
@@ -7,9 +7,10 @@ import { GoSearch } from 'react-icons/go'
 import { LuMailPlus } from 'react-icons/lu'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { GetSingleconversationDetails } from '../../../features/conversation/conversationReducer';
+import ListContent from '../list';
 const messagecomments = [
     {
-        _id:3,
+        _id: 3,
         profile_name: "Blair Dulder CPA™",
         username: "mhasnneye",
         tweet_text: 'Sent a link',
@@ -17,7 +18,7 @@ const messagecomments = [
         location: "Agodim",
     },
     {
-        _id:1,
+        _id: 1,
         profile_name: "mhasnneye",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
@@ -25,7 +26,7 @@ const messagecomments = [
         location: "Agodim",
     },
     {
-        _id:2,
+        _id: 2,
         profile_name: "Lamine Mbacke",
         username: "mhasnneye",
         tweet_text: 'Sent a tweet',
@@ -36,14 +37,17 @@ const messagecomments = [
 
 const LeftContent: React.FC = () => {
     const { id } = useParams()
-    const {userInfo} = useAppSelector(store=> store.auth)
-    // const userId = id?.split('-')[1]
-    // const recieverId = id?.split('-')[2]
-    // console.log(id?.split('-')[1], id?.split('-')[0])
+    const [userconversation, setUserConversation] = useState([])
+    const { userInfo } = useAppSelector(store => store.auth)
+    const { conversation } = useAppSelector(store => store.conversation)
+
+
     const dispatch = useAppDispatch()
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(GetSingleconversationDetails(userInfo?._id))
-    },[])
+    }, [])
+
+
     return (
         <LeftContentStyles>
             <div className="flex column w-100 column gap-2">
@@ -61,34 +65,73 @@ const LeftContent: React.FC = () => {
                     </div>
 
                 </div>
-                <div className="search w-90 auto flex item-center justify-center gap-1">
-                    <GoSearch fontSize={'20px'} color='var(--grey-1)' />
-                    <input type="text" placeholder='Search direct messages' className='searchinput' />
-                </div>
+                {
+                    conversation?.length !== 0 && <div className="search w-90 auto flex item-center justify-center gap-1">
+                        <GoSearch fontSize={'20px'} color='var(--grey-1)' />
+                        <input type="text" placeholder='Search direct messages' className='searchinput' />
+                    </div>
+                }
+
                 <div className="flex column w-100">
                     {
-                        messagecomments.map((x, index) => {
-                            return <NavLink
-                                activeClassName="active"
-                                to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
-                                <div className="flex item-start gap-1">
-                                    <div className="image_wrapper">
-                                        <img src={x.image} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
-                                        <div className="image_gradient"></div>
-                                    </div>
-                                    <div className="flex flex-1 column " style={{ gap: ".1rem" }}>
-                                        <h4 className="fs-15 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
-                                            {x.profile_name}
-                                            <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                            <span className="text-light fs-14 text-grey ">@{x.username}</span>
-                                        </h4>
-                                        <h5 className="fs-15 text-light text-grey">{x.tweet_text}</h5>
+                        conversation?.length === 0 ? <div className="w-85 auto flex column">
+                            <h3 className="fs-30 text-extra-bold">Welcome to your inbox!
+                                <span className="text-light py-1 block fs-16 text-grey">Drop a line, share posts and more with private conversations between you and others on X. </span>
+                            </h3>
+                            <div className="w-100 flex item-start">
+                                <div className="btn btn-1 fs-16 text-white text-bold">Write Messages</div>
+                            </div>
+                        </div> : <div className="w-100">
+                            {
+                                conversation?.map((x, index) => {
+                                    return x?.sender?._id !== userInfo?._id && <NavLink
+                                        activeClassName="active"
+                                        to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
+                                        <div className="flex item-start gap-1">
+                                            <div className="image_wrapper">
+                                                <img src={x.sender?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                                                <div className="image_gradient"></div>
+                                            </div>
+                                            <div className="flex flex-1 column " style={{ gap: ".1rem" }}>
+                                                <h4 className="fs-16 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
+                                                    {x?.sender?.display_name}
+                                                    <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                                    <span className="text-light fs-14 text-grey">@{x?.sender?.name}</span>
+                                                </h4>
+                                                <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
 
-                                    </div>
-                                </div>
-                            </NavLink>
-                        })
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                })
+                            }
+                            {
+                                conversation?.map((x, index) => {
+                                    return x?.receiver?._id !== userInfo?._id && <NavLink
+                                        activeClassName="active"
+                                        to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
+                                        <div className="flex item-start gap-1">
+                                            <div className="image_wrapper">
+                                                <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                                                <div className="image_gradient"></div>
+                                            </div>
+                                            <div className="flex flex-1 item-center column " style={{ gap: ".1rem" }}>
+                                                <h4 className="fs-16 text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
+                                                    {x?.receiver?.display_name}
+                                                    <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                                    <span className="text-light fs-14 text-grey ">@{x?.receiver?.name}</span>
+                                                </h4>
+                                                <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
+
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                })
+                            }
+                        </div>
                     }
+                    {/* if sender */}
+
                 </div>
             </div>
         </LeftContentStyles>
