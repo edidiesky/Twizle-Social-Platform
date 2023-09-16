@@ -5,6 +5,8 @@ import { AiOutlineSetting } from 'react-icons/ai'
 import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/reduxtoolkit';
+import { ToggelDisplayModal } from '../../features/tweet/tweetSlice';
 
 type propTypes = {
     setDrop: (value: boolean) => void
@@ -12,6 +14,11 @@ type propTypes = {
 
 const Moredropdown: React.FC<propTypes> = ({ setDrop }) => {
     const [active, setActive] = useState(false)
+    const handleModal = ()=> {
+        dispatch(ToggelDisplayModal('any'))
+        setDrop(false)
+    }
+    const dispatch = useAppDispatch()
     return <Dropdown className="dropdown flex column">
         <div onClick={() => setDrop(false)} className="dropdown_background"></div>
 
@@ -45,7 +52,7 @@ const Moredropdown: React.FC<propTypes> = ({ setDrop }) => {
                     </span>
                 </div>
                 <div className={active ? "w-100 drop_options active" : "w-100 drop_options"}>
-                    <div className="fs-16 setting_list1 text-light text-dark w-100 flex item-center gap-2">
+                    <div onClick={handleModal} className="fs-16 setting_list1 text-light text-dark w-100 flex item-center gap-2">
                         <span className='fs-14'>
                             <AiOutlineSetting style={{ fontSize: "20px" }} />
                         </span>
