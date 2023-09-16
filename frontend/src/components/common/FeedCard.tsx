@@ -58,12 +58,12 @@ const FeedCard = (props: feedcardtype) => {
         dispatch(RePostATweet(props?._id))
     }
     const likes = props?.tweet_likes?.length
-    const handleDeleteTweet =()=> {
+    const handleDeleteTweet = () => {
         dispatch(DeleteTweet(props?._id))
         setDeleteModal(false)
     }
-   const handledeleteModal=()=> {
-        setDeleteModal(true) 
+    const handledeleteModal = () => {
+        setDeleteModal(true)
         setDrop(false)
     }
 
@@ -90,7 +90,7 @@ const FeedCard = (props: feedcardtype) => {
             </AnimatePresence>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
-                <ul style={{ fontSize: "14.6px" }}  className="flex column w-100 text-bold">
+                <ul style={{ fontSize: "14.6px" }} className="flex column w-100 text-bold">
                     {
                         checkifUser && <li onClick={handledeleteModal} style={{ color: "rgb(244, 33, 46)" }} className="flex text-extra-bold item-center gap-1">
                             <DeleteIcon />Delete</li>
@@ -133,7 +133,7 @@ const FeedCard = (props: feedcardtype) => {
                             <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                             <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@{props?.tweet_user_id?.name}</span>
                         </div>
-                       
+
                         {/* <span sty></span> */}
                         <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
                     </h4>
@@ -163,9 +163,9 @@ const FeedCard = (props: feedcardtype) => {
                                 <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
                                     <div onClick={() => setQuote(false)} className="dropdown_background"></div>
                                     <ul className="flex column w-100 text-bold">
-                                        <li style={{gap:"10px"}} onClick={handleRepostTweet} className="flex fs-15 text-dark text-extra-bold justify-center item-center">
+                                        <li style={{ gap: "10px" }} onClick={handleRepostTweet} className="flex fs-15 text-dark text-extra-bold justify-center item-center">
                                             <div className=" flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
-                                        <li style={{gap:"10px"}} onClick={handleQuoteModal}  className="flex fs-15 text-dark text-extra-bold justify-center item-center">
+                                        <li style={{ gap: "10px" }} onClick={handleQuoteModal} className="flex fs-15 text-dark text-extra-bold justify-center item-center">
                                             <div className=" flex item-center justify-center"><FollowIcon /></div>Quote </li>
                                     </ul>
                                 </div>

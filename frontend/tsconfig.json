@@ -16,6 +16,6 @@
       "noEmit": true,
       "jsx": "react-jsx"
     },
-    "include": ["src", "src/assets/svg/feedcardicons/.tsx"],
+    "include": ["src", "src/assets/svg/feedcardicons/.tsx", "src/components/modals/.tsx"],
     "references": [{ "path": "./tsconfig.node.json" }]
   }

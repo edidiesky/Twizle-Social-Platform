@@ -34,6 +34,8 @@ interface tweetState {
   showAlert?: Boolean,
   alertType?: string,
 
+  modal?:boolean,
+
 
 }
 
@@ -50,6 +52,8 @@ const initialState: tweetState = {
   tweetisError: false,
   isBookMarked: false,
   isLiked: false,
+  modal: true,
+
 
   // tweetisLoading: false,
   // tweetisSuccess: false,
@@ -76,6 +80,12 @@ export const tweetSlice = createSlice({
       state.alertText = ''
       state.showAlert = false
       state.alertType = ''
+    },
+    ToggelDisplayModal: (state, action) => {
+      state.modal = !state.modal
+    }, 
+    offDisplayModal: (state, action) => {
+      state.modal = false
     },
   },
   extraReducers: (builder) => {
@@ -298,7 +308,7 @@ export const tweetSlice = createSlice({
   },
 })
 
-export const { cleartweet } = tweetSlice.actions
+export const { cleartweet, ToggelDisplayModal, offDisplayModal } = tweetSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.tweet.value

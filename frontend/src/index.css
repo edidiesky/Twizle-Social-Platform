@@ -46,7 +46,7 @@
   --dark-1: rgb(0, 0, 0);
   --primary: #e4c590;
   --background_2: #0e0d0c;
-  --blue-1: rgb(29, 155, 240);
+  --blue-1: #1D9BF0;
   --grey-2: #f7f7f9;
   --white: #fff;
   --border: rgba(0, 0, 0, 0.06);
@@ -463,23 +463,23 @@ button {
 }
 
 .fs-20 {
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .fs-24 {
-  font-size: 2.4rem;
+  font-size: 24px;
 }
 
 .fs-26 {
-  font-size: 2.6rem;
+  font-size: 26px;
 }
 
 .fs-30 {
-  font-size: 3rem;
+  font-size: 30px;
 }
 
 .fs-35 {
-  font-size: 3.5rem;
+  font-size: 35px;
 }
 
 .fs-40 {
