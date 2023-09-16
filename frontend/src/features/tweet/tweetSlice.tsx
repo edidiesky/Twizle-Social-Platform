@@ -52,7 +52,7 @@ const initialState: tweetState = {
   tweetisError: false,
   isBookMarked: false,
   isLiked: false,
-  modal: true,
+  modal: false,
 
 
   // tweetisLoading: false,

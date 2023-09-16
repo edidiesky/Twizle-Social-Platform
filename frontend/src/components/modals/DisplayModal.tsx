@@ -18,14 +18,71 @@ type modalType = {
 const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
   const dispatch = useAppDispatch()
   const [colortab, setColorTab] = useState(0)
+  const [backgroundtab, setBackgroundTab] = useState(0)
   const [color, setColor] = useState([
-    'var(--blue-1)',
-    '#FFD400',
-    '#F91880',
-    '#7856FF',
-    '#FF7A00',
-    '#00BA7C',
+    {
+      text:"blue-theme",
+      color:"var(--blue-1)"
+    },
+    {
+      text: "yellow-theme",
+      color: "#FFD400"
+    },
+    {
+      text: "pinkred-theme",
+      color: "#F91880"
+    },
+    {
+      text: "purple-theme",
+      color: "#7856FF"
+    },
+    {
+      text: "greyred-theme",
+      color: "#FF7A00"
+    },
+     {
+      text: "green-theme",
+       color: "#00BA7C"
+    }
   ])
+  // let theme = 'light-theme'
+  // get the theme
+  const getBackgroundTheme = () => {
+    let theme: string = 'light-theme'
+
+    if (theme = 'light-theme') {
+      theme = localStorage.getItem('theme' || '')
+    }
+    return theme
+  }
+
+  const getColorTheme = () => {
+    let theme: string = 'blue-theme'
+
+    if (theme = 'blue-theme') {
+      theme = localStorage.getItem('colortheme' || '')
+    }
+    return theme
+  }
+  const [themes, setThemes] = useState(getBackgroundTheme())
+  const [colortheme, setColorTheme] = useState(getColorTheme())
+  // toggle the theme
+  // set the document class name to the theme
+
+  const handleBackgroundTheme = (theme: string, tab: number) => {
+    setThemes(theme)
+    setBackgroundTab(tab)
+  }
+  const handleColorTheme = (theme: string, tab: number) => {
+    setColorTheme(theme)
+    setColorTab(tab)
+  }
+  useEffect(() => {
+    document.documentElement.className = `${themes} ${colortheme}`
+    // store
+    localStorage.setItem('theme', themes);
+    localStorage.setItem('colortheme', colortheme);
+  }, [themes, colortheme])
 
   return (
     <DisplayModalStyles
@@ -68,7 +125,7 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
                   </div>
                   <div style={{ gap: '.4rem' }} className="flex flex-1 column">
                     <h4 className="fs-18 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                      <div style={{ gap: '.4rem' }} className="tweet_user flex item-cener">
+                      <div style={{ gap: '.4rem' }} className="tweet_user flex item-center">
                         X
                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                         <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@X</span>
@@ -78,7 +135,7 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
                       {/* <span sty></span> */}
                       <span style={{ fontSize: "15px" }} className="date text-light text-grey "></span>
                     </h4>
-                    <h5 style={{ paddingBottom: "1rem", fontSize: "16px"}} className="text_dark_grey text-light family1">
+                    <h5 style={{ paddingBottom: "1rem", fontSize: "16px" }} className="text_dark_grey text-light family1">
                       At the hearts of X are short messages called posts - Just like this one - Which can include photos, videos, links, text, hashtags and mentions like @X
                     </h5>
                   </div>
@@ -92,7 +149,7 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
                     {color.map((x, index) => {
 
                       const active = index === colortab
-                      return <div onClick={() => setColorTab(index)} style={{ background: `${x}` }}
+                      return <div onClick={() => handleColorTheme(`${x.text}`, index)} style={{ background: `${x.color}` }}
                         className="card_color text-white flex item-center justify-center">
                         <span className={active ? "flex item-center justify-center active" : "flex item-center justify-center"}>
                           <AiOutlineCheck fontSize={'24px'} />
@@ -108,29 +165,32 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
                   <h4 className="fs-14 text-grey text-bold">Background</h4>
                   <div className="tab_wrapper justify-space gap-1 flex item-center">
                     {/* blue */}
-                    <div className="background_tab flex-1 fs-15 text-bold flex item-center justify-center gap-1">
+                    <div onClick={() => handleBackgroundTheme('light-theme', 0)} className={`background_tab flex-1 ${backgroundtab === 0 && `active`} fs-15 text-bold flex item-center justify-center gap-1`}>
                       <div className="icons1 flex item-center justify-center">
-                        <div className="icon_check text-white flex item-center justify-center">
+
+                        <span className={backgroundtab === 0 ? "flex icon_check item-center justify-center active" : "flex icon_check item-center justify-center"}>
                           <AiOutlineCheck />
-                        </div>
+                        </span>
                       </div>
                       <span className="flex-1"> Default</span>
                     </div>
                     {/* blue */}
-                    <div className="background_tab flex-1 text-white tab1 fs-15 text-bold flex item-center justify-center gap-1">
+                    <div onClick={() => handleBackgroundTheme('dim-theme', 1)} className={`background_tab flex-1 text-white ${backgroundtab === 1 && `active`} tab1 fs-15 text-bold flex item-center justify-center gap-1`}>
                       <div className="icons1 icon2 flex item-center justify-center">
-                        <div className="icon_check text-white flex item-center justify-center">
-                          {/* <AiOutlineCheck /> */}
-                        </div>
+                        <span 
+                        className={backgroundtab === 1 ? 
+                        "flex icon_check item-center justify-center active" : "flex icon_check item-center justify-center"}>
+                          <AiOutlineCheck />
+                        </span>
                       </div>
                       <span className="flex-1">Dim</span>
                     </div>
                     {/* lights out */}
-                    <div className="background_tab flex-1 text-white tab2 fs-15 text-bold flex item-center justify-center gap-1">
+                    <div onClick={() => handleBackgroundTheme('dark-theme', 2)} className={`background_tab flex-1 text-white tab2 ${backgroundtab === 2 && `active`} fs-15 text-bold flex item-center justify-center gap-1`}>
                       <div className="icons1 icon2 flex item-center justify-center">
-                        <div className="icon_check text-white flex item-center justify-center">
-                          {/* <AiOutlineCheck /> */}
-                        </div>
+                        <span className={backgroundtab === 2 ? "flex icon_check item-center justify-center active" : "flex icon_check item-center justify-center"}>
+                          <AiOutlineCheck />
+                        </span>
                       </div>
                       <span className="flex-1">Lights Out</span>
                     </div>
@@ -139,7 +199,7 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
               </div>
             </div>
             <div className="w-100 flex item-center justify-center">
-              <div className="btn btn-3 fs-14 text-extra-bold text-white">Done</div>
+              <div onClick={() => dispatch(offDisplayModal('any'))} className="btn btn-3 fs-14 text-extra-bold text-white">Done</div>
 
             </div>
           </div>
@@ -173,14 +233,22 @@ const DisplayModalStyles = styled(motion.div)`
     border-radius: 4px;
     cursor:pointer;
     min-height:7.5rem;
-    border: 2px solid var(--blue-1);
+    &.active {
+      border: 2px solid var(--blue-1);
+    }
     &.tab1 {
       background-color: #15202B;
       border: none;
+       &.active {
+      border: 2px solid var(--blue-1);
+    }
     }
     &.tab2 {
-      background-color: var(--dark-1);
+      background-color: #0e0d0c;
       border: none;
+       &.active {
+      border: 2px solid var(--blue-1);
+    }
     }
   }
   .icons1 {
@@ -199,14 +267,28 @@ const DisplayModalStyles = styled(motion.div)`
    
     /* background-color: var(--dark-grey-hover); */
     .icon_check {
-      background-color: var(--blue-1);
+      border: 2px solid var(--grey-1);
       width: 60%;
       height: 60%;
       border-radius: 50%;
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        background-color: var(--blue-1);
+      border: none;
 
+        svg {
+ opacity: 1;
+        visibility: visible;
+        }
+      }
       svg {
-          width: 70%;
-      height: 70%;
+          width: 60%;
+      height: 60%;
+      opacity: 0;
+      visibility: hidden;
+      color: #fff;
+      transition: all .3s;
       }
     }
   }
@@ -226,13 +308,13 @@ const DisplayModalStyles = styled(motion.div)`
     }
   }
   .top {
-    height: 600px;
+    height: 635px;
     overflow:auto;
     border-radius: 20px;
     padding: 2rem 0;
   }
   .tab_wrapper {
-    background-color: #F7F9F9;
+    background-color: var(--grey-2);
     padding:1.4rem;
     border-radius: 13px;
   }
@@ -259,7 +341,7 @@ const DisplayModalStyles = styled(motion.div)`
     position:relative;
   }
   .btn-3 {
-        padding: 1rem 2rem;
+        padding: 1.4rem 2.5rem;
         background-color: var(--blue-1) !important;
   }
   .icon {

@@ -101,7 +101,6 @@ const QuoteFeedCard = () => {
                             </Link>
                         </Link>
                         <div className="w-100 flex item-center">
-                            <div className="image_wrapper"></div>
                             <div className="flex item-center w-85 auto gap-2">
                                 <div style={{ marginTop: ".6rem" }} className="flex item-center w-90 auto gap-2">
                                     <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
@@ -162,8 +161,8 @@ const QuoteCardStyles = styled.div`
     padding: 1.7rem .7rem;
     padding-bottom:.6rem;
      position: relative;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border1);
+    border-bottom: 1px solid var(--border1);
     &:hover {
         background-color: var(--dark-grey-hover);
     }
@@ -406,7 +405,7 @@ const FeedCardStyles = styled.div`
     padding: 1.7rem;
     padding-bottom:.6rem;
    position: relative;
-    border: 1px solid rgba(0,0,0,.1);
+    border: 1px solid var(--border) !important;
     border-radius: 16px;
     &:hover {
         background-color: var(--dark-grey-hover);

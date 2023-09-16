@@ -61,9 +61,54 @@
   --red:rgb(244, 33, 46);
   --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }
-/* :root {
+.light-theme {
+  --grey-1: rgb(113, 118, 123);
+  --grey-3:rgb(83, 100, 113);
+  --dark-1: rgb(0, 0, 0);
+  --primary: #e4c590;
+  --blue-1: #1D9BF0;
+
+  --background_2: #0e0d0c;
+  --blue-1: #1D9BF0;
+  --grey-2: #f7f7f9;
+  --white: #fff;
+  --border: rgba(0, 0, 0, 0.06);
+  --border1: rgba(207, 217, 222,.9);
+  --dark-grey: rgb(15, 20, 25);
+  --top: rgba(255, 255, 255, 0.65);
+  --top1: rgba(255, 255, 255, 0.65);
+  --dark-grey-hover: #f9f9f9d3;
+  --grey-hover: rgba(15, 20, 25, 0.1);
+  --grey-hover1: rgb(239, 243, 244);
+  --backdrop: rgba(0, 0, 0, 0.5);
+  --red:rgb(244, 33, 46);
+  --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+}
+
+.dim-theme {
+  --white: rgb(20,32,43);
+  --grey-3:#eff3f4;
+  --blue-1: #1D9BF0;
+
+  --dark-1: #eff3f4;
+  --dark-grey: #eff3f4;
+  --dark-grey-hover: #f9f9f90f;
+  --grey-hover: #f9f9f90f;
+  --grey-hover1: #f9f9f90b;
+  --grey-2: rgb(30,39,50);
+  --grey-1: rgb(113, 118, 123);
+  --border: rgba(255, 255, 255, 0.1);
+  --border1: rgba(255, 255, 255, 0.2);
+  --top:rgba(20, 32, 43, 0.435);
+  --top1:rgb(20,32,43);
+  --backdrop:rgba(49,59,69,.6);
+  --shadow:rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+}
+
+.dark-theme {
   --white: rgb(0, 0, 0);
   --grey-3:#eff3f4;
+  --blue-1: #1D9BF0;
 
   --dark-1: #eff3f4;
   --dark-grey: #eff3f4;
@@ -78,7 +123,23 @@
   --top1:rgba(0, 0, 0, 0.65);
   --backdrop:rgba(49,59,69,.6);
   --shadow:rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
-} */
+}
+.yellow-theme {
+  --blue-1: #FFD400;
+
+}
+.pinkred-theme {
+  --blue-1: #F91880;
+}
+.purple-theme {
+  --blue-1: #7856FF;
+}
+.greyred-theme {
+  --blue-1: #FF7A00;
+}
+.green-theme {
+  --blue-1: #00BA7C;
+}
 
 body {
   margin: 0;
@@ -139,8 +200,9 @@ h2 {
   outline: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  background-color: #1d9bf0;
+  background-color: var(--blue-1);
   z-index: 300;
+
   border-radius: 40px;
   text-align: center;
   padding: 1.7rem 3rem;
@@ -148,9 +210,11 @@ h2 {
 }
 .btn.btn-2 {
   opacity: 0.9;
+
 }
 .btn.btn-3 {
-  background-color: #000;
+  background-color: var(--dark-1);
+  color: var(--white);
   padding: 1rem 2rem;
   opacity: 1;
 }
