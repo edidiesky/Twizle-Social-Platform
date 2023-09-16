@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { AiOutlineSetting } from 'react-icons/ai'
 import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
-import { BiChevronDown } from 'react-icons/bi';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 type propTypes = {
@@ -10,6 +11,7 @@ type propTypes = {
 };
 
 const Moredropdown: React.FC<propTypes> = ({ setDrop }) => {
+    const [active, setActive] = useState(false)
     return <Dropdown className="dropdown flex column">
         <div onClick={() => setDrop(false)} className="dropdown_background"></div>
 
@@ -23,24 +25,36 @@ const Moredropdown: React.FC<propTypes> = ({ setDrop }) => {
 
         </ul>
         <div className="flex w-100 column">
-            <div className="fs-15 seeting_list text-bold text-dark w-100 flex item-center justify-space">
+            <div className="fs-15 setting_list text-bold text-dark w-100 flex item-center justify-space">
                 <span>Creator Studio</span>
                 <span>
-                    <BiChevronDown/>
+                    <BiChevronDown />
                 </span>
             </div>
-            <div className="fs-15 seeting_list text-bold text-dark w-100 flex item-center justify-space">
+            <div className="fs-15 setting_list text-bold text-dark w-100 flex item-center justify-space">
                 <span>Professional Tools</span>
                 <span>
                     <BiChevronDown />
                 </span>
             </div>
-            <div className="fs-15 seeting_list text-bold text-dark w-100 flex item-center justify-space">
-                <span>Settings and Support</span>
-                <span>
-                    <BiChevronDown />
-                </span>
+            <div style={{ gap: ".5rem" }} className="w-100 flex column item-start">
+                <div onClick={() => setActive(!active)} className="fs-15 setting_list text-bold text-dark w-100 flex item-center justify-space">
+                    <span>Settings and Support</span>
+                    <span>
+                        {!active?<BiChevronDown />:<BiChevronUp/>}
+                    </span>
+                </div>
+                <div className={active ? "w-100 drop_options active" : "w-100 drop_options"}>
+                    <div className="fs-16 setting_list1 text-light text-dark w-100 flex item-center gap-2">
+                        <span className='fs-14'>
+                            <AiOutlineSetting style={{ fontSize: "20px" }} />
+                        </span>
+                        <span>Display</span>
+
+                    </div>
+                </div>
             </div>
+
         </div>
     </Dropdown>
 }
@@ -57,12 +71,30 @@ const Dropdown = styled.div`
         background-color: var(--white);
         min-height: fit-content;
         transition: all .3s;    
+        overflow: hidden;
         /* opacity:0;
         visibility: hidden; */
      
         @media (max-width:500px) {
         width: 300px;
 
+        }
+        .drop_options {
+            height: 0;
+            transition: all .4s;
+            &.active {
+                height: 40px;
+            }
+        }
+        .setting_list1 {
+                padding:.6rem 2.4rem;
+            z-index: 200;
+            position: relative;
+          &:hover {
+                   /* background-color: #f1f1f1; */
+                   background-color: var(--dark-grey-hover);
+
+               }
         }
                .dropdown_background {
             width: 100vw;
@@ -82,7 +114,7 @@ const Dropdown = styled.div`
             left:0;
             background-color: transparent;
         }
-        .seeting_list {
+        .setting_list {
                 padding:.6rem 2.4rem;
             z-index: 200;
 
