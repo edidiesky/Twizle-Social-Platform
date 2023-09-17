@@ -20,7 +20,7 @@ const Regsiters: React.FC = () => {
   const [username, setUsername] = useState<boolean>(false)
   const [profile, setProfile] = useState<boolean>(false)
 
-  const [tab, setTab] = useState(2)
+  const [tab, setTab] = useState(0)
 
   // useEffect(()=> {
   //   if (!registerisSuccess) {

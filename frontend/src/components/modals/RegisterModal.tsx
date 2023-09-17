@@ -27,9 +27,10 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
   const dispatch = useAppDispatch()
   // console.log(registerisLoading)
 
-  const HandleRegisterUser = () => {
-    // e.preventDefault()
-    dispatch(registerUser({ email, name, password }))
+  const HandleRegisterUser = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // dispatch(registerUser({ email, name, password }))
+    console.log('submit')
   }
 
   return (
@@ -65,64 +66,27 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
             }
           </div>
         </div>
-        {
-          index === 1 ? <div className="center_content h-100 justify-space w-85 py-1 auto flex column">
+        <div className="center_content h-100 justify-space w-85 py-2 auto flex column">
 
-            <div className="w-85 formwraper auto flex column gap-3">
-              <h4 className="fs-35 text-extra-bold">Customize your experience</h4>
-              <div className="flex w-100 column gap-2">
-                <div className="flex column gap-1">
-                  <h5 className="fs-24 py-2 text-extra-bold"> Track where you see Twitter content across the web
-                    <span className="text-light fs-16 py-1 block text-dark">
-                      Twitter uses this data to personalize your experience. This web browsing history will never be stored with your name, email, or phone number.
-                    </span>
-
-
-                  </h5>
-                </div>
-                <h5 className="fs-16 text-light text-grey">By signing up, you agree to our Terms, Privacy Policy, and Cookie Use. Twitter may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy. Learn more</h5>
-              </div>
-            </div>
-            <div className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
-          </div> : index === 2 ? <div className="center_content h-100 justify-space w-85 py-2 auto flex column">
-
-            <div className="w-85 formwraper auto flex column gap-3">
+          <div className="w-85 formwraper justify-space auto flex column gap-2">
+            <div className="flex h-100 column gap-2">
               <h4 className="fs-30 text-extra-bold">Create your account</h4>
-              <div className="flex w-100 column gap-2">
-                <FormInput state={name} label={'Name'} setState={setName} />
-                <FormInput state={name} label={'Name'} setState={setName} />
-                <div className="flex column gap-1">
-                  <h5 className="fs-16 py-2 text-extra-bold">  Date of birth
-                    <span className="text-light py-1 block text-grey">This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</span>
-                  </h5>
+              <form onSubmit={(e) => HandleRegisterUser(e)} className="h-100 flex column justify-space">
+                <div className="flex w-100 column gap-2">
+                  <FormInput required={true} type="text" state={name} label={'Name'} setState={setName} />
+                  <FormInput required={true} type="email" state={email} label={'Email'} setState={setEmail} />
+                  <FormInput required={true} type="password" state={password} label={'Password'} setState={setPassword} />
                 </div>
-              </div>
-            </div>
-            <div className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
-          </div> : <div className="center_content h-100 justify-space w-85 py-2 auto flex gap-1 column">
-            <div className="hidden w-85 auto">
-              <div className="w-85 auto"><Message showAlert={false} alertText={'Hello Hi are u fine'} /></div>
-            </div>
-            <div className="w-85 formwraper auto flex column gap-3">
 
-              <h4 className="fs-30 text-dark text-extra-bold">Create your account</h4>
-              <div className="flex w-100 column" style={{ gap: "20px" }}>
-                <FormInput state={name} label={'Name'} setState={setName} />
-                <FormInput state={email} label={'Email'} setState={setEmail} />
-                <FormInput state={password} label={'Password'} setState={setPassword} />
-                {/* <div className="flex column gap-1">
-                  <h5 className="fs-16 py-2 text-extra-bold">  Date of birth
-                    <span className="text-light py-1 block text-grey">This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</span>
-                  </h5>
-                </div> */}
-              </div>
+                <button type="submit" className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
+                </button>
+
+              </form>
             </div>
-                <div onClick={HandleRegisterUser} className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
+           
           </div>
-        }
+
+        </div>
       </motion.div>
     </RegisterModalStyles>
     // <h2>hello</h2>
@@ -146,6 +110,8 @@ const RegisterModalStyles = styled(motion.div)`
     padding-bottom: 3rem;
   }
   .btn.btn-1 {
+    border: none;
+    outline: none;
     padding:1.6rem 2rem !important;
     margin-top: 4rem;
     &:hover {
@@ -298,7 +264,7 @@ const RegisterModalStyles = styled(motion.div)`
   }
   .deleteCard {
     max-width: 80vw;
-    min-width: 600px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     background: var(--white);
@@ -330,5 +296,7 @@ const RegisterModalStyles = styled(motion.div)`
   .center_content {
     background: var(--white);
     position: relative;
+    min-height: 50rem;
+
   }
 `;

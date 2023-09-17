@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
+import {styled} from 'styled-components'
+import { styled as styleds } from '@mui/material/styles';
 
-const InputTextField = styled(TextField)(({ theme }) => ({
+const InputTextField = styleds(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
@@ -52,7 +53,7 @@ const InputTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const AreaTextField = styled(TextField)(({ theme }) => ({
+const AreaTextField = styleds(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     backgroundColor: 'var(--white)',
@@ -103,33 +104,24 @@ const AreaTextField = styled(TextField)(({ theme }) => ({
 }));
 
 
+
 type EditInput = {
   types?: String
 }
-
-// Define the prop type for the setState function
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type EditInputTypes = {
   state?: string;
   label?: string;
   type?: string;
+  required?: boolean;
   setState?: (val: string) => void;
-  // bio?: string;
-  // setBio?: SetStateProp<string>;
-  // location?: string;
-  // setLocation?: SetStateProp<string>;
-  // website?: string;
-
-
-
-  // setWebsite?: SetStateProp<string>;
 };
 
 type FormInputProps = EditInput & EditInputTypes;
 
 
-const FormInput: React.FC<FormInputProps> = ({ types, type, setState, state, label }) => {
+const FormInput: React.FC<FormInputProps> = ({ types, type, setState, 
+  state, label, required }) => {
   const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (setState) {
       setState(e.target.value);
@@ -155,12 +147,14 @@ const FormInput: React.FC<FormInputProps> = ({ types, type, setState, state, lab
       type={type}
       variant="outlined"
       fullWidth
+      required={required}
       value={state}
       onChange={handleFormInput}
       multiline={types === ''}
 
     />
   );
+
  
 };
 
