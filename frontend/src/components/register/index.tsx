@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitter } from 'react-icons/bs'
@@ -15,10 +15,18 @@ import { useAppSelector } from "../../hooks/reduxtoolkit";
 const Regsiters: React.FC = () => {
   const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
 
-  const [registermodal, setRegisterModal] = useState(false)
-  const [loginmodal, setLoginModal] = useState(false)
-  const [username, setUsername] = useState(false)
-  const [profile, setProfile] = useState(false)
+  const [registermodal, setRegisterModal] = useState<boolean>(false)
+  const [loginmodal, setLoginModal] = useState<boolean>(false)
+  const [username, setUsername] = useState<boolean>(false)
+  const [profile, setProfile] = useState<boolean>(false)
+
+  const [tab, setTab] = useState(2)
+
+  // useEffect(()=> {
+  //   if (!registerisSuccess) {
+  //     setTab(1)
+  //   }
+  // }, [registerisSuccess, setTab])
   return (
     <RegsiterStyles style={{ overflow: "hidden" }}>
       {/* register modal */}
@@ -45,8 +53,7 @@ const Regsiters: React.FC = () => {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {registerisSuccess && <UsernameModal modal={username}
-          setModal={setUsername} />}
+        {tab === 1 && <UsernameModal />}
       </AnimatePresence>
 
       {/* profile modal */}
@@ -55,7 +62,7 @@ const Regsiters: React.FC = () => {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {profile && <ProfilePictureModal modal={profile}
+        {tab === 2 && <ProfilePictureModal modal={profile}
           setModal={setProfile} />}
       </AnimatePresence>
 

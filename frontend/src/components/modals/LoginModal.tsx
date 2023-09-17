@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
-  modal?: Boolean;
-  setModal: (val: Boolean) => void;
+  modal?: boolean;
+  setModal: (val: boolean) => void;
 }
 
 const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {

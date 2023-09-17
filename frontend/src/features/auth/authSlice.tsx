@@ -14,6 +14,11 @@ interface authState {
   registerisLoading?: Boolean,
   registerisSuccess?: Boolean,
   registerisError?: Boolean,
+
+  profilepictureisLoading?: Boolean,
+  profilepictureisSuccess?: Boolean,
+  usernameisLoading?: Boolean,
+  usernameisSuccess?: Boolean,
   usertoBefollowedInFllowingsArray?: boolean,
 
   loginisLoading?: Boolean,
@@ -27,6 +32,9 @@ interface authState {
   alertText?: any,
   showAlert?: Boolean,
   alertType?: string,
+
+ isLoading?: Boolean,
+ isSuccess?: Boolean,
 
 
 }
@@ -48,6 +56,11 @@ const initialState: authState = {
   loginisSuccess: false,
   loginisError: false,
 
+  profilepictureisLoading: false,
+  profilepictureisSuccess: false,
+  usernameisLoading: false,
+  usernameisSuccess: false,
+
 
   userprofileisLoading: false,
   userprofileisSuccess: false,
@@ -56,6 +69,9 @@ const initialState: authState = {
   alertText: '',
   showAlert: false,
   alertType: '',
+
+  isLoading: false,
+  isSuccess: false,
 
 }
 

@@ -2,24 +2,58 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BsTwitter } from 'react-icons/bs'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { slideUp } from "../utils/framer";
 import { RxCross2 } from 'react-icons/rx'
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
+import axios from "axios";
+import CameraIcon from "../../assets/svg/camera";
+import TwitterIcon from "../../assets/svg/twitter";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
-  modal?: Boolean;
-  setModal: (val: Boolean) => void;
+  modal?: boolean;
+  setModal: (val: boolean) => void;
+  setTab?: any
 }
 
-const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {
+const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
 
   const [profilepicture, setProfilePicture] = useState('');
+  const [image, setImage] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [alert, setAlert] = useState(false);
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?: string) => {
+    // get the file
+    // console.log('file')
+
+    const file = e?.target?.files[0];
+    setUploading(true);
+    // create formdata
+    const formData = new FormData();
+    formData.append("files", file);
+
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/v1/upload/single", formData, config);
+
+
+      setImage(data.urls)
+      setAlert(true);
+      setUploading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <ProfilePictureModalStyles
       as={motion.div}
@@ -40,7 +74,7 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {
 
         <div className="flex column justify-center item-center">
           <div style={{ marginTop: "10px" }} className="icon flex item-center justify-center">
-            <BsTwitter fontSize={'45px'} color='var(--blue-1)' />
+            <TwitterIcon type={'small'} />
           </div>
           <div className="center_content h-100 justify-space w-85 py-1 auto flex gap-1 column">
             <div className="hidden w-85 auto">
@@ -49,9 +83,25 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {
             <div className="w-85 formwraper auto flex column gap-3">
 
               <h3 className="fs-35 text-dark text-extra-bold">Pick a profile Picture
-                <span style={{ fontSize: "15px", marginTop: "6px" }} className="block fs-14 text-light">Have a favourite selfie? Upload it now.</span>
+                <span style={{ fontSize: "15px", marginTop: "6px" }} className="block text-grey fs-15 text-light">Have a favourite selfie? Upload it now.</span>
               </h3>
-              <div className="flex w-100 column" style={{ gap: "10px" }}>
+              <div className="flex w-100 column flex item-center justify-center" style={{ gap: "10px" }}>
+                <label htmlFor="upload_image" className="image_wrapper flex item-center justify-center">
+                  <CameraIcon />
+                  <input
+                    type="file"
+                    id="upload_image"
+                    placeholder="Gig Image"
+                    autoComplete="off"
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    multiple
+                    className="w-100"
+                  />
+                  <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="profile_image" className="avatar_profile" />
+                  <div className="image_gradient"></div>
+                </label>
+                
                 {/* <FormInput state={profilepicture} label={'ProfilePicture'} setState={setProfilePicture} /> */}
                 {/* <div className="profile_icons flex item-center justify-center">
                   <div className="profile_svg flex item-center justify-center">
@@ -99,7 +149,7 @@ const ProfilePictureModalStyles = styled(motion.div)`
   }
   .btn_3 {
     /* width: 100%; */
-    border:1px solid var(--border);
+    border:1px solid var(--border1);
     padding:1.4rem 0;
     border-radius:40px;
     cursor:pointer;
@@ -114,95 +164,39 @@ const ProfilePictureModalStyles = styled(motion.div)`
       opacity:.5;
     }
   }
-  .label {
-    width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3rem;
-  font-size: 1.3rem;
-  color: var(--dark-1);
-  font-weight: 700;
-  text-transform: capitalize;
-  position: relative;
-
-  .labelspan {
-    position: absolute;
-    top: -15%;
-    padding: 0 .6rem;
-    left: 2%;
-    background-color: var(--white);
-    font-weight: normal;
-  }
-  textarea {
-    height: 10rem;
-    border-radius: 8px;
-    background: transparent;
-    padding:1.8rem;
-    width: 100%;
-    outline: none;
-    font-size: 1.6rem;
-    font-weight: 500;
-    resize:none;
-    font-family: inherit;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    color: var(--dark-1);
-
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.4);
+  .image_wrapper {
+      width:32rem;
+      height:32rem;
+      position: relative;
+      border-radius:50%;
+      cursor:pointer;
+      margin: 0 auto;
+      border:5px solid #fff;
+      &:hover {
+        .image_gradient{
+          opacity:1;
+        }
+      }
     }
-    &:focus {
-      border: 2px solid var(--blue-1);
-      background: transparent;
+    .image_gradient {
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      /* transform: translateY(-100%); */
+      position: absolute;
+      background:rgba(0,0,0,.2);
+      /* opacity:0; */
+      transition:all .5s;
     }
-    &.true {
-      background: var(--white);
+    .avatar_profile {
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      /* transform: translateY(-100%); */
+      position: absolute;
+      object-fit:cover;
+      
     }
-    &.inputError {
-      border: 2px solid var(--red);
-    }
-    &:invalid[focused="true"] ~ span {
-      display: block;
-    }
-  }
-  input {
-    height: 5.5rem;
-    border-radius: 8px;
-    background: transparent;
-    padding: 0 1.8rem;
-    width: 100%;
-    outline: none;
-    font-size: 1.6rem;
-    font-weight: 500;
-    font-family: inherit;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    color: var(--dark-1);
-
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-    &:focus {
-      border: 2px solid var(--blue-1);
-      background: transparent;
-    }
-    &.true {
-      background: var(--white);
-    }
-    &.inputError {
-      border: 2px solid var(--red);
-    }
-    &:invalid[focused="true"] ~ span {
-      display: block;
-    }
-  }
-
-  span {
-    font-size: 1.3rem;
-    color: #c61212;
-    font-weight: 600;
-    display: none;
-  }
-  }
   .RegsiterBottom {
     position: relative;
     padding: 0 1rem;
@@ -259,8 +253,9 @@ const ProfilePictureModalStyles = styled(motion.div)`
   border-top-right-radius:20px;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
     display: flex;
+     max-width: 80vw;
+    min-width: 600px;
     flex-direction: column;
     background: var(--white);
     position: relative;
@@ -270,11 +265,9 @@ const ProfilePictureModalStyles = styled(motion.div)`
     border-radius:20px;
     border-top-right-radius:20px;
     justify-content:space-between;
-    @media (max-width:980px) {
-      width: 70%;
-    }
+   
     @media (max-width:580px) {
-      width: 90%;
+      width: 100%;
     }
     @media (max-width:580px) {
     min-height: 100vh;

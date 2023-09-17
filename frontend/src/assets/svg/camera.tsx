@@ -4,7 +4,7 @@ const CameraIcon: React.FC = () => {
     return (
         <span 
         style={{ width: '5rem', height: "5rem", 
-        background: "rgba(0,0,0,.6)", 
+        background: "rgba(0,0,0,.5)", 
         borderRadius: "50%", 
         zIndex:"50",
         cursor:"pointer" }} className="flex item-center justify-center">

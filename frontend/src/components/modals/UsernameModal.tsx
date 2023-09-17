@@ -34,7 +34,7 @@ const UsernameModal = () => {
         navigate('/')
       }, 4000);
 
-      return () => clearTimeout(navigate('/'), 4000)
+      return () => clearTimeout(navigate('/'),4000)
 
     }
   }, [userprofileisSuccess])
