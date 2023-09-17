@@ -72,8 +72,8 @@ const Regsiters: React.FC = () => {
       </div>
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
         <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
-          <div className="flex column gap-2">
-            <h1 className="text-dark text-bold">Happening now</h1>
+          <div className="flex column gap-1">
+            <h1 className="text-dark text-extra-bold">Happening now</h1>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
           </div>
           <div className="flex authWrapper column w-100 gap-1">
@@ -145,12 +145,6 @@ const RegsiterStyles = styled.div`
     @media (max-width:1080px) {
     font-size: 50px;
   }
-    @media (max-width:580px) {
-    font-size: 40px;
-    }
-    @media (max-width:380px) {
-    font-size: 35px;
-    }
   }
   .authWrapper {
     width: 55%;
@@ -160,7 +154,7 @@ const RegsiterStyles = styled.div`
     }
   }
   .btn {
-    padding: 1rem 2rem !important;
+    padding: 1.2rem 2rem !important;
     opacity:1 !important;
   }
   .authleft {
@@ -170,7 +164,7 @@ const RegsiterStyles = styled.div`
   }
   .authBtn {
     border: 1px solid var(--border1);
-    padding: .9rem 4rem;
+    padding: 1rem 4rem;
     border-radius: 40px;
     width: 100%;
     cursor: pointer;

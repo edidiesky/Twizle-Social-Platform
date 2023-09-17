@@ -7,6 +7,7 @@ import { CircularProgress } from '@mui/material';
 import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet } from '../../../features/tweet/tweetSlice';
 import { GetAllUserProfile } from '../../../features/auth/authReducer';
+import LoaderIndex from '../../loaders';
 
 const Feed: React.FC = () => {
     const { tweets, tweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
@@ -24,7 +25,9 @@ const Feed: React.FC = () => {
                 <div className="flex w-100 column">
                     {
                         tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                            <CircularProgress style={{ width: '25px', height: '25px', fontSize: '25px' }} color="primary" />
+                         
+                            <LoaderIndex type="small" />
+
                         </div> : <>
                             {
                                     tweets?.map((value: feedcardtype) => {

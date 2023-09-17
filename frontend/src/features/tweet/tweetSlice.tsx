@@ -26,15 +26,17 @@ interface tweetState {
   tweetisSuccess?: Boolean,
   tweetisError?: Boolean,
 
-  // tweetisLoading?: Boolean,
-  // tweetisSuccess?: Boolean,
-  // tweetisError?: Boolean,
+  createtweetisLoading?: Boolean,
+  createtweetisSuccess?: Boolean,
+  createtweetisError?: Boolean,
 
   alertText?: any,
   showAlert?: Boolean,
   alertType?: string,
 
   modal?:boolean,
+
+
 
 
 }
@@ -62,6 +64,10 @@ const initialState: tweetState = {
   alertText: '',
   showAlert: false,
   alertType: '',
+
+  createtweetisLoading: false,
+  createtweetisSuccess: false,
+  createtweetisError: false,
 
 }
 
@@ -129,7 +135,7 @@ export const tweetSlice = createSlice({
 
     // create user tweet
     builder.addCase(CreateTweet.pending, (state, action) => {
-      state.tweetisLoading = true
+      state.createtweetisLoading = true
 
     })
     builder.addCase(CreateTweet.fulfilled, (state, action) => {
@@ -137,7 +143,7 @@ export const tweetSlice = createSlice({
       state.alertText = 'Tweet created succesfully'
       state.showAlert = true
       state.tweetisLoading = false
-
+      state.createtweetisSuccess = true
       state.alertType = 'success'
     })
     builder.addCase(CreateTweet.rejected, (state, action) => {

@@ -24,13 +24,18 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { loginisLoading, loginisSuccess } = useAppSelector(store => store.auth)
+  const { loginisLoading, loginisSuccess,
+
+    alertText,
+    showAlert,
+    alertType,
+  } = useAppSelector(store => store.auth)
 
   const dispatch = useAppDispatch()
 
 
-  const handleLoginUser = () => {
-    // e.preventDefault()
+  const handleLoginUser = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     dispatch(loginUser({ email, password }))
   }
 
@@ -64,6 +69,8 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
         exit={"exit"}
         className={"deleteCard shadow"}
       >
+        <Message showAlert={showAlert} alertText={alertText} />
+
         {/* edit profile top */}
         <div className="flex Logintop w-100 auto ">
           <div className="w-90 auto flex gap-2 item-center">
@@ -91,14 +98,19 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
                 </div>
               </div>
               <div className="option">or</div>
+              <form onSubmit={(e) => handleLoginUser(e)} action="" className="w-100 flex column gap-2">
+                <div className="flex column gap-2">
+                  <FormInput required={true} state={email} label={'Email'} setState={setEmail} />
+                  <FormInput required={true} state={password} type='password' label={'Password'} setState={setPassword} />
 
+                </div>
+                <button disabled={loginisSuccess} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+                </button>
+              </form>
 
-              <FormInput state={email} label={'Email'} setState={setEmail} />
-              <FormInput state={password} type='password' label={'Password'} setState={setPassword} />
 
             </div>
-            <div onClick={handleLoginUser} className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
-            </div>
+
           </div>
 
         </div>
@@ -126,7 +138,12 @@ const RegisterModalStyles = styled(motion.div)`
     width: 70%;
   }
   .btn.btn-1 {
-    padding:1rem 2rem !important;
+    padding:1.6rem 2rem !important;
+     margin-top: 4rem;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .3 !important;
+    }
     &:hover {
       background-color: var(--grey-hover) !important;
     }

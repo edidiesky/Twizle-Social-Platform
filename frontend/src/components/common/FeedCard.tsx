@@ -128,7 +128,7 @@ const FeedCard = (props: feedcardtype) => {
 
                 <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex column flex-1" style={{ gap: '.3rem' }}>
                     <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                        <div className="tweet_user flex item-cener">
+                        <div style={{gap:".3rem"}} className="tweet_user flex item-center">
                             {props?.tweet_user_id?.display_name}
                             <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                             <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@{props?.tweet_user_id?.name}</span>
