@@ -5,6 +5,9 @@ const tweeturl: string = "/api/v1/tweet";
 type tweetdatatype = {
   tweet_text?: string;
   tweet_image?: any;
+  userIdIncludedInTweetLikesArray?:boolean;
+  tweetdetails?: any;
+  tweet?: any;
   _id?: string;
   tweet_user_id: {
     _id?: string;
@@ -59,7 +62,7 @@ export const getAllBookmarkedTweet = createAsyncThunk<{
         },
       };
       const response = await axios.get('/api/v1/tweet/bookmark', config);
-    return response.data.bookmarkTweets;
+      return response.data.bookmarkTweets;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -93,7 +96,7 @@ export const CreateTweet = createAsyncThunk<{
         localStorage.setItem("tweet", JSON.stringify(response2.data.tweet));
         return response2.data.tweet;
       }
-     
+
       // console.log(tweetData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -139,7 +142,7 @@ export const UpdateTweet = createAsyncThunk<{
 );
 
 // update User tweet
-export const BookMarkATweet = createAsyncThunk <BookMarkATweetPayload,{
+export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, {
   rejectValue: KnownError,
 }>(
   "BookMarkATweet",
@@ -159,7 +162,7 @@ export const BookMarkATweet = createAsyncThunk <BookMarkATweetPayload,{
         Detailsdata,
         config
       );
-     const response2 = await axios.get(
+      const response2 = await axios.get(
         `/api/v1/tweet/${Detailsdata}`,
         config
       );
@@ -212,7 +215,7 @@ export const DeleteTweet = createAsyncThunk<{
 
 
 // GetTweet Details
-export const GetSingleTweetDetails = createAsyncThunk < BookMarkATweetPayload,{
+export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, {
   rejectValue: KnownError,
 }>(
   "GetDetails",
@@ -220,7 +223,7 @@ export const GetSingleTweetDetails = createAsyncThunk < BookMarkATweetPayload,{
 
     try {
       const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -230,7 +233,7 @@ export const GetSingleTweetDetails = createAsyncThunk < BookMarkATweetPayload,{
         `/api/v1/tweet/${Detailsdata}`,
         config
       );
-       return {
+      return {
         tweetdetails: response.data.tweet,
         userIdIncludedInBookmarksArray: response.data.userIdIncludedInBookmarksArray
       };
@@ -246,9 +249,11 @@ export const GetSingleTweetDetails = createAsyncThunk < BookMarkATweetPayload,{
 );
 
 // Like and unlike a tweet
-export const LikeAndUnlikeATweet = createAsyncThunk<{
+export const LikeAndUnlikeATweet = createAsyncThunk<
+tweetdatatype,
+{
   rejectValue: KnownError,
-}, {id?:string}>(
+}>(
   "LikeAndUnlikeATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -266,10 +271,22 @@ export const LikeAndUnlikeATweet = createAsyncThunk<{
       // );
       // return response.data.updateTweet;
       const response = await axios.put(
-        `/api/v1/tweet/like/${Detailsdata}`,null,
+        `/api/v1/tweet/like/${Detailsdata}`, null,
         config
       );
-      return response.data.updateTweet;
+      const response1 =  await axios.get(
+        `/api/v1/tweet/${Detailsdata}`,
+        config
+      );
+      const response2 = await axios.get(
+        `/api/v1/tweet/`,
+        config
+      );
+      return {
+        tweetDetails: response.data.updateTweet,
+        tweet: response2.data.tweet,
+        userIdIncludedInTweetLikesArray: response1.data.userIdIncludedInTweetLikesArray
+      };
 
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -284,7 +301,7 @@ export const LikeAndUnlikeATweet = createAsyncThunk<{
 // Get User Tweet
 export const GetUserTweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:any}>(
+}, { _id?: any }>(
   "GetUserTweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -316,12 +333,12 @@ export const GetUserTweet = createAsyncThunk<{
 // Like and unlike a tweet
 export const RePostATweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:string}>(
+}, { _id?: string }>(
   "RePostATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth:{token: string } };
+      const { auth } = getState() as { auth: { token: string } };
 
       const config = {
         headers: {

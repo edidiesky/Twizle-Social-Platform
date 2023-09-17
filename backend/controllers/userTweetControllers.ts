@@ -61,13 +61,15 @@ const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) 
   const tweet = await UserTweet.findById({ _id: req.params.id })
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
   const userIdIncludedInBookmarksArray = tweet?.tweet_bookmarks.includes(req?.user?.userId)
+  const userIdIncludedInTweetLikesArray = tweet?.tweet_likes.includes(req?.user?.userId)
+
 
     if (!tweet) {
     res.status(404);
     throw new Error("The Tweet does not exist");
   }
 
-  res.status(200).json({ tweet, userIdIncludedInBookmarksArray });
+  res.status(200).json({ tweet, userIdIncludedInBookmarksArray, userIdIncludedInTweetLikesArray });
 });
 
 
@@ -110,9 +112,12 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
   const userIdIncludedInTweetLikesArray = tweet.tweet_likes.includes(userid)
   if (!userIdIncludedInTweetLikesArray) {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_likes: userid } }, { new: true })
+   
+
     res.status(200).json({ updateTweet });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
+
 
     res.status(200).json({ updateTweet });
 

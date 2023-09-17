@@ -14,6 +14,7 @@ import {
 } from './tweetReducer'
 const BookMarked = localStorage.getItem("isBookMarked");
 
+const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
 
 // Define a type for the tweet state
 interface tweetState {
@@ -35,6 +36,7 @@ interface tweetState {
   alertType?: string,
 
   modal?:boolean,
+  userIdIncludedInTweetLikesArray?:boolean
 
 
 
@@ -45,7 +47,7 @@ interface tweetState {
 const initialState: tweetState = {
   tweetDetails: null,
 
-  tweets: [],
+  tweets: tweetdata ? tweetdata: [],
   bookmarks: [],
 
 
@@ -68,6 +70,7 @@ const initialState: tweetState = {
   createtweetisLoading: false,
   createtweetisSuccess: false,
   createtweetisError: false,
+  userIdIncludedInTweetLikesArray:false
 
 }
 
@@ -246,12 +249,15 @@ export const tweetSlice = createSlice({
 
     // like and unlike slices
     builder.addCase(LikeAndUnlikeATweet.pending, (state, action) => {
-      state.tweetisLoading = true
+      // state.tweetisLoading = true
     })
     builder.addCase(LikeAndUnlikeATweet.fulfilled, (state, action) => {
       state.tweetisSuccess = true
-      state.tweetisLoading = false
-      state.tweetDetails = action.payload
+      state.tweetDetails = action.payload.tweetDetails
+      state.tweets = action.payload.tweet
+      localStorage.setItem("tweet", JSON.stringify(action.payload.tweet));
+
+      state.userIdIncludedInTweetLikesArray = action.payload.userIdIncludedInTweetLikesArray
       state.alertText = 'Tweet Update succesfully'
       state.showAlert = true
       state.alertType = 'success'
