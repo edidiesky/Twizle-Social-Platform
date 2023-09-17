@@ -8,8 +8,8 @@ import CameraIcon from "../../assets/svg/camera";
 import TwitterIcon from "../../assets/svg/twitter";
 import { clearUserProfile } from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
-
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
+import { UpdateProfile } from "../../features/auth/authReducer";
+import { useNavigate } from "react-router-dom";
 
 type modalType = {
   modal?: boolean;
@@ -19,9 +19,10 @@ type modalType = {
 
 const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
+  const navigate = useNavigate()
 
   const [profilepicture, setProfilePicture] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png');
   const [uploading, setUploading] = useState(false);
   const dispatch = useAppDispatch()
   const [alert, setAlert] = useState(false);
@@ -47,6 +48,7 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
 
 
       setImage(data.urls)
+      setProfilePicture(data.urls)
       setAlert(true);
       setUploading(false);
     } catch (err) {
@@ -64,11 +66,20 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
         navigate('/')
       }, 4000);
 
-      return () => clearTimeout(navigate('/'),4000)
+      return () => clearTimeout(navigate('/'), 4000)
       // setTab(2)
     }
   }, [userprofileisSuccess, setTab])
+  const handleProfileImage =()=> {
+    if(profilepicture) {
+      dispatch(UpdateProfile({ profile_image_url: profilepicture, _id: userInfo?._id }))
+      // console.log('Update profile')
 
+    } else {
+      navigate('/')
+      // console.log('Navigate')
+    }
+  }
   return (
     <ProfilePictureModalStyles
       as={motion.div}
@@ -113,22 +124,19 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
                     multiple
                     className="w-100"
                   />
-                  <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="profile_image" className="avatar_profile" />
+                  <img src={image} alt="profile_image" className="avatar_profile" />
                   <div className="image_gradient"></div>
                 </label>
-                
-                {/* <FormInput state={profilepicture} label={'ProfilePicture'} setState={setProfilePicture} /> */}
-                {/* <div className="profile_icons flex item-center justify-center">
-                  <div className="profile_svg flex item-center justify-center">
-                    <CgProfile style={{ width: "100%", height: "100%" }} />
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
         </div>
         <div className="flex w-85 py-2 auto item-center justify-center">
-          <div className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">Skip For Now</div>
+          <div onClick={handleProfileImage} className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">
+            {
+              profilepicture ? 'Update Profile' : "Skip For Now"
+            }
+          </div>
         </div>
 
       </motion.div>

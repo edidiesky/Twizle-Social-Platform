@@ -30,32 +30,33 @@ const Message: React.FC<messageprops> = ({
           : "gap-1 flex item-center justify-space"
       }
     >
-      <div className=" flex1 fs-14 text-bold text-center">{alertText}</div>
+      <div className=" flex1 text-light text-center">{alertText}</div>
     </MessageContent>
   );
 }
 
 const MessageContent = styled.div`
-  min-width: 260px;
+  min-width: 220px;
   padding: 1.2rem 2rem;
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
   background-color: var(--blue-1);
   z-index: 10000;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--white);
-  transition: all 0.6s;
+  transition: all 1s;
   text-align:center;
   position:fixed;
   /* top:-100%; */
   left:50%;
   transform:translateX(-50%);
   /* transform: translateY(-1000%); */
-  top: -10005%;
+  bottom: -100vh;
 
   &.active {
-    top: 5%;
+    bottom: -2%;
+  /* bottom: -1000%; */
+
   } 
   &.danger {
     background-color: var(--red);

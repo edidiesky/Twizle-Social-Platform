@@ -21,14 +21,19 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   const [password, setPassword] = useState('');
   const [index, setIndex] = useState(0);
 
-  const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
+  const { registerisLoading, registerisSuccess,
+    alertText,
+    showAlert,
+    alertType,
+
+   } = useAppSelector(store => store.auth)
   const dispatch = useAppDispatch()
   // console.log(registerisLoading)
 
   const HandleRegisterUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // dispatch(registerUser({ email, name, password }))
-    console.log('submit')
+    dispatch(registerUser({ email, name, password }))
+    // console.log('submit')
   }
 
   useEffect(()=> {
@@ -71,7 +76,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
           </div>
         </div>
         <div className="center_content h-100 justify-space w-85 py-2 auto flex column">
-
+          <Message showAlert={showAlert} alertText={alertText}/>
           <div className="w-85 formwraper justify-space auto flex column gap-2">
             <div className="flex h-100 column gap-2">
               <h4 className="fs-30 text-extra-bold">Create your account</h4>
