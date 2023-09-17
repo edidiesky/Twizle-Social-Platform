@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { BsTwitter } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
-import { CgProfile } from 'react-icons/cg'
 import { slideUp } from "../utils/framer";
-import { RxCross2 } from 'react-icons/rx'
-import FormInput from "../form/input";
 import Message from "../loaders/Message";
 import axios from "axios";
 import CameraIcon from "../../assets/svg/camera";
 import TwitterIcon from "../../assets/svg/twitter";
+import { clearUserProfile } from "../../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
@@ -21,10 +18,12 @@ type modalType = {
 }
 
 const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
+  const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
 
   const [profilepicture, setProfilePicture] = useState('');
   const [image, setImage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const dispatch = useAppDispatch()
   const [alert, setAlert] = useState(false);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?: string) => {
@@ -54,6 +53,22 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
       console.log(err);
     }
   };
+
+  // navigate home if update profile is succesfull
+  useEffect(() => {
+    dispatch(clearUserProfile("any"))
+  }, [])
+  useEffect(() => {
+    if (userprofileisSuccess) {
+      setTimeout(() => {
+        navigate('/')
+      }, 4000);
+
+      return () => clearTimeout(navigate('/'),4000)
+      // setTab(2)
+    }
+  }, [userprofileisSuccess, setTab])
+
   return (
     <ProfilePictureModalStyles
       as={motion.div}

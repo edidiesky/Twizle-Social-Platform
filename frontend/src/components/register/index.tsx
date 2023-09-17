@@ -35,7 +35,7 @@ const Regsiters: React.FC = () => {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {registermodal && !registerisSuccess && <RegsiterModal modal={registermodal}
+        {registermodal && !registerisSuccess && <RegsiterModal setTab={setTab} modal={registermodal}
           setModal={setRegisterModal} />}
       </AnimatePresence>
       {/* login modal */}
@@ -53,7 +53,7 @@ const Regsiters: React.FC = () => {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {tab === 1 && <UsernameModal />}
+        {tab === 1 && <UsernameModal setTab={setTab} />}
       </AnimatePresence>
 
       {/* profile modal */}

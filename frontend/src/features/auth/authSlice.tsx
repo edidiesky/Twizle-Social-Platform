@@ -11,30 +11,30 @@ interface authState {
   userDetails?: any,
   users?: any,
   token?: string,
-  registerisLoading?: Boolean,
-  registerisSuccess?: Boolean,
-  registerisError?: Boolean,
+  registerisLoading?: boolean,
+  registerisSuccess?: boolean,
+  registerisError?: boolean,
 
-  profilepictureisLoading?: Boolean,
-  profilepictureisSuccess?: Boolean,
-  usernameisLoading?: Boolean,
-  usernameisSuccess?: Boolean,
+  profilepictureisLoading?: boolean,
+  profilepictureisSuccess?: boolean,
+  usernameisLoading?: boolean,
+  usernameisSuccess?: boolean,
   usertoBefollowedInFllowingsArray?: boolean,
 
-  loginisLoading?: Boolean,
-  loginisSuccess?: Boolean,
-  loginisError?: Boolean,
+  loginisLoading?: boolean,
+  loginisSuccess?: boolean,
+  loginisError?: boolean,
 
-  userprofileisLoading?: Boolean,
-  userprofileisSuccess?: Boolean,
-  userprofileisError?: Boolean,
+  userprofileisLoading?: boolean,
+  userprofileisSuccess?: boolean,
+  userprofileisError?: boolean,
 
   alertText?: any,
-  showAlert?: Boolean,
+  showAlert?: boolean,
   alertType?: string,
 
- isLoading?: Boolean,
- isSuccess?: Boolean,
+ isLoading?: boolean,
+ isSuccess?: boolean,
 
 
 }

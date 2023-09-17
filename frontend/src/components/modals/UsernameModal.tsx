@@ -9,12 +9,10 @@ import TwitterIcon from "../../assets/svg/twitter";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { UpdateProfile } from "../../features/auth/authReducer";
 import { useNavigate } from "react-router-dom";
-
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
-
+import { clearUserProfile } from "../../features/auth/authSlice";
 
 
-const UsernameModal = () => {
+const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) => {
 
   const navigate = useNavigate()
 
@@ -29,15 +27,16 @@ const UsernameModal = () => {
 
   // navigate home if update profile is succesfull
   useEffect(() => {
+    dispatch(clearUserProfile("any"))
     if (userprofileisSuccess) {
-      setTimeout(() => {
-        navigate('/')
-      }, 4000);
+      // setTimeout(() => {
+      //   navigate('/')
+      // }, 4000);
 
-      return () => clearTimeout(navigate('/'),4000)
-
+      // return () => clearTimeout(navigate('/'),4000)
+      setTab(2)
     }
-  }, [userprofileisSuccess])
+  }, [userprofileisSuccess, setTab])
 
   return (
     <UsernameModalStyles

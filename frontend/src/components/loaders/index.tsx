@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-export default function LoaderIndex() {
 
-  // if (type === "small") {
-  //   return (
-  //     <Box
-  //       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-  //     >
-  //       <CircularProgress sx={{ width: "1rem" }} />
-  //     </Box>
-  //   );
-  // }
-  return (
-    <div>
-      <Backdrop
-        sx={{ color: "var(--blue-1)", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={true}
+const LoaderIndex: React.FC<{ type?: string }> = ({ type }) => {
+
+  if (type === "small") {
+    return (
+      <div
+        className="flex item-center justify-center"
+        style={{ width: "100vw", zIndex: "200", position: "fixed", height: "100vh", background: "var(--backdrop)" }}
       >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+        <div className="loading"></div>
+      </div>
+    );
+  }
+  return (
+    <div
+      className="flex item-center justify-center column gap-1"
+      style={{ width: "100vw", zIndex: "200", position: "fixed", height: "100vh", background: "var(--backdrop)" }}
+    >
+      <div className="loading"></div>
+      <div className="text-center w-100 text-bold fs-18">Loading ...</div>
     </div>
   );
 }
 
-// import React from "react";
-
-// export default function LoaderIndex() {
-//   return (
-//     <div id="preloader">
-//       <div class="sk-three-bounce">
-//         <div class="sk-child sk-bounce1"></div>
-//         <div class="sk-child sk-bounce2"></div>
-//         <div class="sk-child sk-bounce3"></div>
-//       </div>
-//     </div>
-//   );
-// }
+export default LoaderIndex

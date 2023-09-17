@@ -9,15 +9,13 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import LoaderIndex from "../loaders";
 import { registerUser } from "../../features/auth/authReducer";
 
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
-
-
 type modalType = {
   modal?: boolean;
   setModal: (val: boolean) => void;
+  setTab: (val?: any) => void;
 }
 
-const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
+const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -32,6 +30,12 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
     // dispatch(registerUser({ email, name, password }))
     console.log('submit')
   }
+
+  useEffect(()=> {
+    if(registerisSuccess) {
+      setTab(1)
+    }
+  }, [registerisSuccess])
 
   return (
     <RegisterModalStyles
@@ -78,7 +82,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal }) => {
                   <FormInput required={true} type="password" state={password} label={'Password'} setState={setPassword} />
                 </div>
 
-                <button type="submit" className="btn w-85 auto btn-1 fs-16 text-white text-extra-bold">Next
+                <button disabled={registerisSuccess} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
                 </button>
 
               </form>
@@ -107,13 +111,16 @@ const RegisterModalStyles = styled(motion.div)`
   justify-content: center;
   top: 0;
   .formwraper {
-    padding-bottom: 3rem;
   }
   .btn.btn-1 {
     border: none;
     outline: none;
     padding:1.6rem 2rem !important;
-    margin-top: 4rem;
+    margin-top: 10rem;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .3 !important;
+    }
     &:hover {
       opacity:.5;
     }
