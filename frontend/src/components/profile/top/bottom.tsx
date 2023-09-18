@@ -77,11 +77,11 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
         </div>
         {/* followers followings */}
         <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-3">
-          <div className="text-bold flex item-center" style={{ gap: ".5rem" }}>
+          <Link to={`/${userDetails?.name}/following`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
             {userDetails?.following_count || 0} <div className="text-light">Following</div>
-          </div> <div className="text-bold flex item-center" style={{ gap: ".5rem" }}>
+          </Link> <Link to={`/${userDetails?.name}/followers`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
             {userDetails?.followers_count || 0} <div className=" text-light">Followers</div>
-          </div>
+          </Link>
         </div>
       </div>
     </ProfileBottomStyles>
@@ -92,6 +92,9 @@ const ProfileBottomStyles = styled.div`
     width: 100%;
     padding-top:2rem;
     position: relative;
+    a:hover {
+      text-decoration: underline;
+    }
     .avatar_profile {
       width:12rem;
       height:12rem;

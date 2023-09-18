@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import LoaderIndex from '../../loaders';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
@@ -23,7 +24,7 @@ const Top: React.FC<modalType> = ({ setModal }) => {
                     <span style={{marginTop:"4px"}} className="flex item-center gap-1 fs-14 text-light text-dark">
                         {
                             tweetisLoading ? <div className="flex justify-center">
-                                <CircularProgress style={{ width: '15px', height: '15px', fontSize: '15px' }} color="primary" />
+                              <LoaderIndex type='small'/>
                             </div> : <>
                                 {tweets.length} {" "}
                             </>

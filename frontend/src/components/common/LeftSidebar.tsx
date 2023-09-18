@@ -154,7 +154,7 @@ const LeftSidebarIndex = () => {
 }
 
 const LeftSidebarStyles = styled.div`
-    flex: 0 0 310px;
+    flex: 0 0 285px;
     min-height: 100vh;
    position: sticky;
    top: 0;
@@ -205,7 +205,7 @@ const LeftSidebarStyles = styled.div`
     li {
   border-radius: 40px;
   text-align: center;
-  padding: 1.15rem 1rem;
+  padding: 1.1rem 1rem;
   padding-right: 2rem;
   font-size: 20px;
   @media (max-width:1180px) {

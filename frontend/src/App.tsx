@@ -87,7 +87,7 @@ export default function App() {
           </Route>
 
           {/* affilate */}
-          <Route path={"/:name/"} element={<AffilateLayoutIndex />}>
+          <Route path={"/:name"} element={<AffilateLayoutIndex />}>
             <Route path="followers" element={<Suspense fallback={<Preloader />}>
               <ProtectRoute>
                 <Followers />

@@ -219,12 +219,12 @@ export const GetAllUserProfile = createAsyncThunk<{
 // Getuser profile
 export const GetAllUserFollowings = createAsyncThunk<{
   rejectValue: KnownError,
-}>(
+}, string>(
   "GetAllUserFollowings",
-  async (_, { rejectWithValue, getState }) => {
+  async (authdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth, userInfo } = getState() as { auth: { userInfo: { _id: string }, token: string } };
+      const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
 
       const config = {
         headers: {
@@ -232,7 +232,7 @@ export const GetAllUserFollowings = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/followings/${userInfo?._id}`,
+        `/api/v1/user/followings/${authdata}`,
         config
       );
       return response.data.followings;
@@ -250,12 +250,12 @@ export const GetAllUserFollowings = createAsyncThunk<{
 
 export const GetAllUserFollowers = createAsyncThunk<{
   rejectValue: KnownError,
-}>(
+}, string>(
   "GetAllUserFollowers",
-  async (_, { rejectWithValue, getState }) => {
+  async (authdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth, userInfo } = getState() as { auth: { userInfo: { _id: string }, token: string } };
+      const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
 
       const config = {
         headers: {
@@ -263,7 +263,7 @@ export const GetAllUserFollowers = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/followers/${userInfo?._id}`,
+        `/api/v1/user/followers/${authdata}`,
         config
       );
       return response.data.followers;
