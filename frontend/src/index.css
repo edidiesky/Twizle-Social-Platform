@@ -71,6 +71,7 @@
 
   --background_2: #0e0d0c;
   --blue-1: #1D9BF0;
+  --grey-3:#CFD9DE;
   --grey-2: #f7f7f9;
   --white: #fff;
   --border: rgba(0, 0, 0, 0.06);
@@ -97,8 +98,9 @@
   --dark-grey-hover: #f9f9f90f;
   --grey-hover: #f9f9f90f;
   --grey-hover1: #f9f9f90b;
+  --grey-3:#425364;
   --grey-2: rgb(30,39,50);
-  --grey-1: rgb(113, 118, 123);
+  --grey-1: #425364;
   --border: rgba(255, 255, 255, 0.1);
   --border1: rgba(255, 255, 255, 0.2);
   --top:rgba(20, 32, 43, 0.435);
@@ -117,8 +119,9 @@
   --dark-grey-hover: #f9f9f90f;
   --grey-hover: #f9f9f90f;
   --grey-hover1: #f9f9f90b;
+  --grey-3:#425364;
   --grey-2: #16181C;
-  --grey-1: rgb(113, 118, 123);
+  --grey-1: #425364;
   --border: rgba(255, 255, 255, 0.1);
   --border1: rgba(255, 255, 255, 0.2);
   --top:rgba(0, 0, 0, 0.65);

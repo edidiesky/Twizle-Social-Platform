@@ -21,7 +21,7 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
   const date = moment(userDetails?.createdAt).format('MMM YYYY')
 
   return (
-    <ProfileBottomStyles className='flex column gap-1'>
+    <ProfileBottomStyles style={{marginTop:"2rem"}} className='flex column gap-1'>
       <div className="w-90 auto flex item-center justify-space">
         <div className="flex gap-1 item-center justify-end w-100"> 
          {

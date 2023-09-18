@@ -92,7 +92,7 @@ const Profile: React.FC = () => {
 
                                 <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                             </h2>
-                        </div> : <div className="w-100">
+                        </div> : <div className="w-100 h-100 wrapper">
                             {
                                 tweetisLoading ? <div className="flex py-2 w-100 justify-center">
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
@@ -164,7 +164,8 @@ const ProfileStyles = styled.div`
     .wraps {
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
-        min-height: 100vh;
+        /* min-height: 50vh; */
+        min-height: 150vh;
         @media (max-width:980px) {
     border-right : 1px solid var(--border);
 

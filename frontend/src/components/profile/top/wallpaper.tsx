@@ -30,8 +30,8 @@ const WallpaperIndex: React.FC = () => {
 
 const WallpaperStyles = styled.div`
     width: 100%;
-    height: 20rem;
-    background-color: #CFD9DE;
+    height: 25rem;
+    background-color: var(--grey-3);
     position: relative;
     .image_gradient {
       width:100%;
@@ -57,7 +57,7 @@ const WallpaperStyles = styled.div`
       z-index: 30;
       left:2%;
       cursor:pointer;
-      border:5px solid #fff;
+      border:5px solid var(--white);
          .image_gradient {
       width:100%;
       height:100%;
