@@ -31,6 +31,34 @@ const GetSingleUser = asyncHandler(async (req: ExpressRequest, res: Response) =>
   res.status(200).json({ user });
 });
 
+
+// GET All User Followings
+//  Public
+const GetAllUserFollowings = asyncHandler(async (req: ExpressRequest, res: Response) => {
+  let user = await User.findOne({_id:req.params.id});
+  if (!user) {
+    res.status(404);
+    throw new Error("The user does not exist");
+  }
+  // get all the user follwings
+  const followings = await User.find({_id:{$in:user?.followings}})
+  res.status(200).json({ followings });
+
+});
+
+// GET All User
+//  Public
+const GetAllUserFollowers = asyncHandler(async (req: ExpressRequest, res: Response) => {
+  let user = await User.findOne({ _id: req.params.id });
+  if (!user) {
+    res.status(404);
+    throw new Error("The user does not exist");
+  }
+  // get all the user follwings
+  const followers = await User.find({ _id: { $in: user?.followers } })
+  res.status(200).json({ followers });
+
+});
 //PRIVATE
 const UpdateUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
   
@@ -98,5 +126,7 @@ export {
   UpdateUser,
   GetAllUser,
   GetSingleUser,
-  FollowAndUnFollowUser
+  FollowAndUnFollowUser,
+  GetAllUserFollowers,
+  GetAllUserFollowings
 };

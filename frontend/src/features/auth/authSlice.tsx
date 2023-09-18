@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { FollowAndUnFollowAUser, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
+import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -35,6 +35,8 @@ interface authState {
 
  isLoading?: boolean,
  isSuccess?: boolean,
+ followers?:any,
+ followings?:any
 
 
 }
@@ -72,7 +74,8 @@ const initialState: authState = {
 
   isLoading: false,
   isSuccess: false,
-
+  followers: [],
+  followings: []
 }
 
 export const authSlice = createSlice({
@@ -206,6 +209,47 @@ export const authSlice = createSlice({
 
     })
     builder.addCase(GetAllUserProfile.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.userprofileisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+    // case for user followings
+
+    builder.addCase(GetAllUserFollowings.pending, (state, action) => {
+      state.userprofileisLoading = true
+    })
+    builder.addCase(GetAllUserFollowings.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      state.userprofileisLoading = false
+      state.followings = action.payload
+
+    })
+    builder.addCase(GetAllUserFollowings.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.userprofileisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+
+    builder.addCase(GetAllUserFollowers.pending, (state, action) => {
+      state.userprofileisLoading = true
+    })
+    builder.addCase(GetAllUserFollowers.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      state.userprofileisLoading = false
+      state.followers = action.payload
+
+    })
+    builder.addCase(GetAllUserFollowers.rejected, (state, action) => {
       state.userprofileisSuccess = false
       state.userprofileisError = true
       state.userprofileisLoading = false

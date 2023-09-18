@@ -11,7 +11,7 @@ type RegisterData = {
   display_name?: string;
   usertoBefollowedInFllowingsArray?:boolean;
   user?: any;
-  userInfo?: any;
+  userInfo?: { _id: string };
   token?: any;
   _id?: string;
   image?: string;
@@ -216,7 +216,64 @@ export const GetAllUserProfile = createAsyncThunk<{
   }
 );
 
+// Getuser profile
+export const GetAllUserFollowings = createAsyncThunk<{
+  rejectValue: KnownError,
+}>(
+  "GetAllUserFollowings",
+  async (_, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth, userInfo } = getState() as { auth: { userInfo: { _id: string }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/followings/${userInfo?._id}`,
+        config
+      );
+      return response.data.followings;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
 
 
+export const GetAllUserFollowers = createAsyncThunk<{
+  rejectValue: KnownError,
+}>(
+  "GetAllUserFollowers",
+  async (_, { rejectWithValue, getState }) => {
 
+    try {
+      const { auth, userInfo } = getState() as { auth: { userInfo: { _id: string }, token: string } };
 
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/followers/${userInfo?._id}`,
+        config
+      );
+      return response.data.followers;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);

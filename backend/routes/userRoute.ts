@@ -8,11 +8,15 @@ import {
   UpdateUser,
   GetAllUser,
   GetSingleUser,
-  FollowAndUnFollowUser
+  FollowAndUnFollowUser,
+  GetAllUserFollowers,
+  GetAllUserFollowings
 } from "../controllers/userControllers";
 
 router.get("/", authMiddleware, GetAllUser);
 router.put("/follow/:id", authMiddleware, FollowAndUnFollowUser);
+router.get("/followers/:id", authMiddleware, GetAllUserFollowers);
+router.get("/followings/:id", authMiddleware, GetAllUserFollowings);
 
 
 router.route('/profile/:id').get(authMiddleware, GetSingleUser)
