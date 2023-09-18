@@ -15,6 +15,7 @@ const BookmarksIndex: React.FC = () => {
 const BookmarksStyles = styled.div`
   width: 100%;
   position: relative;
+  overflow: auto;
 `
 
 export default BookmarksIndex

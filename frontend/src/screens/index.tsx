@@ -10,7 +10,11 @@ const QuoteIndex = lazy(() => import("./Quote"));
 const MessageIndex = lazy(() => import('./Message'))
 const MessageList = lazy(() => import('../components/messages/list'))
 const MessageContent = lazy(() => import('../components/messages/content'))
+const Followers = lazy(() => import('../components/affilate/followers'))
+const Followings = lazy(() => import('../components/affilate/followings'))
+const Verified = lazy(() => import('../components/affilate/verified'))
 import LayoutIndex from './Layout'
+import AffilateLayoutIndex from './AffilateLayout'
 export {
     Home,
     LayoutIndex,
@@ -22,7 +26,11 @@ export {
     LogoutIndex,
     MessageIndex,
     MessageList,
-    MessageContent
+    MessageContent,
+    AffilateLayoutIndex,
+    Followers,
+    Followings,
+    Verified
 
     // ShopIndex
 }

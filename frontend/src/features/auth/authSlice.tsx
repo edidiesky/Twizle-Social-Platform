@@ -271,6 +271,7 @@ export const authSlice = createSlice({
       state.users = action.payload.user
       state.userInfo = action.payload.userInfo
       state.usertoBefollowedInFllowingsArray = action.payload.usertoBefollowedInFllowingsArray
+      
       state.alertText = 'Profile Update succesfully'
       state.showAlert = true
       state.alertType = 'success'

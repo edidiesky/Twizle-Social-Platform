@@ -17,7 +17,9 @@ const LayoutIndex: React.FC = () => {
                 {modal && <DisplayModal modal={modal} />}
             </AnimatePresence>
             {/* <DisplayModal/> */}
-            <Outlet />
+            <div className="w-100">
+                <Outlet />
+            </div>
         </>
     )
 }

@@ -29,36 +29,38 @@ const Bookmarks: React.FC = () => {
         <ProfileStyles>
             {/* top bar of user profile */}
             <LeftSidebarIndex />
-            <div className="flex flex-1 wraps column ">
-                <Top />
-               
-                <div className="w-100 flex py-2 column">
-                   
-                    {
-                        bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
-                            <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
-                                @{userDetails?.display_name} you have no bookmarks
+            <div className="flex-1 flex wrapper item-center">
+                <div className="flex flex-1 wraps column ">
+                    <Top />
 
-                                <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
-                            </h2>
-                        </div> : <div className="w-100">
-                            {
-                                tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                                    <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
-                                </div> : <>
-                                    {
-                                        bookmarks?.map((value: feedcardtype) => {
-                                            return <FeedCard {...value} key={value._id} />
-                                        })
-                                    }
-                                </>
-                            }
-                        </div>
-                    }
+                    <div className="w-100 flex py-2 column">
 
+                        {
+                            bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
+                                <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
+                                    @{userDetails?.display_name} you have no bookmarks
+
+                                    <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
+                                </h2>
+                            </div> : <div className="w-100">
+                                {
+                                    tweetisLoading ? <div className="flex py-2 w-100 justify-center">
+                                        <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
+                                    </div> : <>
+                                        {
+                                            bookmarks?.map((value: feedcardtype) => {
+                                                return <FeedCard {...value} key={value._id} />
+                                            })
+                                        }
+                                    </>
+                                }
+                            </div>
+                        }
+
+                    </div>
                 </div>
+                <RightSidebarIndex />
             </div>
-            <RightSidebarIndex />
             {/* User feeds */}
         </ProfileStyles>
     )
@@ -71,8 +73,8 @@ const ProfileStyles = styled.div`
     height: 100vh;
     overflow: auto;
     align-items: flex-start;
-  border-right: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--border);
 
     @media (min-width:1380px) {
         max-width: 1380px;
@@ -110,10 +112,14 @@ const ProfileStyles = styled.div`
             }
         }
     }
+    .wrapper {
+        height: 100vh;
+    } 
     .wraps {
         border-right : 1px solid var(--border);
+        height: 100vh;
         border-left : 1px solid var(--border);
-        min-height: 100vh;
+      
         @media (max-width:980px) {
     border-right : 1px solid var(--border);
 

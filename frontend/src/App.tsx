@@ -12,7 +12,11 @@ import {
   LayoutIndex,
   MessageIndex,
   MessageList,
-  MessageContent
+  MessageContent,
+  Followers,
+  Followings,
+  Verified,
+  AffilateLayoutIndex
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -81,6 +85,21 @@ export default function App() {
               <MessageContent />
             </Suspense>} />
           </Route>
+
+          {/* affilate */}
+          <Route path={"/:name/"} element={<AffilateLayoutIndex />}>
+            <Route path="followers" element={<Suspense fallback={<Preloader />}>
+              <ProtectRoute>
+                <Followers />
+              </ProtectRoute>
+            </Suspense>} />
+            <Route path="following" element={<Suspense fallback={<Preloader />}>
+              <ProtectRoute>
+                <Followings />
+              </ProtectRoute>
+            </Suspense>} />
+          </Route>
+
 
           {/* tweet detail  route */}
           <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
