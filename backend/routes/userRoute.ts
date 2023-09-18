@@ -11,10 +11,12 @@ import {
   FollowAndUnFollowUser,
   GetAllUserFollowers,
   GetAllUserFollowings,
-  GetUsersNotFollowed
+  GetUsersNotFollowed,
+  GetUserSearch
 } from "../controllers/userControllers";
 
 router.get("/", authMiddleware, GetAllUser);
+router.get("/search", authMiddleware, GetUserSearch);
 router.put("/follow/:id", authMiddleware, FollowAndUnFollowUser);
 router.get("/notfollowed/:id", authMiddleware, GetUsersNotFollowed);
 router.get("/followers/:id", authMiddleware, GetAllUserFollowers);

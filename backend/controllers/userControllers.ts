@@ -1,6 +1,7 @@
 // import bcrypt from "bcryptjs";
 import asyncHandler from "express-async-handler";
-import { NextFunction, Request as ExpressRequest, Response } from "express";
+import { Request as ExpressRequest, Response } from "express";
+import UserTweet from "../models/UserTweet";
 
 import User from "../models/User";
 interface CustomInterface extends ExpressRequest {
@@ -13,13 +14,13 @@ interface CustomInterface extends ExpressRequest {
 // GET All User
 //  Public
 const GetAllUser = asyncHandler(async (req: CustomInterface, res: Response) => {
-    
+
   const user = await User.find({});
-    if (!user) {
-      res.status(404);
-      throw new Error("The user does not exist");
-    }
-    res.status(200).json({ user });
+  if (!user) {
+    res.status(404);
+    throw new Error("The user does not exist");
+  }
+  res.status(200).json({ user });
 
 });
 
@@ -43,17 +44,31 @@ const GetUsersNotFollowed = asyncHandler(async (req: ExpressRequest, res: Respon
   res.status(200).json({ user });
 });
 
+const GetUserSearch = asyncHandler(async (req: CustomInterface, res: Response) => {
+
+  // queries
+  const query = req.query.query
+  // get the user search
+  const user = await User.find({ $or: [{ name: { $regex: query, $options: "i" } }, { display_name: { $regex: query, $options: "i" } }] });
+  const tweet = await UserTweet.find({ tweet_text :{$regex:query, $options:"i"}})
+  if (!user) {
+    res.status(404);
+    throw new Error("The user does not exist");
+  }
+  res.status(200).json({ user, tweet });
+
+});
 
 // GET All User Followings
 //  Public
 const GetAllUserFollowings = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  let user = await User.findOne({_id:req.params.id});
+  let user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(404);
     throw new Error("The user does not exist");
   }
   // get all the user follwings
-  const followings = await User.find({_id:{$in:user?.followings}})
+  const followings = await User.find({ _id: { $in: user?.followings } })
   res.status(200).json({ followings });
 
 });
@@ -73,7 +88,7 @@ const GetAllUserFollowers = asyncHandler(async (req: ExpressRequest, res: Respon
 });
 //PRIVATE
 const UpdateUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  
+
   const user = await User.findById({ _id: req.params.id });
 
   if (!user) {
@@ -141,5 +156,6 @@ export {
   FollowAndUnFollowUser,
   GetAllUserFollowers,
   GetAllUserFollowings,
-  GetUsersNotFollowed
+  GetUsersNotFollowed,
+  GetUserSearch
 };
