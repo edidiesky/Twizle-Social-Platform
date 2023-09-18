@@ -12,8 +12,9 @@ interface CustomInterface extends ExpressRequest {
 
 // GET All User
 //  Public
-const GetAllUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
-    const user = await User.find({});
+const GetAllUser = asyncHandler(async (req: CustomInterface, res: Response) => {
+    
+  const user = await User.find({});
     if (!user) {
       res.status(404);
       throw new Error("The user does not exist");
@@ -23,6 +24,17 @@ const GetAllUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
 });
 
 const GetSingleUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
+  const user = await User.findOne({ name: req.params.id });
+  if (!user) {
+    res.status(404);
+    throw new Error("The user does not exist");
+  }
+  res.status(200).json({ user });
+});
+
+// GET
+// GET ALL USERS NOT FOLLOWED
+const GetUsersNotFollowed = asyncHandler(async (req: ExpressRequest, res: Response) => {
   const user = await User.findOne({ name: req.params.id });
   if (!user) {
     res.status(404);
@@ -128,5 +140,6 @@ export {
   GetSingleUser,
   FollowAndUnFollowUser,
   GetAllUserFollowers,
-  GetAllUserFollowings
+  GetAllUserFollowings,
+  GetUsersNotFollowed
 };

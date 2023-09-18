@@ -78,9 +78,9 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
         {/* followers followings */}
         <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-3">
           <Link to={`/${userDetails?.name}/following`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
-            {userDetails?.following_count || 0} <div className="text-light">Following</div>
+            {userDetails?.following?.length || 0} <div className="text-light">Following</div>
           </Link> <Link to={`/${userDetails?.name}/followers`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
-            {userDetails?.followers_count || 0} <div className=" text-light">Followers</div>
+            {userDetails?.followers?.length || 0} <div className=" text-light">Followers</div>
           </Link>
         </div>
       </div>
