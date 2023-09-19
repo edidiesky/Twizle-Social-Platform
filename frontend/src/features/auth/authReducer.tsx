@@ -167,6 +167,8 @@ export const FollowAndUnFollowAUser = createAsyncThunk < RegisterData,{
         `/api/v1/user`,
         config
       )
+      localStorage.setItem("User", JSON.stringify(response.data.updateUsers));
+
       return {
         user: response2.data.user,
         usertoBefollowedInFllowingsArray: response.data.usertoBefollowedInFllowingsArray,
@@ -267,6 +269,37 @@ export const GetAllUserFollowers = createAsyncThunk<{
         config
       );
       return response.data.followers;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+
+export const GetAllUserNotFollowed = createAsyncThunk<{
+  rejectValue: KnownError,
+}, string>(
+  "GetAllUserNotFollowed",
+  async (authdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/user/notfollowed/${authdata}`,
+        config
+      );
+      return response.data.notfollowedUsers;
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

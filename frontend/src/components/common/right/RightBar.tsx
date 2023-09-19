@@ -5,8 +5,9 @@ import { chatData } from '../../../data/chatData';
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FollowAndUnFollowAUser, GetAllUserProfile } from '../../../features/auth/authReducer';
+import { FollowAndUnFollowAUser, GetAllUserNotFollowed, GetAllUserProfile } from '../../../features/auth/authReducer';
 import { CircularProgress } from '@mui/material';
+import LoaderIndex from '../../loaders';
 type Rightbar = {
     types?: String
 }
@@ -19,11 +20,11 @@ const images = [
 
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
-    const { users, userprofileisLoading, userInfo, usertoBefollowedInFllowingsArray } = useAppSelector(store => store.auth)
+    const { notfollowedUsers, userprofileisLoading, userInfo, usertoBefollowedInFllowingsArray } = useAppSelector(store => store.auth)
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-        dispatch(GetAllUserProfile())
+        dispatch(GetAllUserNotFollowed(userInfo?._id))
     }, [])
 
     const handleFollowUser = (id: string) => {
@@ -96,10 +97,10 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                         <div className="flex column w-100">
                             {
                                 userprofileisLoading ? <div className="flex justify-center">
-                                    <CircularProgress style={{ width: '25px', height: '25px', fontSize: '15px' }} color="primary" />
+                                  <LoaderIndex type='small'/>
                                 </div> : <>
                                     {
-                                        users?.slice(1, 4).map((x, index) => {
+                                        notfollowedUsers?.slice(0, 3).map((x, index) => {
                                             const active = userInfo?.followings?.includes(x?._id)
                                             return <div key={index} className="w-100 list flex item-center justify-space">
                                                 <div className="flex item-center gap-1">

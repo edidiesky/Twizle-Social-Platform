@@ -4,6 +4,7 @@ import { Request as ExpressRequest, Response } from "express";
 import UserTweet from "../models/UserTweet";
 
 import User from "../models/User";
+import mongoose from "mongoose";
 interface CustomInterface extends ExpressRequest {
   user?: {
     userId?: String;
@@ -25,23 +26,35 @@ const GetAllUser = asyncHandler(async (req: CustomInterface, res: Response) => {
 });
 
 const GetSingleUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
+
   const user = await User.findOne({ name: req.params.id });
   if (!user) {
     res.status(404);
     throw new Error("The user does not exist");
   }
   res.status(200).json({ user });
+
 });
 
 // GET
 // GET ALL USERS NOT FOLLOWED
 const GetUsersNotFollowed = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  const user = await User.findOne({ name: req.params.id });
+  const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(404);
     throw new Error("The user does not exist");
   }
-  res.status(200).json({ user });
+  // find the users not included in the followings
+  const followersId = user?.followings?.map(followerId => new mongoose.Types.ObjectId(followerId))
+  const followersArray = followersId?.concat(new mongoose.Types.ObjectId(req.params.id))
+  const notfollowedUsers = await User.aggregate([
+    {
+      $match: {
+        _id: { $nin: followersArray }
+      }
+    }
+  ])
+  res.status(200).json({ notfollowedUsers });
 });
 
 const GetUserSearch = asyncHandler(async (req: CustomInterface, res: Response) => {
@@ -50,7 +63,7 @@ const GetUserSearch = asyncHandler(async (req: CustomInterface, res: Response) =
   const query = req.query.query
   // get the user search
   const user = await User.find({ $or: [{ name: { $regex: query, $options: "i" } }, { display_name: { $regex: query, $options: "i" } }] });
-  const tweet = await UserTweet.find({ tweet_text :{$regex:query, $options:"i"}})
+  const tweet = await UserTweet.find({ tweet_text: { $regex: query, $options: "i" } })
   if (!user) {
     res.status(404);
     throw new Error("The user does not exist");

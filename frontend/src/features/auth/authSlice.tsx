@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
+import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserNotFollowed, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -33,10 +33,11 @@ interface authState {
   showAlert?: boolean,
   alertType?: string,
 
- isLoading?: boolean,
- isSuccess?: boolean,
- followers?:any,
- followings?:any
+  isLoading?: boolean,
+  isSuccess?: boolean,
+  followers?: any,
+  followings?: any,
+  notfollowedUsers?: any
 
 
 }
@@ -75,7 +76,8 @@ const initialState: authState = {
   isLoading: false,
   isSuccess: false,
   followers: [],
-  followings: []
+  followings: [],
+  notfollowedUsers:[]
 }
 
 export const authSlice = createSlice({
@@ -112,7 +114,7 @@ export const authSlice = createSlice({
       state.alertText = "";
     },
   },
- 
+
   extraReducers: (builder) => {
     // registration build case
     builder.addCase(registerUser.pending, (state, action) => {
@@ -259,6 +261,27 @@ export const authSlice = createSlice({
 
     })
 
+    // get all user not followed
+
+    builder.addCase(GetAllUserNotFollowed.pending, (state, action) => {
+      state.userprofileisLoading = true
+    })
+    builder.addCase(GetAllUserNotFollowed.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      state.userprofileisLoading = false
+      state.notfollowedUsers = action.payload
+
+    })
+    builder.addCase(GetAllUserNotFollowed.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.userprofileisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
 
     builder.addCase(FollowAndUnFollowAUser.pending, (state, action) => {
       // state.userprofileisLoading = true
@@ -271,7 +294,7 @@ export const authSlice = createSlice({
       state.users = action.payload.user
       state.userInfo = action.payload.userInfo
       state.usertoBefollowedInFllowingsArray = action.payload.usertoBefollowedInFllowingsArray
-      
+
       state.alertText = 'Profile Update succesfully'
       state.showAlert = true
       state.alertType = 'success'
