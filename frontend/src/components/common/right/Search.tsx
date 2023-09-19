@@ -8,12 +8,15 @@ const Search: React.FC = () => {
     <SearchContainer>
       <div className="w-90 auto flex column gap-1">
         <form action="" className="w-90 family1 auto flex item-center gap-2">
-          <BsSearch color="var(--dark-1)" />
-          <input
-            type="text"
-            placeholder="Search"
-            className="input fs-16 w-100 text-dark family1"
-          />
+          <label htmlFor="search" className="flex h-100 w-100 item-center gap-2">
+            <BsSearch color="var(--dark-1)" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="input fs-15 w-100 text-dark text-light"
+            />
+          </label>
+         
         </form>
       </div>
     </SearchContainer>
@@ -53,23 +56,31 @@ const SearchContainer = styled.div`
   form {
    padding:1.4rem 2rem;
     background-color: var(--grey-2);
+      border: 1px solid var(--grey-2);
+
     border-radius: 40px;
     position: sticky;
     top: 0;
     z-index: 3000;
 
     left: 0;
+    &:hover {
+      border: 1px solid var(--blue-1);
+    }
     @media (max-width: 920px) {
       gap: 0.6rem;
       height: 4.5rem;
     }
-    svg {
+   label {
+     svg {
       font-size: 20px;
       @media (max-width: 900px) {
         font-size: 28px;
       }
     }
     .input {
+      font-family: inherit;
     }
+   }
   }
 `;
