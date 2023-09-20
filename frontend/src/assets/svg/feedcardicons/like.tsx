@@ -8,11 +8,11 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
         return (
             <span style={{
                 width: "23px",
-                color: "var(--grey-3)",
+                color: "var(--grey-1)",
                 height: "23px",
 
                 position: "relative",
-                fill: isClicked ? "var(--red)" : "currentcolor",
+                fill: isClicked ? "var(--red)" : "var(--grey-1)",
                 display: "inline-block",
             }}>
                 <svg viewBox="0 0 24 24"
@@ -21,6 +21,7 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
                         width: "100%",
                         height: "100%",
                         display: "inline-block",
+                        fill: isClicked ? "var(--red)" : "var(--grey-1)",
                     }}>
 
                     <g> 
@@ -38,10 +39,10 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: isClicked ? 'red' : "var(--grey-3)",
+            color: isClicked ? 'red' : "var(--grey-1)",
             height: "1.25em",
             position: "relative",
-            fill: isClicked ? "var(--red)" : "currentcolor",
+            fill: isClicked ? "var(--red)" : "var(--grey-1)",
             display: "inline-block",
         }}>
             <svg viewBox="0 0 24 24"
@@ -50,6 +51,7 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
                     width: "100%",
                     height: "100%",
                     display: "inline-block",
+                    fill: isClicked ? "var(--red)" : "var(--grey-1)",
                 }}>
 
                 <g>

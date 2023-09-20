@@ -1,13 +1,10 @@
 import React from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { BsSearch, BsThreeDots } from "react-icons/bs";
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom';
-import { GetUserProfile } from '../../../features/auth/authReducer';
-import Search from '../../common/right/Search';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
@@ -83,6 +80,8 @@ const TopStyles = styled.div`
   top: 0;
   background-color: var(--top1);
   z-index: 300;
+     border-right : 1px solid var(--border);
+        border-left : 1px solid var(--border);
   /* padding: 1rem 0; */
   backdrop-filter: blur(12px);
   padding:1rem 0;

@@ -37,7 +37,7 @@ const RetweetIcon: React.FC<iconType> = ({ isClicked, type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-3)",
+            color: "var(--grey-1)",
             height: "1.25em",
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",

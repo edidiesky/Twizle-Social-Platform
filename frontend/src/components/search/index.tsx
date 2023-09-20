@@ -49,7 +49,7 @@ const Search: React.FC = () => {
                                             <span className="text-light fs-14 block text-grey">Try searching for something else, or check your Search settings to see if they’re protecting you from potentially sensitive content.</span>
                                         </h2>
                                     </div>
-                                        : <div className="w-100">
+                                        : <div className="w-100 wrappers">
                                             {
                                                 userSearchResult?.length !== 0 && <div className="w-100 flex bottom column gap-1">
                                                     <h4 className="fs-20 w-90 auto text-extra-bold">People</h4>
@@ -244,6 +244,11 @@ const ProfileStyles = styled.div`
     overflow: auto;
 
     } 
+    .wrappers {
+           border-right : 1px solid var(--border);
+        /* min-height: 100vh; */
+        border-left : 1px solid var(--border);
+    }
     .wraps {
         border-right : 1px solid var(--border);
         min-height: 100vh;

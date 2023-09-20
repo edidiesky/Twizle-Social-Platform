@@ -7,7 +7,7 @@ const StatIcon: React.FC<iconType> = ({ type }) => {
         return (
             <span style={{
                 width: "23px",
-                color: "var(--grey-3)",
+                color: "var(--grey-1)",
                 height: "23px",
 
                 position: "relative",
@@ -34,7 +34,7 @@ const StatIcon: React.FC<iconType> = ({ type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-3)",
+            color: "var(--grey-1)",
             height: "1.25em",
             position: "relative",
             fill: "currentcolor",
