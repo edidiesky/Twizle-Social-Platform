@@ -4,13 +4,14 @@ import axios, { AxiosError } from "axios";
 const Registerurl: string = "/api/v1/auth/register";
 const Loginurl = "/api/v1/auth/login";
 
-type RegisterData = {
+type authtype = {
   name?: string;
   email?: string;
   password?: string;
   display_name?: string;
   usertoBefollowedInFllowingsArray?:boolean;
   user?: any;
+  tweet?: any;
   userInfo?: { _id: string };
   token?: any;
   _id?: string;
@@ -29,7 +30,7 @@ type KnownError = {
   errorMessage: string;
 }
 
-export const registerUser = createAsyncThunk<RegisterData, {
+export const registerUser = createAsyncThunk<authtype, {
   rejectValue: KnownError,
 
 }>(
@@ -53,7 +54,7 @@ export const registerUser = createAsyncThunk<RegisterData, {
   }
 );
 
-export const loginUser = createAsyncThunk<RegisterData, {
+export const loginUser = createAsyncThunk<authtype, {
   rejectValue: KnownError,
 }>(
   "loginUser",
@@ -82,7 +83,7 @@ export const loginUser = createAsyncThunk<RegisterData, {
 // update user profile
 export const UpdateProfile = createAsyncThunk<{
   rejectValue: KnownError,
-}, RegisterData>(
+}, authtype>(
   "UpdateProfile",
   async (profiledata, { rejectWithValue, getState }) => {
 
@@ -144,7 +145,7 @@ export const GetUserProfile = createAsyncThunk<{
   }
 );
 
-export const FollowAndUnFollowAUser = createAsyncThunk < RegisterData,{
+export const FollowAndUnFollowAUser = createAsyncThunk < authtype,{
   rejectValue: KnownError,
 }>(
   "FollowAndUnFollowAUser",
@@ -281,6 +282,7 @@ export const GetAllUserFollowers = createAsyncThunk<{
 );
 
 
+// get all user not followed by the user
 export const GetAllUserNotFollowed = createAsyncThunk<{
   rejectValue: KnownError,
 }, string>(
@@ -300,6 +302,42 @@ export const GetAllUserNotFollowed = createAsyncThunk<{
         config
       );
       return response.data.notfollowedUsers;
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+
+
+// get all user not followed by the user
+export const GetUserSearch = createAsyncThunk < authtype,{
+  rejectValue: KnownError,
+}>(
+  "GetUserSearch",
+  async (authdata, { rejectWithValue, getState }) => {
+
+    try {
+      const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `/api/v1/user/search?query=${authdata}`,
+        config
+      );
+      return {
+        user: response.data.user,
+        tweet: response.data.tweet
+      };
 
     } catch (err: any) {
       const message = err.response && err.response.data.message

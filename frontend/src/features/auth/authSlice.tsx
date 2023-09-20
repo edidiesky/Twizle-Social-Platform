@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserNotFollowed, GetAllUserProfile, GetUserProfile, UpdateProfile, loginUser, registerUser } from './authReducer'
+import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserNotFollowed, GetAllUserProfile, GetUserProfile, GetUserSearch, UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -37,6 +37,8 @@ interface authState {
   isSuccess?: boolean,
   followers?: any,
   followings?: any,
+  userSearchResult?: any,
+  tweetSearchResult?: any,
   notfollowedUsers?: any
 
 
@@ -77,7 +79,9 @@ const initialState: authState = {
   isSuccess: false,
   followers: [],
   followings: [],
-  notfollowedUsers:[]
+  notfollowedUsers:[],
+  userSearchResult: [],
+  tweetSearchResult: [],
 }
 
 export const authSlice = createSlice({
@@ -276,6 +280,28 @@ export const authSlice = createSlice({
       state.userprofileisSuccess = false
       state.userprofileisError = true
       state.userprofileisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+    // get all user not followed
+
+    builder.addCase(GetUserSearch.pending, (state, action) => {
+      state.isLoading = true
+    })
+    builder.addCase(GetUserSearch.fulfilled, (state, action) => {
+      state.userprofileisSuccess = true
+      state.isLoading = false
+      state.userSearchResult = action.payload.user
+      state.tweetSearchResult = action.payload.tweet
+
+    })
+    builder.addCase(GetUserSearch.rejected, (state, action) => {
+      state.userprofileisSuccess = false
+      state.userprofileisError = true
+      state.isLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload

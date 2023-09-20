@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsThreeDots } from "react-icons/bs";
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { useParams } from 'react-router-dom';
@@ -48,6 +48,8 @@ const Top: React.FC<modalType> = ({ setModal }) => {
 
                     </form>
                 </div>
+                <div className="icons flex item-center justify-center"><BsThreeDots color='var(--dark-1)' fontSize={'20px'} /></div>
+
             </div>
             <ul className="w-100 flex item-center text-bold fs-16 profilelist">
                 <li className="flex-1 profileTag active w-100">
@@ -108,7 +110,7 @@ const TopStyles = styled.div`
            
         }
          form {
-   padding:1.4rem 2rem;
+   padding:1.2rem 2rem;
     background-color: #EFF3F4;
       border: 1px solid #EFF3F4;
 

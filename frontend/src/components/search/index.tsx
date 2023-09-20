@@ -10,21 +10,24 @@ import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import { useSearchParams } from 'react-router-dom';
+import { GetUserSearch } from '../../features/auth/authReducer';
 
 const Search: React.FC = () => {
     const [tab, setTab] = useState(0)
-    const feed = false
-    // console.log(name)
+    let [searchParams, setSearchParams] = useSearchParams();
+    const queryvalue = searchParams.get("q");
+    // console.log(queryvalue)
     const [modal, setModal] = React.useState<Boolean>(false)
 
-    const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { userInfo, userSearchResult, tweetSearchResult, isLoading } = useAppSelector(store => store.auth)
+    const { bookmarks } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getAllBookmarkedTweet())
-    }, [])
+        dispatch(GetUserSearch(queryvalue))
+    }, [queryvalue])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
@@ -36,33 +39,22 @@ const Search: React.FC = () => {
                         <Top/>
                         <div className="w-100 flex column">
 
-                            {
+                            {/* {
                                 bookmarks?.map((value: feedcardtype) => {
                                     return <FeedCard {...value} key={value._id} />
                                 })
-                            }
-
-                            {/* {
-                                bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
-                                    <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
-                                        @{userDetails?.display_name} you have no bookmarks
-
-                                        <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
-                                    </h2>
-                                </div> : <div className="w-100">
-                                    {
-                                        tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                                            <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
-                                        </div> : <div className='w-100'>
-                                            {
-                                                bookmarks?.map((value: feedcardtype) => {
-                                                    return <FeedCard {...value} key={value._id} />
-                                                })
-                                            }
-                                        </div>
-                                    }
-                                </div>
                             } */}
+
+                            {
+                                userSearchResult?.length === 0 && tweetSearchResult?.length === 0 && <div className="flex w-85 auto py-2 item-center justify-center">
+                                    <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-35 w-85 auto text-extra-bold">
+                                        No results for 
+                                        <span className="block">"{queryvalue}"</span>
+
+                                        <span className="text-light fs-14 block text-grey">Try searching for something else, or check your Search settings to see if they’re protecting you from potentially sensitive content.</span>
+                                    </h2>
+                                </div>
+                            }
 
                         </div>
                     </div>
