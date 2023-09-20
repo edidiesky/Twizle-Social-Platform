@@ -21,6 +21,7 @@ import {
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
+import LoaderIndex from "./components/loaders";
 
 export default function App() {
   const [height, setHeight] = useState(0);
@@ -66,7 +67,7 @@ export default function App() {
             />
 
             {/* user profile route */}
-            <Route path=":name" element={<Suspense fallback={<Preloader />}>
+            <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
               <ProtectRoute>
                 <Profile />
               </ProtectRoute>
@@ -76,7 +77,7 @@ export default function App() {
             />
           </Route>
           <Route path={"/messages"} element={<MessageIndex />}>
-            <Route index element={<Suspense fallback={<Preloader />}>
+            <Route index element={<Suspense fallback={<LoaderIndex />}>
               <ProtectRoute>
                 <MessageList />
               </ProtectRoute>
