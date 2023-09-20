@@ -315,10 +315,10 @@ export const GetAllUserNotFollowed = createAsyncThunk<{
 
 
 
-// get all user not followed by the user
+// get all user and tweet search by the user
 export const GetUserSearch = createAsyncThunk < authtype,{
   rejectValue: KnownError,
-}>(
+}, string>(
   "GetUserSearch",
   async (authdata, { rejectWithValue, getState }) => {
 

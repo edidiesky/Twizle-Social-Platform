@@ -157,7 +157,7 @@ const LeftSidebarStyles = styled.div`
     flex: 0 0 310px;
     min-height: 100vh;
    position: sticky;
-    border-right: 1px solid var(--border);
+    /* border-right: 1px solid var(--border); */
 
    top: 0;
         z-index: 4000;

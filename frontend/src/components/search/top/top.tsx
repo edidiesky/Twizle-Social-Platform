@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { BsSearch, BsThreeDots } from "react-icons/bs";
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom';
 import { GetUserProfile } from '../../../features/auth/authReducer';
@@ -15,19 +15,18 @@ type modalType = {
 
 const Top: React.FC<modalType> = ({ setModal }) => {
     const { userDetails } = useAppSelector(store => store.auth)
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    const [search, setSearch] = React.useState('')
+
     const [tab, setTab] = React.useState(0)
     const dispatch = useAppDispatch()
     const { name } = useParams()
     const { followings } = useAppSelector(store => store.auth)
-    React.useEffect(() => {
-        //  dispatch(get)
-        if (name) {
-            dispatch(GetUserProfile(name))
-        }
-    }, [name])
-
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
-
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setSearchParams({ q:`${search}`})
+    }
 
 
     return (
@@ -36,10 +35,13 @@ const Top: React.FC<modalType> = ({ setModal }) => {
             <div className='flex item-center gap-1 w-90 auto'>
                 <Link to={'/'} className="icons flex item-center justify-center"><AiOutlineArrowLeft color='var(--dark-1)' fontSize={'20px'} /></Link>
                 <div className="flex-1">
-                    <form action="" className="w-90 family1 auto flex item-center gap-2">
+                    <form onSubmit={(e) => handleSearch(e)} className="w-90 family1 auto flex item-center gap-2">
                         <label htmlFor="search" className="flex h-100 w-100 item-center gap-2">
                             <BsSearch color="var(--dark-1)" />
                             <input
+                                value={search}
+                                name='search'
+                                onChange={(e) => setSearch(e.target.value)}
                                 type="text"
                                 placeholder="Search"
                                 className="input fs-15 w-100 text-dark text-light"
