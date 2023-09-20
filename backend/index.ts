@@ -22,9 +22,10 @@ import quoteRoute from "./routes/quoteTweetRoute";
 import uploadRoute from "./routes/uploadRoute";
 import conversationRoute from "./routes/conversationRoute";
 import messageRoute from "./routes/messageRoute";
+import commentRoute from "./routes/commentRoute";
 
 
-// routes
+// end points
 app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);
@@ -32,6 +33,7 @@ app.use("/api/v1/upload", uploadRoute);
 app.use("/api/v1/quote", quoteRoute);
 app.use("/api/v1/conversation", conversationRoute);
 app.use("/api/v1/message", messageRoute);
+app.use("/api/v1/comment", commentRoute);
 
 
 const mongoUrl = process.env.MONGO_URL;
