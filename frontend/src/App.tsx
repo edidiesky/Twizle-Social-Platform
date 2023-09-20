@@ -16,7 +16,8 @@ import {
   Followers,
   Followings,
   Verified,
-  AffilateLayoutIndex
+  AffilateLayoutIndex,
+  Search
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -74,7 +75,6 @@ export default function App() {
 
             />
           </Route>
-
           <Route path={"/messages"} element={<MessageIndex />}>
             <Route index element={<Suspense fallback={<Preloader />}>
               <ProtectRoute>
@@ -85,7 +85,6 @@ export default function App() {
               <MessageContent />
             </Suspense>} />
           </Route>
-
           {/* affilate */}
           <Route path={"/:name"} element={<AffilateLayoutIndex />}>
             <Route path="followers" element={<Suspense fallback={<Preloader />}>
@@ -99,8 +98,6 @@ export default function App() {
               </ProtectRoute>
             </Suspense>} />
           </Route>
-
-
           {/* tweet detail  route */}
           <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
             <ProtectRoute>
@@ -109,8 +106,14 @@ export default function App() {
           </Suspense>
           }
           />
-
-
+          {/* tweet search  route */}
+          <Route path="/search" element={<Suspense fallback={<Preloader />}>
+            <ProtectRoute>
+              <Search />
+            </ProtectRoute>
+          </Suspense>
+          }
+          />
           {/* Logout route */}
           <Route path="logout" element={<Suspense fallback={<Preloader />}>
             <ProtectRoute>

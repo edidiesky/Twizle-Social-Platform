@@ -94,7 +94,7 @@ const LeftSidebarIndex = () => {
             <LeftSidebarStyles>
 
 
-                <div className="flex column justify-space wrapper auto gap-1">
+                <div className="flex column w-100 justify-space leftwrapper auto gap-1">
                     <div className="leftTop flex column">
                         <div className="flex w-100 column">
                             <div className="flex top w-100">
@@ -154,9 +154,11 @@ const LeftSidebarIndex = () => {
 }
 
 const LeftSidebarStyles = styled.div`
-    flex: 0 0 285px;
+    flex: 0 0 310px;
     min-height: 100vh;
    position: sticky;
+    border-right: 1px solid var(--border);
+
    top: 0;
         z-index: 4000;
 
@@ -284,7 +286,7 @@ const LeftSidebarStyles = styled.div`
         width: 85%;
         margin: 0 auto;
     }
-    .wrapper {
+    .leftwrapper {
         height: 100vh;
    position: sticky;
    top: 0%;

@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { RiVideoAddFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Search: React.FC = () => {
+  const [search, setSearch] = useState('')
+  const navigate = useNavigate()
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    navigate(`/search?q=${search}`)
+  }
   return (
     <SearchContainer>
       <div className="w-90 auto flex column gap-1">
-        <form action="" className="w-90 family1 auto flex item-center gap-2">
+        <form onSubmit={(e) => handleSearch(e)} action="" className="w-90 family1 auto flex item-center gap-2">
           <label htmlFor="search" className="flex h-100 w-100 item-center gap-2">
             <BsSearch color="var(--dark-1)" />
             <input
+              value={search}
+              name='search'
+              onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Search"
               className="input fs-15 w-100 text-dark text-light"
             />
           </label>
-         
+
         </form>
       </div>
     </SearchContainer>

@@ -13,6 +13,7 @@ const MessageContent = lazy(() => import('../components/messages/content'))
 const Followers = lazy(() => import('../components/affilate/followers'))
 const Followings = lazy(() => import('../components/affilate/followings'))
 const Verified = lazy(() => import('../components/affilate/verified'))
+const Search = lazy(() => import('./Search'))
 import LayoutIndex from './Layout'
 import AffilateLayoutIndex from './AffilateLayout'
 export {
@@ -30,7 +31,8 @@ export {
     AffilateLayoutIndex,
     Followers,
     Followings,
-    Verified
+    Verified,
+    Search
 
     // ShopIndex
 }

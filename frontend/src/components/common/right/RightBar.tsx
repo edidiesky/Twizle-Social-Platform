@@ -161,6 +161,8 @@ const RightSidebarStyles = styled.div`
    min-height: 100vh;
    position: sticky;
    top: 0;
+    border-left: 1px solid var(--border);
+
    @media (max-width:1080px) {
         flex: .6;
     }
