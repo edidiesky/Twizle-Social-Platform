@@ -55,8 +55,8 @@
   --dark-grey-hover: #f9f9f9d3;
   --grey-hover: rgba(15, 20, 25, 0.1);
   --grey-hover1: rgb(239, 243, 244);
-  --backdrop: rgb(148,149,149);
-  --backdrop1: rgb(148,149,149);
+  --backdrop: rgba(0, 0, 0, 0.4);
+  --backdrop1: rgba(0, 0, 0, 0.4);
   --red:rgb(244, 33, 46);
   --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }

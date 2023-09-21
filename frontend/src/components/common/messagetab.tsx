@@ -192,7 +192,7 @@ const MessageTab: React.FC<modalType> = ({ }) => {
                                     </div>
                                     <div className="flex flex-1 item-center justify-space">
                                         <div style={{ gap: '.4rem' }} className="flex column flex-1">
-                                            <h4 className="fs-16 text-dark text-bold relative flex item-center" style={{ gap: '.4rem' }}>
+                                            <h4 className="fs-16 text-dark text-bold relative flex item-center" style={{ gap: '1rem' }}>
                                                 <div style={{ gap: ".3rem" }} className=" flex item-center">
                                                     <span className="text-bold tweet_user">{x?.display_name}</span>
                                                     <span className="text-light fs-14 text-grey tweet_user1">@{x?.username}</span>
@@ -226,12 +226,26 @@ export default MessageTab
 
 const MessageTabStyles = styled.div`
  position: absolute;
- left:0;
+ right:10%;
  bottom:-200%;
- width:95%;
+ width:85%;
  transition: all .6s ease;
+ @media (min-width:1440px) {
+        bottom: -250%;
+
+ }
+  @media (min-width:2560px) {
+        bottom: -450%;
+    }
  &.active {
     bottom:-120%;
+     @media (min-width:1440px) {
+        bottom: -150%;
+
+ }
+    @media (min-width:2560px) {
+        bottom: -350%;
+    }
  }
   .timeline {
     min-height: 4.6rem;
@@ -246,7 +260,7 @@ const MessageTabStyles = styled.div`
         overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 100px;
+  max-width: 70px;
   
     }
 .top {

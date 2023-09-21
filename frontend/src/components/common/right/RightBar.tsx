@@ -141,14 +141,14 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
 
                         </div>
                     </div>
-                    <div className="flex item-center text-dark w-90 auto fs-16 text-light flex-wrap" style={{ gap: ".5rem", paddingBottom: "2rem" }}>
-                        <h5 className='text-light'>Terms of Service</h5>
-                        <h5 className='text-light'>Privacy Policy</h5>
-                        <h5 className='text-light'>Cookie Policy</h5>
-                        <h5 className='text-light'>Ads info</h5>
-                        <h5 className='text-light'>More</h5>
-                        <h5 className='text-light'>Edidiong Essien</h5>
-                        <h5 className='text-light'>© 2023</h5>
+                    <div className="flex item-center w-85 auto fs-16 text-light flex-wrap" style={{ gap: ".5rem", paddingBottom: "2rem", color:"rgb(83, 100, 113)" }}>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 3px"}}>Terms of Service</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 3px"}}>Privacy Policy</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 1px"}}>Cookie Policy</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 1px"}}>Ads info</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 2px"}}>More</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px"}}>Edidiong Essien</Link>
+                        <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 2px"}}>© 2023 Eddy Corp..</Link>
                     </div>
                     <MessageTab/>
                 </div>
@@ -180,6 +180,9 @@ const RightSidebarStyles = styled.div`
     }
   h5 {
     color: var(--grey-1);
+  }
+  .links:hover {
+    text-decoration: underline;
   }
   .feed_participant {
     border: 1px solid var(--border);
