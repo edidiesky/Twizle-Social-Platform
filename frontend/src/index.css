@@ -45,6 +45,7 @@
   --blue-1: #1D9BF0;
   --grey-3:#CFD9DE;
   --grey-2: #f7f7f9;
+  --grey-4:#EFF3F4;
   --white: #fff;
   --border: rgba(0, 0, 0, 0.06);
   --border1: rgba(207, 217, 222,.9);
@@ -65,6 +66,7 @@
   --dark-1: rgb(0, 0, 0);
   --primary: #e4c590;
   --blue-1: #1D9BF0;
+  --grey-4:#EFF3F4;
 
   --background_2: #0e0d0c;
   --blue-1: #1D9BF0;
@@ -87,6 +89,7 @@
 
 .dim-theme {
   --white: rgb(20,32,43);
+  --grey-4:#eff3f4;
   --grey-3:#eff3f4;
   --blue-1: #1D9BF0;
 
@@ -108,6 +111,7 @@
 
 .dark-theme {
   --white: rgb(0, 0, 0);
+  --grey-4:#eff3f4;
   --grey-3:#eff3f4;
   --blue-1: #1D9BF0;
 

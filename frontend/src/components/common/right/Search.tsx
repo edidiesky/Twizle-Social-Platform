@@ -65,8 +65,8 @@ const SearchContainer = styled.div`
   }
   form {
    padding:1.4rem 2rem;
-    background-color: var(--grey-2);
-      border: 1px solid var(--grey-2);
+    background-color: var(--grey-4);
+      border: 1px solid var(--grey-4);
 
     border-radius: 40px;
     position: sticky;
