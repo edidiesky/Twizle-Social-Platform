@@ -60,7 +60,6 @@ const createReplyComment = asyncHandler(async (req: CustomInterface, res: Respon
 // GET All Reply
 //  Public
 const getAllReply = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const userId = req.user?.userId
   const tweetid = req.params.tweetid
   // get the tweet comment is to be rendered 
   const tweet = await UserTweet.findOne({ _id: tweetid })

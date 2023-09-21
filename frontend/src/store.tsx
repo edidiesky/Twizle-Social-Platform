@@ -4,6 +4,7 @@ import tweetSlice  from './features/tweet/tweetSlice'
 import quoteSlice from './features/quote/quoteSlice'
 import messageSlice from './features/message/messageSlice'
 import conversationSlice from './features/conversation/conversationSlice'
+import commentSlice from './features/comment/commentSlice'
 // ...
 
 export const store = configureStore({
@@ -13,9 +14,7 @@ export const store = configureStore({
     quotes:quoteSlice,
     conversation: conversationSlice,
     message: messageSlice,
-    
-    // comments: commentsReducer,
-    // users: usersReducer,
+    comment: commentSlice
   },
 })
 

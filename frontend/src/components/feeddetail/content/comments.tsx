@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
-import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
-import { LiaRetweetSolid } from 'react-icons/lia'
+import { BiSolidBadgeCheck,BiDotsHorizontalRounded } from 'react-icons/bi'
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
 import ShareIcon from '../../../assets/svg/feedcardicons/share';
 import MessageIcon from '../../../assets/svg/feedcardicons/message';
 import FollowIcon from '../../../assets/svg/dropdownicons/follow';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
+import { getAllComment } from '../../../features/comment/commentReducer';
 
 const postcomments = [
     {
@@ -26,13 +26,22 @@ const PostDetailsComments: React.FC = () => {
     const [quote, setQuote] = useState(false)
     const [tweet, setTweet] = useState(false)
     const [like, setLike] = useState(false)
+    const { comment } = useAppSelector(store => store.comment)
+    const { tweetDetails } = useAppSelector(store => store.tweet)
+    const dispatch = useAppDispatch()
+    useEffect(()=> {
+        if (tweetDetails) {
+            dispatch(getAllComment(tweetDetails?._id))
+        }
+        
+    }, [tweetDetails])
     return (
         <PostDetailsCommentsStyles className='w-100 flex column '>
             {
-                postcomments.map((x, index) => {
-                    return <div key={index} className="postCard w-100 flex item-start justify-space gap-2">
+                comment?.map((x, index) => {
+                    return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
                         <div className="image_wrapper">
-                            <img src={x.image} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                            <img src={x.user?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                             <div className="image_gradient"></div>
                         </div>
 
@@ -40,11 +49,11 @@ const PostDetailsComments: React.FC = () => {
                             <div className="flex item-start justify-space gap-1 w-100 " style={{ gap: ".3rem" }}>
                                 <div className="flex column">
                                     <h4 className="fs-16 text-bold flex item-center" style={{ gap: '.2rem', fontSize: "15px" }}>
-                                        {x.profile_name}
+                                        {x.user?.display_name}
                                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                        <span className="text-light fs-14 text-grey ">@{x.username}</span>
+                                        <span className="text-light fs-14 text-grey ">@{x.user?.name}</span>
                                     </h4>
-                                    <h5 style={{fontSize:"15px"}} className=" text-light">{x.tweet_text}</h5>
+                                    <h5 style={{fontSize:"16px", marginTop:"6px"}} className=" text-light">{x.text}</h5>
                                 </div>
 
                                 <div className="flex item-center justify-end">
@@ -57,7 +66,7 @@ const PostDetailsComments: React.FC = () => {
                             <div className="w-100 flex justify-space item-center">
                                
                                 <div className="flex item-center w-100 auto gap-2">
-                                    <div style={{ marginTop: ".2rem" }} className="flex item-center w-90 auto gap-2">
+                                    <div className="flex item-center w-90 auto gap-2">
                                         <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
                                             <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center" 
                                             style={{ gap: ".3rem" }}>
@@ -184,8 +193,8 @@ h5 {
     }
 }
     .image_wrapper {
-      width:5rem;
-      height:5rem;
+      width:4rem;
+      height:4rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
