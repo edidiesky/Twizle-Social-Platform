@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Top from '../feedtop/top';
-import PostDetailsComments from './comments';
+import PostDetailsComments from './commeents';
 import TweetFormSection from '../../common/tweetsection';
 import PostFeedCard from '../card';
 import { BiSolidBadgeCheck } from 'react-icons/bi'

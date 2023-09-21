@@ -114,7 +114,7 @@ const FeedCard = (props: feedcardtype) => {
                 onExitComplete={() => null}
             >
                 {
-                    tweet && <TweetModal setModal={setTweet} modal={tweet} />
+                    tweet && <TweetModal id={props?._id} setModal={setTweet} modal={tweet} />
                 }
             </AnimatePresence>
             <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">

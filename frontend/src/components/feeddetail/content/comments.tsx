@@ -9,6 +9,8 @@ import MessageIcon from '../../../assets/svg/feedcardicons/message';
 import FollowIcon from '../../../assets/svg/dropdownicons/follow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { getAllComment } from '../../../features/comment/commentReducer';
+import TweetModal from '../../modals/TweetModal';
+import { AnimatePresence } from 'framer-motion';
 
 const postcomments = [
     {
@@ -36,91 +38,103 @@ const PostDetailsComments: React.FC = () => {
         
     }, [tweetDetails])
     return (
-        <PostDetailsCommentsStyles className='w-100 flex column '>
-            {
-                comment?.map((x, index) => {
-                    return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
-                        <div className="image_wrapper">
-                            <img src={x.user?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
-                            <div className="image_gradient"></div>
-                        </div>
-
-                        <div className="flex flex-1 column gap-1">
-                            <div className="flex item-start justify-space gap-1 w-100 " style={{ gap: ".3rem" }}>
-                                <div className="flex column">
-                                    <h4 className="fs-16 text-bold flex item-center" style={{ gap: '.2rem', fontSize: "15px" }}>
-                                        {x.user?.display_name}
-                                        <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                        <span className="text-light fs-14 text-grey ">@{x.user?.name}</span>
-                                    </h4>
-                                    <h5 style={{fontSize:"16px", marginTop:"6px"}} className=" text-light">{x.text}</h5>
-                                </div>
-
-                                <div className="flex item-center justify-end">
-                                    <div className="icons flex item-center justify-center">
-                                        <BiDotsHorizontalRounded fontSize={'20px'} />
-                                    </div>
-                                </div>
-
+        <>
+           <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+            >
+                {
+                    tweet && <TweetModal id={tweetDetails?._id} setModal={setTweet} modal={tweet} />
+                }
+            </AnimatePresence>
+            <PostDetailsCommentsStyles className='w-100 flex column '>
+                {
+                    comment?.map((x:any, index:any) => {
+                        return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
+                            <div className="image_wrapper">
+                                <img src={x.user?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                                <div className="image_gradient"></div>
                             </div>
-                            <div className="w-100 flex justify-space item-center">
-                               
-                                <div className="flex item-center w-100 auto gap-2">
-                                    <div className="flex item-center w-90 auto gap-2">
-                                        <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
-                                            <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center" 
-                                            style={{ gap: ".3rem" }}>
-                                                <div className="icons icon1 flex item-center justify-center">
-                                                    <MessageIcon />
-                                                </div>
-                                                {/* 23 */}
-                                            </div>
-                                            <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
-                                                <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
-                                                    <div onClick={() => setQuote(false)} className="dropdown_background"></div>
-                                                    <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
-                                                        <li  style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
-                                                            <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
-                                                        <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1">
-                                                            <div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
-                                                    </ul>
-                                                </div>
-                                                <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
-                                                    <RetweetIcon />
-                                                </div>
-                                                {/* 144 */}
-                                            </div>
-                                            <div  className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
-                                                <div className="icons icon3 flex item-center justify-center">
-                                                    <LikeIcon />
-                                                </div>
-                                                {/* {likes} */}
-                                                {/* 23 */}
-                                            </div>
-                                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
-                                                <div className="icons icon1 flex item-center justify-center">
-                                                    <StatIcon />
-                                                </div>
-                                                {/* 123 */}
-                                            </div>
-                                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
-                                                <div className="icons icon1 flex item-center justify-center">
-                                                    <ShareIcon />
-                                                </div>
-                                                {/* 123 */}
-                                            </div>
+
+                            <div className="flex flex-1 column gap-1">
+                                <div className="flex item-start justify-space gap-1 w-100 " style={{ gap: ".3rem" }}>
+                                    <div className="flex column">
+                                        <h4 className="fs-16 text-bold flex item-center" style={{ gap: '.2rem', fontSize: "15px" }}>
+                                            {x.user?.display_name}
+                                            <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                            <span className="text-light fs-14 text-grey ">@{x.user?.name}</span>
+                                        </h4>
+                                        <h5 style={{ fontSize: "16px", marginTop: "6px" }} className=" text-light">{x.text}</h5>
+                                    </div>
+
+                                    <div className="flex item-center justify-end">
+                                        <div className="icons flex item-center justify-center">
+                                            <BiDotsHorizontalRounded fontSize={'20px'} />
                                         </div>
+                                    </div>
 
+                                </div>
+                                <div className="w-100 flex justify-space item-center">
+
+                                    <div className="flex item-center w-100 auto gap-2">
+                                        <div className="flex item-center w-90 auto gap-2">
+                                            <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
+                                                <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center"
+                                                    style={{ gap: ".3rem" }}>
+                                                    <div className="icons icon1 flex item-center justify-center">
+                                                        <MessageIcon />
+                                                    </div>
+                                                    {/* 23 */}
+                                                </div>
+                                                <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                                                    <div className={quote ? "dropdownCard card1  flex column active" : "dropdownCard card1  flex column"}>
+                                                        <div onClick={() => setQuote(false)} className="dropdown_background"></div>
+                                                        <ul style={{ fontSize: "14px" }} className="flex column w-100 text-bold">
+                                                            <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center">
+                                                                <div className="flex-1 flex item-center justify-center"><RetweetIcon type={'large'} /></div>Retweet</li>
+                                                            <li style={{ gap: "5px" }} className="flex fs-16 text-dark text-bold item-center gap-1">
+                                                                <div className="flex-1 flex item-center justify-center"><FollowIcon /></div>Quote </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div onClick={() => setQuote(true)} className="icons icon2 flex item-center justify-center">
+                                                        <RetweetIcon />
+                                                    </div>
+                                                    {/* 144 */}
+                                                </div>
+                                                <div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                                                    <div className="icons icon3 flex item-center justify-center">
+                                                        <LikeIcon />
+                                                    </div>
+                                                    {/* {likes} */}
+                                                    {/* 23 */}
+                                                </div>
+                                                <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                                    <div className="icons icon1 flex item-center justify-center">
+                                                        <StatIcon />
+                                                    </div>
+                                                    {/* 123 */}
+                                                </div>
+                                                <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                                    <div className="icons icon1 flex item-center justify-center">
+                                                        <ShareIcon />
+                                                    </div>
+                                                    {/* 123 */}
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
-
-                    </div>
-                })
-            }
-        </PostDetailsCommentsStyles>
+                    })
+                }
+            </PostDetailsCommentsStyles>
+        </>
+      
     )
 }
 

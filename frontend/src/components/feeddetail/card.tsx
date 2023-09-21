@@ -28,15 +28,7 @@ const PostFeedCard = () => {
                     <li className="flex item-center gap-1">Report tweet</li>
                 </ul>
             </div>
-            <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
-            >
-                {
-                    tweet && <TweetModal setModal={setTweet} modal={tweet} />
-                }
-            </AnimatePresence>
+           
             <div className="flex w-90 auto item-start justify-space feed_card_wrapper gap-1">
                 <div className="flex column gap-1">
                     <div className="flex-1 item-center flex gap-1">
