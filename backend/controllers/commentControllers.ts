@@ -72,7 +72,7 @@ const getAllReply = asyncHandler(async (req: CustomInterface, res: Response) => 
   const reply = await Comment.find({
     parentTweet: tweet?._id,
     parentComment: null,
-  }).populate('user')
+  }).populate('user', 'username bio display_name name profile_image_url')
 
   res.status(200).json({ reply })
 });
@@ -90,34 +90,33 @@ const getSingleCommentReply = asyncHandler(async (req: CustomInterface, res: Res
     parentTweet: tweetid,
     _id: replyid,
   }).populate('parentComment')
-  // perform a recursive function to get a specific reply child
-  const getRepliesComment = async(reply:any)=> {
-    // get the parent request and comment
-    const parentreply = await Comment.find({
-      parentTweet: tweetid,
-      parentComment: reply?._id,
-    }) 
-    return parentreply
-    // const childrenreplies:any[] = [];
-    // for (const reply of parentreply) {
-    //   const replies = await getRepliesComment(reply?._id)
-    //   childrenreplies.push({
-    //     comment:reply,
-    //     replies: replies
-    //   })
-    // }
+  // perform a recursive functions to get all the replies of a comment
+  const getCommentReplies = async(comment:any)=> {
+    // console.log(comment)
+    // get the tweet
+    // get the comment
+    const comments = await Comment.find({
+      parentComment:comment,
+      parentTweet: req.params.tweetid
+    }).populate('user', 'username bio display_name name profile_image_url')
 
-    // return childrenreplies
+    // console.log(comments)
+    let replies: any[] = []
+    for(const comment of comments) {
+      const reply = await getCommentReplies(comment?._id)
+      // console.log(comment)
+      replies.push({
+        reply: reply,
+        comments: comment
+      })
+    }
+
+    return replies
   }
-
-  // await getRepliesComment(reply)
-
-  // Fetch all child replies recursively
-  const replyHierarchy = await getRepliesComment(replyid);
-
-
-
-  res.status(200).json({ reply, replies:replyHierarchy })
+  const hierarchyReplies = await getCommentReplies(replyid)
+  res.status(200).json({
+    reply: hierarchyReplies
+  })
 });
 
 
