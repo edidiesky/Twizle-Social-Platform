@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { FollowAndUnFollowAUser, GetAllUserNotFollowed, GetAllUserProfile } from '../../../features/auth/authReducer';
 import { CircularProgress } from '@mui/material';
 import LoaderIndex from '../../loaders';
+import MessageTab from '../messagetab';
 type Rightbar = {
     types?: String
 }
@@ -149,6 +150,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                         <h5 className='text-light'>Edidiong Essien</h5>
                         <h5 className='text-light'>© 2023</h5>
                     </div>
+                    <MessageTab/>
                 </div>
 
             </div>
