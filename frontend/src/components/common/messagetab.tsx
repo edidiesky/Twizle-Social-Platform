@@ -238,10 +238,9 @@ const MessageTabStyles = styled.div`
         bottom: -450%;
     }
  &.active {
-    bottom:-120%;
+    bottom:-150%;
      @media (min-width:1440px) {
-        bottom: -150%;
-
+        bottom: -250%;
  }
     @media (min-width:2560px) {
         bottom: -350%;

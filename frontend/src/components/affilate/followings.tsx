@@ -65,7 +65,7 @@ const Followings: React.FC = () => {
 
                         </div>
                         {/* about */}
-                        <h4 className="fs-16 text-light text-dark">
+                        <h4 className="fs-15 text-light text-grey">
                           {x?.bio}
                         </h4>
                       </div>

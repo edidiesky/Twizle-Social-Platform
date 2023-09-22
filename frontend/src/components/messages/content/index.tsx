@@ -154,8 +154,8 @@ const MessageContent: React.FC = () => {
               value={messages}
               name='messages'
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessages(e.target.value)}
-              placeholder="Aa"
-              className="input fs-16 flex-1 text-dark family1"
+              placeholder="Start a new Message"
+              className="input fs-15 flex-1 text-dark family1"
             />
             <div className="icons flex item-center justify-center avatar">
               <IoSend className="fs-20" color={'var(--blue-1)'} />
@@ -170,8 +170,8 @@ const MessageContent: React.FC = () => {
 
 const ChatContentStyles = styled.div`
 height: 100vh;
-    border-right : 1px solid var(--border);
-border-left : 1px solid var(--border);
+    /* border-right : 1px solid var(--border);
+border-left : 1px solid var(--border); */
 overflow:hidden;
     overflow: auto;
 
@@ -281,10 +281,12 @@ height: 100%;
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
    }
-   border-radius: 40px;
+   border-radius: 24px;
+   border-bottom-left-radius: 4px;
   }
   .recieverChat {
-   border-radius: 40px;
+   border-radius: 24px;
+   border-bottom-right-radius: 4px;
    background-color: var(--blue-1);
   }
   .SenderChat,
@@ -319,7 +321,9 @@ height: 100%;
   background-color:var(--top);
     z-index: 300;
   backdrop-filter: blur(12px);
-    padding: .4rem 2rem;
+    border-top: 1px solid var(--border);
+
+    padding: 1rem 2rem;
      position: sticky;
     bottom: 0%;
     left: 0;
@@ -328,7 +332,7 @@ height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .5rem 2rem;
+    padding: .2rem 2rem;
     gap: 0.5rem;
     border-radius: 40px;
     background-color: #EFF3F4;

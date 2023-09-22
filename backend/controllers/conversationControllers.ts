@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import { NextFunction, Request as ExpressRequest, Response } from "express";
+import { NextFunction, Request as ExpressRequest, Response, Request } from "express";
 import Conversation from "../models/Conversation";
 interface CustomInterface extends ExpressRequest {
   user?: {
@@ -11,14 +11,37 @@ interface CustomInterface extends ExpressRequest {
 // POST
 // Create Conversation
 //  Public
-const createConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
+const createConversation = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   // const { userId } = req.user;
-  const conversation = await Conversation.create({
-    sender: req.body?.sender,
-    receiver: req.body.receiver
-  });
+  const senderId = req.body.sender
+  const receiverId = req.body.receiver
+  // check for any exusting conversation
+  const existingConversations = await Conversation.find({
+    $or: [
+      {
+        sender: senderId,
+        receiver: receiverId
+      },
+      {
+        receiver: senderId,
+        sender: receiverId
+      }
+    ]
+  }).populate("sender", " username bio display_name name profile_image_url")
+    .populate("receiver", " username bio display_name name profile_image_url");
+  if (existingConversations) {
+     res.status(400).json({message:"Conversation exist" })
+  } else {
+    const conversation = await Conversation.create({
+      sender: senderId,
+      receiver: receiverId
+    })
 
-  res.status(200).json({ conversation });
+    res.status(200).json({ conversation })
+  }
+
+ 
+
 });
 
 // GET Review of the user conversation
@@ -42,7 +65,7 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
   const { id } = req.params;
   // // find the Gig
   const conversation = await Conversation.
-    findOne({_id:id })
+    findOne({ _id: id })
     .populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
 

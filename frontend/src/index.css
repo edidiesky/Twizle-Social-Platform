@@ -335,7 +335,7 @@ button {
 
 .text-grey {
   /* color: var(--grey-1); */
-  color: var(--grey-1);
+  color: rgb(15, 20, 25);
 }
 
 .text-grey2 {

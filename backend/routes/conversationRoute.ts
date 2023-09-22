@@ -8,11 +8,12 @@ import {
   DeleteConversation,
   getSingleConversation,
   UpdateConversation,
+  createConversation
 } from "../controllers/conversationControllers";
 
 router.get("/:id", authMiddleware, getSingleConversation);
 router.get("/", authMiddleware, getUserConversation);
-router.post("/", authMiddleware, getUserConversation);
+router.post("/", authMiddleware, createConversation);
 
 
 // router.route('/profile/:id').get(authMiddleware, GetSingleUser)
