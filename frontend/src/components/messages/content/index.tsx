@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+cssimport { Link, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";

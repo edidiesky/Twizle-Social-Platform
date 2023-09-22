@@ -207,9 +207,27 @@ const LeftSidebarStyles = styled.div`
     li {
   border-radius: 40px;
   text-align: center;
-  padding: 1.1rem 1rem;
+  padding: 1.1rem;
   padding-right: 2rem;
   font-size: 20px;
+   @media (min-width:2440px) {
+        padding: 14px;
+  padding-right: 2rem;
+
+    }
+   @media (min-width:1440px) {
+        padding: 10px;
+  padding-right: 2rem;
+
+    }
+    
+  a {
+    @media (min-width:1440px) {
+        padding: 4px;
+    }
+  
+
+  }
   @media (max-width:1180px) {
     align-items: flex-end;
     justify-content: flex-end;

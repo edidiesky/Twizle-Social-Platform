@@ -1,20 +1,68 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsImages, BsEmojiSmile } from 'react-icons/bs'
 import GiIcon from '../../assets/svg/gif';
 import MediaIcon from '../../assets/svg/media';
 import ScheduleIcon from '../../assets/svg/schedule';
 import PollIcon from '../../assets/svg/poll';
-import { useAppSelector } from '../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import WorldIcon from '../../assets/svg/world';
+import { BiChevronDown } from 'react-icons/bi';
+import axios from 'axios';
+import { CreateTweet } from '../../features/tweet/tweetReducer';
 
 const TweetFormSection = () => {
     const { userInfo } = useAppSelector(store => store.auth)
+    const [active, setActive] = useState(true)
+    const [text, setText] = useState<string>('')
+    const [images, setImages] = useState<string[]>([])
+    const [uploading, setUploading] = useState(false);
+    const [alert, setAlert] = useState(false);
+    const dispatch = useAppDispatch()
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        // get the file
+        const file = e.target.files;
+        setUploading(true);
+        // create formdata
+        const formData = new FormData();
+        for (let i = 0; i < file.length; i++) {
+            formData.append("files", file[i]);
+        }
 
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            };
+            const { data } = await axios.post("/api/v1/upload", formData, config);
+
+            setImages(data.urls);
+            setAlert(true);
+            setUploading(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const handlePost = () => {
+        dispatch(CreateTweet({
+            tweet_image: images,
+            tweet_text: text,
+            tweet_user_id: {
+                _id: userInfo?._id,
+                display_name: userInfo?.display_name,
+                name: userInfo?.name,
+                bio: userInfo?.bio,
+                profile_image_url: userInfo?.profile_image_url,
+            }
+        }))
+        // setModal(false)
+    }
 
     return (
         <TweetFormSectionStyles>
-            <div className="w-100 flex item-start gap-1">
+            <div style={{ gap: "3px" }} className="w-100 flex item-start">
                 <div className="image_wrapper">
                     {
                         userInfo?.profile_image_url ?
@@ -22,31 +70,107 @@ const TweetFormSection = () => {
                             : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
 
                     }
-                    
+
                     <div className="image_gradient"></div>
                 </div>
                 <div className="flex flex-1 column gap-1">
-                    <div className="area w-100">
-                        <textarea placeholder='Tweet your reply' className="text w-100"></textarea>
+                    <div className={!active ? "flex tweetTop flex-1 column item-start gap-1 active" : "flex tweetTop flex-1 column item-start gap-1"}>
+                        {
+                            !active && <div style={{ color: "rgb(29, 155, 240)", fontSize: "13.5px", gap: "2px" }} className="replyBtn1 flex item-center text-bold">
+                                Everyone <span className='flex item-center justify-center'><BiChevronDown fontSize={'24px'} /></span></div>
+
+                        }
+
+                        <div onClick={() => setActive(false)} className="area w-100">
+                            <textarea
+                                name={"text"}
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                                placeholder='What is happening?!' className="text w-100 text-light"></textarea>
+                        </div>
+                        {
+                            !active && <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
+                                <WorldIcon />
+                                <span style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="fs-12 text-bold">Everyone can reply</span>
+                            </div>
+                        }
+
                     </div>
+
                     <div className="flex w-100 item-center justify-space">
                         <div className="flex item-center">
-                            <div className="icons flex item-center justify-center">
+                            <label
+                                htmlFor="upload" className="icons flex item-center justify-center">
+                                <input
+                                    type="file"
+                                    id="upload"
+                                    placeholder="Gig Image"
+                                    autoComplete="off"
+                                    style={{ display: "none" }}
+                                    onChange={handleFileUpload}
+                                    multiple
+                                    className="w-100"
+                                />
                                 <MediaIcon />
-                            </div> <div className="icons flex item-center justify-center">
+                            </label>
+                            <label
+                                htmlFor="upload" className="icons flex item-center justify-center">
+                                <input
+                                    type="file"
+                                    id="upload"
+                                    placeholder="Gig Image"
+                                    autoComplete="off"
+                                    style={{ display: "none" }}
+                                    onChange={handleFileUpload}
+                                    multiple
+                                    className="w-100"
+                                />
                                 <GiIcon />
-                            </div>
-                            <div className="icons flex item-center justify-center">
+                            </label>
+                            <label
+                                htmlFor="upload" className="icons flex item-center justify-center">
+                                <input
+                                    type="file"
+                                    id="upload"
+                                    placeholder="Gig Image"
+                                    autoComplete="off"
+                                    style={{ display: "none" }}
+                                    onChange={handleFileUpload}
+                                    multiple
+                                    className="w-100"
+                                />
                                 <ScheduleIcon />
-                            </div>
-                            <div className="icons flex item-center justify-center">
+                            </label>
+                            <label
+                                htmlFor="upload" className="icons flex item-center justify-center">
+                                <input
+                                    type="file"
+                                    id="upload"
+                                    placeholder="Gig Image"
+                                    autoComplete="off"
+                                    style={{ display: "none" }}
+                                    onChange={handleFileUpload}
+                                    multiple
+                                    className="w-100"
+                                />
                                 <PollIcon />
-                            </div>
-                            <div className="icons flex item-center justify-center">
+                            </label>
+                            <label
+                                htmlFor="upload" className="icons flex item-center justify-center">
+                                <input
+                                    type="file"
+                                    id="upload"
+                                    placeholder="Gig Image"
+                                    autoComplete="off"
+                                    style={{ display: "none" }}
+                                    onChange={handleFileUpload}
+                                    multiple
+                                    className="w-100"
+                                />
                                 <GiIcon />
-                            </div>
+                            </label>
                         </div>
-                        <div className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
+                        <button disabled={!text && images.length === 0} onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Post</button>
                     </div>
                 </div>
             </div>
@@ -64,15 +188,46 @@ const TweetFormSectionStyles = styled.div`
         background-color: var(--blue-1) !important;
         opacity: .6;
         padding: .8rem 2rem;
+        background:var(--blue-1);
+   &:disabled {
+      opacity: .3 !important;
+      cursor: not-allowed;
     }
-    .area {
-        height: 6.5rem;
-    border-bottom: 1px solid var(--border);
+    &:hover {
+      opacity:.8;
+    }
+    }
+     .replyBtn1 {
+    padding:.5px 10px;
+    border-radius:20px;
+    border:1px solid var(--border1);
+    padding-right:5px;
 
+    &:hover {
+      background:rgba(29, 155, 240, 0.1);
     }
+  }
+     .replyBtn {
+    padding:4px 10px;
+    border-radius:20px;
+    &:hover {
+      background:rgba(29, 155, 240, 0.1);
+    }
+  }
+  .tweetTop {
+     
+     padding-bottom: 1rem;
+     &.active {
+border-bottom: 1px solid var(--border);
+     }
+  }
+    .area {
+        height: 4rem;
+    }
+
     .image_wrapper {
-      width:4.5rem;
-      height:4.5rem;
+      width:4rem;
+      height:4rem;
       border-radius:50%;
       cursor:pointer;
       position: relative;
@@ -102,8 +257,8 @@ const TweetFormSectionStyles = styled.div`
     }
     }
     .icons {
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 4rem;
+        height: 4rem;
         border-radius: 50%;
         transition: all .5s;
 
@@ -122,6 +277,8 @@ const TweetFormSectionStyles = styled.div`
         resize: none;
         border:none;
         outline:none;
+        
+
         font-size: 17px;
         font-family: "CustomFont_Normal", sans-serif;
         font-weight: 400;

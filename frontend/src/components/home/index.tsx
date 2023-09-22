@@ -7,6 +7,8 @@ import Feed from '../common/feed/feed';
 import Content from './content/Content';
 
 const Home: React.FC = () => {
+    const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
+    console.log(tweetdata)
     return (
         <HomeStyles>
             <LeftSidebarIndex />
