@@ -22,14 +22,10 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
         sender: senderId,
         receiver: receiverId
       },
-      {
-        receiver: senderId,
-        sender: receiverId
-      }
     ]
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
-  if (existingConversations) {
+  if (existingConversations.length !== 0) {
      res.status(400).json({message:"Conversation exist" })
   } else {
     const conversation = await Conversation.create({
@@ -62,10 +58,20 @@ const getUserConversation = asyncHandler(async (req: CustomInterface, res: Respo
 //  Public
 // send the conversation Id only
 const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const { id } = req.params;
+  const { receiverId, senderId } = req.params;
   // // find the Gig
-  const conversation = await Conversation.
-    findOne({ _id: id })
+  const conversation = await Conversation.findOne({
+    $or: [
+      {
+        sender: senderId,
+        receiver: receiverId
+      },
+      {
+        receiver: senderId,
+        sender: receiverId
+      }
+    ]
+  })
     .populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
 

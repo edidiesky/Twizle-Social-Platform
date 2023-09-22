@@ -6,7 +6,9 @@ type conversationdatatype = {
   conversation_text?: string;
   conversation_image?: any;
   _id?: string;
-  conversation_user_id?:string;
+  senderId?: string;
+  receiverId?: string;
+  conversation_user_id?: string;
 }
 
 interface conversationPayload {
@@ -52,15 +54,19 @@ export const Createconversation = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      
-        const response2 = await axios.post(
-          `/api/v1/conversation/${conversationData?._id}`,
-          conversationData,
-          config
-        );
-        return response2.data.conversation;
-    
-     
+
+      const response2 = await axios.post(
+        `/api/v1/conversation`,
+        conversationData,
+        config
+      );
+      const response = await axios.get(
+        `/api/v1/conversation/user`,
+        config
+      );
+      return response.data.conversation;
+
+
       // console.log(conversationData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -106,7 +112,7 @@ export const Deleteconversation = createAsyncThunk<{
 
 
 // Getconversation Details
-export const GetSingleconversationDetails = createAsyncThunk < conversationPayload,{
+export const GetSingleconversationDetails = createAsyncThunk<conversationPayload, {
   rejectValue: KnownError,
 }>(
   "GetSingleconversationTweetDetails",
@@ -114,7 +120,7 @@ export const GetSingleconversationDetails = createAsyncThunk < conversationPaylo
 
     try {
       const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -139,7 +145,7 @@ export const GetSingleconversationDetails = createAsyncThunk < conversationPaylo
 // Get User conversation
 export const GetUserconversation = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:any}>(
+}, conversationdatatype>(
   "GetUserconversation",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -152,7 +158,7 @@ export const GetUserconversation = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/conversation/user/${Detailsdata}`,
+        `/api/v1/conversation/user`,
         config
       );
       return response.data.conversation;
@@ -173,7 +179,7 @@ export const GetUserconversation = createAsyncThunk<{
 // Get User conversation
 export const GetUserconversationDetails = createAsyncThunk<{
   rejectValue: KnownError,
-}, { _id?: any }>(
+}, conversationdatatype>(
   "GetUserconversationDetails",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -186,7 +192,7 @@ export const GetUserconversationDetails = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/conversation/${Detailsdata}`,
+        `/api/v1/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
         config
       );
       return response.data.conversation;

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Createmessage, GetSinglemessageDetails } from '../../../features/message/messageReducer';
 import moment from 'moment';
-import { GetUserconversationDetails } from '../../../features/conversation/conversationReducer';
+import { Createconversation, GetUserconversationDetails } from '../../../features/conversation/conversationReducer';
 
 
 
@@ -18,11 +18,20 @@ const MessageContent: React.FC = () => {
   const { message } = useAppSelector(store => store.message)
   const { conversationDetails } = useAppSelector(store => store.conversation)
   const { userInfo } = useAppSelector(store => store.auth)
-
+  // console.log()
+  const senderId = id?.split('-')[0]
+  const receiverId = id?.split('-')[1]
+  // console.log(senderId, receiverId)
   useEffect(() => {
-    dispatch(GetUserconversationDetails(id))
-    dispatch(GetSinglemessageDetails(id))
-  }, [id])
+    dispatch(Createconversation({ senderId: senderId, receiverId: receiverId }))
+  }, [senderId, receiverId])
+  useEffect(() => {
+    dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
+  }, [senderId, receiverId])
+  useEffect(() => {
+    dispatch(GetSinglemessageDetails(conversationDetails?._id))
+
+  }, [conversationDetails])
   // console.log(id?.split('-')[1], id?.split('-')[0])
 
   const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +39,7 @@ const MessageContent: React.FC = () => {
     dispatch(Createmessage({
       message: messages,
       userId: userInfo?._id,
-      conversationId: id
+      conversationId: conversationDetails?._id
     }))
     setMessages('')
   }
@@ -42,7 +51,13 @@ const MessageContent: React.FC = () => {
       <div className="chatWrapper w-100">
         <div className="top2 w-100 auto ">
           <div className="w-90 auto flex item-center justify-space">
-            <h3 className="fs-20 text-bold text-dark">Messages</h3>
+            <h3 className="fs-20 text-bold text-dark">
+              {
+                conversationDetails?.sender?._id !== userInfo?._id ?
+                  conversationDetails?.sender?.display_name : conversationDetails?.receiver?.display_name
+              }
+
+            </h3>
 
           </div>
 
@@ -75,22 +90,22 @@ const MessageContent: React.FC = () => {
                   <div className="image_gradient"></div>
                   <img src={conversationDetails?.receiver?.profile_image_url} alt="" className="avatar_profile" />
                 </div>
-                  <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.receiver?.display_name}
-                    <span className="block fs-14 text-grey text-light">@{conversationDetails?.receiver?.name}</span>
+                <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.receiver?.display_name}
+                  <span className="block fs-14 text-grey text-light">@{conversationDetails?.receiver?.name}</span>
                 </h4>
               </div>
               <h4 className="w-100 bio auto text-center fs-15 text-light text-dark">
-                  {conversationDetails?.receiver?.bio}
+                {conversationDetails?.receiver?.bio}
               </h4>
               <h4 className="w-85 auto text-center fs-14 text-light text-grey">
 
-                  Joined {receivercreatedAt}
+                Joined {receivercreatedAt}
                 ·
                 4,127 Followers
               </h4>
-            </Link> :''
+            </Link> : ''
           }
-         
+
           <div className="w-85 auto chatList column flex gap-2">
             {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: {} | null | undefined; }) => {
               const usermessage = x?.sender === userInfo?._id
@@ -137,7 +152,7 @@ const MessageContent: React.FC = () => {
         </div>
         {/* search */}
         <div className="form_wrapper w-100 auto">
-          <form onSubmit={(e: React.FormEvent<HTMLFormElement>)=>handleCreateMessage(e)} action="" className="w-100 family1 auto flex item-center">
+          <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleCreateMessage(e)} action="" className="w-100 family1 auto flex item-center">
             <div className="flex item-center">
               <div className="icons flex item-center justify-center avatar">
                 <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
@@ -275,7 +290,7 @@ height: 100%;
     position: relative;
   }
   .SenderChat {
-    background-color: var(--grey-2);
+    background-color: var(--grey-3);
    &:nth-child(1) {
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;

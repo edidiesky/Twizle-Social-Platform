@@ -1,84 +1,91 @@
 export const timelineData = [
-    // gOOGLE AFRICA
+    // .Center Devils 
     {
-        tweet_user_id: '64f692e2374ae635be6021a1',
-        tweet_text: "Reminder to apply!",
-        tweet_image: [
-            'https://pbs.twimg.com/media/F5LhhvfXQAAkxLj?format=jpg&name=small'
+        tweet_text: "🚨🚨🎙️| Erik ten Hag on Casemiro: `He’s the one.I’ve just mentioned, you have to stay in the game.You have to show the leadership in those moments when the team have difficult moments, difficult occasions, and we have to survive. All the players can be with him.He shows the example that all the players follow.That’s Casemiro.In the end, he scored two goals.`",
+        tweet_image: ['https://pbs.twimg.com/media/F6jjGpDbMAAXF95?format=jpg&name=medium'],
+        tweet_user_id: ""
+    },
+    // food
+    {
+        tweet_text: "How do you like your noodles to be prepared?😋",
+        tweet_image: ['https://pbs.twimg.com/media/F5uioLVWIAAzoL1?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLNWYAAac4I?format=jpg&name=medium',
+            'https://pbs.twimg.com/media/F5uioLPWIAEzA5d?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLIXMAAthC2?format=jpg&name=medium'
         ],
-        location: "Africa",
+        tweet_user_id: ""
     },
-    // Edgar
+    // .Center Devils 
     {
-        tweet_user_id: '64f692e2374ae635be60219c',
-        profile_name: "Edgar Allen Poe",
-        username: "Edgar Allen Poe",
-        tweet_text: "Always donating money to the wrong causes. There are brilliant kids who haven't chosen a life of crime, who, despite the hardship they face in Nigeria, are hoping to get one life-changing opportunity. Let's send those ones to school. Àwọn aṣunú.", createdAt: "07/25/2022",
-        retweet_count: 292,
-        favorite_count: 299,
-        is_verified: false,
-        tweet_image: ['https://pbs.twimg.com/media/F2Syd3RW8AAIzkS?format=webp&name=small'],
-        location: "Agodim",
+        tweet_text: "Who'll win the first Women's Nations League ⁉️🤔",
+        tweet_image: ['https://pbs.twimg.com/media/F6nYzr3W4AAI2Yv?format=jpg&name=large'],
+        tweet_user_id: ""
     },
-    // Big Eddy
+    // Marquees
     {
-        tweet_user_id: '64f692e2374ae635be60219d',
-        tweet_text: "Someday your kids are going to figure you out. I promise you they will. The type of parent you are. The type of spouse you are. How you treat other people. How much effort you put into them +", createdAt: "12/22/2022",
-        retweet_count: 246,
-        favorite_count: 749,
-        is_verified: true,
-        tweet_image: ['https://pbs.twimg.com/media/F1020UVWIAMPGoX?format=webp&name=small'],
-        location: "Miskolc",
+        tweet_text: "One of these was shot with iPhone 15 Pro, and the other was shot with Pixel Fold 🔎",
+        tweet_image: ['https://pbs.twimg.com/media/F6jsBllXAAAz8TY?format=jpg&name=4096x4096','https://pbs.twimg.com/media/F6jsBllXcAAb_iL?format=jpg&name=4096x4096'],
+        tweet_user_id: "Marquees"
     },
-    // gOOGLE AFRICA
+    // .Center Devils 
     {
-        tweet_user_id: '64f692e2374ae635be6021a1',
-        tweet_text: "We made it to Kenya 🇰🇪Incredible to see all the amazing sights and scenes through Google Lens. #EverydayAI #GoogleLensIt",
-        tweet_image: [
-            'https://pbs.twimg.com/media/F5Bim7uXIAA0KmT?format=jpg&name=small'
-        ],
-        location: "Africa",
+        tweet_text: "🚨 Manchester United are prepared to offload Jadon Sancho in January and are willing to accept a significant financial loss on the £73M they paid for him in 2021.",
+        tweet_image: ['https://pbs.twimg.com/media/F6k3qT2WEAAT7Az?format=jpg&name=900x900'],
+        tweet_user_id: ""
     },
-    // Big Eddy
+    // Barca Times
     {
-        tweet_user_id: '64f692e2374ae635be60219d',
-        tweet_text: "What do you guys use to implement real time server-client communication ?", retweet_count: 246,
-        favorite_count: 749,
-        is_verified: true,
-        tweet_image: ['https://pbs.twimg.com/media/F1020UVWIAMPGoX?format=webp&name=small'],
-        location: "Miskolc",
+        tweet_text: "🚨 | BREAKING: According to @ESPNBrasil Roque's injury could be more serious. The Brazilian's ligaments could potentially be affected.Recovery will take more than three months.#fcblive",
+        tweet_image: ['https://pbs.twimg.com/media/F6pYh1qXUAI2Zv9?format=jpg&name=small'],
+        tweet_user_id: ""
     },
+    // Baba Jide
+    {
+        tweet_text: "I remember one year, I applied for a job. My friend sent me the link, he said he had just applied and suggested I give it a try too. He said they are a multinational company and trying to expand to Nigeria. Lol, I quickly applied too. I needed the job so bad",
+        tweet_image: [''],
+        tweet_user_id: "Baba Jide"
+    },
+    // .Center Devils
+    {
+        tweet_text: "As I leave this club after many years of incredible memories, outstanding teammates, and trophies, I want to express my profound gratitude. This chapter may be closing, but the friendships and memories will forever remain in my heart. The fans here are the real champions. Thanks… Show more",
+        tweet_image: ['https://pbs.twimg.com/media/F5W8W1kWEAAZbdU?format=jpg&name=small'],
+        tweet_user_id: ""
+    },
+    // Marquees
+    {
+        tweet_text: "PSA for everyone who leaves their phones on silent and is about to get an iPhone 15 Pro: You can turn off the annoying permanent silent indicator in settings. You’re welcome",
+        tweet_image: ['https://pbs.twimg.com/media/F6o6Q-2XIAAItiP?format=jpg&name=medium','https://pbs.twimg.com/media/F6o6Q-4XcAA0Jjr?format=jpg&name=medium'],
+        tweet_user_id: "Marquees"
+    }, 
 
-    // Daily Mall
+    // Romano
     {
-        tweet_user_id: '64f692e2374ae635be6021a2',
-        tweet_text: "NADINE DORRIES: Labour want to ban school uniform - they couldn't be more wrong",
-        tweet_image: [
-            'https://pbs.twimg.com/media/F5OBj1NW4AAaYRT?format=jpg&name=small'
-        ],
-        location: "Africa",
+        tweet_text: "Xavi on Barça decisions for João Félix, and Cancelo loans: “Now there are nine months left and that is a long time”. 🔵🔴🇵🇹 #FCB“ We will have to define and talk to their clubs, but right now it is unthinkable to discuss about it”.",
+        tweet_image: ['https://pbs.twimg.com/media/F6oQNubWYAEmBmi?format=jpg&name=large'],
+        tweet_user_id: "Romano"
     },
+    // Romano
     {
-        tweet_user_id: '64f683b0e9aab5e8f8778510',
-        tweet_text: "Since everyone is awake.  Shea I should tell you people a story????? What story do you want to hear???",
+        tweet_text: "🚨🔴⚪️ Official: Martin Ødegaard has signed new long term deal at Arsenal — valid until June 2028.“Signing a new contract was a really easy decision for me, what we are doing right now as a club is special, and I want to be a part of that”, Ødegaard says.Never in doubt 🔒✨",
+        tweet_image: ['https://pbs.twimg.com/media/F6nYISOXAAATvly?format=jpg&name=900x900'],
+        tweet_user_id: "Romano"
+    }, 
+    {
+        tweet_text: `Xavi: "My 𝐛𝐞𝐬𝐭 moment as a Barça coach? The Super Cup Final against Real Madrid." #fcblive 💪`,
+        tweet_image: ['https://pbs.twimg.com/media/F6oKLfvWIAAybPJ?format=jpg&name=small'],
+        tweet_user_id: "Marquees"
+    }, 
+    // Barca times
+    {
+        tweet_text: "📅| Barcelona's updated game schedule for September. #fcblive 🔵🔴",
+        tweet_image: ['https://pbs.twimg.com/media/F5nalslWMAA6Ek0?format=jpg&name=small'],
+        tweet_user_id: "BarçaTimes"
     },
-
-    // Daily Mall
-    {
-        tweet_user_id: '64f692e2374ae635be6021a2',
-        tweet_text: "Nutritionist who wed clothing designer at lavish Lake Como ceremony in front of Pippa Middleton continues her celebrations with drinks by the beach and a romantic boat ride",
-        tweet_image: [
-            'https://pbs.twimg.com/media/F5NlxCnWMAEc58r?format=jpg&name=small'
-        ],
-        location: "Africa",
-    },
-    // gOOGLE AFRICA
-    {
-        tweet_user_id: '64f692e2374ae635be6021a1',
-        tweet_text: "We’re happy to be participating at the #ACS23 and have @ymatias, our VP for Research & Eng sharing how our early warning systems like FloodHub & Wildfires can help predict & adapt to the effects of climate change ", tweet_image: [
-            'https://pbs.twimg.com/media/F4tD9G6aIAA23yc?format=jpg&name=small'
-        ],
-        location: "Africa",
+    // Barca Times
+     {
+        tweet_text: "🚨 | BREAKING: According to @ESPNBrasil Roque's injury could be more serious. The Brazilian's ligaments could potentially be affected.Recovery will take more than three months.#fcblive",
+         tweet_image: ['https://pbs.twimg.com/media/F6pYh1qXUAI2Zv9?format=jpg&name=small'],
+        tweet_user_id: ""
     },
 
 ];
+
+//  2. Itohan 3. babajide 4. Ericc Baily 5.Center Devils 6. Edo Boy

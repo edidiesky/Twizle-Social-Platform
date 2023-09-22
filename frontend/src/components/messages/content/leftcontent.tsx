@@ -49,6 +49,7 @@ const LeftContent: React.FC = () => {
 
                 <div className="flex column w-100">
                     {
+                        
                         conversation?.length === 0 ? <div className="w-85 auto flex column">
                             <h3 className="fs-30 text-extra-bold">Welcome to your inbox!
                                 <span className="text-light py-1 block fs-16 text-grey">Drop a line, share posts and more with private conversations between you and others on X. </span>
@@ -58,7 +59,7 @@ const LeftContent: React.FC = () => {
                             </div>
                         </div> : <div className="w-100">
                             {
-                                conversation?.map((x, index) => {
+                                conversation?.map((x:any, index:any) => {
                                     const updatedAt = moment(x?.updatedAt);
                                     const now = moment();
                                     const hoursDifference = now.diff(updatedAt, 'hours');
@@ -78,7 +79,7 @@ const LeftContent: React.FC = () => {
 
                                     return x?.sender?._id !== userInfo?._id && <NavLink
                                         activeClassName="active"
-                                        to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
+                                        to={`/messages/${x?.sender?._id}-${x?.receiver?._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
                                                 <img src={x.sender?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
@@ -99,7 +100,7 @@ const LeftContent: React.FC = () => {
                                 })
                             }
                             {
-                                conversation?.map((x, index) => {
+                                conversation?.map((x:any, index:any) => {
                                     const updatedAt = moment(x?.updatedAt);
                                     const now = moment();
                                     const hoursDifference = now.diff(updatedAt, 'hours');
@@ -119,7 +120,7 @@ const LeftContent: React.FC = () => {
 
                                     return x?.receiver?._id !== userInfo?._id && <NavLink
                                         activeClassName="active"
-                                        to={`/messages/${x._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
+                                        to={`/messages/${x?.sender?._id}-${ x?.receiver?._id }`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
                                                 <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />

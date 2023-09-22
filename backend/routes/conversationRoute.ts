@@ -11,7 +11,7 @@ import {
   createConversation
 } from "../controllers/conversationControllers";
 
-router.get("/:id", authMiddleware, getSingleConversation);
+router.get("/:senderId/:receiverId", authMiddleware, getSingleConversation);
 router.get("/", authMiddleware, getUserConversation);
 router.post("/", authMiddleware, createConversation);
 
