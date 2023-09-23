@@ -123,7 +123,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                                     </h4>
                                                 </div>
                                                 <div onClick={() => handleFollowUser(x?._id)}
-                                                    className={`btn ${active && `active`} text-extra-bold btn-3 fs-14 text-white`}>
+                                                    className={`btn ${active && `active`} text-extra-bold btn-3 fs-12 text-white`}>
 
                                                     {
                                                         active ? <span className="following">Following</span> : "Follow"
@@ -268,7 +268,13 @@ const RightSidebarStyles = styled.div`
         font-size: 20px;
     }
     .btn.btn-3 {
-        padding: .7rem 1.5rem;
+        padding: .6rem 1.5rem;
+        font-size: 14px;
+         @media (max-width:1080px) {
+                    font-size: 12px;
+        padding: 1rem 1.5rem;
+
+        }
         &.active {
             background-color: transparent !important;
             color: var(--dark-1) !important;

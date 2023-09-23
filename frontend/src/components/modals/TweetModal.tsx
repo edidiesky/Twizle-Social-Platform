@@ -357,6 +357,10 @@ const TweetModalStyles = styled(motion.div)`
     position: absolute;
     height: 100%;
     width: 100%;
+     @media (max-width:480px) {
+     display: none;
+
+    }
   }
   .deleteCard {
     max-width: 600px;
@@ -372,5 +376,12 @@ const TweetModalStyles = styled(motion.div)`
     position: relative;
     padding:1rem 0;
     margin-top:2rem;
+     @media (max-width:480px) {
+     
+       max-width: 100vw;
+    min-width: 100vw;
+    border-radius: 0px;
+
+    }
   }
 `;

@@ -260,6 +260,10 @@ const ProfilePictureModalStyles = styled(motion.div)`
     position: absolute;
     height: 100%;
     width: 100%;
+     @media (max-width:480px) {
+     display: none;
+
+    }
   }
   .Regsitertop {
   z-index: 3000;
@@ -292,9 +296,12 @@ const ProfilePictureModalStyles = styled(motion.div)`
     @media (max-width:580px) {
       width: 100%;
     }
-    @media (max-width:580px) {
-    min-height: 100vh;
-      width: 100%;
+    @media (max-width:480px) {
+     
+       max-width: 100vw;
+    min-width: 100vw;
+    border-radius: 0px;
+
     }
 
   }

@@ -5,12 +5,14 @@ import LeftSidebarIndex from '../common/LeftSidebar';
 import RightSidebarIndex from '../common/right/RightBar';
 import Feed from '../common/feed/feed';
 import Content from './content/Content';
+import SmallSidebarIndex from '../common/smallsidebar';
 
 const Home: React.FC = () => {
     const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
     console.log(tweetdata)
     return (
         <HomeStyles>
+            <SmallSidebarIndex/>
             <LeftSidebarIndex />
             <Content />
             <RightSidebarIndex />

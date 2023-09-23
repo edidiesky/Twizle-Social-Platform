@@ -378,6 +378,9 @@ const DeleteContainer = styled(motion.div)`
     position: absolute;
     height: 100%;
     width: 100%;
+     @media (max-width:480px) {
+      display: none;
+     }
   }
   .authtop {
   /* background-color: rgba(255, 255, 255, 0.85); */
@@ -410,8 +413,12 @@ overflow:auto;
     @media (max-width:980px) {
       width: 70%;
     }
-    @media (max-width:580px) {
+    @media (max-width:480px) {
       width: 90%;
+       max-width: 100vw;
+    min-width: 100vw;
+    border-radius: 0px;
+
     }
 
   }

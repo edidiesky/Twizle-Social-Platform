@@ -342,5 +342,12 @@ const PostModalStyles = styled(motion.div)`
     position: relative;
     padding:1rem 0;
     margin-top:2rem;
+     @media (max-width:480px) {
+      width: 90%;
+       max-width: 100vw;
+    min-width: 100vw;
+    border-radius: 0px;
+
+    }
   }
 `;

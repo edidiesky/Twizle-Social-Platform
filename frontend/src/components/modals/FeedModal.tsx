@@ -149,7 +149,9 @@ const TweetModalStyles = styleds(motion.div)`
     width: 100%;
   }
   .deleteCard {
-    width: clamp(45%, 150px, 100%);
+    max-width: 80vw;
+    min-width: 600px;
+    display: flex;
     display: flex;
     flex-direction: column;
     background: var(--white);
@@ -159,5 +161,12 @@ const TweetModalStyles = styleds(motion.div)`
 
     padding:1rem 0;
     margin-top:2rem;
+      @media (max-width:480px) {
+      width: 90%;
+       max-width: 100vw;
+    min-width: 100vw;
+    border-radius: 0px;
+
+    }
   }
 `;

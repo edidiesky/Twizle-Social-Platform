@@ -36,6 +36,7 @@ interface tweetState {
   alertType?: string,
 
   modal?:boolean,
+  sidebar?:boolean,
   userIdIncludedInTweetLikesArray?:boolean
 
 
@@ -57,6 +58,7 @@ const initialState: tweetState = {
   isBookMarked: false,
   isLiked: false,
   modal: false,
+  sidebar: false,
 
 
   // tweetisLoading: false,
@@ -95,6 +97,14 @@ export const tweetSlice = createSlice({
     }, 
     offDisplayModal: (state, action) => {
       state.modal = false
+    },
+
+    // toggle sidebar
+    ToggleSidebar: (state, action) => {
+      state.sidebar = !state.sidebar
+    },
+    offSidebar: (state, action) => {
+      state.sidebar = false
     },
   },
   extraReducers: (builder) => {
@@ -320,7 +330,7 @@ export const tweetSlice = createSlice({
   },
 })
 
-export const { cleartweet, ToggelDisplayModal, offDisplayModal } = tweetSlice.actions
+export const { cleartweet, ToggelDisplayModal, offDisplayModal, ToggleSidebar, offSidebar } = tweetSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.tweet.value

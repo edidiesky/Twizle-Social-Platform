@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
 import TwitterIcon from '../../../assets/svg/twitter';
+import { ToggleSidebar, offSidebar } from '../../../features/tweet/tweetSlice';
 
 interface TopProps {
 }
 const Top: React.FC<TopProps> = () => {
     const { userInfo, userDetails } = useAppSelector(store => store.auth)
+    const dispatch = useAppDispatch()
+
     return (
         <TopStyles className="w-100">
             <div style={{ paddingTop: "1rem" }} className='flex top2 w-85 auto column gap-1'>
                <div className="w-100 flex item-center justify-space">
-                    <div className="flex-1">
+                    <div onClick={() => dispatch(ToggleSidebar("any"))} className="flex-1">
                         {
                             userInfo?.profile_image_url ?
                                 <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
