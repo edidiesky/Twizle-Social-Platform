@@ -46,10 +46,10 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
         <>
             
             <div className="w-100 flex item-center">
-                <div className="image_wrapper"></div>
-                <div className="flex item-center w-85 auto gap-2">
+                <div className="flex item-center w-100 gap-2">
                     <div className="flex item-center w-90 auto gap-2">
-                        <div className="flex w-100 item-center fs-14 text-light justify-center feedtags_wrapper text-dark">
+                        <div 
+                        className="flex w-100 item-center fs-14 text-light justify-start feedtags_wrapper text-dark">
                             <div onClick={() => setTweet(true)} className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
                                 <div className="icons icon1 flex item-center justify-center">
                                     <MessageIcon />

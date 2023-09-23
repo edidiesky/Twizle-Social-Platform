@@ -125,7 +125,9 @@ const LeftSidebarIndex = () => {
                                    </div>
 
                                 </li>
-                               <TweetIcon/>
+                                <div onClick={() => setTweet(true)} className="">
+                                    <TweetIcon />
+                               </div>
                                 
                             </ul>
                             <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
@@ -135,7 +137,7 @@ const LeftSidebarIndex = () => {
                         {
                             logout && <Logoutdropdown setDrop={setLogOut} />
                         }
-                        <span className="images w-85 auto">
+                        <span onClick={() => setTweet(true)} className="images w-85 auto">
                             {
                                 userInfo?.profile_image_url ?
                                     <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
@@ -181,7 +183,7 @@ const LeftSidebarStyles = styled.div`
 
   }
   @media (max-width:980px) {
-        flex: 0 0 200px;
+        flex: 0 0 150px;
   }
   @media (max-width:780px) {
         flex: 0 0 120px;
@@ -195,11 +197,17 @@ const LeftSidebarStyles = styled.div`
   .images {
         display: none;
         margin:4rem auto;
- @media (max-width:780px) {
+ @media (max-width:980px) {
+     display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+   }
+    @media (max-width:780px) {
      display: flex;
     align-items: center;
     justify-content: center;
    }
+  
   }
   .sidebarbottom {
 @media (max-width:1180px) {
@@ -223,12 +231,20 @@ const LeftSidebarStyles = styled.div`
     }
     .top {
         @media (max-width:1180px) {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  @media (max-width:780px) {
     align-items: center;
     justify-content: center;
   }
     }
     ul {
         @media (max-width:1180px) {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  @media (max-width:780px) {
     align-items: center;
     justify-content: center
   }

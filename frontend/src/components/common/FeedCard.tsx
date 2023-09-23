@@ -131,37 +131,44 @@ const FeedCard = (props: feedcardtype) => {
                     }
                 </Link>
 
-                <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex column flex-1" style={{ gap: '.3rem' }}>
-                    <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                        <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
-                            {props?.tweet_user_id?.display_name}
-                            <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                            <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@{props?.tweet_user_id?.name}</span>
-                        </div>
+                <div className="flex column flex-1" style={{ gap: '.7rem' }}>
+                    <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column '>
+                        <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
+                            <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
+                                {props?.tweet_user_id?.display_name}
+                                <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                <span style={{ fontSize: "15px" }} className="text-light  text-grey ">@{props?.tweet_user_id?.name}</span>
+                            </div>
 
-                        {/* <span sty></span> */}
-                        <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
-                    </h4>
-                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
-                        {props.tweet_text}
-                    </h5>
-                    <div className="w-100 wrapper">
+                            {/* <span sty></span> */}
+                            <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
+                        </h4>
+                        <h5 style={{ lineHeight: "20px" }} className="text_dark_grey fs-15 text-light family1">
+                            {props.tweet_text}
+                        </h5>
                         {
-                            props.tweet_image?.length > 0 && <FeedImage images={props.tweet_image} />
-                        }
-                    </div>
+                            props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
-                </Link>
+                                <FeedImage images={props.tweet_image} />
+                            </div>
+                        }
+                    </Link>
+
+
+                    <FeedCardBottom
+                        isliked={isliked}
+                        handleQuoteModal={handleQuoteModal}
+                        setTweet={setTweet}
+                        quote={quote}
+                        likelength={props?.tweet_likes?.length}
+                        handleLikeTweet={handleLikeTweet}
+                        setQuote={setQuote}
+                    />
+
+                </div>
+
             </Link>
-            <FeedCardBottom
-                isliked={isliked}
-                handleQuoteModal={handleQuoteModal}
-                setTweet={setTweet}
-                quote={quote}
-                likelength={props?.tweet_likes?.length}
-                handleLikeTweet={handleLikeTweet}
-                setQuote={setQuote}      
-                />
+
 
         </FeedCardStyles>
     )
@@ -237,12 +244,6 @@ const FeedCardStyles = styled.div`
     h5 {
         font-weight: 600;
         font-size: 15px;
-        @media (max-width:980px) {
-        font-size: 15.5px !important;
-       }
-       @media (max-width:580px) {
-        font-size: 14px !important;
-       }
     }
     .dropdownCard {
         position: absolute;
