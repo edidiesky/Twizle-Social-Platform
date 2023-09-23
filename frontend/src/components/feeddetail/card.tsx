@@ -58,7 +58,7 @@ const PostFeedCard = () => {
                         </h5>
                         <div className="w-100 wrapper">
                             {
-                                tweetDetails?.tweet_image.map((x, index) => {
+                                tweetDetails?.tweet_image.map((x:any, index?:any) => {
                                     return <img key={index} style={{ borderRadius: "10px" }} src={x} alt="" className="w-100 h-100" />
                                 })
                             }

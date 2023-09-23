@@ -5,10 +5,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import TweetModal from '../modals/TweetModal';
-import RetweetIcon from '../../assets/svg/feedcardicons/retweet';
-import LikeIcon from '../../assets/svg/feedcardicons/like';
-import StatIcon from '../../assets/svg/feedcardicons/stat';
-import MessageIcon from '../../assets/svg/feedcardicons/message';
 import IntrestIcon from '../../assets/svg/dropdownicons/interest';
 import FollowIcon from '../../assets/svg/dropdownicons/follow';
 import ReportIcon from '../../assets/svg/dropdownicons/report';
@@ -53,15 +49,15 @@ const FeedCard = (props: feedcardtype) => {
     const dispatch = useAppDispatch()
     const handleLikeTweet = () => {
 
-        dispatch(LikeAndUnlikeATweet(props?._id))
+        dispatch(LikeAndUnlikeATweet({Detailsdata:props?._id}))
     }
     const handleRepostTweet = () => {
         setQuote(false)
-        dispatch(RePostATweet(props?._id))
+        dispatch(RePostATweet({Detailsdata:props?._id}))
     }
     const likes = props?.tweet_likes?.length
     const handleDeleteTweet = () => {
-        dispatch(DeleteTweet(props?._id))
+        dispatch(DeleteTweet({Detailsdata:props?._id}))
         setDeleteModal(false)
     }
     const handledeleteModal = () => {
@@ -162,8 +158,9 @@ const FeedCard = (props: feedcardtype) => {
                         quote={quote}
                         likelength={props?.tweet_likes?.length}
                         handleLikeTweet={handleLikeTweet}
-                        setQuote={setQuote}
-                    />
+                        setQuote={setQuote} setQuoteModal={function (val: boolean): void {
+                            throw new Error('Function not implemented.');
+                        } }                    />
 
                 </div>
 

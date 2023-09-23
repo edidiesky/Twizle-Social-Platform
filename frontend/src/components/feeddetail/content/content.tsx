@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Top from '../feedtop/top';
-import PostDetailsComments from './commeents';
+import PostDetailsComments from './comments';
 import TweetFormSection from '../../common/tweetsection';
 import PostFeedCard from '../card';
 import { BiSolidBadgeCheck } from 'react-icons/bi'
@@ -29,14 +29,14 @@ const PostDetailsContent: React.FC = () => {
     
     const dispatch = useAppDispatch()
     React.useEffect(()=> {
-        dispatch(GetSingleTweetDetails(id))
+        dispatch(GetSingleTweetDetails({Detailsdata:id}))
     }, [id])
     React.useEffect(() => {
-        dispatch(GetSingleQuoteTweetDetails(id))
+        dispatch(GetSingleQuoteTweetDetails({Detailsdata:id}))
     }, [id])
     const handleBookMark=()=> {
         setBookMark(!bookmark)
-        dispatch(BookMarkATweet(id))
+        dispatch(BookMarkATweet({Detailsdata:id}))
     }
    
     return (

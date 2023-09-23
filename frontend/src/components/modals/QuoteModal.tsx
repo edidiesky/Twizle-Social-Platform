@@ -28,7 +28,7 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
   
 
   React.useEffect(() => {
-    dispatch(GetSingleTweetDetails(id))
+    dispatch(GetSingleTweetDetails({Detailsdata:id}))
   }, [id])
   const { tweetDetails } = useAppSelector(store => store.tweet)
   const [uploading, setUploading] = useState(false);
@@ -43,9 +43,12 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
     setUploading(true);
     // create formdata
     const formData = new FormData();
-    for (let i = 0; i < file.length; i++) {
-      formData.append("files", file[i]);
+    if (file !== null) {
+      for (let i = 0; i < file.length; i++) {
+        formData.append("files", file[i]);
+      }
     }
+    
 
     try {
       const config = {

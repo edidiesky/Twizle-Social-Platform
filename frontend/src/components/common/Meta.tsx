@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-export default function Meta({ title, keyword, description }) {
+const Meta: React.FC<{ title?: string, keyword?: string, description?: string }>=({ title, keyword, description })=> {
   return (
     <Helmet>
       <title>{title}</title>

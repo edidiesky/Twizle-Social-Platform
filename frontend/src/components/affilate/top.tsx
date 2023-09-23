@@ -43,13 +43,19 @@ const Top: React.FC<modalType> = ({ setModal }) => {
             </div>
             <ul className="w-100 flex item-center text-bold fs-16 profilelist">
                 <li className="flex-1 profileTag w-100">
-                    <NavLink activeClassName='active' to={`/`} className="tag text-dark">Verified Followers</NavLink>
+                    <NavLink className={isActive =>
+                        "nav-link tag text-dark" + (!isActive ? " unselected" : "")
+                    } to={`/`} >Verified Followers</NavLink>
                 </li>
                 <li className="flex-1 profileTag w-100">
-                    <NavLink activeClassName='active' to={`/${userDetails?.name}/followers`} className="tag text-dark">Followers</NavLink>
+                    <NavLink to={`/${userDetails?.name}/followers`} className={isActive =>
+                        "nav-link tag text-dark" + (!isActive ? " unselected" : "")
+                    } >Followers</NavLink>
                 </li>
                 <li className="flex-1 profileTag w-100">
-                    <NavLink to={'following'} activeClassName='active' className="tag text-dark">Followings</NavLink>
+                    <NavLink to={'following'} className={isActive =>
+                        "nav-link tag text-dark" + (!isActive ? " unselected" : "")
+                    } >Followings</NavLink>
                 </li>
 
             </ul>

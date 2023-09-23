@@ -21,13 +21,15 @@ const TweetFormSection = () => {
     const [alert, setAlert] = useState(false);
     const dispatch = useAppDispatch()
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        // get the file
         const file = e.target.files;
         setUploading(true);
         // create formdata
         const formData = new FormData();
-        for (let i = 0; i < file.length; i++) {
-            formData.append("files", file[i]);
+
+        if (file !== null) {
+            for (let i = 0; i < file.length; i++) {
+                formData.append("files", file[i]);
+            }
         }
 
         try {

@@ -142,7 +142,7 @@ export const UpdateTweet = createAsyncThunk<{
 );
 
 // update User tweet
-export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, {
+export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsdata ?:string},{
   rejectValue: KnownError,
 }>(
   "BookMarkATweet",
@@ -182,9 +182,9 @@ export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, {
 );
 
 // Deelete User tweet
-export const DeleteTweet = createAsyncThunk<{
+export const DeleteTweet = createAsyncThunk <{
   rejectValue: KnownError,
-}, { _id?: string }>(
+}, { Detailsdata?: string }>(
   "deletetweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
@@ -215,7 +215,7 @@ export const DeleteTweet = createAsyncThunk<{
 
 
 // GetTweet Details
-export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, {
+export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { Detailsdata ?:string}, {
   rejectValue: KnownError,
 }>(
   "GetDetails",
@@ -251,6 +251,7 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, {
 // Like and unlike a tweet
 export const LikeAndUnlikeATweet = createAsyncThunk<
 tweetdatatype,
+{ Detailsdata :string},
 {
   rejectValue: KnownError,
 }>(
@@ -333,7 +334,7 @@ export const GetUserTweet = createAsyncThunk<{
 // Like and unlike a tweet
 export const RePostATweet = createAsyncThunk<{
   rejectValue: KnownError,
-}, { _id?: string }>(
+}, { Detailsdata: string }>(
   "RePostATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 

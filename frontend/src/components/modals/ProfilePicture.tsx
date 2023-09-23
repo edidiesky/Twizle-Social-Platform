@@ -30,30 +30,36 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?: string) => {
     // get the file
     // console.log('file')
-
-    const file = e?.target?.files[0];
-    setUploading(true);
-    // create formdata
-    const formData = new FormData();
-    formData.append("files", file);
-
-
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post("/api/v1/upload/single", formData, config);
+    const fileInput = e.target as HTMLInputElement
+    if (fileInput.files !== null) {
+      const selectedfiles = fileInput.files[0]
+      setUploading(true);
+      // create formdata
+      const formData = new FormData();
+      formData.append("files", selectedfiles);
 
 
-      setImage(data.urls)
-      setProfilePicture(data.urls)
-      setAlert(true);
-      setUploading(false);
-    } catch (err) {
-      console.log(err);
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        const { data } = await axios.post("/api/v1/upload/single", formData, config);
+
+
+        setImage(data.urls)
+        setProfilePicture(data.urls)
+        setAlert(true);
+        setUploading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log('No files were being selected');
+
     }
+
   };
 
   // navigate home if update profile is succesfull
@@ -62,11 +68,11 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
   }, [])
   useEffect(() => {
     if (userprofileisSuccess) {
-      setTimeout(() => {
+     const timeoutId = setTimeout(() => {
         navigate('/')
       }, 4000);
 
-      return () => clearTimeout(navigate('/'), 4000)
+      return () => clearTimeout(timeoutId)
       // setTab(2)
     }
   }, [userprofileisSuccess, setTab])

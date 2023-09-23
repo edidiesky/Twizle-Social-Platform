@@ -41,9 +41,12 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
     setUploading(true);
     // create formdata
     const formData = new FormData();
-    for (let i = 0; i < file.length; i++) {
-      formData.append("files", file[i]);
+    if(file !== null) {
+      for (let i = 0; i < file.length; i++) {
+        formData.append("files", file[i]);
+      }
     }
+   
 
     try {
       const config = {

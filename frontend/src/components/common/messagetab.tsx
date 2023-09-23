@@ -8,13 +8,15 @@ import LoaderIndex from "../loaders";
 import { GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
 import axios from "axios";
 import { BsThreeDots } from "react-icons/bs";
+type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 
 type modalType = {
     modal?: Boolean;
     type?: string;
     id?: string;
-    setModal: (val: boolean) => void;
+    setModal: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 const userdata = [

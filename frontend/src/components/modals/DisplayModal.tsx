@@ -50,8 +50,10 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
   const getBackgroundTheme = () => {
     let theme: string = 'light-theme'
 
-    if (theme = 'light-theme') {
-      theme = localStorage.getItem('theme' || '')
+    if (theme === 'light-theme') {
+      const storedTheme = localStorage.getItem('light-theme');
+
+      theme = storedTheme !== null ? storedTheme : 'light-theme';
     }
     return theme
   }
@@ -59,8 +61,9 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
   const getColorTheme = () => {
     let theme: string = 'blue-theme'
 
-    if (theme = 'blue-theme') {
-      theme = localStorage.getItem('colortheme' || '')
+    if (theme === 'blue-theme') {
+      const storedTheme = localStorage.getItem('blue-theme');
+      theme = storedTheme !== null ? storedTheme : 'blue-theme';
     }
     return theme
   }

@@ -16,7 +16,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 
 type modalType = {
   modal?: boolean;
-  setModal: (value?:boolean) => void;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
   handleDeleteTweet:()=> void;
 }
 
@@ -28,20 +28,13 @@ const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }
   const { loginisLoading, loginisSuccess } = useAppSelector(store => store.auth)
 
   const dispatch = useAppDispatch()
-
-
-  const handleLoginUser = () => {
-    // e.preventDefault()
-    dispatch(loginUser({ email, password }))
-  }
-
   useEffect(() => {
     if (loginisSuccess) {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         navigate('/')
       }, 3000);
 
-      return () => clearTimeout(navigate('/'), 3000)
+      return () => clearTimeout(timeoutId)
 
     }
   }, [loginisSuccess])

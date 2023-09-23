@@ -27,6 +27,7 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
   const [image, setImage] = useState('');
   const [banner, setBanner] = useState('');
   const [location, setLocation] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useAppDispatch()
   const { userInfo, userprofileisLoading } = useAppSelector(store=> store.auth)
 
@@ -55,52 +56,63 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type?:string) => {
     // get the file
     // console.log('file')
+    const fileInput = e.target as HTMLInputElement;
+    if(fileInput.files !== null) {
+      const selectedFiles = fileInput.files[0];
+      setUploading(true);
+      // create formdata
+      const formData = new FormData();
+      formData.append("files", selectedFiles);
 
-    const file = e?.target?.files[0];
-    setUploading(true);
-    // create formdata
-    const formData = new FormData();
-    formData.append("files", file);
+
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        const { data } = await axios.post("/api/v1/upload/single", formData, config);
 
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post("/api/v1/upload/single", formData, config);
-   
-      
-      setImage(data.urls)
-      setAlert(true);
-      setUploading(false);
-    } catch (err) {
-      console.log(err);
+        setImage(data.urls)
+        setAlert(true);
+        setUploading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setError('No files were being selected')
     }
+    
   };
   const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // get the file
-    // console.log('banner')
-    const file = e?.target?.files[0];
-    setUploading(true);
-    // create formdata
-    const formData = new FormData();
-    formData.append("files", file);
+    const fileInput = e.target as HTMLInputElement;
+    if (fileInput.files !== null) {
+      const selectedFiles = fileInput.files[0];
+      setUploading(true);
+      // create formdata
+      const formData = new FormData();
+      formData.append("files", selectedFiles);
 
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post("/api/v1/upload/single", formData, config);
-      setBanner(data.urls)
-      setAlert(true);
-      setUploading(false);
-    } catch (err) {
-      console.log(err);
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        const { data } = await axios.post("/api/v1/upload/single", formData, config);
+
+
+        setImage(data.urls)
+        setAlert(true);
+        setUploading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setError('No files were being selected')
     }
   };
   const handleUpdateProfile =()=> {

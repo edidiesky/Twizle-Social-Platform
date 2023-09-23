@@ -30,7 +30,7 @@ type KnownError = {
   errorMessage: string;
 }
 
-export const registerUser = createAsyncThunk<authtype, {
+export const registerUser = createAsyncThunk<authtype, { email?: string, password?: string, name ?:string}, {
   rejectValue: KnownError,
 
 }>(
@@ -54,7 +54,7 @@ export const registerUser = createAsyncThunk<authtype, {
   }
 );
 
-export const loginUser = createAsyncThunk<authtype, {
+export const loginUser = createAsyncThunk<authtype, { email?: string, password?: string, name?: string }, {
   rejectValue: KnownError,
 }>(
   "loginUser",
@@ -146,7 +146,7 @@ export const GetUserProfile = createAsyncThunk<{
 );
 
 export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefollowedInFllowingsArray: []; userInfo: {} },
-  { profiledata: string },
+{ profiledata: string },
   {
     rejectValue: KnownError
   }>(
@@ -287,7 +287,7 @@ export const GetAllUserFollowers = createAsyncThunk<{
 // get all user not followed by the user
 export const GetAllUserNotFollowed = createAsyncThunk<{
   rejectValue: KnownError,
-}, string>(
+}, {authdata:string}>(
   "GetAllUserNotFollowed",
   async (authdata, { rejectWithValue, getState }) => {
 

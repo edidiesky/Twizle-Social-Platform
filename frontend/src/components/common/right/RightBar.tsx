@@ -25,11 +25,11 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-        dispatch(GetAllUserNotFollowed(userInfo?._id))
+        dispatch(GetAllUserNotFollowed({authdata:userInfo?._id}))
     }, [])
 
     const handleFollowUser = (id: string) => {
-        dispatch(FollowAndUnFollowAUser(id))
+        dispatch(FollowAndUnFollowAUser({profiledata:id}))
     }
 
     return (
@@ -101,7 +101,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                   <LoaderIndex type='small'/>
                                 </div> : <>
                                     {
-                                        notfollowedUsers?.slice(0, 3).map((x, index) => {
+                                        notfollowedUsers?.slice(0, 3).map((x:any, index:any) => {
                                             const active = userInfo?.followings?.includes(x?._id)
                                             return <div key={index} className="w-100 list flex item-center justify-space">
                                                 <div className="flex item-center gap-1">
@@ -150,7 +150,9 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                         <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px"}}>Edidiong Essien</Link>
                         <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{margin:"1px 2px"}}>© 2023 Eddy Corp..</Link>
                     </div>
-                    <MessageTab/>
+                    {/* <MessageTab setModal={function (val: boolean): void {
+                        throw new Error('Function not implemented.');
+                    } }/> */}
                 </div>
 
             </div>

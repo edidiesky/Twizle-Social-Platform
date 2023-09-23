@@ -78,7 +78,7 @@ const LeftContent: React.FC = () => {
                                     }
 
                                     return x?.sender?._id !== userInfo?._id && <NavLink
-                                        activeClassName="active"
+                                        
                                         to={`/messages/${x?.sender?._id}-${x?.receiver?._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
@@ -119,7 +119,7 @@ const LeftContent: React.FC = () => {
                                     }
 
                                     return x?.receiver?._id !== userInfo?._id && <NavLink
-                                        activeClassName="active"
+                                        
                                         to={`/messages/${x?.sender?._id}-${ x?.receiver?._id }`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">

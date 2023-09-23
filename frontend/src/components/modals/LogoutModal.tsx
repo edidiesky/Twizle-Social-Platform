@@ -15,7 +15,7 @@ const LogoutModal: React.FC<modalType> = ({setModal }) => {
   const { userInfo } = useAppSelector(store => store.auth)
   const dispatch = useAppDispatch()
     const handleLogOut = () => {
-        dispatch(ClearUserInfo());
+        dispatch(ClearUserInfo("any"));
         window.location.reload();
     };
 
