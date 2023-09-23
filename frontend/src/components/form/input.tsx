@@ -28,7 +28,7 @@ const InputTextField = styleds(TextField)(({ theme }) => ({
     padding: '24px 10px',
     paddingBottom:"7px",
     
-    fontSize: '17px',
+    fontSize: '16px',
     fontWeight: 'Normal',
     fontFamily: "CustomFont_Normal, sans-serif",
     lineHeight:"1.15",
@@ -36,7 +36,7 @@ const InputTextField = styleds(TextField)(({ theme }) => ({
 
   },
   '& .MuiInputLabel-root': {
-    fontSize: '17px',
+    fontSize: '16px',
     fontWeight: 'Normal',
     color: 'var(--dark-1)'
   },

@@ -50,6 +50,12 @@ const UserSchema = new mongoose.Schema(
     },
     website: {
       type: String,
+    }, 
+    location: {
+      type: String,
+    },
+    language: {
+      type: String,
     },
     profession: {
       type: String,

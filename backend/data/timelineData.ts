@@ -1,55 +1,7 @@
 export const timelineData = [
     // .Center Devils 
-    {
-        tweet_text: "🚨🚨🎙️| Erik ten Hag on Casemiro: `He’s the one.I’ve just mentioned, you have to stay in the game.You have to show the leadership in those moments when the team have difficult moments, difficult occasions, and we have to survive. All the players can be with him.He shows the example that all the players follow.That’s Casemiro.In the end, he scored two goals.`",
-        tweet_image: ['https://pbs.twimg.com/media/F6jjGpDbMAAXF95?format=jpg&name=medium'],
-        tweet_user_id: "650e3b444cee3105b9a8146d"
-    },
-    {
-        tweet_text: "One of these was shot with iPhone 15 Pro, and the other was shot with Pixel Fold 🔎",
-        tweet_image: ['https://pbs.twimg.com/media/F6jsBllXAAAz8TY?format=jpg&name=4096x4096', 'https://pbs.twimg.com/media/F6jsBllXcAAb_iL?format=jpg&name=4096x4096'],
-        tweet_user_id: "650e3b444cee3105b9a81471"
-    },
-    // food
-    {
-        tweet_text: "How do you like your noodles to be prepared?😋",
-        tweet_image: ['https://pbs.twimg.com/media/F5uioLVWIAAzoL1?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLNWYAAac4I?format=jpg&name=medium',
-            'https://pbs.twimg.com/media/F5uioLPWIAEzA5d?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLIXMAAthC2?format=jpg&name=medium'
-        ],
-        tweet_user_id: "650e3b444cee3105b9a8146f"
-    },
-    // .Center Devils 
-    {
-        tweet_text: "Who'll win the first Women's Nations League ⁉️🤔",
-        tweet_image: ['https://pbs.twimg.com/media/F6nYzr3W4AAI2Yv?format=jpg&name=large'],
-        tweet_user_id: "650e3b444cee3105b9a8146d"
-    },
-    // 650e3b444cee3105b9a81471
    
-    // .Center Devils 
-    {
-        tweet_text: "🚨 Manchester United are prepared to offload Jadon Sancho in January and are willing to accept a significant financial loss on the £73M they paid for him in 2021.",
-        tweet_image: ['https://pbs.twimg.com/media/F6k3qT2WEAAT7Az?format=jpg&name=900x900'],
-        tweet_user_id: "650e3b444cee3105b9a8146d"
-    },
-    // Barca Times
-    {
-        tweet_text: "🚨 | BREAKING: According to @ESPNBrasil Roque's injury could be more serious. The Brazilian's ligaments could potentially be affected.Recovery will take more than three months.#fcblive",
-        tweet_image: ['https://pbs.twimg.com/media/F6pYh1qXUAI2Zv9?format=jpg&name=small'],
-        tweet_user_id: "650e3b444cee3105b9a81473"
-    },
-    // 650e3b444cee3105b9a81470
-    {
-        tweet_text: "I remember one year, I applied for a job. My friend sent me the link, he said he had just applied and suggested I give it a try too. He said they are a multinational company and trying to expand to Nigeria. Lol, I quickly applied too. I needed the job so bad",
-        tweet_image: [''],
-        tweet_user_id: "650e3b444cee3105b9a81470"
-    },
-    // .Center Devils
-    {
-        tweet_text: "As I leave this club after many years of incredible memories, outstanding teammates, and trophies, I want to express my profound gratitude. This chapter may be closing, but the friendships and memories will forever remain in my heart. The fans here are the real champions. Thanks… Show more",
-        tweet_image: ['https://pbs.twimg.com/media/F5W8W1kWEAAZbdU?format=jpg&name=small'],
-        tweet_user_id: "650e3b444cee3105b9a8146d"
-    },
+   
     // 650e3b444cee3105b9a81471
     {
         tweet_text: "PSA for everyone who leaves their phones on silent and is about to get an iPhone 15 Pro: You can turn off the annoying permanent silent indicator in settings. You’re welcome",
@@ -85,6 +37,56 @@ export const timelineData = [
         tweet_text: "🚨 | BREAKING: According to @ESPNBrasil Roque's injury could be more serious. The Brazilian's ligaments could potentially be affected.Recovery will take more than three months.#fcblive",
          tweet_image: ['https://pbs.twimg.com/media/F6pYh1qXUAI2Zv9?format=jpg&name=small'],
         tweet_user_id: "650e3b444cee3105b9a81473"
+    },
+    {
+        tweet_text: "🚨🚨🎙️| Erik ten Hag on Casemiro: `He’s the one.I’ve just mentioned, you have to stay in the game.You have to show the leadership in those moments when the team have difficult moments, difficult occasions, and we have to survive. All the players can be with him.He shows the example that all the players follow.That’s Casemiro.In the end, he scored two goals.`",
+        tweet_image: ['https://pbs.twimg.com/media/F6jjGpDbMAAXF95?format=jpg&name=medium'],
+        tweet_user_id: "650e3b444cee3105b9a8146d"
+    },
+    {
+        tweet_text: "One of these was shot with iPhone 15 Pro, and the other was shot with Pixel Fold 🔎",
+        tweet_image: ['https://pbs.twimg.com/media/F6jsBllXAAAz8TY?format=jpg&name=4096x4096', 'https://pbs.twimg.com/media/F6jsBllXcAAb_iL?format=jpg&name=4096x4096'],
+        tweet_user_id: "650e3b444cee3105b9a81471"
+    },
+    // food
+    {
+        tweet_text: "How do you like your noodles to be prepared?😋",
+        tweet_image: ['https://pbs.twimg.com/media/F5uioLVWIAAzoL1?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLNWYAAac4I?format=jpg&name=medium',
+            'https://pbs.twimg.com/media/F5uioLPWIAEzA5d?format=jpg&name=medium', 'https://pbs.twimg.com/media/F5uioLIXMAAthC2?format=jpg&name=medium'
+        ],
+        tweet_user_id: "650e3b444cee3105b9a8146f"
+    },
+    // .Center Devils 
+    {
+        tweet_text: "Who'll win the first Women's Nations League ⁉️🤔",
+        tweet_image: ['https://pbs.twimg.com/media/F6nYzr3W4AAI2Yv?format=jpg&name=large'],
+        tweet_user_id: "650e3b444cee3105b9a8146d"
+    },
+    // 650e3b444cee3105b9a81471
+
+    // .Center Devils 
+    {
+        tweet_text: "🚨 Manchester United are prepared to offload Jadon Sancho in January and are willing to accept a significant financial loss on the £73M they paid for him in 2021.",
+        tweet_image: ['https://pbs.twimg.com/media/F6k3qT2WEAAT7Az?format=jpg&name=900x900'],
+        tweet_user_id: "650e3b444cee3105b9a8146d"
+    },
+    // Barca Times
+    {
+        tweet_text: "🚨 | BREAKING: According to @ESPNBrasil Roque's injury could be more serious. The Brazilian's ligaments could potentially be affected.Recovery will take more than three months.#fcblive",
+        tweet_image: ['https://pbs.twimg.com/media/F6pYh1qXUAI2Zv9?format=jpg&name=small'],
+        tweet_user_id: "650e3b444cee3105b9a81473"
+    },
+    // 650e3b444cee3105b9a81470
+    {
+        tweet_text: "I remember one year, I applied for a job. My friend sent me the link, he said he had just applied and suggested I give it a try too. He said they are a multinational company and trying to expand to Nigeria. Lol, I quickly applied too. I needed the job so bad",
+        tweet_image: [''],
+        tweet_user_id: "650e3b444cee3105b9a81470"
+    },
+    // .Center Devils
+    {
+        tweet_text: "As I leave this club after many years of incredible memories, outstanding teammates, and trophies, I want to express my profound gratitude. This chapter may be closing, but the friendships and memories will forever remain in my heart. The fans here are the real champions. Thanks… Show more",
+        tweet_image: ['https://pbs.twimg.com/media/F5W8W1kWEAAZbdU?format=jpg&name=small'],
+        tweet_user_id: "650e3b444cee3105b9a8146d"
     },
 
 ];

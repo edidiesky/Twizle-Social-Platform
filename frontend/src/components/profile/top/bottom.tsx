@@ -5,7 +5,7 @@ import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5'
 import { PiSuitcaseSimple } from 'react-icons/pi'
 import { useAppSelector } from '../../../hooks/reduxtoolkit';
 import { HiOutlineMail } from 'react-icons/hi';
-import { BsThreeDots } from 'react-icons/bs';
+import { BsThreeDots, BsLink45Deg } from 'react-icons/bs';
 import { AiOutlineBell } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
@@ -37,10 +37,10 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
           }
         </div>
       </div>
-      <div className="w-90 flex column  gap-2 auto">
+      <div className="w-90 flex column gap-1 auto">
         {/* username and  */}
-        <h3 className="fs-20 text-extra-bold">{userDetails?.name}
-          <div style={{marginTop:"3px"}} className="block fs-14 text-grey text-light">@{userDetails?.display_name}</div>
+        <h3 className="fs-24 text-extra-bold">{userDetails?.name}
+          <div style={{marginTop:"3px"}} className="block fs-14 text-grey2 text-light">@{userDetails?.display_name}</div>
         </h3>
         {
           userDetails?.bio && <h4 className="fs-16 text-light">
@@ -52,10 +52,10 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
 
 
         {/* ocupation date location */}
-        <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-1">
+        <div style={{ gap: "1.2rem" }} className="flex flex-wrap fs-15 text-grey2 text-light item-center w-100">
           {
             userDetails?.profession && <div className="flex item-center" style={{ gap: ".5rem" }}>
-              <PiSuitcaseSimple fontSize={'20px'} />
+              <PiSuitcaseSimple fontSize={'18px'} />
               {
                 userDetails?.profession
               }
@@ -64,23 +64,32 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
           {/* users country */}
           {
             userDetails?.country && <div className="flex item-center" style={{ gap: ".5rem" }}>
-              <IoLocationOutline fontSize={'20px'} color={'var(--dark-1)'} />
+              <IoLocationOutline fontSize={'18px'} color={'var(--dark-1)'} />
               {
                 userDetails?.country
               }
             </div>
           }
+          {/* users website */}
+          {
+            userDetails?.website && <div className="flex item-center" style={{ gap: ".5rem" }}>
+              <BsLink45Deg fontSize={'18px'} color={'var(--dark-1)'} />
+              {
+                userDetails?.website
+              }
+            </div>
+          }
           <div className="flex item-center" style={{ gap: ".5rem" }}>
-            <IoCalendarOutline fontSize={'20px'} />
+            <IoCalendarOutline fontSize={'18px'} />
             Joined {date}
           </div>
         </div>
         {/* followers followings */}
-        <div className="flex flex-wrap fs-16 text-light item-center w-100 gap-3">
+        <div className="flex flex-wrap fs-14 text-light item-center w-100 gap-3">
           <Link to={`/${userDetails?.name}/following`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
-            {userDetails?.followings?.length || 0} <div className="text-light">Following</div>
+            {userDetails?.followings?.length || 0} <div className="text-light text-grey2">Following</div>
           </Link> <Link to={`/${userDetails?.name}/followers`} className="text-bold text-dark flex item-center" style={{ gap: ".5rem" }}>
-            {userDetails?.followers?.length || 0} <div className=" text-light">Followers</div>
+            {userDetails?.followers?.length || 0} <div className=" text-light text-grey2">Followers</div>
           </Link>
         </div>
       </div>

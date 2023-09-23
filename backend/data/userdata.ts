@@ -12,7 +12,7 @@ const userdata = [
         "profile_banners": "https://pbs.twimg.com/profile_banners/1222239337548435456/1694552092/1500x500",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2020",
         "verified": true,
         "profile_image_url": "https://pbs.twimg.com/profile_images/1531275838364307456/c09EuRtq_400x400.jpg",
@@ -32,7 +32,7 @@ const userdata = [
         "profile_banners": "",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "",
@@ -51,7 +51,7 @@ const userdata = [
         "profile_banners":"https://pbs.twimg.com/profile_banners/181280529/1528985965/600x200",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "./eddy.jpeg", 
@@ -71,7 +71,7 @@ const userdata = [
         "profile_banners": "",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "https://pbs.twimg.com/media/F6kgrZPXAAAUDrT?format=jpg&name=240x240",
@@ -91,7 +91,7 @@ const userdata = [
         "profile_banners": "https://pbs.twimg.com/profile_banners/29873662/1642786557/1500x500",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "https://pbs.twimg.com/profile_images/1468001914302390278/B_Xv_8gu_400x400.jpg",
@@ -111,7 +111,7 @@ const userdata = [
         "profile_banners": "https://pbs.twimg.com/profile_banners/330262748/1635957145/1500x500",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "https://pbs.twimg.com/profile_images/1486761402853380113/3ifAqala_400x400.jpg",
@@ -131,7 +131,7 @@ const userdata = [
         "profile_banners": "https://pbs.twimg.com/profile_banners/1603887084/1689605707/1500x500",
         "followers_count": 0,
         "following_count": 0,
-        "tweets_count": 0,
+      
         "createdAt": "1/14/2011",
         "verified": false,
         "profile_image_url": "https://pbs.twimg.com/profile_images/1680955089236922368/9ojiEUiD_400x400.jpg",
