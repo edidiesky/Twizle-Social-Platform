@@ -22,6 +22,7 @@ import LoaderIndex from '../loaders';
 import Moredropdown from './moredropdown';
 import Logoutdropdown from './logoutdropdown';
 import TwitterIcon from '../../assets/svg/twitter';
+import TweetIcon from '../../assets/svg/leftsidebaricons/tweet';
 
 
 const LeftSidebarIndex = () => {
@@ -95,7 +96,7 @@ const LeftSidebarIndex = () => {
 
 
                 <div className="flex column w-100 justify-space leftwrapper auto gap-1">
-                    <div className="leftTop flex column">
+                    <div className="leftTop w-85 auto flex column">
                         <div className="flex w-100 column">
                             <div className="flex top w-100">
                                 <Link to={'/'} className="icon flex item-center justify-center">
@@ -124,15 +125,26 @@ const LeftSidebarIndex = () => {
                                    </div>
 
                                 </li>
+                               <TweetIcon/>
+                                
                             </ul>
                             <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
                         </div>
                     </div>
-                    <div className="w-85 relative auto">
+                    <div className="w-85 sidebarbottom relative auto">
                         {
                             logout && <Logoutdropdown setDrop={setLogOut} />
                         }
-                        <div onClick={()=> setLogOut(true)} style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
+                        <span className="images w-85 auto">
+                            {
+                                userInfo?.profile_image_url ?
+                                    <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
+                                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                            }
+                        </span>
+                        
+                    <div onClick={()=> setLogOut(true)} style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
                             {
                                 userInfo?.profile_image_url ?
                                     <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
@@ -155,7 +167,8 @@ const LeftSidebarIndex = () => {
 
 const LeftSidebarStyles = styled.div`
     flex: 0 0 310px;
-    min-height: 100vh;
+    height: 100vh;
+    overflow:auto;
    position: sticky;
     /* border-right: 1px solid var(--border); */
 
@@ -171,13 +184,29 @@ const LeftSidebarStyles = styled.div`
         flex: 0 0 200px;
   }
   @media (max-width:780px) {
-        flex: 0 0 80px;
+        flex: 0 0 120px;
   }
   @media (max-width:580px) {
-        flex: 0 0 60px;
+        flex: 0 0 80px;
   }
     @media (max-width:480px) {
         display: none;
+  }
+  .images {
+        display: none;
+        margin:4rem auto;
+ @media (max-width:780px) {
+     display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+  }
+  .sidebarbottom {
+@media (max-width:1180px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   }
   .activeLink {
   font-weight: bold;
@@ -194,14 +223,14 @@ const LeftSidebarStyles = styled.div`
     }
     .top {
         @media (max-width:1180px) {
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
   }
     }
     ul {
         @media (max-width:1180px) {
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center
   }
     }
     li {
@@ -219,6 +248,18 @@ const LeftSidebarStyles = styled.div`
         padding: 10px;
   padding-right: 2rem;
 
+    }
+    @media (max-width:980px) {
+          width: 6.4rem !important;
+        height: 6.4rem !important;
+        border-radius: 50% !important;
+  padding: 0;
+
+        a {
+            align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+        }
     }
     
   a {
@@ -265,11 +306,15 @@ const LeftSidebarStyles = styled.div`
   gap:2px;
   margin-bottom: 1.5rem;
   cursor: pointer;
+   @media (max-width:1180px) {
+        display: none !important;
+  }
   .avatar {
         width: 4rem !important;
         height: 4rem !important;
         border-radius: 50%;
         object-fit: cover;
+    margin: 0 !important;
     
     }
   @media (max-width:1180px) {
@@ -281,7 +326,7 @@ const LeftSidebarStyles = styled.div`
     display: grid;
     place-items: center;
     align-self: flex-end;
-    margin: 0;
+    margin: 0 !important;
    
     &:hover {
   background-color: var(--grey-hover);
@@ -301,8 +346,6 @@ const LeftSidebarStyles = styled.div`
 }
     }
     .leftTop {
-        width: 85%;
-        margin: 0 auto;
     }
     .leftwrapper {
         height: 100vh;

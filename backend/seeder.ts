@@ -20,8 +20,8 @@ mongoose.connection.on('error', (error: Error) => console.log('Error'))
 
 const importData = async () => {
   try {
-    await User.insertMany(userdata);
-    // await UserTweet.insertMany(timelineData);
+    // await User.insertMany(userdata);
+    await UserTweet.insertMany(timelineData);
     console.log("Data Imported!");
     process.exit();
   } catch (error) {
