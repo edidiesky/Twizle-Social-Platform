@@ -1,4 +1,4 @@
-export const tweets?efeedData = [
+export const feedData = [
   // africa facts zone
   {
     tweet_id: 14,

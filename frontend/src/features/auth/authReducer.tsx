@@ -117,7 +117,7 @@ export const UpdateProfile = createAsyncThunk<{
 // Getuser profile
 export const GetUserProfile = createAsyncThunk<{
   rejectValue: KnownError,
-}>(
+}, string>(
   "GetProfile",
   async (profiledata, { rejectWithValue, getState }) => {
 
@@ -145,9 +145,11 @@ export const GetUserProfile = createAsyncThunk<{
   }
 );
 
-export const FollowAndUnFollowAUser = createAsyncThunk < authtype,{
-  rejectValue: KnownError,
-}>(
+export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefollowedInFllowingsArray: []; userInfo: {} },
+  { profiledata: string },
+  {
+    rejectValue: KnownError
+  }>(
   "FollowAndUnFollowAUser",
   async (profiledata, { rejectWithValue, getState }) => {
 

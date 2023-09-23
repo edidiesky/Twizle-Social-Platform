@@ -18,7 +18,7 @@ const Followers: React.FC = () => {
   }, [])
 
   const handleFollowUser = (id: string) => {
-    dispatch(FollowAndUnFollowAUser(id))
+    dispatch(FollowAndUnFollowAUser({ profiledata: id }))
   }
   return (
     <Followerstyles className="w-100">
@@ -38,7 +38,7 @@ const Followers: React.FC = () => {
             </div> :
               <div className="w-100 flex column ">
                 {
-                  followers?.map(x => {
+                  followers?.map((x:any) => {
                     const active = userDetails?.followers?.includes(x?._id)
 
                     return <div className="w-100 connect_card flex item-start justify-space gap-1">
