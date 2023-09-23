@@ -1,13 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { Link } from 'react-router-dom';
+import TwitterIcon from '../../../assets/svg/twitter';
 
 interface TopProps {
 }
 const Top: React.FC<TopProps> = () => {
+    const { userInfo, userDetails } = useAppSelector(store => store.auth)
     return (
         <TopStyles className="w-100">
-            <div style={{ paddingTop: "1rem" }} className='flex column gap-1'>
-                <h2 style={{fontWeight:"800"}} className="fs-20 text-bold w-90 auto text-dark">Home</h2>
+            <div style={{ paddingTop: "1rem" }} className='flex top2 w-85 auto column gap-1'>
+               <div className="w-100 flex item-center justify-space">
+                    <div className="flex-1">
+                        {
+                            userInfo?.profile_image_url ?
+                                <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
+                                : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                        }
+                    </div>
+                    <Link to={'/'} className="icon flex item-center justify-center">
+                        <TwitterIcon type={'small'} />
+                    </Link>
+                    <div className="flex-1"></div>
+               </div>
+                <div className="w-100 flex item-center">
+                    <div className="flex-1 tab text-center fs-15 text-dark text-bold tab-1">
+                        <div className="spans text-center">For you</div>
+                    </div>
+                    <div className="flex-1 tab text-center fs-15 text-grey2 text-light tab-2">Following</div>
+                </div>
+            </div>
+            <div style={{ paddingTop: "1rem" }} className='flex top1 column gap-1'>
+                <h2 style={{ fontWeight: "800" }} className="fs-20 text-bold w-90 auto text-dark">Home</h2>
                 <div className="w-100 flex item-center">
                     <div className="flex-1 tab text-center fs-15 text-dark text-bold tab-1">
                         <div className="spans text-center">For you</div>
@@ -33,6 +59,24 @@ const TopStyles = styled.div`
   /* height: 10rem; */
   border-bottom: 1px solid var(--border);
   /* backdrop-filter: c; */
+   .avatar {
+        width: 4rem !important;
+        height: 4rem !important;
+        border-radius: 50%;
+        object-fit: cover;
+    margin: 0 !important;
+    
+    }
+    .top1 {
+        @media (max-width:490px) {
+            display:none;
+        }
+    }
+    .top2 {
+        @media (min-width:490px) {
+            display:none;
+        }
+    }
   .tab {
     padding:2rem;
     &.tab-1 {

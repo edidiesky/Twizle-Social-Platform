@@ -11,7 +11,9 @@ const Content: React.FC = () => {
             <Top />
             {/* notification popup */}
             {/* <Notification/> */}
-            <TweetFormSection />
+            <div className="forms w-100">
+                <TweetFormSection />
+            </div>
             <Feed />
         </ContentStyles>
     )
@@ -26,6 +28,11 @@ const ContentStyles = styled.div`
         /* background-color: red; */
         @media (max-width:980px) {
     border-right : 1px solid var(--border);
+        }
+        .forms {
+            @media (max-width:490px) {
+                display:none;
+            }
         }
     
   `
