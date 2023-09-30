@@ -146,7 +146,7 @@ export const GetUserProfile = createAsyncThunk<{
 );
 
 export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefollowedInFllowingsArray: []; userInfo: {} },
-{ profiledata: string },
+{ profiledata?: string },
   {
     rejectValue: KnownError
   }>(
@@ -318,9 +318,9 @@ export const GetAllUserNotFollowed = createAsyncThunk<{
 
 
 // get all user and tweet search by the user
-export const GetUserSearch = createAsyncThunk < authtype,{
+export const GetUserSearch = createAsyncThunk < authtype, { authdata:string},{
   rejectValue: KnownError,
-}, string>(
+}>(
   "GetUserSearch",
   async (authdata, { rejectWithValue, getState }) => {
 

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 type modalType = {
   modal?: boolean;
-  setModal: (value?:boolean) => void;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const LogoutModal: React.FC<modalType> = ({setModal }) => {

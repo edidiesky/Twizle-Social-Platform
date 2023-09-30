@@ -79,9 +79,9 @@ export const Createconversation = createAsyncThunk<{
 );
 
 // Deelete User conversation
-export const Deleteconversation = createAsyncThunk<{
+export const Deleteconversation = createAsyncThunk<string,{
   rejectValue: KnownError,
-}, { _id?: string }>(
+}>(
   "deleteconversation",
   async (Detailsdata, { rejectWithValue, getState }) => {
 

@@ -1,4 +1,4 @@
-const userdata = [
+export const userdata = [
     {
         "username": "robert_sefton0",
         "display_name": "Robert Sefton",

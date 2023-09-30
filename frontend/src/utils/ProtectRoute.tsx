@@ -1,19 +1,21 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+
+// export default ProtectRoute
+import React, { ReactNode } from 'react';
+import { Route, Navigate } from 'react-router-dom';
 import { useAppSelector } from "../hooks/reduxtoolkit";
-
 interface LayoutProps {
-  children: React.ReactNode
+  children?: ReactNode;
 }
-const ProtectRoute: React.FC<LayoutProps> = ({ children }) => {
-  // const navigate = useNavigate()
-  const {userInfo } = useAppSelector(store => store.auth)
-  // protect the home page and other routes
-  if (!userInfo) {
-    return <Navigate to="/i/flow/login" />;
-  }
 
-  return (children);
+const ProtectRoute: React.FC<LayoutProps> = ({ children }) => {
+  // Your logic for protecting the route (e.g., authentication checks)
+   const {userInfo } = useAppSelector(store => store.auth)
+
+  if (userInfo) {
+    return <Route>{children}</Route>; // Render the children when authenticated
+  } else {
+    return <Navigate to="/login" />; // Redirect to the login page when not authenticated
+  }
 };
 
-export default ProtectRoute
+export default ProtectRoute;

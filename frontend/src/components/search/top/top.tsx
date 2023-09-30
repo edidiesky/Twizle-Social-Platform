@@ -52,7 +52,7 @@ const Top: React.FC<modalType> = ({ setModal }) => {
             </div>
             <ul className="w-100 flex item-center text-bold fs-16 profilelist">
                 <li className="flex-1 profileTag active w-100">
-                    <NavLink activeClassName='active' to={``} className="tag text-dark">Top</NavLink>
+                    <NavLink to={``} className="tag text-dark">Top</NavLink>
                 </li>
                 <li className="flex-1 profileTag w-100">
                     <div className="tag text-dark">Latest</div>

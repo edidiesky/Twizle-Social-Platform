@@ -1,131 +1,54 @@
-import React, { useState, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import "./index.css";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import {
+  LayoutIndex,
   Auth,
   Home,
   Profile,
-  TweetDetailIndex,
   Bookmarks,
-  LogoutIndex,
   QuoteIndex,
-  LayoutIndex,
   MessageIndex,
-  MessageList,
   MessageContent,
   Followers,
   Followings,
-  Verified,
+  TweetDetailIndex,
+  Search,
+  LogoutIndex,
   AffilateLayoutIndex,
-  Search
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
 import LoaderIndex from "./components/loaders";
 
 export default function App() {
-  const [height, setHeight] = useState(0);
   return (
-    <div className="based w-100 h-100" style={{ height }}>
-      <Suspense fallback={<Preloader />}>
-        <Routes>
-          <Route path={"/"} element={<LayoutIndex />}>
-            <Route index element={<Suspense fallback={<Preloader />}>
-              <ProtectRoute>
-                <Home />
-              </ProtectRoute>
-            </Suspense>
-            }
-            />
-            <Route path="i/flow/signup" element={<Suspense fallback={<Preloader />}>
+    <div className="based w-100 h-100">
+      <Routes>
+        <Route path="/" element={<LayoutIndex />}>
+          <Route index element={<ProtectRoute><Home /></ProtectRoute>} />
+          <Route path="i/flow/signup" element={<Auth />} />
+          <Route path="i/bookmarks" element={<ProtectRoute><Bookmarks /></ProtectRoute>} />
+          <Route path="i/quote/:id" element={<ProtectRoute><QuoteIndex /></ProtectRoute>} />
+          <Route path="i/flow/login" element={<Auth />} />
+          <Route path=":name" element={<ProtectRoute><Profile /></ProtectRoute>} />
+        </Route>
 
-              <Auth />
-            </Suspense>
-            }
-            />
-            {/* bookmarks route */}
-            <Route path="i/bookmarks" element={<Suspense fallback={<Preloader />}>
-              <ProtectRoute>
-                <Bookmarks />
-              </ProtectRoute>
-            </Suspense>
-            }
-            />
-            <Route path="i/quote/:id" element={<Suspense fallback={<Preloader />}>
-              <ProtectRoute>
-                <QuoteIndex />
-              </ProtectRoute>
-            </Suspense>
-            }
-            />
-            {/* login route */}
-            <Route path="i/flow/login" element={<Suspense fallback={<Preloader />}>
+        <Route path="/messages" element={<MessageIndex />}>
+          <Route index element={<ProtectRoute><MessageContent /></ProtectRoute>} />
+          <Route path=":id" element={<MessageContent />} />
+        </Route>
 
-              <Auth />
-            </Suspense>
-            }
-            />
+        <Route path="/:name" element={<AffilateLayoutIndex />}>
+          <Route path="followers" element={<ProtectRoute><Followers /></ProtectRoute>} />
+          <Route path="following" element={<ProtectRoute><Followings /></ProtectRoute>} />
+        </Route>
 
-            {/* user profile route */}
-            <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
-              <ProtectRoute>
-                <Profile />
-              </ProtectRoute>
-            </Suspense>
-            }
+        <Route path=":name/status/:id" element={<ProtectRoute><TweetDetailIndex /></ProtectRoute>} />
 
-            />
-          </Route>
-          <Route path={"/messages"} element={<MessageIndex />}>
-            <Route index element={<Suspense fallback={<LoaderIndex />}>
-              <ProtectRoute>
-                <MessageList />
-              </ProtectRoute>
-            </Suspense>} />
-            <Route path=":id" element={<Suspense fallback={<Preloader />}>
-              <MessageContent />
-            </Suspense>} />
-          </Route>
-          {/* affilate */}
-          <Route path={"/:name"} element={<AffilateLayoutIndex />}>
-            <Route path="followers" element={<Suspense fallback={<Preloader />}>
-              <ProtectRoute>
-                <Followers />
-              </ProtectRoute>
-            </Suspense>} />
-            <Route path="following" element={<Suspense fallback={<Preloader />}>
-              <ProtectRoute>
-                <Followings />
-              </ProtectRoute>
-            </Suspense>} />
-          </Route>
-          {/* tweet detail  route */}
-          <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
-            <ProtectRoute>
-              <TweetDetailIndex />
-            </ProtectRoute>
-          </Suspense>
-          }
-          />
-          {/* tweet search  route */}
-          <Route path="/search" element={<Suspense fallback={<Preloader />}>
-            <ProtectRoute>
-              <Search />
-            </ProtectRoute>
-          </Suspense>
-          }
-          />
-          {/* Logout route */}
-          <Route path="logout" element={<Suspense fallback={<Preloader />}>
-            <ProtectRoute>
-              <LogoutIndex />
-            </ProtectRoute>
-          </Suspense>
-          }
-          />
+        <Route path="/search" element={<ProtectRoute><Search /></ProtectRoute>} />
 
-        </Routes>
-      </Suspense>
+        <Route path="logout" element={<ProtectRoute><LogoutIndex /></ProtectRoute>} />
+      </Routes>
     </div>
   );
 }

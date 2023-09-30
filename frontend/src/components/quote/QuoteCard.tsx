@@ -28,7 +28,7 @@ const QuoteFeedCard = () => {
     return (
         <div className="w-100 flex column">
             {
-                quotes?.map(x => {
+                quotes?.map((x:any) => {
                     return <QuoteCardStyles key={x?._id}>
                         <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
                             <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />

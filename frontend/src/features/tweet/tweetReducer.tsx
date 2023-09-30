@@ -251,7 +251,7 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { D
 // Like and unlike a tweet
 export const LikeAndUnlikeATweet = createAsyncThunk<
 tweetdatatype,
-{ Detailsdata :string},
+{ Detailsdata? :string},
 {
   rejectValue: KnownError,
 }>(
@@ -266,11 +266,6 @@ tweetdatatype,
           authorization: `Bearer ${auth.token}`,
         },
       };
-      // const response = await axios.put(
-      //   `/api/v1/tweet/like/${Detailsdata}`,
-      //   config
-      // );
-      // return response.data.updateTweet;
       const response = await axios.put(
         `/api/v1/tweet/like/${Detailsdata}`, null,
         config
