@@ -31,7 +31,7 @@ const Dropdown = styled.div`
         bottom: 100%;
         z-index: 4000;
         cursor: pointer;
-        width: 320px;
+        width: 290px;
         border-radius: 17px;
         box-shadow: var(--shadow);
         background-color: var(--white);

@@ -97,7 +97,7 @@ const LeftSidebarIndex = () => {
                         <div className="flex w-100 column">
                             <div className="flex top w-100">
                                 <Link to={'/'} className="icon flex item-center justify-center">
-                                    <TwitterIcon type={'small'}/>
+                                    <TwitterIcon type={'small'} />
                                 </Link>
                             </div>
                             <ul className="flex w-100 column item-start">
@@ -116,16 +116,16 @@ const LeftSidebarIndex = () => {
                                 }
                                 <li className="list relative text-dark flex item-center gap-2 text-light" >
                                     {drop && <Moredropdown setDrop={setDrop} />}
-                                   <div onClick={()=> setDrop(true)} className="w-100 flex w-100 item-center gap-2">
+                                    <div onClick={() => setDrop(true)} className="w-100 flex w-100 item-center gap-2">
                                         <CiCircleMore fontSize={'20px'} />
                                         <span className='span'>More</span>
-                                   </div>
+                                    </div>
 
                                 </li>
                                 <div onClick={() => setTweet(true)} className="">
                                     <TweetIcon />
-                               </div>
-                                
+                                </div>
+
                             </ul>
                             <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
                         </div>
@@ -142,8 +142,8 @@ const LeftSidebarIndex = () => {
 
                             }
                         </span>
-                        
-                    <div onClick={()=> setLogOut(true)} style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
+
+                        <div onClick={() => setLogOut(true)} style={{ gap: ".5rem" }} className="profilewrapper w-100 flex item-center">
                             {
                                 userInfo?.profile_image_url ?
                                     <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
@@ -167,10 +167,12 @@ const LeftSidebarIndex = () => {
 const LeftSidebarStyles = styled.div`
     flex: 0 0 310px;
     height: 100vh;
-    overflow:auto;
+    
    position: sticky;
     /* border-right: 1px solid var(--border); */
-
+@media (max-width:780px) {
+    overflow:auto;
+}
    top: 0;
         z-index: 4000;
 
