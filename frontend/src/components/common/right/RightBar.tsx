@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Search from './Search';
 import { chatData } from '../../../data/chatData';
-import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FollowAndUnFollowAUser, GetAllUserNotFollowed, GetAllUserProfile } from '../../../features/auth/authReducer';
 import { CircularProgress } from '@mui/material';
 import LoaderIndex from '../../loaders';
 import MessageTab from '../messagetab';
+import { FollowAndUnFollowAUser, GetAllUserNotFollowed } from '../../../features/auth/authReducer';
 type Rightbar = {
     types?: String
 }
@@ -22,7 +22,7 @@ const images = [
 const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const { tweetDetails } = useAppSelector(store => store.tweet)
     const { notfollowedUsers, userprofileisLoading, userInfo, usertoBefollowedInFllowingsArray } = useAppSelector(store => store.auth)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch();
 
     React.useEffect(() => {
         if (userInfo?._id) {
