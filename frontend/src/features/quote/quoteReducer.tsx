@@ -6,7 +6,7 @@ type Quotedatatype = {
   quote_text?: string;
   quote_image?: any;
   _id?: string;
-  quote_user_id?:string;
+  quote_user_id?: string;
 }
 
 interface BookMarkAQuotePayload {
@@ -52,7 +52,7 @@ export const getAllBookmarkedQuote = createAsyncThunk<{
         },
       };
       const response = await axios.get('/api/v1/quote/bookmark', config);
-    return response.data.bookmarkQuotes;
+      return response.data.bookmarkQuotes;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -77,15 +77,15 @@ export const CreateQuote = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      
-        const response2 = await axios.post(
-          `/api/v1/quote/${QuoteData?._id}`,
-          QuoteData,
-          config
-        );
-        return response2.data.quote;
-    
-     
+
+      const response2 = await axios.post(
+        `/api/v1/quote/${QuoteData?._id}`,
+        QuoteData,
+        config
+      );
+      return response2.data.quote;
+
+
       // console.log(QuoteData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -98,11 +98,13 @@ export const CreateQuote = createAsyncThunk<{
 );
 
 // Deelete User Quote
-export const DeleteQuote = createAsyncThunk<{
+export const DeleteQuote = createAsyncThunk<string, {
+  Detailsdata: string
+}, {
   rejectValue: KnownError,
-}, { _id?: string }>(
+}>(
   "deleteQuote",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({ Detailsdata }, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { token: string } };
@@ -114,7 +116,7 @@ export const DeleteQuote = createAsyncThunk<{
         },
       };
       await axios.delete(
-        `/api/v1/quote/${Detailsdata}`,
+        `/api/v1/quote/${{ Detailsdata }}`,
         config
       );
       return Detailsdata;
@@ -139,7 +141,7 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
 
     try {
       const { auth } = getState() as { auth: { QuoteInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -164,7 +166,7 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
 // Get User Quote
 export const GetUserQuote = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:any}>(
+}, { _id?: any }>(
   "GetUserQuote",
   async (Detailsdata, { rejectWithValue, getState }) => {
 

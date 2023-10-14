@@ -144,7 +144,7 @@ export const messageSlice = createSlice({
     })
     builder.addCase(Deletemessage.fulfilled, (state, action) => {
 
-      state.message = state.message.filter((x) => x._id !== action.payload);
+      state.message = state.message.filter((x:any) => x._id !== action.payload);
     })
     builder.addCase(Deletemessage.rejected, (state, action) => {
       state.messageisSuccess = false

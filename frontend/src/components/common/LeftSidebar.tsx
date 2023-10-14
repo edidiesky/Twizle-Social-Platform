@@ -86,9 +86,6 @@ const LeftSidebarIndex = () => {
                 tweetisLoading && <LoaderIndex/>
         } */}
             <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
             >
                 {tweet && <PostModal modal={tweet} setModal={setTweet} />}
             </AnimatePresence>

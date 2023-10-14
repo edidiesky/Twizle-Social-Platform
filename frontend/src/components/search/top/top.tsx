@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsSearch, BsThreeDots } from "react-icons/bs";
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai'

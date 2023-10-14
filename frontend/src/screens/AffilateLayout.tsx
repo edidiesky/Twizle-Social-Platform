@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import DisplayModal from '../components/modals/DisplayModal';
 import { AnimatePresence } from 'framer-motion';
 import { useAppSelector } from '../hooks/reduxtoolkit';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import LeftSidebarIndex from '../components/common/LeftSidebar';
 import RightSidebarIndex from '../components/common/right/RightBar';
 import Top from '../components/affilate/top';

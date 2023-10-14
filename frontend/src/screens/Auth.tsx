@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import Auth from '../components/register';
 const AuthIndex: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { useParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai'

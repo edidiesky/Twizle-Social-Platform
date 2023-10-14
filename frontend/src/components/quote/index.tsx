@@ -31,7 +31,7 @@ const Bookmarks: React.FC = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(GetSingleQuoteTweetDetails(id))
+        dispatch(GetSingleQuoteTweetDetails({ Detailsdata: id }))
     }, [id])
     return (
         <ProfileStyles>

@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import Profile from '../components/profile';
 const ProfileIndex: React.FC = () => {
   return (

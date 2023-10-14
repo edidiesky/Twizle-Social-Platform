@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import LogoutModal from '../components/modals/LogoutModal';
 const LogoutIndex: React.FC = () => {
   const [logout, setLogout] = React.useState<boolean>(true)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 const Verified: React.FC = () => {
     return (

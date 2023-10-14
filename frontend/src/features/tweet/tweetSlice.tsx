@@ -178,7 +178,7 @@ export const tweetSlice = createSlice({
       state.tweetisSuccess = true
       state.tweetisLoading = false
       state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
-      state.tweetDetails = action.payload.tweetdetails
+      state.tweetDetails = action.payload.tweetDetails
     })
     builder.addCase(GetSingleTweetDetails.rejected, (state, action) => {
       state.tweetisSuccess = false
@@ -197,7 +197,7 @@ export const tweetSlice = createSlice({
     })
     builder.addCase(DeleteTweet.fulfilled, (state, action) => {
 
-      state.tweets = state.tweets.filter((x) => x._id !== action.payload);
+      state.tweets = state.tweets.filter((x:any) => x._id !== action.payload);
     })
     builder.addCase(DeleteTweet.rejected, (state, action) => {
       state.tweetisSuccess = false
@@ -238,7 +238,7 @@ export const tweetSlice = createSlice({
       state.tweetisSuccess = true
       state.tweetisLoading = false
       state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
-      state.tweetDetails = action.payload.tweetdetails
+      state.tweetDetails = action.payload.tweetDetails
 
       localStorage.setItem("isBookMarked", JSON.stringify(action.payload.userIdIncludedInBookmarksArray));
 

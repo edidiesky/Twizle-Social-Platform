@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 // import Verified from '../components/Verified';
 const VerifiedIndex: React.FC = () => {
   return (

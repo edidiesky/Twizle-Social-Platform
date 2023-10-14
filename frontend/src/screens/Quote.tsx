@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import Quote from '../components/quote';
 const QuoteIndex: React.FC = () => {
   return (

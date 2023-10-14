@@ -107,7 +107,7 @@ const MessageContent: React.FC = () => {
           }
 
           <div className="w-85 auto chatList column flex gap-2">
-            {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: {} | null | undefined; }) => {
+            {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: any }) => {
               const usermessage = x?.sender === userInfo?._id
               const createdAt = moment(x?.createdAt).format('MMMM Do YYYY, h:mm a')
               return (

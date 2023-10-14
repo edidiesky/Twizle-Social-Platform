@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 type uploadType = {
     images: string[], 

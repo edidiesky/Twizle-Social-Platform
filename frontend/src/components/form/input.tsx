@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import {styled} from 'styled-components'
+import styled from 'styled-components'
 import { styled as styleds } from '@mui/material/styles';
 
 const InputTextField = styleds(TextField)(({ theme }) => ({

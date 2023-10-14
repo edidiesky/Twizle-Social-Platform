@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { useParams } from 'react-router-dom';
 import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetUserProfile } from '../../features/auth/authReducer';
 import LoaderIndex from '../loaders';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 const Followers: React.FC = () => {
   const { followers, userDetails, userprofileisLoading } = useAppSelector(store => store.auth)

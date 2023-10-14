@@ -148,7 +148,7 @@ export const conversationSlice = createSlice({
     })
     builder.addCase(Deleteconversation.fulfilled, (state, action) => {
 
-      state.conversation = state.conversation.filter((x) => x._id !== action.payload);
+      state.conversation = state.conversation.filter((x:any) => x._id !== action.payload);
     })
     builder.addCase(Deleteconversation.rejected, (state, action) => {
       state.conversationisSuccess = false

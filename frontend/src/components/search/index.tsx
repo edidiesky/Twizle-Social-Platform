@@ -54,7 +54,7 @@ const Search: React.FC = () => {
                                                 userSearchResult?.length !== 0 && <div className="w-100 flex bottom column gap-1">
                                                     <h4 className="fs-20 w-90 auto text-extra-bold">People</h4>
                                                     {
-                                                        userSearchResult?.slice(0, 3)?.map((x:string) => {
+                                                        userSearchResult?.slice(0, 3)?.map((x:any) => {
                                                             const active = userInfo?.followings?.includes(x?._id)
 
                                                             return <div className="w-100 connect_card flex item-start justify-space gap-1">

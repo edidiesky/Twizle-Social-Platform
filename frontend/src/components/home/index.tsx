@@ -9,7 +9,7 @@ import SmallSidebarIndex from '../common/smallsidebar';
 
 const Home: React.FC = () => {
     const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
-    console.log(tweetdata)
+    // console.log(tweetdata)
     return (
         <HomeStyles>
             <SmallSidebarIndex/>

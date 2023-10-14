@@ -145,7 +145,7 @@ export const GetUserProfile = createAsyncThunk<{
   }
 );
 
-export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefollowedInFllowingsArray: []; userInfo: {} },
+export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefollowedInFllowingsArray: boolean; userInfo: {} },
 { profiledata?: string },
   {
     rejectValue: KnownError

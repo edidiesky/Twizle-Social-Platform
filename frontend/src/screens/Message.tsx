@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Outlet } from "react-router-dom";
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import LeftSidebarIndex from '../components/common/LeftSidebar';
 import LeftContent from '../components/messages/content/leftcontent';
 const MessageIndex: React.FC = () => {

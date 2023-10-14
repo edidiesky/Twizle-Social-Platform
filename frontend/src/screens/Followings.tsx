@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 // import Followings from '../components/Followings';
 const FollowingsIndex: React.FC = () => {
   return (

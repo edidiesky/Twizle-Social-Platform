@@ -5,11 +5,11 @@ const tweeturl: string = "/api/v1/tweet";
 type tweetdatatype = {
   tweet_text?: string;
   tweet_image?: any;
-  userIdIncludedInTweetLikesArray?:boolean;
-  tweetdetails?: any;
+  userIdIncludedInTweetLikesArray?: any;
+  tweetDetails?: any;
   tweet?: any;
   _id?: string;
-  tweet_user_id: {
+  tweet_user_id?: {
     _id?: string;
     display_name?: string;
     name?: string;
@@ -21,7 +21,7 @@ type tweetdatatype = {
 
 interface BookMarkATweetPayload {
   userIdIncludedInBookmarksArray: boolean;
-  tweetdetails: any;
+  tweetDetails: any;
 }
 
 type KnownError = {
@@ -142,7 +142,7 @@ export const UpdateTweet = createAsyncThunk<{
 );
 
 // update User tweet
-export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsdata ?:string},{
+export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsdata?: string }, {
   rejectValue: KnownError,
 }>(
   "BookMarkATweet",
@@ -167,7 +167,7 @@ export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsd
         config
       );
       return {
-        tweetdetails: response2.data.tweet,
+        tweetDetails: response2.data.tweet,
         userIdIncludedInBookmarksArray: response2.data.userIdIncludedInBookmarksArray
       };
 
@@ -182,40 +182,37 @@ export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsd
 );
 
 // Deelete User tweet
-export const DeleteTweet = createAsyncThunk <{
-  rejectValue: KnownError,
-}, { Detailsdata?: string }>(
+export const DeleteTweet = createAsyncThunk<
+  string, // Return type (Detailsdata)
+  { Detailsdata: string },
+  {
+    rejectValue: KnownError;
+  }
+>(
   "deletetweet",
-  async (Detailsdata, { rejectWithValue, getState }) => {
-
+  async ({ Detailsdata }, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState() as { auth: { token: string } };
-      // console.log(auth.token)
-      // console.log(tweetdata?._id)
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
         },
       };
-      await axios.delete(
-        `/api/v1/tweet/${Detailsdata}`,
-        config
-      );
-      return Detailsdata;
-
+      await axios.delete(`/api/v1/tweet/${Detailsdata}`, config);
+      return Detailsdata; // Return the data
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
-        : err.message
+        : err.message;
       return rejectWithValue(message);
-
     }
   }
 );
 
 
+
 // GetTweet Details
-export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { Detailsdata ?:string}, {
+export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { Detailsdata?: string }, {
   rejectValue: KnownError,
 }>(
   "GetDetails",
@@ -234,7 +231,7 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { D
         config
       );
       return {
-        tweetdetails: response.data.tweet,
+        tweetDetails: response.data.tweet,
         userIdIncludedInBookmarksArray: response.data.userIdIncludedInBookmarksArray
       };
 
@@ -250,14 +247,14 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { D
 
 // Like and unlike a tweet
 export const LikeAndUnlikeATweet = createAsyncThunk<
-tweetdatatype,
-{ Detailsdata? :string},
-{
-  rejectValue: KnownError,
-}>(
+  tweetdatatype, // Adjust the return type
+  { Detailsdata?: string },
+  {
+    rejectValue: KnownError,
+  }
+>(
   "LikeAndUnlikeATweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
-
     try {
       const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
 
@@ -267,32 +264,29 @@ tweetdatatype,
         },
       };
       const response = await axios.put(
-        `/api/v1/tweet/like/${Detailsdata}`, null,
+        `/api/v1/tweet/like/${Detailsdata}`,
+        null,
         config
       );
-      const response1 =  await axios.get(
-        `/api/v1/tweet/${Detailsdata}`,
-        config
-      );
-      const response2 = await axios.get(
-        `/api/v1/tweet/`,
-        config
-      );
-      return {
+      const response1 = await axios.get(`/api/v1/tweet/${Detailsdata}`, config);
+      const response2 = await axios.get(`/api/v1/tweet/`, config);
+
+      const tweetData: tweetdatatype = {
         tweetDetails: response.data.updateTweet,
         tweet: response2.data.tweet,
-        userIdIncludedInTweetLikesArray: response1.data.userIdIncludedInTweetLikesArray
+        userIdIncludedInTweetLikesArray: response1.data.userIdIncludedInTweetLikesArray,
       };
 
+      return tweetData;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
-        : err.message
+        : err.message;
       return rejectWithValue(message);
-
     }
   }
 );
+
 
 // Get User Tweet
 export const GetUserTweet = createAsyncThunk<{

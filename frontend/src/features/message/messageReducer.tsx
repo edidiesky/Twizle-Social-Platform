@@ -53,19 +53,19 @@ export const Createmessage = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      
-        const response2 = await axios.post(
-          `/api/v1/message/${messageData?.conversationId}`,
-          messageData,
-          config
-        );
+
+      const response2 = await axios.post(
+        `/api/v1/message/${messageData?.conversationId}`,
+        messageData,
+        config
+      );
       const response = await axios.get(
         `/api/v1/message/${messageData?.conversationId}`,
         config
       )
       return response.data.message;
-    
-     
+
+
       // console.log(messageData)
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -78,11 +78,11 @@ export const Createmessage = createAsyncThunk<{
 );
 
 // Deelete User message
-export const Deletemessage = createAsyncThunk<{
+export const Deletemessage = createAsyncThunk<string, { Detailsdata: string }, {
   rejectValue: KnownError,
-}, { _id?: string }>(
+}>(
   "deletemessage",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({ Detailsdata }, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { token: string } };
@@ -111,7 +111,7 @@ export const Deletemessage = createAsyncThunk<{
 
 
 // Getmessage Details
-export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
+export const GetSinglemessageDetails = createAsyncThunk<messagePayload, {
   rejectValue: KnownError,
 }>(
   "GetSinglemessageTweetDetails",
@@ -119,7 +119,7 @@ export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
 
     try {
       const { auth } = getState() as { auth: { messageInfo: { _id: String }, token: string } };
-    
+
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -129,7 +129,7 @@ export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
         `/api/v1/message/${Detailsdata}`,
         config
       );
-     
+
       return response.data.message
 
     } catch (err: any) {
@@ -145,7 +145,7 @@ export const GetSinglemessageDetails = createAsyncThunk < messagePayload,{
 // Get User message
 export const GetUsermessage = createAsyncThunk<{
   rejectValue: KnownError,
-}, {_id?:any}>(
+}, { _id?: any }>(
   "GetUsermessage",
   async (Detailsdata, { rejectWithValue, getState }) => {
 

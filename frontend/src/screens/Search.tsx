@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import Search from '../components/search';
 const SearchIndex: React.FC = () => {
   return (
