@@ -5,7 +5,7 @@ const TweetDetailIndex = lazy(() => import("./TweetDetail"));
 const Auth = lazy(() => import("./Auth"));
 const Profile = lazy(() => import("./Profile"));
 const Bookmarks = lazy(() => import("./Bookmarks"));
-const LogoutIndex = lazy(()=> import('./Logout'))
+import LogoutIndex  from './Logout'
 const QuoteIndex = lazy(() => import("./Quote"));
 const MessageIndex = lazy(() => import('./Message'))
 const MessageList = lazy(() => import('../components/messages/list'))

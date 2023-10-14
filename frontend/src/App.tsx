@@ -1,130 +1,23 @@
-// // import React, { useState, Suspense } from "react";
-// // import { Route, Routes } from "react-router-dom";
-// // import "./index.css";
-// // import {
-// //   Auth,
-// //   Home,
-// //   LayoutIndex,
-// //   Profile,
-// //   TweetDetailIndex
-// // } from "./screens";
-// // import ProtectRoute from "./utils/ProtectRoute";
-// // import Preloader from "./components/loaders/preloader";
-
-// // export default function App() {
-// //   const [height, setHeight] = useState(0);
-// //   return (
-// //     <div className="based" style={{ height }}>
-// //       <Routes>
-// //         {/* <Route path={"/"} element={<LayoutIndex />}>
-
-// //         </Route> */}
-// // <Route path="/" element={<Suspense fallback={<Preloader />}>
-// //   <ProtectRoute>
-// //     <Home />
-// //   </ProtectRoute>
-// // </Suspense>
-// // }
-// // />
-// //       </Routes>
-// //     </div>
-// //   );
-// // }
-
-
-// // import React, { useState, Suspense } from "react";
-// // import { Routes, Route } from "react-router-dom";
-// // import "./index.css";
-// // import { Auth, Home, LayoutIndex, Profile, TweetDetailIndex } from "./screens";
-// // import ProtectRoute from "./utils/ProtectRoute";
-// // import Preloader from "./components/loaders/preloader";
-
-// // export default function App() {
-// //   const [height, setHeight] = useState(0);
-
-// //   return (
-// //     <div className="based" style={{ height }}>
-// //       <Routes>
-// //         <Route path="/" element={<LayoutIndex />}>
-// //           <Route index element={<Home />} />
-// //           <Route path="profile" element={<Profile />} />
-// //           <Route path="tweet-detail" element={<TweetDetailIndex />} />
-// //         </Route>
-
-// //         <Route path="/auth" element={<Auth />} />
-// //       </Routes>
-// //     </div>
-// //   );
-// // }
-
-
-// import React, { useState, Suspense } from "react";
-// import { Routes, Route } from "react-router-dom";
-// import "./index.css";
-// import { Auth, Home, LayoutIndex, Profile, TweetDetailIndex } from "./screens";
-// import ProtectRoute from "./utils/ProtectRoute";
-// import Preloader from "./components/loaders/preloader";
-
-// export default function App() {
-//   const [height, setHeight] = useState(0);
-
-//   return (
-//     <div className="based" style={{ height }}>
-//       <Routes>
-//         <Route path="/" element={<LayoutIndex />}>
-//           <Route index element={
-//             <Suspense fallback={<Preloader />}>
-//             <ProtectRoute>
-//               <Home />
-//             </ProtectRoute>
-//             </Suspense>
-//           } />
-//           {/* <Route path="profile" element={<Profile />} />
-//           <Route path="tweet-detail" element={<TweetDetailIndex />} /> */}
-//         </Route>
-
-//         {/* <Route path="/auth" element={<Auth />} /> */}
-//       </Routes>
-//     </div>
-//   );
-// }
-
-// // import React, { useState, Suspense } from "react";
-// // import { Routes, Route } from "react-router-dom";
-// // import "./index.css";
-// // import { Auth, Home, LayoutIndex, Profile, TweetDetailIndex } from "./screens";
-// // import ProtectRoute from "./utils/ProtectRoute";
-// // import Preloader from "./components/loaders/preloader";
-
-// // export default function App() {
-// //   const [height, setHeight] = useState(0);
-
-// //   return (
-// //     <div className="based" style={{ height }}>
-// //       <Routes>
-// //         <Route path="/" element={<LayoutIndex />}>
-// //           <Route index element={<Home />} />
-// //           <Route path="profile" element={<Profile />} />
-// //           <Route path="tweet-detail" element={<TweetDetailIndex />} />
-// //         </Route>
-
-// //         <Route path="/auth" element={<Auth />} />
-// //       </Routes>
-// //     </div>
-// //   );
-// // }
-
-
-
 import React, { useState, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
 import {
-  Auth,
   Home,
   LayoutIndex,
+  Auth,
   Profile,
-  TweetDetailIndex
+  TweetDetailIndex,
+  Bookmarks,
+  QuoteIndex,
+  LogoutIndex,
+  MessageIndex,
+  MessageList,
+  MessageContent,
+  AffilateLayoutIndex,
+  Followers,
+  Followings,
+  Verified,
+  Search
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import Preloader from "./components/loaders/preloader";
@@ -145,6 +38,13 @@ export default function App() {
           <Route path="i/flow/signup" element={<Suspense fallback={<Preloader />}>
             <Auth />
           </Suspense>
+          }
+          />
+          {/* logout */}
+          <Route path="logout" element={
+            <ProtectRoute>
+              <LogoutIndex />
+            </ProtectRoute>
           }
           />
           {/* login route */}

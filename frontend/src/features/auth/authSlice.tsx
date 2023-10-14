@@ -46,7 +46,7 @@ interface authState {
 
 // Define the initial state using that type
 const initialState: authState = {
-  userInfo: userData ? userData : "",
+  userInfo: userData ? userData : null,
   userDetails: null,
   users: [],
   usertoBefollowedInFllowingsArray: false,
