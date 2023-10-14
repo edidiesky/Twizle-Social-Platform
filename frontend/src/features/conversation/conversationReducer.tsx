@@ -79,11 +79,14 @@ export const Createconversation = createAsyncThunk<{
 );
 
 // Deelete User conversation
-export const Deleteconversation = createAsyncThunk<string,{
+export const Deleteconversation = createAsyncThunk<string, {
+  Detailsdata
+  : string
+}, {
   rejectValue: KnownError,
 }>(
   "deleteconversation",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({ Detailsdata }, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { token: string } };

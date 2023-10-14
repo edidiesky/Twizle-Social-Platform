@@ -1,5 +1,4 @@
 import { feedcardtype } from '../../types/feedtype';
-import { AnimatePresence } from 'framer-motion';
 import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -19,6 +18,7 @@ import FeedImage from './FeedImage';
 import QuoteModal from '../modals/QuoteModal';
 import moment from 'moment';
 import FeedCardBottom from './FeedCardBottom';
+import MyAnimatePresence from '../../utils/AnimatePresence';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
@@ -74,21 +74,21 @@ const FeedCard = (props: feedcardtype) => {
 
     return (
         <FeedCardStyles key={props._id}>
-            <AnimatePresence
+            <MyAnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
                 {deletemodal && <DeleteModal handleDeleteTweet={handleDeleteTweet} modal={deletemodal} setModal={setDeleteModal} />}
-            </AnimatePresence>
+            </MyAnimatePresence>
 
-            <AnimatePresence
+            <MyAnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
             >
                 {quotemodal && <QuoteModal id={props?._id} modal={quotemodal} setModal={setQuoteModal} />}
-            </AnimatePresence>
+            </MyAnimatePresence>
             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                 <div onClick={() => setDrop(false)} className="dropdown_background"></div>
                 <ul style={{ fontSize: "14.6px" }} className="flex column w-100 text-bold">
@@ -104,7 +104,7 @@ const FeedCard = (props: feedcardtype) => {
                     <li onClick={() => setDrop(false)} className="flex item-center gap-1"><ReportIcon /> Report tweet</li>
                 </ul>
             </div>
-            <AnimatePresence
+            <MyAnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
                 onExitComplete={() => null}
@@ -112,7 +112,7 @@ const FeedCard = (props: feedcardtype) => {
                 {
                     tweet && <TweetModal id={props?._id} setModal={setTweet} modal={tweet} />
                 }
-            </AnimatePresence>
+            </MyAnimatePresence>
             <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
             </div>

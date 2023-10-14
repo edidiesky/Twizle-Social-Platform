@@ -7,7 +7,6 @@ import RightSidebarIndex from '../common/right/RightBar';
 import LeftSidebarIndex from '../common/LeftSidebar';
 import Top from './top/top';
 import AuthModal from '../modals/EditProfileModal';
-import { AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { GetUserProfile } from '../../features/auth/authReducer';
 import { useParams } from 'react-router-dom';
@@ -15,6 +14,7 @@ import { clearUserProfile } from '../../features/auth/authSlice';
 import { GetUserTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
+import MyAnimatePresence from '../../utils/AnimatePresence';
 
 type Rightbar = {
     type: String
@@ -54,15 +54,13 @@ const Profile: React.FC = () => {
             {/* top bar of user profile */}
             <LeftSidebarIndex />
             {/* control the update modal */}
-            <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
+            <MyAnimatePresence
+                initial={false} exitBeforeEnter
             >
                 {
                     modal && <AuthModal modal={modal} setModal={setModal} />
                 }
-            </AnimatePresence>
+            </MyAnimatePresence>
             <div className="flex flex-1 wraps column ">
                 <Top />
                 <div className="flex column">

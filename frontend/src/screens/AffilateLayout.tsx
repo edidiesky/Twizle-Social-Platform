@@ -7,24 +7,22 @@ import styled from 'styled-components';
 import LeftSidebarIndex from '../components/common/LeftSidebar';
 import RightSidebarIndex from '../components/common/right/RightBar';
 import Top from '../components/affilate/top';
+import MyAnimatePresence from '../utils/AnimatePresence';
 
 const AffilateLayoutIndex: React.FC = () => {
     const { modal } = useAppSelector(store => store.tweet)
     return (
 
         <>
-            <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
+            <MyAnimatePresence
             >
                 {modal && <DisplayModal modal={modal} />}
-            </AnimatePresence>
+            </MyAnimatePresence>
             {/* <DisplayModal/> */}
             <AffilateLayoutstyles className="w-100">
                 <LeftSidebarIndex />
                 <div className="flex-1 content flex column">
-                    <Top/>
+                    <Top />
                     <Outlet />
                 </div>
                 <RightSidebarIndex />

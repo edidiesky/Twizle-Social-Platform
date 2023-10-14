@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BiSolidBadgeCheck,BiDotsHorizontalRounded } from 'react-icons/bi'
+import { BiSolidBadgeCheck, BiDotsHorizontalRounded } from 'react-icons/bi'
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
@@ -10,7 +10,7 @@ import FollowIcon from '../../../assets/svg/dropdownicons/follow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { getAllComment } from '../../../features/comment/commentReducer';
 import TweetModal from '../../modals/TweetModal';
-import { AnimatePresence } from 'framer-motion';
+import MyAnimatePresence from '../../../utils/AnimatePresence';
 
 const postcomments = [
     {
@@ -31,26 +31,24 @@ const PostDetailsComments: React.FC = () => {
     const { comment } = useAppSelector(store => store.comment)
     const { tweetDetails } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
-    useEffect(()=> {
+    useEffect(() => {
         if (tweetDetails) {
             dispatch(getAllComment(tweetDetails?._id))
         }
-        
+
     }, [tweetDetails])
     return (
         <>
-           <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
+            <MyAnimatePresence
+                initial={false} exitBeforeEnter
             >
                 {
                     tweet && <TweetModal id={tweetDetails?._id} setModal={setTweet} modal={tweet} />
                 }
-            </AnimatePresence>
+            </MyAnimatePresence>
             <PostDetailsCommentsStyles className='w-100 flex column '>
                 {
-                    comment?.map((x:any, index:any) => {
+                    comment?.map((x: any, index: any) => {
                         return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
                             <div className="image_wrapper">
                                 <img src={x.user?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
@@ -134,7 +132,7 @@ const PostDetailsComments: React.FC = () => {
                 }
             </PostDetailsCommentsStyles>
         </>
-      
+
     )
 }
 

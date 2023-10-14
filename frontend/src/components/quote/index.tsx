@@ -5,7 +5,6 @@ import RightSidebarIndex from '../common/right/RightBar';
 import LeftSidebarIndex from '../common/LeftSidebar';
 import Top from './top/top';
 import AuthModal from '../modals/EditProfileModal';
-import { AnimatePresence } from 'framer-motion';
 import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
@@ -13,13 +12,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { useParams } from 'react-router-dom';
 import { GetSingleQuoteTweetDetails } from '../../features/quote/quoteReducer';
 import QuoteFeedCard from './QuoteCard';
+import MyAnimatePresence from '../../utils/AnimatePresence';
 
 type Rightbar = {
     type: String
 }
 
 const Bookmarks: React.FC = () => {
-    const {id} = useParams()
+    const { id } = useParams()
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
@@ -38,20 +38,18 @@ const Bookmarks: React.FC = () => {
             {/* top bar of user profile */}
             <LeftSidebarIndex />
             {/* control the update modal */}
-            <AnimatePresence
-                initial={false}
-                exitBeforeEnter={true}
-                onExitComplete={() => null}
+            <MyAnimatePresence
+                initial={false} exitBeforeEnter
             >
                 {
                     modal && <AuthModal modal={modal} setModal={setModal} />
                 }
-            </AnimatePresence>
+            </MyAnimatePresence>
             <div className="flex flex-1 wraps column ">
                 <Top />
-               
+
                 <div className="w-100 flex py-2 column">
-                   
+
                     {
                         quotes?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
                             <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
@@ -64,7 +62,7 @@ const Bookmarks: React.FC = () => {
                                 tweetisLoading ? <div className="flex py-2 w-100 justify-center">
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
                                 </div> : <>
-                                            <QuoteFeedCard/>
+                                    <QuoteFeedCard />
                                 </>
                             }
                         </div>
@@ -72,7 +70,7 @@ const Bookmarks: React.FC = () => {
 
                 </div>
             </div>
-            <RightSidebarIndex/>
+            <RightSidebarIndex />
             {/* User feeds */}
         </ProfileStyles>
     )

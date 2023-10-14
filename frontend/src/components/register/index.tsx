@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitter } from 'react-icons/bs'
-import { AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import RegsiterModal from "../modals/RegisterModal";
@@ -11,6 +10,7 @@ import UsernameModal from "../modals/UsernameModal";
 import ProfilePictureModal from "../modals/ProfilePicture";
 import TwitterBanner from "../../assets/svg/twitterBanner";
 import { useAppSelector } from "../../hooks/reduxtoolkit";
+import MyAnimatePresence from "../../utils/AnimatePresence";
 
 const Regsiters: React.FC = () => {
   const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
@@ -30,41 +30,33 @@ const Regsiters: React.FC = () => {
   return (
     <RegsiterStyles style={{ overflow: "hidden" }}>
       {/* register modal */}
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
+      <MyAnimatePresence
+        initial={false} exitBeforeEnter
       >
         {registermodal && !registerisSuccess && <RegsiterModal setTab={setTab} modal={registermodal}
           setModal={setRegisterModal} />}
-      </AnimatePresence>
+      </MyAnimatePresence>
       {/* login modal */}
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
+      <MyAnimatePresence
+
       >
         {loginmodal && <LoginModal modal={loginmodal}
           setModal={setLoginModal} />}
-      </AnimatePresence>
+      </MyAnimatePresence>
       {/* username modal */}
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
+      <MyAnimatePresence
+
       >
         {tab === 1 && <UsernameModal setTab={setTab} />}
-      </AnimatePresence>
+      </MyAnimatePresence>
 
       {/* profile modal */}
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
+      <MyAnimatePresence
+
       >
         {tab === 2 && <ProfilePictureModal modal={profile}
           setModal={setProfile} />}
-      </AnimatePresence>
+      </MyAnimatePresence>
 
 
       <div className="w-100 authleft flex item-center justify-center">

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom'
 import ActiveLink from './activelink'
 import TweetModal from '../modals/TweetModal'
-import { AnimatePresence } from 'framer-motion'
 import SearchIcon from '../../assets/svg/leftsidebaricons/search'
 import HomeIcon from '../../assets/svg/leftsidebaricons/home'
 import NotificationIcon from '../../assets/svg/leftsidebaricons/notification'
@@ -23,6 +22,7 @@ import Moredropdown from './moredropdown';
 import Logoutdropdown from './logoutdropdown';
 import TwitterIcon from '../../assets/svg/twitter';
 import TweetIcon from '../../assets/svg/leftsidebaricons/tweet';
+import MyAnimatePresence from '../../utils/AnimatePresence';
 
 
 const LeftSidebarIndex = () => {
@@ -85,10 +85,10 @@ const LeftSidebarIndex = () => {
             {/* {
                 tweetisLoading && <LoaderIndex/>
         } */}
-            <AnimatePresence
+            <MyAnimatePresence
             >
                 {tweet && <PostModal modal={tweet} setModal={setTweet} />}
-            </AnimatePresence>
+            </MyAnimatePresence>
             <LeftSidebarStyles>
 
 

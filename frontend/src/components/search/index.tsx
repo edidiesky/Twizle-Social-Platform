@@ -17,7 +17,7 @@ import LoaderIndex from '../loaders';
 const Search: React.FC = () => {
     const [tab, setTab] = useState(0)
     let [searchParams, setSearchParams] = useSearchParams();
-    const queryvalue = searchParams.get("q");
+    const queryvalue:string = searchParams.get("q");
     const { userInfo, userSearchResult, tweetSearchResult, isLoading } = useAppSelector(store => store.auth)
     const { bookmarks } = useAppSelector(store => store.tweet)
 

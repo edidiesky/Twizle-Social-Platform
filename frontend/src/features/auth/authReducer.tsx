@@ -322,7 +322,7 @@ export const GetUserSearch = createAsyncThunk < authtype, { authdata:string},{
   rejectValue: KnownError,
 }>(
   "GetUserSearch",
-  async (authdata, { rejectWithValue, getState }) => {
+  async ({authdata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };
