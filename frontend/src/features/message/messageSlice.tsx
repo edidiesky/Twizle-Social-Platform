@@ -30,6 +30,9 @@ interface messageState {
 
 
 }
+interface MessageType {
+  _id?: string
+}
 
 // Define the initial state of the message using that type
 const initialState: messageState = {
@@ -144,7 +147,7 @@ export const messageSlice = createSlice({
     })
     builder.addCase(Deletemessage.fulfilled, (state, action) => {
 
-      state.message = state.message.filter((x:any) => x._id !== action.payload);
+      state.message = state.message.filter((x: MessageType) => x._id !== action.payload);
     })
     builder.addCase(Deletemessage.rejected, (state, action) => {
       state.messageisSuccess = false

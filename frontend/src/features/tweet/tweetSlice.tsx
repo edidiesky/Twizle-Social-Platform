@@ -14,6 +14,10 @@ import {
 } from './tweetReducer'
 const BookMarked = localStorage.getItem("isBookMarked");
 
+interface tweetDeleteType {
+_id?:string
+}
+
 const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
 
 // Define a type for the tweet state
@@ -197,7 +201,7 @@ export const tweetSlice = createSlice({
     })
     builder.addCase(DeleteTweet.fulfilled, (state, action) => {
 
-      state.tweets = state.tweets.filter((x:any) => x._id !== action.payload);
+      state.tweets = state.tweets.filter((x: tweetDeleteType) => x._id !== action.payload);
     })
     builder.addCase(DeleteTweet.rejected, (state, action) => {
       state.tweetisSuccess = false

@@ -25,9 +25,10 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-        dispatch(GetAllUserNotFollowed({authdata:userInfo?._id}))
-    }, [])
-
+        if (userInfo?._id) {
+            dispatch(GetAllUserNotFollowed({ authdata: userInfo?._id }));
+        }
+    }, [userInfo, dispatch]);
     const handleFollowUser = (id: string) => {
         dispatch(FollowAndUnFollowAUser({profiledata:id}))
     }

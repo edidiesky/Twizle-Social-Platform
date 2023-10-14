@@ -15,6 +15,7 @@ interface messagePayload {
   messagedetails: any;
 }
 
+
 type KnownError = {
   errorMessage: string;
 }

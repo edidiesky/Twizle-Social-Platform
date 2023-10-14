@@ -41,11 +41,11 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
 
   useEffect(() => {
     if (loginisSuccess) {
-      setTimeout(() => {
+    const timeout = setTimeout(() => {
         navigate('/')
       }, 3000);
 
-      return () => clearTimeout(navigate('/'), 3000)
+      return () => clearTimeout(timeout)
 
     }
   }, [loginisSuccess])

@@ -285,9 +285,9 @@ export const GetAllUserFollowers = createAsyncThunk<{
 
 
 // get all user not followed by the user
-export const GetAllUserNotFollowed = createAsyncThunk<{
+export const GetAllUserNotFollowed = createAsyncThunk<string, {authdata:string},{
   rejectValue: KnownError,
-}, {authdata:string}>(
+}>(
   "GetAllUserNotFollowed",
   async (authdata, { rejectWithValue, getState }) => {
 

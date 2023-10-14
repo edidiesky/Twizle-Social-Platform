@@ -35,7 +35,7 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
     
     const handleRepostTweet = () => {
         setQuote(false)
-        dispatch(RePostATweet({Detailsdata:props?._id}))
+        dispatch(RePostATweet({ Detailsdata: tweetDetails?._id}))
     }
     const tweetDetail = tweets?.find((x:any)=> x?._id === tweetDetails?._id)?.tweet_likes.includes(userInfo?._id)
     // console.log(userIdIncludedInTweetLikesArray)

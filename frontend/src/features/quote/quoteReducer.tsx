@@ -98,6 +98,8 @@ export const CreateQuote = createAsyncThunk<{
 );
 
 // Deelete User Quote
+
+
 export const DeleteQuote = createAsyncThunk<string, {
   Detailsdata: string
 }, {
@@ -108,15 +110,13 @@ export const DeleteQuote = createAsyncThunk<string, {
 
     try {
       const { auth } = getState() as { auth: { token: string } };
-      // console.log(auth.token)
-      // console.log(Quotedata?._id)
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
         },
       };
       await axios.delete(
-        `/api/v1/quote/${{ Detailsdata }}`,
+        `/api/v1/quote/${Detailsdata}`,
         config
       );
       return Detailsdata;
@@ -124,12 +124,12 @@ export const DeleteQuote = createAsyncThunk<string, {
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
-        : err.message
-      return rejectWithValue(message);
-
+        : err.message;
+      return rejectWithValue(message)
     }
   }
 );
+
 
 
 // GetQuote Details
