@@ -116,7 +116,7 @@ const FeedCard = (props: feedcardtype) => {
             <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
             </div>
-            <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex w-90 auto item-start feed_card_wrapper gap-1">
+            <div className="flex w-90 auto item-start feed_card_wrapper gap-1">
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
                     <div className="image_gradient"></div>
                     {
@@ -160,11 +160,12 @@ const FeedCard = (props: feedcardtype) => {
                         handleLikeTweet={handleLikeTweet}
                         setQuote={setQuote} setQuoteModal={function (val: boolean): void {
                             throw new Error('Function not implemented.');
-                        } }                    />
+                        } }                    
+                    />
 
                 </div>
 
-            </Link>
+            </div>
 
 
         </FeedCardStyles>

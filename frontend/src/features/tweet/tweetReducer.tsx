@@ -254,7 +254,7 @@ export const LikeAndUnlikeATweet = createAsyncThunk<
   }
 >(
   "LikeAndUnlikeATweet",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({Detailsdata}, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };
 

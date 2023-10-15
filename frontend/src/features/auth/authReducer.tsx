@@ -151,7 +151,7 @@ export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefoll
     rejectValue: KnownError
   }>(
   "FollowAndUnFollowAUser",
-  async (profiledata, { rejectWithValue, getState }) => {
+  async ({profiledata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
