@@ -137,7 +137,7 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
   rejectValue: KnownError,
 }>(
   "GetSingleQuoteTweetDetails",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({Detailsdata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { QuoteInfo: { _id: String }, token: string } };

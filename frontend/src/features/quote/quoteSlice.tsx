@@ -17,18 +17,15 @@ const BookMarked = localStorage.getItem("isBookMarked");
 
 // Define a type for the tweet state
 interface QuoteState {
-  tweetDetails?: any,
+  quoteDetails?: any,
   quotes?: any,
+  quote?: any,
   bookmarks?: any,
   isLiked?: Boolean,
-  tweetisLoading?: Boolean,
+  quoteisLoading?: Boolean,
   isBookMarked?: Boolean,
-  tweetisSuccess?: Boolean,
-  tweetisError?: Boolean,
-
-  // tweetisLoading?: Boolean,
-  // tweetisSuccess?: Boolean,
-  // tweetisError?: Boolean,
+  quoteisSuccess?: Boolean,
+  quoteisError?: Boolean,
 
   alertText?: any,
   showAlert?: Boolean,
@@ -37,23 +34,20 @@ interface QuoteState {
 
 }
 
-// Define the initial state of the tweet using that type
+// Define the initial state of the quote using that type
 const initialState: QuoteState = {
-  tweetDetails: null,
+  quoteDetails: null,
 
   quotes: [],
+  quote: null,
   bookmarks: [],
 
 
-  tweetisLoading: false,
-  tweetisSuccess: false,
-  tweetisError: false,
+  quoteisLoading: false,
+  quoteisSuccess: false,
+  quoteisError: false,
   isBookMarked: false,
   isLiked: false,
-
-  // tweetisLoading: false,
-  // tweetisSuccess: false,
-  // tweetisError: false,
 
   alertText: '',
   showAlert: false,
@@ -66,57 +60,36 @@ export const quoteSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    cleartweet: (state, action) => {
-      state.tweetDetails = null
+    clearquote: (state, action) => {
+      state.quoteDetails = null
       state.quotes = []
-      state.tweetisLoading = false
+      state.quoteisLoading = false
       state.isBookMarked = false
-      state.tweetisSuccess = false
-      state.tweetisError = false
+      state.quoteisSuccess = false
+      state.quoteisError = false
       state.alertText = ''
       state.showAlert = false
       state.alertType = ''
     },
   },
   extraReducers: (builder) => {
-    // // registration build case
-    // builder.addCase(getAllTweet.pending, (state, action) => {
-    //   state.tweetisLoading = true
-    // })
-    // builder.addCase(getAllTweet.fulfilled, (state, action) => {
-    //   state.tweetisSuccess = true
-    //   state.tweetisLoading = false
-    //   state.quotes = action.payload
-    // })
-    // builder.addCase(getAllTweet.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
-
-    // })
-
- 
-
-    // create user tweet
+    // create user quote
     builder.addCase(CreateQuote.pending, (state, action) => {
-      state.tweetisLoading = true
+      state.quoteisLoading = true
 
     })
     builder.addCase(CreateQuote.fulfilled, (state, action) => {
-      state.quotes = action.payload
-      state.alertText = 'Tweet created succesfully'
+      state.quote = action.payload
+      state.alertText = 'quote created succesfully'
       state.showAlert = true
-      state.tweetisLoading = false
+      state.quoteisLoading = false
 
       state.alertType = 'success'
     })
     builder.addCase(CreateQuote.rejected, (state, action) => {
-      state.tweetisSuccess = false
-      state.tweetisError = true
-      state.tweetisLoading = false
+      state.quoteisSuccess = false
+      state.quoteisError = true
+      state.quoteisLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload
@@ -129,114 +102,24 @@ export const quoteSlice = createSlice({
       // state.tweetisLoading = true
     })
     builder.addCase(GetSingleQuoteTweetDetails.fulfilled, (state, action) => {
-      state.tweetisSuccess = true
-      state.tweetisLoading = false
+      state.quoteisSuccess = true
+      state.quoteisLoading = false
       state.quotes = action.payload
     })
     builder.addCase(GetSingleQuoteTweetDetails.rejected, (state, action) => {
-      state.tweetisSuccess = false
-      state.tweetisError = true
-      state.tweetisLoading = false
+      state.quoteisSuccess = false
+      state.quoteisError = true
+      state.quoteisLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload
 
     })
 
-    // DeleteTweet slice
-
-    // builder.addCase(DeleteTweet.pending, (state, action) => {
-
-    // })
-    // builder.addCase(DeleteTweet.fulfilled, (state, action) => {
-
-    //   state.quotes = state.quotes.filter((x) => x._id !== action.payload);
-    // })
-    // builder.addCase(DeleteTweet.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
-
-    // })
-
-    // builder.addCase(UpdateTweet.pending, (state, action) => {
-    //   state.tweetisLoading = true
-    // })
-    // builder.addCase(UpdateTweet.fulfilled, (state, action) => {
-    //   state.tweetisSuccess = true
-    //   state.tweetisLoading = false
-    //   state.tweetDetails = action.payload
-    //   state.alertText = 'Tweet Update succesfully'
-    //   state.showAlert = true
-    //   state.alertType = 'success'
-    // })
-    // builder.addCase(UpdateTweet.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
-
-    // })
-    // builder.addCase(BookMarkATweet.pending, (state, action) => {
-    //   state.tweetisLoading = true
-    // })
-    // builder.addCase(BookMarkATweet.fulfilled, (state, action) => {
-    //   // handling bookmarks
-    //   // find the tweet
-    //   state.tweetisSuccess = true
-    //   state.tweetisLoading = false
-    //   state.isBookMarked = action.payload.userIdIncludedInBookmarksArray
-    //   state.tweetDetails = action.payload.tweetdetails
-
-    //   localStorage.setItem("isBookMarked", JSON.stringify(action.payload.userIdIncludedInBookmarksArray));
-
-
-    //   state.alertText = 'Tweet Update succesfully'
-    //   state.showAlert = true
-    //   state.alertType = 'success'
-    // })
-    // builder.addCase(BookMarkATweet.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
-
-    // })
-
-
-    // // Get all tweet of user slices
-    // builder.addCase(GetUserTweet.pending, (state, action) => {
-    //   // state.tweetisLoading = true
-    // })
-    // builder.addCase(GetUserTweet.fulfilled, (state, action) => {
-    //   state.tweetisSuccess = true
-    //   state.tweetisLoading = false
-    //   state.quotes = action.payload
-    //   state.alertText = 'Tweet Update succesfully'
-    //   state.showAlert = true
-    //   state.alertType = 'success'
-    // })
-    // builder.addCase(GetUserTweet.rejected, (state, action) => {
-    //   state.tweetisSuccess = false
-    //   state.tweetisError = true
-    //   state.tweetisLoading = false
-    //   state.showAlert = true
-    //   state.alertType = 'danger'
-    //   state.alertText = action.payload
-
-    // })
-
   },
 })
 
-export const { cleartweet } = quoteSlice.actions
+export const { clearquote } = quoteSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.tweet.value

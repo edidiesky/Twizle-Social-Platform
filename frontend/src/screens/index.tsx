@@ -7,7 +7,7 @@ const Profile = lazy(() => import("./Profile"));
 const Bookmarks = lazy(() => import("./Bookmarks"));
 import LogoutIndex  from './Logout'
 const QuoteIndex = lazy(() => import("./Quote"));
-const MessageIndex = lazy(() => import('./Message'))
+import MessageIndex from './Message'
 const MessageList = lazy(() => import('../components/messages/list'))
 const MessageContent = lazy(() => import('../components/messages/content'))
 const Followers = lazy(() => import('../components/affilate/followers'))

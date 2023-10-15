@@ -35,6 +35,14 @@ export default function App() {
           </Suspense>
           }
           />
+          {/* quotes */}
+          <Route path="i/quote/:id" element={<Suspense fallback={<LoaderIndex />}>
+            <ProtectRoute>
+              <QuoteIndex />
+            </ProtectRoute>
+          </Suspense>
+          }
+          />
           <Route path="i/bookmarks" element={<Suspense fallback={<LoaderIndex />}>
             <ProtectRoute>
               <Bookmarks />
@@ -73,6 +81,32 @@ export default function App() {
           </Suspense>
           }
 
+          />
+        </Route>
+        {/* affilate */}
+        <Route path={"/:name"} element={<AffilateLayoutIndex />}>
+          <Route path="followers" element={<Suspense fallback={<LoaderIndex />}>
+            <Followers />
+          </Suspense>
+          }
+          />
+          <Route path="following" element={<Suspense fallback={<LoaderIndex />}>
+            <Followings />
+          </Suspense>
+          }
+          />
+        </Route>
+        {/* message */}
+        <Route path={"/messages"} element={<MessageIndex />}>
+          <Route path="" element={<Suspense fallback={<LoaderIndex />}>
+            <MessageList />
+          </Suspense>
+          }
+          />
+          <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
+            <MessageContent />
+          </Suspense>
+          }
           />
         </Route>
 
