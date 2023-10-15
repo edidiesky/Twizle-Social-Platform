@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 type messagedatatype = {
-  message?: string;
-  message_image?: any;
+  text?: string;
+  reply_image?: any;
   _id?: string;
   userId?: string;
   conversationId?: string;

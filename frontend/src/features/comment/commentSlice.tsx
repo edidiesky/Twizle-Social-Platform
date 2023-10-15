@@ -91,7 +91,7 @@ export const commentSlice = createSlice({
     builder.addCase(CreateTweetReplycomment.fulfilled, (state, action) => {
       state.commentisSuccess = true
       state.commentisLoading = false
-      state.comment = action.payload
+      state.commentDetails = action.payload
     })
     builder.addCase(CreateTweetReplycomment.rejected, (state, action) => {
       state.commentisSuccess = false

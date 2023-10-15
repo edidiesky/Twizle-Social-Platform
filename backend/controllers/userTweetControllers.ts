@@ -2,7 +2,9 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request as ExpressRequest, Response } from "express";
 
+import Comment from "../models/Comment";
 import UserTweet from "../models/UserTweet";
+import QuoteTweet from "../models/QuoteTweet";
 
 interface CustomInterface extends ExpressRequest {
   user?: {
@@ -13,10 +15,13 @@ interface CustomInterface extends ExpressRequest {
 
 // GET All UserTweet
 //  Public
-const GetAllTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
+const GetAllTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   const tweet = await UserTweet.find().sort("-createdAt")
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
-
+  const quote = await QuoteTweet.find({ tweet_id: req.user?.userId }).populate('tweet_id', 'tweet_image tweet_text')
+ 
+  // const tweet = tweets?.concat(quote!)
+ 
   res.status(200).json({ tweet });
 
 });
@@ -34,9 +39,9 @@ const RePostATweet = asyncHandler(async (req: CustomInterface, res: Response) =>
 
   // create a new tweet
   const newttweet = await UserTweet.create({
-    "tweet_text": tweet.tweet_text, 
+    "tweet_text": tweet.tweet_text,
     "tweet_image": tweet.tweet_image,
-    tweet_user_id:req.user?.userId
+    tweet_user_id: req.user?.userId
   })
 
   // check if the userid is included in the tweet like array
@@ -64,7 +69,7 @@ const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) 
   const userIdIncludedInTweetLikesArray = tweet?.tweet_likes.includes(req?.user?.userId)
 
 
-    if (!tweet) {
+  if (!tweet) {
     res.status(404);
     throw new Error("The Tweet does not exist");
   }
@@ -78,13 +83,15 @@ const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) 
 const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   const tweet = await UserTweet.find({ tweet_user_id: req.params.id }).sort("-createdAt")
     .populate("tweet_user_id", " username bio display_name name profile_image_url");
- 
- 
-    if (!tweet) {
+
+
+  if (!tweet) {
     res.status(404);
     throw new Error("The Tweet does not exist");
   }
+  // const quote = await QuoteTweet.find({ tweet_user_id: req.user?.userId }).populate('tweet_id', 'tweet_image tweet_text')
 
+  // const tweet = tweets?.concat(quote!)
   res.status(200).json({ tweet });
 });
 
@@ -112,7 +119,7 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
   const userIdIncludedInTweetLikesArray = tweet.tweet_likes.includes(userid)
   if (!userIdIncludedInTweetLikesArray) {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { tweet_likes: userid } }, { new: true })
-   
+
 
     res.status(200).json({ updateTweet });
   } else {
@@ -149,7 +156,7 @@ const BookMarkATweet = asyncHandler(async (req: CustomInterface, res: Response) 
     res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_bookmarks: userid } }, { new: true })
-  const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
+    const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
 
     res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
 
@@ -217,7 +224,7 @@ const DeleteTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
 export {
   CreateTweet,
   DeleteTweet,
-  UpdateTweet,  
+  UpdateTweet,
   GetAllTweet,
   GetSingleTweet,
   LikeAndUnlikeATweet,

@@ -12,7 +12,7 @@ import {
   getAllBookmarkedTweet,
   BookMarkATweet
 } from './tweetReducer'
-const BookMarked = localStorage.getItem("isBookMarked");
+// const BookMarked = localStorage.getItem("isBookMarked");
 
 interface tweetDeleteType {
 _id?:string

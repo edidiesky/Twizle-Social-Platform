@@ -25,7 +25,8 @@ const createReply = asyncHandler(async (req: CustomInterface, res: Response) => 
   const reply = await Comment.create({
     user: userId,
     parentTweet: tweet?._id,
-    text: req.body.text
+    text: req.body.text,
+    reply_image: req.body.reply_image
   })
 
   res.status(200).json({ reply })

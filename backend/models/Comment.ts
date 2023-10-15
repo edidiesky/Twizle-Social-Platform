@@ -8,6 +8,10 @@ const CommentSchema = new mongoose.Schema(
       ref: "User",
     },
     text: { type: String, required: true },
+    reply_image: {
+      type: Array,
+      default: []
+    },
     parentTweet: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "UserTweet",
