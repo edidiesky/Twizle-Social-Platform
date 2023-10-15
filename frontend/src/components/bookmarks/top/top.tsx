@@ -116,6 +116,6 @@ const TopStyles = styled.div`
            }
         
     }
-  `
+`
 
 export default Top
