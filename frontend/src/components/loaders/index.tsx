@@ -17,10 +17,9 @@ const LoaderIndex: React.FC<{ type?: string }> = ({ type }) => {
       style={{ width: "100vw",
        zIndex: "200000",
         position: "fixed", height: "100vh", top: 0, left: 0,
-         background: "var(--backdrop1)" }}
+         background: "rgba(255, 255, 255, 0.422)" }}
     >
-      <div className="loading"></div>
-      <div className="text-center w-100 text-bold fs-18">Loading ...</div>
+      <div className="loading small"></div>
     </div>
   );
 }

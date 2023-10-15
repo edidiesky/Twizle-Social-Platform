@@ -17,7 +17,7 @@ const Bookmarks: React.FC = () => {
     // console.log(name)
     const [modal, setModal] = React.useState<Boolean>(false)
 
-    const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
+    const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
     const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
@@ -38,7 +38,7 @@ const Bookmarks: React.FC = () => {
                         {
                             bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
                                 <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
-                                    @{userDetails?.display_name} you have no bookmarks
+                                    @{userInfo?.display_name} <br /> you have no bookmarks
 
                                     <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
                                 </h2>

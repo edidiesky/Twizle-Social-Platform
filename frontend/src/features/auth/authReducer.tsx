@@ -289,7 +289,7 @@ export const GetAllUserNotFollowed = createAsyncThunk<string, {authdata:string},
   rejectValue: KnownError,
 }>(
   "GetAllUserNotFollowed",
-  async (authdata, { rejectWithValue, getState }) => {
+  async ({authdata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { userInfo: { _id: string }, token: string } };

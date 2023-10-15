@@ -90,7 +90,7 @@ export const CreateTweet = createAsyncThunk<{
       const response = await axios.post(tweeturl, tweetData, config);
       if (response?.data?.tweet) {
         const response2 = await axios.get(
-          `/api/v1/tweet/${response?.data?.tweet?._id}`,
+          `/api/v1/tweet`,
           config
         );
         localStorage.setItem("tweet", JSON.stringify(response2.data.tweet));
@@ -146,7 +146,7 @@ export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsd
   rejectValue: KnownError,
 }>(
   "BookMarkATweet",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({Detailsdata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { token: string } };
@@ -216,7 +216,7 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { D
   rejectValue: KnownError,
 }>(
   "GetDetails",
-  async (Detailsdata, { rejectWithValue, getState }) => {
+  async ({Detailsdata}, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { TweetInfo: { _id: String }, token: string } };

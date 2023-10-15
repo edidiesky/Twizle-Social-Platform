@@ -80,7 +80,7 @@ const LeftSidebarIndex = () => {
         },
     ]
 
-    return (
+return (
         <>
             {/* {
                 tweetisLoading && <LoaderIndex/>

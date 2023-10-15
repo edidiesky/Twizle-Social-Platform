@@ -75,13 +75,14 @@ const PostModal: React.FC<modalType> = ({ modal, setModal, type }) => {
         profile_image_url: userInfo?.profile_image_url,
       }
     }))
+    setText('')
     // setModal(false)
   }
   useEffect(()=> {
-    if (createtweetisSuccess) {
+    if (createtweetisSuccess || createtweetisLoading) {
       setModal(false)
     }
-  }, [createtweetisSuccess, setModal])
+  }, [createtweetisSuccess, createtweetisLoading, setModal])
   return (
     <>
     

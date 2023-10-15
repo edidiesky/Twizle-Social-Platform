@@ -20,7 +20,7 @@ import {
   Search
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
-import Preloader from "./components/loaders/preloader";
+import LoaderIndex from "./components/loaders/index";
 
 export default function App() {
   const [height, setHeight] = useState(0);
@@ -28,15 +28,28 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
-          <Route index element={<Suspense fallback={<Preloader />}>
+          <Route index element={<Suspense fallback={<LoaderIndex />}>
             <ProtectRoute>
               <Home />
             </ProtectRoute>
           </Suspense>
           }
           />
-          <Route path="i/flow/signup" element={<Suspense fallback={<Preloader />}>
+          <Route path="i/bookmarks" element={<Suspense fallback={<LoaderIndex />}>
+            <ProtectRoute>
+              <Bookmarks />
+            </ProtectRoute>
+          </Suspense>
+          }
+          />
+          <Route path="i/flow/signup" element={<Suspense fallback={<LoaderIndex />}>
             <Auth />
+          </Suspense>
+          }
+          />
+          {/* serach */}
+          <Route path="search" element={<Suspense fallback={<LoaderIndex />}>
+            <Search />
           </Suspense>
           }
           />
@@ -48,14 +61,14 @@ export default function App() {
           }
           />
           {/* login route */}
-          <Route path="i/flow/login" element={<Suspense fallback={<Preloader />}>
+          <Route path="i/flow/login" element={<Suspense fallback={<LoaderIndex />}>
             <Auth />
           </Suspense>
           }
           />
 
           {/* user profile route */}
-          <Route path=":name" element={<Suspense fallback={<Preloader />}>
+          <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
             <Profile />
           </Suspense>
           }
@@ -64,7 +77,7 @@ export default function App() {
         </Route>
 
         {/* tweet detail  route */}
-        <Route path=":name/status/:id" element={<Suspense fallback={<Preloader />}>
+        <Route path=":name/status/:id" element={<Suspense fallback={<LoaderIndex />}>
           <TweetDetailIndex />
         </Suspense>
         }

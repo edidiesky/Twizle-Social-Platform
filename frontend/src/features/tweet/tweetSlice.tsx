@@ -156,17 +156,17 @@ export const tweetSlice = createSlice({
 
     })
     builder.addCase(CreateTweet.fulfilled, (state, action) => {
-      state.tweets = [action.payload, ...state.tweets]
+      state.tweets = action.payload
       state.alertText = 'Tweet created succesfully'
       state.showAlert = true
-      state.tweetisLoading = false
+      state.createtweetisLoading = false
       state.createtweetisSuccess = true
       state.alertType = 'success'
     })
     builder.addCase(CreateTweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
-      state.tweetisLoading = false
+      state.createtweetisLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload
