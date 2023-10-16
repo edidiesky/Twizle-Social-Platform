@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const Quoteurl: string = "https://twitter-api-indol.vercel.app/api/v1/Quote";
+const Quoteurl: string = "https://eddy-twitter-api.vercel.app/api/v1/Quote";
 type Quotedatatype = {
   quote_text?: string;
   quote_image?: any;
@@ -51,7 +51,7 @@ export const getAllBookmarkedQuote = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      const response = await axios.get('https://twitter-api-indol.vercel.app/api/v1/quote/bookmark', config);
+      const response = await axios.get('https://eddy-twitter-api.vercel.app/api/v1/quote/bookmark', config);
       return response.data.bookmarkQuotes;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -79,12 +79,12 @@ export const CreateQuote = createAsyncThunk<{
       };
 
       const response2 = await axios.post(
-        `https://twitter-api-indol.vercel.app/api/v1/quote/${QuoteData?._id}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/quote/${QuoteData?._id}`,
         QuoteData,
         config
       );
       const response1 = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/tweet`,
+        `https://eddy-twitter-api.vercel.app/api/v1/tweet`,
         config
       );
       localStorage.setItem("tweet", JSON.stringify(response1.data.tweet));
@@ -122,7 +122,7 @@ export const DeleteQuote = createAsyncThunk<string, {
         },
       };
       await axios.delete(
-        `https://twitter-api-indol.vercel.app/api/v1/quote/${Detailsdata}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/quote/${Detailsdata}`,
         config
       );
       return Detailsdata;
@@ -154,7 +154,7 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
         },
       };
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/quote/tweet/${Detailsdata}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/quote/tweet/${Detailsdata}`,
         config
       );
       return response.data.quote
@@ -185,7 +185,7 @@ export const GetUserQuote = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/quote/user/${Detailsdata}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/quote/user/${Detailsdata}`,
         config
       );
       return response.data.quote;

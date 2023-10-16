@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const conversationurl: string = "https://twitter-api-indol.vercel.app/api/v1/conversation";
+const conversationurl: string = "https://eddy-twitter-api.vercel.app/api/v1/conversation";
 type conversationdatatype = {
   conversation_text?: string;
   conversation_image?: any;
@@ -56,12 +56,12 @@ export const Createconversation = createAsyncThunk<{
       };
 
       const response2 = await axios.post(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation`,
         conversationData,
         config
       );
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation/user`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation/user`,
         config
       );
       return response.data.conversation;
@@ -98,7 +98,7 @@ export const Deleteconversation = createAsyncThunk<string, {
         },
       };
       await axios.delete(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation/${Detailsdata}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation/${Detailsdata}`,
         config
       );
       return Detailsdata;
@@ -130,7 +130,7 @@ export const GetSingleconversationDetails = createAsyncThunk<conversationPayload
         },
       };
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation`,
         config
       );
       return response.data.conversations
@@ -161,7 +161,7 @@ export const GetUserconversation = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation/user`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation/user`,
         config
       );
       return response.data.conversation;
@@ -195,7 +195,7 @@ export const GetUserconversationDetails = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://twitter-api-indol.vercel.app/api/v1/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
+        `https://eddy-twitter-api.vercel.app/api/v1/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
         config
       );
       return response.data.conversation;
