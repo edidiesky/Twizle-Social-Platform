@@ -28,7 +28,7 @@ type KnownError = {
   errorMessage: string;
 }
 
-export const getAllTweet = createAsyncThunk<{
+export const getAllTweet = createAsyncThunk<string, void,{
   rejectValue: KnownError,
 
 }>(
@@ -37,7 +37,9 @@ export const getAllTweet = createAsyncThunk<{
     try {
       const response = await axios.get(tweeturl);
       localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
-      return response.data.tweet;
+      const tweetData:string = JSON.parse(localStorage.getItem("tweet") || '') as string
+      // console.log(tweetData)
+      return tweetData;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message

@@ -89,7 +89,8 @@ export const tweetSlice = createSlice({
   reducers: {
     cleartweet: (state, action) => {
       state.tweetDetails = null
-      state.tweets = []
+      state.tweets = [] 
+      state.usertweets = []
       state.tweetisLoading = false
       state.isBookMarked = false
       state.tweetisSuccess = false
