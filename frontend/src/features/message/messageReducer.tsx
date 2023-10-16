@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const messageurl: string = "/api/v1/message";
+const messageurl: string = "https://twitter-api-indol.vercel.app/api/v1/message";
 type messagedatatype = {
   message?: string;
   message_image?: any;
@@ -56,12 +56,12 @@ export const Createmessage = createAsyncThunk<{
       };
 
       const response2 = await axios.post(
-        `/api/v1/message/${messageData?.conversationId}`,
+        `https://twitter-api-indol.vercel.app/api/v1/message/${messageData?.conversationId}`,
         messageData,
         config
       );
       const response = await axios.get(
-        `/api/v1/message/${messageData?.conversationId}`,
+        `https://twitter-api-indol.vercel.app/api/v1/message/${messageData?.conversationId}`,
         config
       )
       return response.data.message;
@@ -95,7 +95,7 @@ export const Deletemessage = createAsyncThunk<string, { Detailsdata: string }, {
         },
       };
       await axios.delete(
-        `/api/v1/message/${Detailsdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/message/${Detailsdata}`,
         config
       );
       return Detailsdata;
@@ -127,7 +127,7 @@ export const GetSinglemessageDetails = createAsyncThunk<messagePayload, {
         },
       };
       const response = await axios.get(
-        `/api/v1/message/${Detailsdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/message/${Detailsdata}`,
         config
       );
 
@@ -159,7 +159,7 @@ export const GetUsermessage = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/message/user/${Detailsdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/message/user/${Detailsdata}`,
         config
       );
       return response.data.message;

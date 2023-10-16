@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const Registerurl: string = "/api/v1/auth/register";
-const Loginurl = "/api/v1/auth/login";
+const Registerurl: string = "https://twitter-api-indol.vercel.app/api/v1/auth/register";
+const Loginurl = "https://twitter-api-indol.vercel.app/api/v1/auth/login";
 
 type authtype = {
   name?: string;
@@ -97,7 +97,7 @@ export const UpdateProfile = createAsyncThunk<{
         },
       };
       const response = await axios.put(
-        `/api/v1/user/profile/${profiledata?._id}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/profile/${profiledata?._id}`,
         profiledata,
         config
       );
@@ -130,7 +130,7 @@ export const GetUserProfile = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/user/profile/${profiledata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/profile/${profiledata}`,
         config
       );
       return response.data.user;
@@ -162,12 +162,12 @@ export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefoll
         },
       };
       const response = await axios.put(
-        `/api/v1/user/follow/${profiledata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/follow/${profiledata}`,
         null,
         config
       );
       const response2 = await axios.get(
-        `/api/v1/user`,
+        `https://twitter-api-indol.vercel.app/api/v1/user`,
         config
       )
       localStorage.setItem("User", JSON.stringify(response.data.updateUsers));
@@ -206,7 +206,7 @@ export const GetAllUserProfile = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/user`,
+        `https://twitter-api-indol.vercel.app/api/v1/user`,
         config
       );
       return response.data.user;
@@ -237,7 +237,7 @@ export const GetAllUserFollowings = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/user/followings/${authdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/followings/${authdata}`,
         config
       );
       return response.data.followings;
@@ -268,7 +268,7 @@ export const GetAllUserFollowers = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `/api/v1/user/followers/${authdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/followers/${authdata}`,
         config
       );
       return response.data.followers;
@@ -300,7 +300,7 @@ export const GetAllUserNotFollowed = createAsyncThunk<string, {authdata:string},
         },
       };
       const response = await axios.get(
-        `/api/v1/user/notfollowed/${authdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/notfollowed/${authdata}`,
         config
       );
       return response.data.notfollowedUsers;
@@ -333,7 +333,7 @@ export const GetUserSearch = createAsyncThunk < authtype, { authdata:string},{
         },
       };
       const response = await axios.get(
-        `/api/v1/user/search?query=${authdata}`,
+        `https://twitter-api-indol.vercel.app/api/v1/user/search?query=${authdata}`,
         config
       );
       return {
