@@ -33,6 +33,8 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
       receiver: receiverId
     })
 
+    res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation })
   }
 
@@ -50,7 +52,9 @@ const getUserConversation = asyncHandler(async (req: CustomInterface, res: Respo
     $or: [{ sender: req.user?.userId }, { receiver: req.user?.userId }],
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
-  res.status(200).json({ conversations })
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.status(200).json({ conversations })
 });
 
 
@@ -80,6 +84,8 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
     throw new Error("Gig not found");
   }
 
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ conversation });
 });
 
@@ -88,7 +94,9 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
 // GET All Gig
 //  Public
 const DeleteConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  // res.status(200).json({ msg: "delete review controller" });
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
+  res.status(200).json({ msg: "delete review controller" });
 });
 
 const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
@@ -98,7 +106,9 @@ const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Respon
   //   { readByBuyer: false, readBySeller: true },
   //   { new: true }
   // );
-  // res.status(200).json({ updatedConversation });
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
+//   res.status(200).json({ updatedConversation });
 });
 
 export {

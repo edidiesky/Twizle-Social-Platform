@@ -21,6 +21,8 @@ const GetAllUser = asyncHandler(async (req: CustomInterface, res: Response) => {
     res.status(404);
     throw new Error("The user does not exist");
   }
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ user });
 
 });
@@ -32,6 +34,8 @@ const GetSingleUser = asyncHandler(async (req: ExpressRequest, res: Response) =>
     res.status(404);
     throw new Error("The user does not exist");
   }
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ user });
 
 });
@@ -54,6 +58,8 @@ const GetUsersNotFollowed = asyncHandler(async (req: ExpressRequest, res: Respon
       }
     }
   ])
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ notfollowedUsers });
 });
 
@@ -68,6 +74,8 @@ const GetUserSearch = asyncHandler(async (req: CustomInterface, res: Response) =
     res.status(404);
     throw new Error("The user does not exist");
   }
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ user, tweet });
 
 });
@@ -82,6 +90,8 @@ const GetAllUserFollowings = asyncHandler(async (req: ExpressRequest, res: Respo
   }
   // get all the user follwings
   const followings = await User.find({ _id: { $in: user?.followings } })
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ followings });
 
 });
@@ -96,6 +106,8 @@ const GetAllUserFollowers = asyncHandler(async (req: ExpressRequest, res: Respon
   }
   // get all the user follwings
   const followers = await User.find({ _id: { $in: user?.followers } })
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ followers });
 
 });
@@ -113,6 +125,8 @@ const UpdateUser = asyncHandler(async (req: ExpressRequest, res: Response) => {
     req.body,
     { new: true }
   );
+  res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ updatedUser });
 });
 
@@ -138,6 +152,8 @@ const FollowAndUnFollowUser = asyncHandler(async (req: CustomInterface, res: Res
     await User.findOneAndUpdate({ _id: req.params.id }, { $push: { followers: userid } }, { new: true })
     const usertoBefollowedInFllowingsArray = updateUsers?.followings.includes(req.params.id)
 
+    res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateUsers, usertoBefollowedInFllowingsArray });
   } else {
     const updateUsers = await User.findOneAndUpdate({ _id: userid }, { $pull: { followings: req.params.id } }, { new: true })
@@ -145,6 +161,8 @@ const FollowAndUnFollowUser = asyncHandler(async (req: CustomInterface, res: Res
     await User.findOneAndUpdate({ _id: req.params.id }, { $pull: { followers: userid } }, { new: true })
     const usertoBefollowedInFllowingsArray = updateUsers?.followings.includes(req.params.id)
 
+    res.setHeader("Content-Type", "text/html");
+res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateUsers, usertoBefollowedInFllowingsArray });
 
   }
