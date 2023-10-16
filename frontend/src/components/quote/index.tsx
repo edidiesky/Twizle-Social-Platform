@@ -26,7 +26,7 @@ const Bookmarks: React.FC = () => {
     const [modal, setModal] = React.useState<Boolean>(false)
 
     const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { quotes, tweetisLoading } = useAppSelector(store => store.quotes)
+    const { quotes, quoteisLoading } = useAppSelector(store => store.quotes)
 
     const dispatch = useAppDispatch()
 
@@ -59,7 +59,7 @@ const Bookmarks: React.FC = () => {
                             </h2>
                         </div> : <div className="w-100">
                             {
-                                tweetisLoading ? <div className="flex py-2 w-100 justify-center">
+                                quoteisLoading ? <div className="flex py-2 w-100 justify-center">
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
                                 </div> : <>
                                     <QuoteFeedCard />
