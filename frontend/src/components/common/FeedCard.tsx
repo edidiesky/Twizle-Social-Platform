@@ -19,6 +19,7 @@ import QuoteModal from '../modals/QuoteModal';
 import moment from 'moment';
 import FeedCardBottom from './FeedCardBottom';
 import MyAnimatePresence from '../../utils/AnimatePresence';
+import { QuoteFeedCardStyles } from '../quote/QuoteCard';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
@@ -49,15 +50,15 @@ const FeedCard = (props: feedcardtype) => {
     const dispatch = useAppDispatch()
     const handleLikeTweet = () => {
 
-        dispatch(LikeAndUnlikeATweet({Detailsdata:props?._id}))
+        dispatch(LikeAndUnlikeATweet({ Detailsdata: props?._id }))
     }
     const handleRepostTweet = () => {
         setQuote(false)
-        dispatch(RePostATweet({Detailsdata:props?._id}))
+        dispatch(RePostATweet({ Detailsdata: props?._id }))
     }
     const likes = props?.tweet_likes?.length
     const handleDeleteTweet = () => {
-        dispatch(DeleteTweet({Detailsdata:props?._id}))
+        dispatch(DeleteTweet({ Detailsdata: props?._id }))
         setDeleteModal(false)
     }
     const handledeleteModal = () => {
@@ -149,6 +150,46 @@ const FeedCard = (props: feedcardtype) => {
                             </div>
                         }
                     </Link>
+                    {
+                        props?.quote_tweet_id && <QuoteFeedCardStyles >
+                            <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
+                                <div onClick={() => setDrop(false)} className="dropdown_background"></div>
+
+                            </div>
+                            <div className="flex w-100 auto item-start feed_card_wrapper gap-1">
+                                <div className="image_wrappers">
+                                    <div className="image_gradient"></div>
+                                    {
+                                        props?.quote_user_id?.profile_image_url ?
+                                            <img src={props?.quote_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                                    }
+                                </div>
+
+                                <div className="flex column flex-1" style={{ gap: '.3rem' }}>
+                                    <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
+                                        {props?.quote_user_id?.display_name}
+                                        <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                        <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.quote_user_id?.name}</span>
+                                    </h4>
+                                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
+                                        {props?.quote_tweet_id?.tweet_text}
+                                    </h5>
+
+
+                                </div>
+                            </div>
+                            <div className="w-100">
+                                <div className="w-100">
+                                    {
+                                        props?.quote_tweet_id?.tweet_image?.length > 0 && <FeedImage images={props?.quote_tweet_id?.tweet_image} />
+                                    }
+                                </div>
+                            </div>
+
+                        </QuoteFeedCardStyles>
+                    }
 
 
                     <FeedCardBottom
@@ -160,7 +201,7 @@ const FeedCard = (props: feedcardtype) => {
                         handleLikeTweet={handleLikeTweet}
                         setQuote={setQuote} setQuoteModal={function (val: boolean): void {
                             throw new Error('Function not implemented.');
-                        } }                    
+                        }}
                     />
 
                 </div>

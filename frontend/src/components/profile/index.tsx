@@ -28,7 +28,7 @@ const Profile: React.FC = () => {
     const [modal, setModal] = React.useState<Boolean>(false)
 
     const { userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { usertweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
@@ -84,7 +84,7 @@ const Profile: React.FC = () => {
                         </div>
                     </div>
                     {
-                        tweets?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
+                        usertweets?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
                             <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-30 w-85 auto text-bold">
                                 @{userDetails?.display_name} hasn’t posted
 
@@ -96,7 +96,7 @@ const Profile: React.FC = () => {
                                     <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
                                 </div> : <>
                                     {
-                                        tweets?.map((value: feedcardtype) => {
+                                        usertweets?.map((value: feedcardtype) => {
                                             return <FeedCard {...value} key={value._id} />
                                         })
                                     }

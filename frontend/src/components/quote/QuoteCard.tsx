@@ -59,7 +59,7 @@ const QuoteFeedCard = () => {
                                     }
                                 </div>
 
-                                <FeedCardStyles >
+                                <QuoteFeedCardStyles >
                                     <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
                                         <div onClick={() => setDrop(false)} className="dropdown_background"></div>
 
@@ -96,7 +96,7 @@ const QuoteFeedCard = () => {
                                         </div>
                                     </div>
 
-                                </FeedCardStyles>
+                                </QuoteFeedCardStyles>
 
                             </Link>
                         </Link>
@@ -400,7 +400,7 @@ li {
     }
   `
 
-const FeedCardStyles = styled.div`
+export const QuoteFeedCardStyles = styled.div`
     width: 100%;
     padding: 1.7rem;
     padding-bottom:.6rem;

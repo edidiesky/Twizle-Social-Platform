@@ -83,6 +83,7 @@ export const quoteSlice = createSlice({
       state.alertText = 'quote created succesfully'
       state.showAlert = true
       state.quoteisLoading = false
+      state.quoteisSuccess = true
 
       state.alertType = 'success'
     })

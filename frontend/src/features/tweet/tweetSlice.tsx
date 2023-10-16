@@ -24,6 +24,7 @@ const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
 interface tweetState {
   tweetDetails?: any,
   tweets?: any,
+  usertweets?: any,
   bookmarks?: any,
   isLiked?: boolean,
   tweetisLoading?: boolean,
@@ -52,7 +53,8 @@ interface tweetState {
 const initialState: tweetState = {
   tweetDetails: null,
 
-  tweets: tweetdata ? tweetdata: [],
+  tweets: tweetdata ? tweetdata : [],
+  usertweets: [],
   bookmarks: [],
 
 
@@ -294,10 +296,7 @@ export const tweetSlice = createSlice({
     builder.addCase(GetUserTweet.fulfilled, (state, action) => {
       state.tweetisSuccess = true
       state.tweetisLoading = false
-      state.tweets = action.payload
-      state.alertText = 'Tweet Update succesfully'
-      state.showAlert = true
-      state.alertType = 'success'
+      state.usertweets = action.payload
     })
     builder.addCase(GetUserTweet.rejected, (state, action) => {
       state.tweetisSuccess = false

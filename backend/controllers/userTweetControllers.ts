@@ -17,11 +17,10 @@ interface CustomInterface extends ExpressRequest {
 //  Public
 const GetAllTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
   const tweet = await UserTweet.find().sort("-createdAt")
-    .populate("tweet_user_id", " username bio display_name name profile_image_url");
-  const quote = await QuoteTweet.find({ tweet_id: req.user?.userId }).populate('tweet_id', 'tweet_image tweet_text')
- 
-  // const tweet = tweets?.concat(quote!)
- 
+    .populate("tweet_user_id", " username bio display_name name profile_image_url")
+    .populate('quote_tweet_id', 'tweet_image tweet_text')
+    .populate('quote_user_id', " username bio display_name name profile_image_url")
+
   res.status(200).json({ tweet });
 
 });
@@ -81,8 +80,10 @@ const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) 
 // GET 
 // Get user's tweet
 const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const tweet = await UserTweet.find({ tweet_user_id: req.params.id }).sort("-createdAt")
-    .populate("tweet_user_id", " username bio display_name name profile_image_url");
+  const tweet = await UserTweet.find().sort("-createdAt")
+    .populate("tweet_user_id", " username bio display_name name profile_image_url")
+    .populate('quote_tweet_id', 'tweet_image tweet_text')
+    .populate('quote_user_id', " username bio display_name name profile_image_url")
 
 
   if (!tweet) {

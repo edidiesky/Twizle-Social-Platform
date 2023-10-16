@@ -1,4 +1,5 @@
 export type feedcardtype = {
+    quote_tweet_id: any;
 
     _id: string;
     user_id: number;
@@ -23,5 +24,14 @@ export type feedcardtype = {
         profile_image_url:string;
         tweet_text:string;
         
+    },
+    quote_user_id: {
+        _id: string;
+        display_name: string;
+        name: string;
+        bio: string;
+        profile_image_url: string;
+        tweet_text: string;
+
     }
 }

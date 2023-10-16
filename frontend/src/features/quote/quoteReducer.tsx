@@ -83,6 +83,12 @@ export const CreateQuote = createAsyncThunk<{
         QuoteData,
         config
       );
+      const response1 = await axios.get(
+        `/api/v1/tweet`,
+        config
+      );
+      localStorage.setItem("tweet", JSON.stringify(response1.data.tweet));
+
       return response2.data.quote;
 
 
@@ -137,7 +143,7 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
   rejectValue: KnownError,
 }>(
   "GetSingleQuoteTweetDetails",
-  async ({Detailsdata}, { rejectWithValue, getState }) => {
+  async ({ Detailsdata }, { rejectWithValue, getState }) => {
 
     try {
       const { auth } = getState() as { auth: { QuoteInfo: { _id: String }, token: string } };

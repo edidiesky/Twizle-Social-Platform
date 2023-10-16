@@ -16,6 +16,7 @@ import UploadImage from "./UploadImage";
 import { CreateTweet, GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
 import QuoteFeedCard from "./QuoteCard";
 import { CreateQuote } from "../../features/quote/quoteReducer";
+import LoaderIndex from "../loaders";
 
 type modalType = {
   modal?: boolean;
@@ -31,6 +32,7 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
     dispatch(GetSingleTweetDetails({Detailsdata:id}))
   }, [id])
   const { tweetDetails } = useAppSelector(store => store.tweet)
+  const { quoteisLoading, quoteisSuccess } = useAppSelector(store => store.quotes)
   const [uploading, setUploading] = useState(false);
   const [alert, setAlert] = useState(false);
   const { userInfo } = useAppSelector(store => store.auth)
@@ -72,159 +74,172 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
       _id: tweetDetails?._id,
       quote_user_id: tweetDetails?.tweet_user_id?._id,
     }))
-    setModal(false)
+    // setModal(false)
   }
+
+  useEffect(() => {
+    if (!quoteisLoading && quoteisSuccess) {
+      setModal(false)
+    }
+  }, [quoteisLoading, quoteisSuccess, setModal])
   return (
-    <QuoteModalStyles
-      as={motion.div}
-      initial={{ opacity: 0, visibility: "hidden" }}
-      exit={{ opacity: 0, visibility: "hidden" }}
-      animate={{ opacity: 1, visibility: "visible" }}
-    >
-      <div className="backdrop" onClick={() => setModal(false)}></div>
-
-      <motion.div
-        variants={slideUp}
-        initial="hidden"
-        animate="visible"
-        exit={"exit"}
-        className={"deleteCard shadow gap-2"}
+    <>
+    {
+        quoteisLoading && <LoaderIndex />
+        
+      }
+      <QuoteModalStyles
+        as={motion.div}
+        initial={{ opacity: 0, visibility: "hidden" }}
+        exit={{ opacity: 0, visibility: "hidden" }}
+        animate={{ opacity: 1, visibility: "visible" }}
       >
-        {/* top of the feed */}
-        <div className="top w-100 flex column gap-2">
-          <div className="w-90 topHeader auto">
-            <div onClick={() => setModal(false)} className="icons text-dark flex item-center justify-center">
-              <RxCross2 fontSize={'20px'} />
+        <div className="backdrop" onClick={() => setModal(false)}></div>
+
+        <motion.div
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+          exit={"exit"}
+          className={"deleteCard shadow gap-2"}
+        >
+          {/* top of the feed */}
+          <div className="top w-100 flex column gap-2">
+            <div className="w-90 topHeader auto">
+              <div onClick={() => setModal(false)} className="icons text-dark flex item-center justify-center">
+                <RxCross2 fontSize={'20px'} />
+              </div>
+            </div>
+
+
+            <div className="flex w-100 column gap-1">
+              <div className="w-90  auto flex item-start gap-1">
+                {/* check if the profile image url exists */}
+                {
+                  userInfo?.profile_image_url ?
+                    <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
+                    : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+
+                }
+
+                <div style={{ gap: "6px" }} className="area flex column flex-1 item-start">
+                  <div style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="replyBtn1 text-bold">Everyone</div>
+                  <textarea
+                    name={"text"}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+
+                    placeholder='Add a Comment' className="text text-light w-100"></textarea>
+                  <div className="w-100 auto">
+                    {
+                      uploading && <div className="flex item-center py-2 justify-center">
+                        <CircularProgress style={{ width: '30px', height: '30px', fontSize: '15px' }} color="primary" />
+                      </div>
+                    }
+                    {
+                      images.length !== 0 && <UploadImage
+                        images={images}
+                        setImages={setImages}
+                      />
+                    }
+
+                  </div>
+                  <div className="w-100">
+                    <QuoteFeedCard />
+                  </div>
+                </div>
+              </div>
+              <div className="bottom w-100">
+                <div className="w-90 auto flex item-start">
+                  <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
+                    <WorldIcon />
+                    <span style={{ color: "rgb(29, 155, 240)", fontSize: "13px" }} className="fs-12 text-bold">Everyone can reply</span>
+                  </div>
+                </div>
+                <div className="flex w-90 auto item-center justify-space">
+                  <div className="flex item-center">
+                    <label
+                      htmlFor="upload" className="icons flex item-center justify-center">
+                      <input
+                        type="file"
+                        id="upload"
+                        placeholder="Gig Image"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                        onChange={handleFileUpload}
+                        multiple
+                        className="w-100"
+                      />
+                      <MediaIcon />
+                    </label>
+                    <label
+                      htmlFor="upload" className="icons flex item-center justify-center">
+                      <input
+                        type="file"
+                        id="upload"
+                        placeholder="Gig Image"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                        onChange={handleFileUpload}
+                        multiple
+                        className="w-100"
+                      />
+                      <GiIcon />
+                    </label>
+                    <label
+                      htmlFor="upload" className="icons flex item-center justify-center">
+                      <input
+                        type="file"
+                        id="upload"
+                        placeholder="Gig Image"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                        onChange={handleFileUpload}
+                        multiple
+                        className="w-100"
+                      />
+                      <ScheduleIcon />
+                    </label>
+                    <label
+                      htmlFor="upload" className="icons flex item-center justify-center">
+                      <input
+                        type="file"
+                        id="upload"
+                        placeholder="Gig Image"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                        onChange={handleFileUpload}
+                        multiple
+                        className="w-100"
+                      />
+                      <PollIcon />
+                    </label>
+                    <label
+                      htmlFor="upload" className="icons flex item-center justify-center">
+                      <input
+                        type="file"
+                        id="upload"
+                        placeholder="Gig Image"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                        onChange={handleFileUpload}
+                        multiple
+                        className="w-100"
+                      />
+                      <GiIcon />
+                    </label>
+                  </div>
+                  <div onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-
-          <div className="flex w-100 column gap-1">
-            <div className="w-90  auto flex item-start gap-1">
-              {/* check if the profile image url exists */}
-              {
-                userInfo?.profile_image_url ?
-                  <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
-                  : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
-
-              }
-
-              <div style={{ gap: "6px" }} className="area flex column flex-1 item-start">
-                <div style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="replyBtn1 text-bold">Everyone</div>
-                <textarea
-                  name={"text"}
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-
-                  placeholder='Add a Comment' className="text text-light w-100"></textarea>
-                <div className="w-100 auto">
-                  {
-                    uploading && <div className="flex item-center py-2 justify-center">
-                      <CircularProgress style={{ width: '30px', height: '30px', fontSize: '15px' }} color="primary" />
-                    </div>
-                  }
-                  {
-                    images.length !== 0 && <UploadImage
-                      images={images}
-                      setImages={setImages}
-                    />
-                  }
-
-                </div>
-                <div className="w-100">
-                  <QuoteFeedCard />
-                </div>
-              </div>
-            </div>
-            <div className="bottom w-100">
-              <div className="w-90 auto flex item-start">
-                <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
-                  <WorldIcon />
-                  <span style={{ color: "rgb(29, 155, 240)", fontSize: "13px" }} className="fs-12 text-bold">Everyone can reply</span>
-                </div>
-              </div>
-              <div className="flex w-90 auto item-center justify-space">
-                <div className="flex item-center">
-                  <label
-                    htmlFor="upload" className="icons flex item-center justify-center">
-                    <input
-                      type="file"
-                      id="upload"
-                      placeholder="Gig Image"
-                      autoComplete="off"
-                      style={{ display: "none" }}
-                      onChange={handleFileUpload}
-                      multiple
-                      className="w-100"
-                    />
-                    <MediaIcon />
-                  </label>
-                  <label
-                    htmlFor="upload" className="icons flex item-center justify-center">
-                    <input
-                      type="file"
-                      id="upload"
-                      placeholder="Gig Image"
-                      autoComplete="off"
-                      style={{ display: "none" }}
-                      onChange={handleFileUpload}
-                      multiple
-                      className="w-100"
-                    />
-                    <GiIcon />
-                  </label>
-                  <label
-                    htmlFor="upload" className="icons flex item-center justify-center">
-                    <input
-                      type="file"
-                      id="upload"
-                      placeholder="Gig Image"
-                      autoComplete="off"
-                      style={{ display: "none" }}
-                      onChange={handleFileUpload}
-                      multiple
-                      className="w-100"
-                    />
-                    <ScheduleIcon />
-                  </label>
-                  <label
-                    htmlFor="upload" className="icons flex item-center justify-center">
-                    <input
-                      type="file"
-                      id="upload"
-                      placeholder="Gig Image"
-                      autoComplete="off"
-                      style={{ display: "none" }}
-                      onChange={handleFileUpload}
-                      multiple
-                      className="w-100"
-                    />
-                    <PollIcon />
-                  </label>
-                  <label
-                    htmlFor="upload" className="icons flex item-center justify-center">
-                    <input
-                      type="file"
-                      id="upload"
-                      placeholder="Gig Image"
-                      autoComplete="off"
-                      style={{ display: "none" }}
-                      onChange={handleFileUpload}
-                      multiple
-                      className="w-100"
-                    />
-                    <GiIcon />
-                  </label>
-                </div>
-                <div onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Reply</div>
-              </div>
-            </div>
-           
-          </div>
-        </div>
-
-      </motion.div>
-    </QuoteModalStyles>
+        </motion.div>
+      </QuoteModalStyles>
+    </>
+   
     // <h2>hello</h2>
   );
 }

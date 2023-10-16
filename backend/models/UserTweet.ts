@@ -11,6 +11,14 @@ const UserTweetSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    quote_user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    quote_tweet_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserTweet",
+    },
     tweet_image: {
       type: Array,
       // required: true,

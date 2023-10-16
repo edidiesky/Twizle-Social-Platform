@@ -80,7 +80,7 @@ const TweetModal: React.FC<modalType> = ({ modal, setModal, type, id }) => {
     setModal(false)
   }
   useEffect(() => {
-    if (commentisLoading && commentisSuccess) {
+    if (!commentisLoading && commentisSuccess) {
       setModal(false)
     }
   }, [commentisLoading, commentisSuccess, setModal])
@@ -276,7 +276,7 @@ const TweetModalStyles = styled(motion.div)`
   position: fixed;
   left: 0;
   display: flex;
-  z-index: 3800;
+  z-index: 800;
   align-items: start;
   justify-content: center;
   z-index: 4800;

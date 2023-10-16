@@ -57,7 +57,15 @@ const QuoteATweet = asyncHandler(async (req: CustomInterface, res: Response) => 
     tweet_id:req.params.id,
     quote_user_id: req.body.quote_user_id
   })
-  res.status(200).json({ quote });
+  const tweet = await UserTweet.create({
+    tweet_user_id: req.user?.userId,
+    tweet_image:quote_image,
+    tweet_text:quote_text,
+    quote_tweet_id: req.params.id,
+    quote_user_id: req.body.quote_user_id
+  })
+  // console.log(tweet,quote)
+  res.status(200).json({ quote, tweet });
 });
 
 //PRIVATE
