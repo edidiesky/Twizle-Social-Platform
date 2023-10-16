@@ -11,7 +11,7 @@ import { errorHandler, NotFound } from "./middleware/error-handler";
 import mongoose from "mongoose";
 app.use(
   cors({
-    origin: ["https://twitter.vercel.app/"],
+    origin: ["https://twitter-five-ruddy.vercel.app/"],
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
