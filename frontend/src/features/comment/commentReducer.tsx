@@ -33,7 +33,7 @@ export const getAllComment = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      const response = await axios.get(`https://eddy-twitter-api.vercel.app/api/v1/comment/${tweetId}`, config);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/comment/${tweetId}`, config);
       return response.data.reply;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -61,12 +61,12 @@ export const CreateTweetcomment = createAsyncThunk<{
       };
       
         await axios.post(
-          `https://eddy-twitter-api.vercel.app/api/v1/message/${messageData?.tweetid}`,
+          `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}`,
           messageData,
           config
         );
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/message/${messageData?.tweetid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}`,
         config
       )
       return response.data.reply;
@@ -98,12 +98,12 @@ export const CreateTweetReplycomment = createAsyncThunk<{
       };
 
       await axios.post(
-        `https://eddy-twitter-api.vercel.app/api/v1/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
         messageData,
         config
       );
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
         config
       )
       return response.data.reply;
@@ -137,7 +137,7 @@ export const GetSingleReplyComment = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}/reply/${messageData?.replyid}`,
         config
       )
       return response.data.reply;

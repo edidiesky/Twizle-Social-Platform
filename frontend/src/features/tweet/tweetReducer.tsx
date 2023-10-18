@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const tweeturl: string = "https://eddy-twitter-api.vercel.app/api/v1/tweet";
+const tweeturl: string = `${import.meta.env.VITE_API_BASE_URLS}/tweet`;
 type tweetdatatype = {
   tweet_text?: string;
   tweet_image?: any;
@@ -63,7 +63,7 @@ export const getAllBookmarkedTweet = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      const response = await axios.get('https://eddy-twitter-api.vercel.app/api/v1/tweet/bookmark', config);
+      const response = await axios.get('${import.meta.env.VITE_API_BASE_URLS}/tweet/bookmark', config);
       return response.data.bookmarkTweets;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -92,7 +92,7 @@ export const CreateTweet = createAsyncThunk<{
       const response = await axios.post(tweeturl, tweetData, config);
       if (response?.data?.tweet) {
         const response2 = await axios.get(
-          `https://eddy-twitter-api.vercel.app/api/v1/tweet`,
+          `${import.meta.env.VITE_API_BASE_URLS}/tweet`,
           config
         );
         localStorage.setItem("tweet", JSON.stringify(response2.data.tweet));
@@ -127,7 +127,7 @@ export const UpdateTweet = createAsyncThunk<{
         },
       };
       const response = await axios.put(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/Details/${Detailsdata?._id}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/Details/${Detailsdata?._id}`,
         Detailsdata,
         config
       );
@@ -160,12 +160,12 @@ export const BookMarkATweet = createAsyncThunk<BookMarkATweetPayload, { Detailsd
         },
       };
       const response1 = await axios.put(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/bookmark/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/bookmark/${Detailsdata}`,
         Detailsdata,
         config
       );
       const response2 = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/${Detailsdata}`,
         config
       );
       return {
@@ -200,7 +200,7 @@ export const DeleteTweet = createAsyncThunk<
           authorization: `Bearer ${auth.token}`,
         },
       };
-      await axios.delete(`https://eddy-twitter-api.vercel.app/api/v1/tweet/${Detailsdata}`, config);
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URLS}/tweet/${Detailsdata}`, config);
       return Detailsdata; // Return the data
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -229,7 +229,7 @@ export const GetSingleTweetDetails = createAsyncThunk<BookMarkATweetPayload, { D
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/${Detailsdata}`,
         config
       );
       return {
@@ -266,12 +266,12 @@ export const LikeAndUnlikeATweet = createAsyncThunk<
         },
       };
       const response = await axios.put(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/like/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/like/${Detailsdata}`,
         null,
         config
       );
-      const response1 = await axios.get(`https://eddy-twitter-api.vercel.app/api/v1/tweet/${Detailsdata}`, config);
-      const response2 = await axios.get(`https://eddy-twitter-api.vercel.app/api/v1/tweet/`, config);
+      const response1 = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/tweet/${Detailsdata}`, config);
+      const response2 = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/tweet/`, config);
 
       const tweetData: tweetdatatype = {
         tweetDetails: response.data.updateTweet,
@@ -306,7 +306,7 @@ export const GetUserTweet = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/user/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/user/${Detailsdata}`,
         config
       );
       return response.data.tweet;
@@ -338,7 +338,7 @@ export const RePostATweet = createAsyncThunk<{
         },
       };
       const response = await axios.post(
-        `https://eddy-twitter-api.vercel.app/api/v1/tweet/repost/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/repost/${Detailsdata}`,
         null,
         config
       );

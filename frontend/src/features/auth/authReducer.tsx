@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const Registerurl: string = "https://eddy-twitter-api.vercel.app/api/v1/auth/register";
-const Loginurl = "https://eddy-twitter-api.vercel.app/api/v1/auth/login";
+const Registerurl: string = `${import.meta.env.VITE_API_BASE_URLS}/auth/register`;
+const Loginurl = `${import.meta.env.VITE_API_BASE_URLS}/auth/login`;
 
 type authtype = {
   name?: string;
@@ -97,7 +97,7 @@ export const UpdateProfile = createAsyncThunk<{
         },
       };
       const response = await axios.put(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/profile/${profiledata?._id}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/profile/${profiledata?._id}`,
         profiledata,
         config
       );
@@ -130,7 +130,7 @@ export const GetUserProfile = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/profile/${profiledata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/profile/${profiledata}`,
         config
       );
       return response.data.user;
@@ -162,12 +162,12 @@ export const FollowAndUnFollowAUser = createAsyncThunk<{ user?: {}; usertoBefoll
         },
       };
       const response = await axios.put(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/follow/${profiledata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/follow/${profiledata}`,
         null,
         config
       );
       const response2 = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user`,
         config
       )
       localStorage.setItem("User", JSON.stringify(response.data.updateUsers));
@@ -206,7 +206,7 @@ export const GetAllUserProfile = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user`,
         config
       );
       return response.data.user;
@@ -237,7 +237,7 @@ export const GetAllUserFollowings = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/followings/${authdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/followings/${authdata}`,
         config
       );
       return response.data.followings;
@@ -268,7 +268,7 @@ export const GetAllUserFollowers = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/followers/${authdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/followers/${authdata}`,
         config
       );
       return response.data.followers;
@@ -300,7 +300,7 @@ export const GetAllUserNotFollowed = createAsyncThunk<string, {authdata:string},
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/notfollowed/${authdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/notfollowed/${authdata}`,
         config
       );
       return response.data.notfollowedUsers;
@@ -333,7 +333,7 @@ export const GetUserSearch = createAsyncThunk < authtype, { authdata:string},{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/user/search?query=${authdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/user/search?query=${authdata}`,
         config
       );
       return {

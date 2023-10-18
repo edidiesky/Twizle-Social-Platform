@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const conversationurl: string = "https://eddy-twitter-api.vercel.app/api/v1/conversation";
+const conversationurl: string = `${import.meta.env.VITE_API_BASE_URLS}/conversation`;
 type conversationdatatype = {
   conversation_text?: string;
   conversation_image?: any;
@@ -56,12 +56,12 @@ export const Createconversation = createAsyncThunk<{
       };
 
       const response2 = await axios.post(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
         conversationData,
         config
       );
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation/user`,
         config
       );
       return response.data.conversation;
@@ -98,7 +98,7 @@ export const Deleteconversation = createAsyncThunk<string, {
         },
       };
       await axios.delete(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation/${Detailsdata}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation/${Detailsdata}`,
         config
       );
       return Detailsdata;
@@ -130,7 +130,7 @@ export const GetSingleconversationDetails = createAsyncThunk<conversationPayload
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
         config
       );
       return response.data.conversations
@@ -161,7 +161,7 @@ export const GetUserconversation = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation/user`,
         config
       );
       return response.data.conversation;
@@ -195,7 +195,7 @@ export const GetUserconversationDetails = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `https://eddy-twitter-api.vercel.app/api/v1/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
         config
       );
       return response.data.conversation;
