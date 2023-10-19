@@ -100,10 +100,23 @@ const FeedImageStyles = styled.div`
 width: 100%;
 display:grid;
 gap:3px;
-grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
 min-height: 30rem;
 border-radius: 12px;
+@media (max-width:780px) {
+grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+min-height: 20rem;
+&.wrapper {
+    min-height: 20rem;
+    /* min-height: 100%; */
+      .imageWrapper {
+    @media (max-width: 780px) {
+      height: 15rem !important;
+    }
+}
+}
 
+}
 @media (max-width:580px) {
 grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
 min-height: 20rem;
