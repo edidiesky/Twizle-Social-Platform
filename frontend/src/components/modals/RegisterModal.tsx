@@ -8,6 +8,7 @@ import Message from "../loaders/Message";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import LoaderIndex from "../loaders";
 import { registerUser } from "../../features/auth/authReducer";
+import { Monthdata, Yeardata } from "../../data/selectdata";
 
 type modalType = {
   modal?: boolean;
@@ -18,29 +19,48 @@ type modalType = {
 const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
   const [password, setPassword] = useState('');
   const [index, setIndex] = useState(0);
+  // console.log('month is', month)
+  // console.log('year is', year)
+  // console.log('day is', day)
 
-  const { registerisLoading, registerisSuccess,
+  const { registerisLoading,
+    registerisSuccess,
     alertText,
     showAlert,
     alertType,
 
-   } = useAppSelector(store => store.auth)
+  } = useAppSelector(store => store.auth)
   const dispatch = useAppDispatch()
   // console.log(registerisLoading)
+  let birthday = `${day} ${month} ${year}`
+  // console.log(birthday)
 
   const HandleRegisterUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(registerUser({ email, name, password }))
+    dispatch(registerUser({ email, name, password, birthday }))
     // console.log('submit')
   }
 
-  useEffect(()=> {
-    if(registerisSuccess) {
+  useEffect(() => {
+    if (registerisSuccess) {
       setTab(1)
     }
   }, [registerisSuccess])
+
+  const handleClearFormData = () => {
+    setMonth('')
+    setYear('')
+    setDay('')
+    setName('')
+    setEmail('')
+    setPassword('')
+    setModal(false)
+  }
 
   return (
     <RegisterModalStyles
@@ -66,33 +86,79 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
         <div className="flex Regsitertop w-100 auto ">
           <div className="w-90 auto flex gap-2 item-center">
             <div className="flex item-center gap-3 py-1">
-              <div onClick={() => setModal(false)} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
+              <div onClick={handleClearFormData} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
             </div>
-            {
-              index === 1 ? <h4 className="fs-20 text-dark text-extra-bold">
-                Step 1 of 2</h4> : index === 2 ? <h4 className="fs-20 text-dark text-extra-bold">
-                  Step 2 of 2</h4> : ''
-            }
           </div>
         </div>
-        <div className="center_content h-100 justify-space w-85 py-2 auto flex column">
-          <Message showAlert={showAlert} alertText={alertText}/>
+        <div className="center_content h-100 justify-space w-85 auto flex column">
+          <Message showAlert={showAlert} alertText={alertText} />
           <div className="w-85 formwraper justify-space auto flex column gap-2">
             <div className="flex h-100 column gap-2">
               <h4 className="fs-30 text-extra-bold">Create your account</h4>
               <form onSubmit={(e) => HandleRegisterUser(e)} className="h-100 flex column justify-space">
-                <div className="flex w-100 column gap-2">
+                <div style={{ gap: "1.5rem" }} className="flex w-100 column gap-1">
                   <FormInput required={true} type="text" state={name} label={'Name'} setState={setName} />
                   <FormInput required={true} type="email" state={email} label={'Email'} setState={setEmail} />
                   <FormInput required={true} type="password" state={password} label={'Password'} setState={setPassword} />
+
+                  <div className="flex w-100 column gap-1">
+                    <h4 className="fs-16 text-bold">
+                      Date of birth
+                      <span className="block py-1 fs-14 text-light text-grey2">This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</span>
+                    </h4>
+
+                    <div className="w-100 birthdayWrapper flex item-center gap-2">
+                      {/* Month */}
+                      <label htmlFor="month" className="selectLabel w-100">
+                        <div className="labelspan fs-12 text-grey2">Month</div>
+                        <select id="month" className='w-100' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setMonth(e.target.value)}>
+                          <option disabled></option>
+                          {
+                            Monthdata.map((x?: any, index?: any) => {
+                              return <option key={index} value={x}>{x}</option>
+                            })
+                          }
+                        </select>
+                      </label>
+                      {/* // Day */}
+                      <label htmlFor="day" className="selectLabel w-100">
+                        <div className="labelspan fs-12 text-grey2">Day</div>
+                        <select id="day" className='w-100' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setMonth(e.target.value)}>
+                          <option disabled></option>
+                          {
+                            new Array(31).fill('').map((x?: any, index?: any) => {
+                              return (<>
+
+                                <option key={index} value={index + 1}>{index + 1}</option>
+                              </>)
+                            })
+                          }
+                        </select>
+                      </label>
+                     {/* Year */}
+                      <label htmlFor="Year" className="selectLabel w-100">
+                        <div className="labelspan fs-12 text-grey2">Year</div>
+                        <select className='w-100' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setYear(e.target.value)}>
+                          <option disabled></option>
+                          {
+                            Yeardata.map((x?: any, index?: any) => {
+                              return <option key={index} value={x}>{x}</option>
+                            })
+                          }
+                        </select>
+                      </label>
+                      
+                    </div>
+                  </div>
+
                 </div>
 
-                <button disabled={registerisSuccess} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+                <button disabled={registerisSuccess || !email || !password || !name || !birthday} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
                 </button>
 
               </form>
             </div>
-           
+
           </div>
 
         </div>
@@ -124,100 +190,43 @@ const RegisterModalStyles = styled(motion.div)`
     margin-top: 10rem;
     &:disabled {
       cursor: not-allowed;
-      opacity: .3 !important;
+      background-color: var(--grey-1);
+
     }
     &:hover {
       opacity:.5;
     }
   }
-  .label {
-    width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3rem;
-  font-size: 1.3rem;
-  color: var(--dark-1);
-  font-weight: 700;
-  text-transform: capitalize;
-  position: relative;
-
-  .labelspan {
+  .birthdayWrapper {
+    display:grid;
+    grid-template-columns: 1fr .5fr .5fr;
+    grid-gap: 1rem;
+  }
+  .selectLabel {
+    position: relative;
+     .labelspan {
     position: absolute;
-    top: -15%;
+    top: 10%;
     padding: 0 .6rem;
     left: 2%;
-    background-color: var(--white);
     font-weight: normal;
   }
-  textarea {
-    height: 10rem;
-    border-radius: 8px;
-    background: transparent;
-    padding:1.8rem;
-    width: 100%;
-    outline: none;
-    font-size: 1.6rem;
-    font-weight: 500;
-    resize:none;
-    font-family: inherit;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    color: var(--dark-1);
-
+  }
+  select {
+    height: 6.7rem;
+    outline-color: var(--blue-1);
+      font-size: 15px !important;
+    border: 1px solid var(--grey-3);
+    padding: 0 .6rem;
+    border-radius: 5px;
+    option {
+      font-size: 16px !important;
+      padding:20px 10px !important;
+    }
     &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-    &:focus {
-      border: 2px solid var(--blue-1);
-      background: transparent;
-    }
-    &.true {
-      background: var(--white);
-    }
-    &.inputError {
-      border: 2px solid var(--red);
-    }
-    &:invalid[focused="true"] ~ span {
-      display: block;
-    }
-  }
-  input {
-    height: 5.5rem;
-    border-radius: 8px;
-    background: transparent;
-    padding: 0 1.8rem;
-    width: 100%;
-    outline: none;
-    font-size: 1.6rem;
-    font-weight: 500;
-    font-family: inherit;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    color: var(--dark-1);
+   outline:2px solid var(--blue-1);
 
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.4);
     }
-    &:focus {
-      border: 2px solid var(--blue-1);
-      background: transparent;
-    }
-    &.true {
-      background: var(--white);
-    }
-    &.inputError {
-      border: 2px solid var(--red);
-    }
-    &:invalid[focused="true"] ~ span {
-      display: block;
-    }
-  }
-
-  span {
-    font-size: 1.3rem;
-    color: #c61212;
-    font-weight: 600;
-    display: none;
-  }
   }
   .RegsiterBottom {
     position: relative;
@@ -254,9 +263,9 @@ const RegisterModalStyles = styled(motion.div)`
     }
   }
   .backdrop {
-    background: var(--backdrop);
+    background: var(--backdrop1);
 
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
      @media (max-width:480px) {
@@ -274,7 +283,6 @@ const RegisterModalStyles = styled(motion.div)`
   z-index: 30;
   /* padding: 1rem 0; */
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
   border-top-left-radius:20px;
   border-top-right-radius:20px;
   }
@@ -301,6 +309,13 @@ const RegisterModalStyles = styled(motion.div)`
     }
 
   }
+  .icons {
+  width: 3rem !important;
+  height: 3rem !important;
+  transition: all 0.4s;
+  border-radius: 50%;
+  cursor: pointer;
+}
   .deleteCard_wrapper {
     width: 100%;
     display: flex;
@@ -312,7 +327,8 @@ const RegisterModalStyles = styled(motion.div)`
   .center_content {
     background: var(--white);
     position: relative;
-    min-height: 50rem;
+    min-height: 40rem;
+    padding-bottom: 2rem;
 
   }
 `;

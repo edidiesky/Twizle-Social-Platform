@@ -78,7 +78,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
               <div onClick={() => setModal(false)} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
             </div>
           </div>
-        </div> <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
+        </div> <div className="center_content h-100 justify-space w-85 auto flex column gap-1">
           <div style={{ width: "70%" }} className="hidden w-85 auto">
             <div className="w-85 auto">
               <Message showAlert={false} alertText={'Hello Hi are u fine'} /></div>
@@ -104,7 +104,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
                   <FormInput required={true} state={password} type='password' label={'Password'} setState={setPassword} />
 
                 </div>
-                <button disabled={loginisSuccess} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+                <button disabled={loginisSuccess || !password || !email} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
                 </button>
               </form>
 
@@ -139,13 +139,11 @@ const RegisterModalStyles = styled(motion.div)`
   }
   .btn.btn-1 {
     padding:1.6rem 2rem !important;
-     margin-top: 4rem;
+    margin-top: 4rem;
     &:disabled {
       cursor: not-allowed;
-      opacity: .3 !important;
-    }
-    &:hover {
-      background-color: var(--grey-hover) !important;
+      background-color: var(--grey-1);
+
     }
   }
   .label {
@@ -294,5 +292,6 @@ const RegisterModalStyles = styled(motion.div)`
   .center_content {
     background: var(--white);
     position: relative;
+    padding-bottom: 2rem;
   }
 `;

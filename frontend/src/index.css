@@ -1,26 +1,37 @@
 
 @font-face {
   font-family: "CustomFont_Bold";
-  src: url("./assets/fonts/chirp_bold.ttf") format("truetype");
+  src: url("./assets/fonts/bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "CustomFont_Heavy";
-  src: url("./assets/fonts/chirp_heavy.ttf") format("truetype");
+  src: url("./assets/fonts/heavy.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "CustomFont_Normal";
-  src: url("./assets/fonts/chirp_regular.ttf") format("truetype");
+  src: url("./assets/fonts/regular.ttf") format("truetype");
 }
 
 
 @font-face {
   font-family: "CustomFont_Medium";
-  src: url("./assets/fonts/chirp_medium.ttf") format("truetype");
+  src: url("./assets/fonts/medium.ttf") format("truetype");
 }
 
 
+@font-face {
+  font-family: "Twitter_Minor";
+  src: url("./assets/fonts/twitterminor.ttf") format("truetype");
+}
+
+.register_text {
+    font-size: 70px;
+    font-weight: bold;
+  /* font-family: "Twitter_Minor", sans-serif; */
+
+}
 
 
 * {
@@ -82,7 +93,7 @@
   --grey-hover: rgba(15, 20, 25, 0.1);
   --grey-hover1: rgb(239, 243, 244);
   --backdrop: rgba(0, 0, 0, 0.2);
-  --backdrop1: rgba(0, 0, 0, 0.2);
+  --backdrop1: rgba(0, 0, 0, 0.4);
   --red:rgb(244, 33, 46);
   --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }
@@ -286,8 +297,8 @@ h2 {
   background-color: var(--grey-hover);
 }
 .icons {
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   transition: all 0.4s;
   border-radius: 50%;
   cursor: pointer;
@@ -415,19 +426,27 @@ button {
 
 .text-extra-bold {
   font-family: "CustomFont_Heavy", sans-serif;
-  font-weight: 700;
+  font-weight: bolder;
 }
 
+
+
 .text-bold {
-  font-weight: 600;
+  font-weight: bold;
   font-family: "CustomFont_Bold", sans-serif;
+
+}
+
+.text-heavy {
+  font-weight: bold;
+  font-family: "Twitter_Minor", sans-serif;
 
 }
 
 .text-light {
   font-family: "CustomFont_Normal", sans-serif;
 
-  font-weight: 500;
+  font-weight: lighter;
 }
 
 .radius1 {

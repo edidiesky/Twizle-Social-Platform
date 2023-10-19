@@ -7,6 +7,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       unique: true
     },
+  birthday: {
+      type: String,
+    },
     display_name: {
       type: String,
       unique: true

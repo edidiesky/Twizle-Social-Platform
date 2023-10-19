@@ -65,7 +65,7 @@ const Regsiters: React.FC = () => {
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
         <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
           <div className="flex column gap-1">
-            <h1 className="text-dark text-extra-bold">Happening now</h1>
+            <div className="text-dark register_text text-heavy">Happening now</div>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
           </div>
           <div className="flex authWrapper column w-100 gap-1">
@@ -128,12 +128,10 @@ const RegsiterStyles = styled.div`
     }
   }
   
-  h1 {
-    font-size: 70px;
-    font-weight: bolder;
-
-
-
+  .register_text {
+    font-size: 64px;
+    font-weight: bold;
+  /* font-family: "Twitter_Minor", sans-serif; */
     @media (max-width:1080px) {
     font-size: 50px;
   }
@@ -141,7 +139,7 @@ const RegsiterStyles = styled.div`
   .authWrapper {
     width: 55%;
     @media (max-width:1080px) {
-    width: 75%;
+    width: 95%;
 
     }
   }

@@ -8,6 +8,7 @@ type authtype = {
   name?: string;
   email?: string;
   password?: string;
+  birthday?: string;
   display_name?: string;
   usertoBefollowedInFllowingsArray?:boolean;
   user?: any;
@@ -30,7 +31,7 @@ type KnownError = {
   errorMessage: string;
 }
 
-export const registerUser = createAsyncThunk<authtype, { email?: string, password?: string, name ?:string}, {
+export const registerUser = createAsyncThunk<authtype, authtype, {
   rejectValue: KnownError,
 
 }>(

@@ -8,9 +8,9 @@ import User from "../models/User";
 // GET All User
 //  Public
 const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password} = req.body;
+  const { name, email, password,birthday} = req.body;
   //
-  if (!email || !password || !name) {
+  if (!email || !password || !name || !birthday) {
     res.status(404);  
     throw new Error("Please fill in the valid credentails");
   }
@@ -26,7 +26,8 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
   const Tempuser = {
     email,
     password: hashedpassword,
-    name
+    name,
+    birthday
   };
   const user = await User.create(Tempuser);
 
