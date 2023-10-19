@@ -12,7 +12,7 @@ type modalType = {
 
 const Top: React.FC<modalType> = ({ setModal }) => {
     const { userDetails } = useAppSelector(store => store.auth)
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { usertweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     return (
         <TopStyles className="w-100">
@@ -26,7 +26,7 @@ const Top: React.FC<modalType> = ({ setModal }) => {
                             tweetisLoading ? <div className="flex justify-center">
                               <LoaderIndex type='small'/>
                             </div> : <>
-                                {tweets.length} {" "}
+                                {usertweets.length} {" "}
                             </>
                         }Tweets</span>
                 </h3>

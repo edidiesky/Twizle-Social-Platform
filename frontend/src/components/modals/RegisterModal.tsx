@@ -46,11 +46,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     // console.log('submit')
   }
 
-  useEffect(() => {
-    if (registerisSuccess) {
-      setTab(1)
-    }
-  }, [registerisSuccess])
+
 
   const handleClearFormData = () => {
     setMonth('')
@@ -61,6 +57,24 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     setPassword('')
     setModal(false)
   }
+   useEffect(()=> {
+    if (registerisSuccess) {
+      const interval = setTimeout(()=> {
+        setModal(false)
+      }, 3000)
+      return () => clearTimeout(interval)
+    }
+  }, [registerisSuccess, setModal])
+
+  useEffect(() => {
+    if (registerisSuccess) {
+      const interval = setTimeout(() => {
+        setTab(1)
+      }, 5000)
+      return () => clearTimeout(interval)
+      
+    }
+  }, [registerisSuccess, setTab])
 
   return (
     <RegisterModalStyles
@@ -91,9 +105,10 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
           </div>
         </div>
         <div className="center_content h-100 justify-space w-85 auto flex column">
-          <Message showAlert={showAlert} alertText={alertText} />
+       
           <div className="w-85 formwraper justify-space auto flex column gap-2">
             <div className="flex h-100 column gap-2">
+              
               <h4 className="fs-30 text-extra-bold">Create your account</h4>
               <form onSubmit={(e) => HandleRegisterUser(e)} className="h-100 flex column justify-space">
                 <div style={{ gap: "1.5rem" }} className="flex w-100 column gap-1">
@@ -153,8 +168,13 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
 
                 </div>
 
-                <button disabled={registerisSuccess || !email || !password || !name || !birthday} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
-                </button>
+              
+                <div className="btn_wrapper flex column gap-1 w-100">
+                  <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+                  <button disabled={registerisSuccess || !email || !password || !name || !birthday} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+                  </button>
+                </div>
+                
 
               </form>
             </div>
@@ -183,11 +203,13 @@ const RegisterModalStyles = styled(motion.div)`
   top: 0;
   .formwraper {
   }
-  .btn.btn-1 {
+  .btn_wrapper {
+    margin-top: 7rem;
+     .btn.btn-1 {
     border: none;
     outline: none;
     padding:1.6rem 2rem !important;
-    margin-top: 10rem;
+    
     &:disabled {
       cursor: not-allowed;
       background-color: var(--grey-1);
@@ -197,6 +219,8 @@ const RegisterModalStyles = styled(motion.div)`
       opacity:.5;
     }
   }
+  }
+ 
   .birthdayWrapper {
     display:grid;
     grid-template-columns: 1fr .5fr .5fr;

@@ -13,7 +13,6 @@ import { useAppSelector } from "../../hooks/reduxtoolkit";
 import MyAnimatePresence from "../../utils/AnimatePresence";
 
 const Regsiters: React.FC = () => {
-  const { registerisLoading, registerisSuccess } = useAppSelector(store => store.auth)
 
   const [registermodal, setRegisterModal] = useState<boolean>(false)
   const [loginmodal, setLoginModal] = useState<boolean>(false)
@@ -22,18 +21,13 @@ const Regsiters: React.FC = () => {
 
   const [tab, setTab] = useState(0)
 
-  // useEffect(()=> {
-  //   if (!registerisSuccess) {
-  //     setTab(1)
-  //   }
-  // }, [registerisSuccess, setTab])
   return (
     <RegsiterStyles style={{ overflow: "hidden" }}>
       {/* register modal */}
       <MyAnimatePresence
         initial={false} exitBeforeEnter
       >
-        {registermodal && !registerisSuccess && <RegsiterModal setTab={setTab} modal={registermodal}
+        {registermodal && <RegsiterModal setTab={setTab} modal={registermodal}
           setModal={setRegisterModal} />}
       </MyAnimatePresence>
       {/* login modal */}
@@ -115,7 +109,7 @@ const RegsiterStyles = styled.div`
     align-items: center;
     justify-content: center;
     gap: 5rem;
-    width: 100%;
+    width: 90%;
   }
   }
   .auth_right {

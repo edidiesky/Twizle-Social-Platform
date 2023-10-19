@@ -10,6 +10,7 @@ import { clearUserProfile } from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { UpdateProfile } from "../../features/auth/authReducer";
 import { useNavigate } from "react-router-dom";
+import LoaderIndex from "../loaders";
 
 type modalType = {
   modal?: boolean;
@@ -94,6 +95,9 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
       animate={{ opacity: 1, visibility: "visible" }}
     >
       <div className="backdrop" onClick={() => setModal(false)}></div>
+      {
+        uploading && <LoaderIndex/>
+      }
 
       <motion.div
         variants={slideUp}

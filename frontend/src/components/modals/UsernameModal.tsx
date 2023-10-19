@@ -27,15 +27,16 @@ const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) =>
 
   // navigate home if update profile is succesfull
   useEffect(() => {
-    dispatch(clearUserProfile("any"))
+   
     if (userprofileisSuccess) {
-      // setTimeout(() => {
-      //   navigate('/')
-      // }, 4000);
-
-      // return () => clearTimeout(navigate('/'),4000)
+    const interval = setTimeout(() => {
       setTab(2)
+      }, 4000);
+
+      return () => clearTimeout(interval)
+      
     }
+    dispatch(clearUserProfile("any"))
   }, [userprofileisSuccess, setTab])
 
   return (
@@ -73,8 +74,8 @@ const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) =>
                 <FormInput state={username} label={'Username'} setState={setUsername} />
 
                 <div className="py-2 flex item-center gap-1">
-                  <span className="fs-16 text-blue text-bold">@workuserindgf</span>
-                  <span className="fs-16 text-blue text-bold">@workuerindgf</span>
+                  <span className="fs-16 text-blue text-bold">@{userInfo?.name}1234</span>
+                  <span className="fs-16 text-blue text-bold">@{userInfo?.name}****</span>
                 </div>
 
               </div>
@@ -82,7 +83,11 @@ const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) =>
           </div>
         </div>
         <div className="flex w-85 py-2 auto item-center justify-center">
-          <div onClick={handleUpdateUserName} className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">Skip For Now</div>
+          <div onClick={handleUpdateUserName} className="btn_3 w-85 text-bold auto text-center fs-16 text-dark">
+            {
+              username ?'Create your username':'Skip For Now'
+            }
+          </div>
         </div>
 
       </motion.div>

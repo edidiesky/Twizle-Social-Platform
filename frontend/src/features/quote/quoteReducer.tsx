@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-const Quoteurl: string = `${import.meta.env.VITE_API_BASE_URLS}/Quote`;
+const Quoteurl: string = `${import.meta.env.VITE_API_BASE_URLS}/Quote` as string;
 type Quotedatatype = {
   quote_text?: string;
   quote_image?: any;
@@ -27,7 +27,7 @@ export const getAllQuote = createAsyncThunk<{
     try {
       const response = await axios.get(Quoteurl);
       localStorage.setItem("Quote", JSON.stringify(response.data.quote));
-      return response.data.quote;
+      return response.data?.quote;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -46,12 +46,13 @@ export const getAllBookmarkedQuote = createAsyncThunk<{
   async (QuoteData, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState() as { auth: { token: string } };
+   
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
         },
       };
-      const response = await axios.get('${import.meta.env.VITE_API_BASE_URLS}/quote/bookmark', config);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/quote/bookmark`, config);
       return response.data.bookmarkQuotes;
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -72,6 +73,7 @@ export const CreateQuote = createAsyncThunk<{
   async (QuoteData, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState() as { auth: { token: string } };
+   
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -116,6 +118,7 @@ export const DeleteQuote = createAsyncThunk<string, {
 
     try {
       const { auth } = getState() as { auth: { token: string } };
+   
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,
@@ -146,16 +149,9 @@ export const GetSingleQuoteTweetDetails = createAsyncThunk<BookMarkAQuotePayload
   async ({ Detailsdata }, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { QuoteInfo: { _id: String }, token: string } };
-
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+      
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/quote/tweet/${Detailsdata}`,
-        config
+        `${import.meta.env.VITE_API_BASE_URLS}/quote/tweet/${Detailsdata}`
       );
       return response.data.quote
 
@@ -177,8 +173,8 @@ export const GetUserQuote = createAsyncThunk<{
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
-      const { auth } = getState() as { auth: { QuoteInfo: { _id: String }, token: string } };
-
+       const { auth } = getState() as { auth: { token: string } };
+   
       const config = {
         headers: {
           authorization: `Bearer ${auth.token}`,

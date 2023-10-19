@@ -1,5 +1,7 @@
+import { Variants, motion } from "framer-motion";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { errorMessage } from "../../utils/framer";
 // import { useDispatch } from "react-redux";
 type messageprops = {
   showAlert?: boolean,
@@ -22,6 +24,44 @@ const Message: React.FC<messageprops> = ({
   //   }, 10000);
   // }, []);
 
+  const errorMessageVariants: Variants = {
+    hidden: {
+      scale: 0, // Add other properties like opacity, transform, etc.
+      opacity: 0,
+      visibility: 'hidden',
+      display: 'none',
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      visibility: 'visible',
+      display: 'block',
+      // Add other properties as needed
+    },
+    exit: {
+      // Define exit animation properties here
+      scale: 0, // Define exit animation properties here
+      opacity: 0,
+      visibility: 'hidden',
+      display: 'none',
+    },
+  };
+
+  if (alertType === 'danger') {
+    return (
+      <ErrorMessage
+        as={motion.div}
+        variants={errorMessageVariants}
+        initial="hidden"
+        animate={showAlert ? "visible" : "exit"}
+        exit="exit"
+        className="gap-1 flex item-center justify-space"
+      >
+        <div className="flex flex1 text-bold">{alertText}</div>
+      </ErrorMessage>
+    );
+  }
+
   return (
     <MessageContent
       className={
@@ -35,8 +75,16 @@ const Message: React.FC<messageprops> = ({
   );
 }
 
+const ErrorMessage = styled(motion.div)`
+  min-width: 200px;
+  border-radius: 15px;
+  padding: 15px 20px;
+  background: #f906061d;
+  color: #5b0404c9;
+  font-size: 13px;
+`;
 const MessageContent = styled.div`
-  min-width: 220px;
+  min-width: 260px;
   padding: 1.2rem 2rem;
   background-color: var(--blue-1);
   z-index: 10000;
