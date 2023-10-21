@@ -23,11 +23,11 @@ type Rightbar = {
 
 const Profile: React.FC = () => {
     const { name } = useParams()
-    const [unfollowmodal, setUnfollowModal] = React.useState(false)
+    const [unfollowmodal, setUnfollowModal] = React.useState<boolean>(false)
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
-    const [modal, setModal] = React.useState<Boolean>(false)
+    const [modal, setModal] = React.useState<boolean>(false)
 
     const { userDetails, userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
     const { usertweets, tweetisLoading } = useAppSelector(store => store.tweet)

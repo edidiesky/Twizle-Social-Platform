@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 import { FollowAndUnFollowAUser } from '../../../features/auth/authReducer';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
-  modal?: Boolean;
-  setModal: (val: Boolean) => void;
-  setUnFollowModals: (val: Boolean) => void;
+  modal?: boolean;
+  setModal: (val: boolean) => void;
+  setUnFollowModals: (val: boolean) => void;
 }
 
 const ProfileBottomIndex: React.FC<modalType> = ({ setModal, setUnFollowModals }) => {

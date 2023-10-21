@@ -23,7 +23,7 @@ const Bookmarks: React.FC = () => {
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
-    const [modal, setModal] = React.useState<Boolean>(false)
+    const [modal, setModal] = React.useState<boolean>(false)
 
     const { userInfo, userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
     const { quotes, quoteisLoading } = useAppSelector(store => store.quotes)

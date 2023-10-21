@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 interface themeState {
-  backgroundtheme?: string,
-  colortheme?: string,
+  backgroundtheme: string,
+  colortheme: string,
 }
 
 // Define the initial state using that type
