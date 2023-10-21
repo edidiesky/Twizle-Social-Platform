@@ -8,6 +8,7 @@ import { AiOutlineCheck } from 'react-icons/ai'
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { offDisplayModal } from "../../features/tweet/tweetSlice";
 import { BiSolidBadgeCheck } from "react-icons/bi";
+import { setBackgroundThemes, setColorTheme } from "../../features/theme/themeSlice";
 
 type modalType = {
   modal?: boolean;
@@ -45,47 +46,16 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
        color: "#00BA7C"
     }
   ])
-  // let theme = 'light-theme'
-  // get the theme
-  const getBackgroundTheme = () => {
-    let theme: string = 'light-theme'
-
-    if (theme === 'light-theme') {
-      const storedTheme = localStorage.getItem('light-theme');
-
-      theme = storedTheme !== null ? storedTheme : 'light-theme';
-    }
-    return theme
-  }
-
-  const getColorTheme = () => {
-    let theme: string = 'blue-theme'
-
-    if (theme === 'blue-theme') {
-      const storedTheme = localStorage.getItem('blue-theme');
-      theme = storedTheme !== null ? storedTheme : 'blue-theme';
-    }
-    return theme
-  }
-  const [themes, setThemes] = useState(getBackgroundTheme())
-  const [colortheme, setColorTheme] = useState(getColorTheme())
-  // toggle the theme
-  // set the document class name to the theme
-
   const handleBackgroundTheme = (theme: string, tab: number) => {
-    setThemes(theme)
+    // setThemes(theme)
     setBackgroundTab(tab)
+    dispatch(setBackgroundThemes(theme))
   }
   const handleColorTheme = (theme: string, tab: number) => {
-    setColorTheme(theme)
     setColorTab(tab)
+    dispatch(setColorTheme(theme))
   }
-  useEffect(() => {
-    document.documentElement.className = `${themes} ${colortheme}`
-    // store
-    localStorage.setItem('theme', themes);
-    localStorage.setItem('colortheme', colortheme);
-  }, [themes, colortheme])
+ 
 
   return (
     <DisplayModalStyles
@@ -236,6 +206,7 @@ const DisplayModalStyles = styled(motion.div)`
     border-radius: 4px;
     cursor:pointer;
     min-height:7.5rem;
+    background-color: #fff;
     &.active {
       border: 2px solid var(--blue-1);
     }

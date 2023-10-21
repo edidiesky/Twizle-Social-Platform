@@ -5,7 +5,7 @@ import quoteSlice from './features/quote/quoteSlice'
 import messageSlice from './features/message/messageSlice'
 import conversationSlice from './features/conversation/conversationSlice'
 import commentSlice from './features/comment/commentSlice'
-// ...
+import themeSlice from './features/theme/themeSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +14,8 @@ export const store = configureStore({
     quotes:quoteSlice,
     conversation: conversationSlice,
     message: messageSlice,
-    comment: commentSlice
+    comment: commentSlice,
+    theme: themeSlice
   },
 })
 

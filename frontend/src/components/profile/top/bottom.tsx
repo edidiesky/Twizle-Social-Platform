@@ -3,22 +3,31 @@ import moment from 'moment'
 import styled from 'styled-components';
 import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5'
 import { PiSuitcaseSimple } from 'react-icons/pi'
-import { useAppSelector } from '../../../hooks/reduxtoolkit';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsThreeDots, BsLink45Deg } from 'react-icons/bs';
 import { AiOutlineBell } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { FollowAndUnFollowAUser } from '../../../features/auth/authReducer';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
   modal?: Boolean;
   setModal: (val: Boolean) => void;
+  setUnFollowModals: (val: Boolean) => void;
 }
 
-const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
+const ProfileBottomIndex: React.FC<modalType> = ({ setModal, setUnFollowModals }) => {
   const { userDetails, userInfo } = useAppSelector(store => store.auth)
+    const dispatch = useAppDispatch();
   const checkifUser = userDetails?._id === userInfo?._id
+  const isFollowed = userInfo?.followings?.includes(userDetails?._id)
 
   const date = moment(userDetails?.createdAt).format('MMM YYYY')
+
+  const handleFollowUser = () => {
+    dispatch(FollowAndUnFollowAUser({ profiledata: userInfo?._id }))
+  }
+
 
   return (
     <ProfileBottomStyles style={{marginTop:"2rem"}} className='flex column gap-1'>
@@ -33,7 +42,17 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal }) => {
          }
           {
             checkifUser ? <div className="profileBtn text-dark text-bold" onClick={() => setModal(true)}>Edit Profile</div>:
-        <div className="profileBtn followbtn text-dark text-bold">Follow</div>
+        <>
+                {
+                  isFollowed ? <div onClick={() => setUnFollowModals(true)}
+                    className="btn active text-extra-bold btn-3 fs-14 text-white">
+                    <span className="following">Following</span>
+                    <span className="unfollow">Unfollow</span>
+                  </div>
+                    : <div onClick={() => handleFollowUser()} className="btn text-extra-bold btn-3 fs-14 text-white">Follow</div>
+
+                }
+        </>
           }
         </div>
       </div>

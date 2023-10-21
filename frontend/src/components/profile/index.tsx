@@ -15,6 +15,7 @@ import { GetUserTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import MyAnimatePresence from '../../utils/AnimatePresence';
+import UnFollowModal from '../modals/UnFollowModal';
 
 type Rightbar = {
     type: String
@@ -22,27 +23,30 @@ type Rightbar = {
 
 const Profile: React.FC = () => {
     const { name } = useParams()
+    const [unfollowmodal, setUnfollowModal] = React.useState(false)
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
     const [modal, setModal] = React.useState<Boolean>(false)
 
-    const { userDetails, userprofileisSuccess } = useAppSelector(store => store.auth)
+    const { userDetails, userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
     const { usertweets, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
+    const isFollowed = userInfo?.followings?.includes(userDetails?._id)
+
 
     useEffect(() => {
         if (name) {
             dispatch(GetUserProfile(name))
         }
-        
+
     }, [name])
 
-        // useEffect(() => {
-        //     dispatch(GetUserProfile(userDetails?.name))
+    // useEffect(() => {
+    //     dispatch(GetUserProfile(userDetails?.name))
 
-        // }, [ userprofileisSuccess])
+    // }, [ userprofileisSuccess])
 
     useEffect(() => {
         if (userDetails?._id) {
@@ -55,6 +59,12 @@ const Profile: React.FC = () => {
             <LeftSidebarIndex />
             {/* control the update modal */}
             <MyAnimatePresence
+            >
+                {unfollowmodal && <UnFollowModal id={userDetails?._id}
+
+                    name={userDetails?.name} modal={unfollowmodal} setModal={setUnfollowModal} />}
+            </MyAnimatePresence>
+            <MyAnimatePresence
                 initial={false} exitBeforeEnter
             >
                 {
@@ -66,7 +76,7 @@ const Profile: React.FC = () => {
                 <div className="flex column">
 
                     <WallpaperIndex />
-                    <ProfileBottomIndex setModal={setModal} />
+                    <ProfileBottomIndex setUnFollowModals={setUnfollowModal} setModal={setModal} />
                 </div>
                 <div className="w-100 flex py-2 column">
                     <div className="w-100 flex item-center text-bold fs-16 profilelist">

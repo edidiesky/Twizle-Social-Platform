@@ -21,9 +21,26 @@ import {
 } from "./screens";
 import ProtectRoute from "./utils/ProtectRoute";
 import LoaderIndex from "./components/loaders/index";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxtoolkit";
+import { getBackgroundTheme, getColorTheme } from "./features/theme/themeSlice";
 
 export default function App() {
   const [height, setHeight] = useState(0);
+  const dispatch = useAppDispatch()
+  const { backgroundtheme, colortheme } = useAppSelector(store => store.theme)
+  // set the theme
+  React.useEffect(()=> {
+    dispatch(getBackgroundTheme('any'))
+    dispatch(getColorTheme('any'))
+  },[])
+
+  // store the theme background and color in the local storage of the user broweser
+  React.useEffect(() => {
+    document.documentElement.className = `${backgroundtheme} ${colortheme}`
+    // store
+    localStorage.setItem('theme', backgroundtheme);
+    localStorage.setItem('colortheme', colortheme);
+  }, [backgroundtheme, colortheme])
   return (
     <div className="based" style={{ height }}>
       <Routes>
