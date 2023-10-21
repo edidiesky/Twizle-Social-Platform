@@ -13,10 +13,12 @@ import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
 import BookmarkIcon from '../../../assets/svg/feedcardicons/bookmark';
 import { GetSingleQuoteTweetDetails } from '../../../features/quote/quoteReducer';
+import LoaderIndex from '../../loaders';
 
 
 const PostDetailsContent: React.FC = () => {
     const {id} = useParams()
+    const { commentisLoading, commentisSuccess } = useAppSelector(store => store.comment)
     const [bookmark, setBookMark] = useState<boolean>(false)
     const { tweets, tweetDetails, isBookMarked } = useAppSelector(store => store.tweet)
     const { quotes } = useAppSelector(store => store.quotes)
@@ -25,7 +27,7 @@ const PostDetailsContent: React.FC = () => {
     const dispatch = useAppDispatch()
     React.useEffect(()=> {
         dispatch(GetSingleTweetDetails({Detailsdata:id}))
-    }, [id])
+    }, [id, commentisSuccess])
     React.useEffect(() => {
         dispatch(GetSingleQuoteTweetDetails({Detailsdata:id}))
     }, [id])
@@ -36,6 +38,9 @@ const PostDetailsContent: React.FC = () => {
    
     return (
         <PostDetailsContentStyles>
+            {
+                commentisLoading && <LoaderIndex />
+            }
             <Top />
             {/* post feed card */}
             <PostFeedCard />
