@@ -16,18 +16,7 @@ const PostFeedCard = () => {
    
     return (
         <FeedCardStyles key={tweetDetails?.tweet_id}>
-            <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
-                <div onClick={() => setDrop(false)} className="dropdown_background"></div>
-                <ul onClick={() => setDrop(false)} className="flex column w-100 fs-14 text-bold">
-                    <li className="flex item-center gap-1">Not interested in this tweet</li>
-                    <li className="flex item-center gap-1">Follow Alexander</li>
-                    <li className="flex item-center gap-1">Add or remove @Alexander form lists</li>
-                    <li className="flex item-center gap-1">Mute Alexander</li>
-                    <li className="flex item-center gap-1">Block Alexander</li>
-                    <li className="flex item-center gap-1">Mute tweet</li>
-                    <li className="flex item-center gap-1">Report tweet</li>
-                </ul>
-            </div>
+           
            
             <div className="flex w-90 auto item-start justify-space feed_card_wrapper gap-1">
                 <div className="flex column gap-1">
@@ -106,16 +95,61 @@ const FeedCardStyles = styled.div`
         position: absolute;
         right: 2%;
         top: 8px;
-        z-index: 40;
+        z-index: 2000;
         cursor: pointer;
-        width: 350px;
-        box-shadow: var(--shadow);
-  border-radius: 10px;
-      background-color: var(--white);
+        width: 320px;
+        border-radius: 10px;
+        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+        background-color: var(--white);
         height: 0;
         transition: all .3s;    
         opacity:0;
         visibility: hidden;
+        &.card1 {
+        width: 110px;
+        right: -40%;
+        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+        &.active {
+            ul {
+            li {
+                padding:1.2rem 1rem;
+            }
+        }
+        }
+       
+        &.active {
+             @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        }
+        @media (max-width:500px)  {
+            width: 130px;
+
+        }
+         @media (max-width:400px)  {
+            width: 130px;
+
+        }
+        
+   ul {
+
+            li {
+                padding:.7rem 2.4rem;
+            }}
+            &.active {
+            max-height: 130px;
+             height: fit-content;
+            }
+        }
+        @media (max-width:500px) {
+        width: 300px;
+
+        }
         .dropdown_background {
             width: 100vw;
             height: 100vh;
@@ -126,17 +160,29 @@ const FeedCardStyles = styled.div`
             background-color: transparent;
         }
         &.active {
-            height: 350px;
+              height: 300px;
+             min-height: fit-content;
+
+            @media (max-width:400px) {
+            width: 310px;
+        height: fit-content;
+
+        }
             opacity:1;
                 visibility: visible;
             ul {
 
             li {
-                padding:2rem 2.4rem;
+                padding:1.5rem 2.4rem;
                 opacity:1;
                 visibility: visible;
                 width: 100%;
                 transition: all .4s;
+                border-radius:5px;
+                @media (max-width:400px) {
+                padding:1.7rem 2rem;
+
+                }
                 &:hover {
                    /* background-color: #f1f1f1; */
                    background-color: var(--dark-grey-hover);
@@ -149,7 +195,7 @@ const FeedCardStyles = styled.div`
             z-index: 35;
 
 li { 
-    padding: 1.4rem;
+    padding: 1.2rem;
     opacity:0;
     visibility: hidden;
     width: 100%;

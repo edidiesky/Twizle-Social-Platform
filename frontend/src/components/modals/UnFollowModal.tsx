@@ -1,48 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { slideUp } from "../utils/framer";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
-import LoaderIndex from "../loaders";
-import { useNavigate } from "react-router-dom";
-
-type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
+import { FollowAndUnFollowAUser, GetUserProfile } from "../../features/auth/authReducer";
 
 type modalType = {
   modal?: boolean;
+  id?: string;
+  name?: string;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDeleteTweet:()=> void;
 }
 
-const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }) => {
-  const navigate = useNavigate()
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { loginisLoading, loginisSuccess } = useAppSelector(store => store.auth)
+const UnFollowModal: React.FC<modalType> = ({ modal, setModal, id, name  }) => {
 
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    if (loginisSuccess) {
-      const timeoutId = setTimeout(() => {
-        navigate('/')
-      }, 3000);
+  
 
-      return () => clearTimeout(timeoutId)
-
+  React.useEffect(() => {
+    if (name) {
+      dispatch(GetUserProfile(name))
     }
-  }, [loginisSuccess])
+
+  }, [name])
+
+  const { userDetails } = useAppSelector(store => store.auth)
+
+
+  const handleUnFollow = ()=> {
+    dispatch(FollowAndUnFollowAUser({ profiledata: id }))
+    setModal(false)
+  }
+
+
 
   return (
-    <DeleteModalStyles
+    <UnFollowModalStyles
       as={motion.div}
       initial={{ opacity: 0, visibility: "hidden" }}
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      {
-        loginisLoading && <LoaderIndex />
-      }
       <div className="backdrop" onClick={() => setModal(false)}></div>
 
       <motion.div
@@ -55,15 +53,15 @@ const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }
        <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
           
           <div className="w-85 formwraper auto flex column gap-1">
-            <h4 className="fs-24 text-dark text-start text-bold">Delete Post?
+            <h4 className="fs-24 text-dark text-start text-bold">Unfollow @{userDetails?.name}
             
             <span className="block text-grey fs-15 text-light py-1">
-                This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from search results. 
-            </span>
+           Their posts will no longer show up in your For You timeline. You can still view their profile, unless their posts are protected.   
+           </span>
             </h4>
           
            <div className="flex column gap-1 w-100">
-              <div onClick={handleDeleteTweet} className="btn w-100 auto btn-2 fs-16 text-white text-extra-bold">Delete
+              <div onClick={handleUnFollow} className="btn w-100 auto btn-2 fs-16 text-white text-extra-bold">UnFollow
               </div>
               <div onClick={() => setModal(false)} className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Cancel
               </div>
@@ -72,13 +70,13 @@ const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }
 
         </div>
       </motion.div>
-    </DeleteModalStyles>
+    </UnFollowModalStyles>
     // <h2>hello</h2>
   );
 }
-export default DeleteModal
+export default UnFollowModal
 
-const DeleteModalStyles = styled(motion.div)`
+const UnFollowModalStyles = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -95,10 +93,11 @@ const DeleteModalStyles = styled(motion.div)`
     /* width: 70%; */
   }
   .btn.btn-2 {
-    background-color:var(--red);
+    background-color:var(--dark-1);
     padding:1.5rem !important;
 
     cursor: pointer;
+    color: var(--white);
   }
 
   .btn.btn-1 {

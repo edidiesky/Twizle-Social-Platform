@@ -4,8 +4,21 @@ import Top from '../top/top';
 import Feed from '../../common/feed/feed';
 import TweetFormSection from '../../common/tweetsection';
 import Notification from '../../common/notification';
+import { useAppDispatch } from '../../../hooks/reduxtoolkit';
+import { cleartweet } from '../../../features/tweet/tweetSlice';
+import { GetAllUserProfile } from '../../../features/auth/authReducer';
+import { getAllTweet } from '../../../features/tweet/tweetReducer';
 
 const Content: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+
+    React.useEffect(() => {
+        dispatch(cleartweet({ payload: "any" }))
+        dispatch(GetAllUserProfile())
+        dispatch(getAllTweet())
+    }, [])
+
     return (
         <ContentStyles>
             <Top />

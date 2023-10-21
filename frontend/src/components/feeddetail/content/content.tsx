@@ -22,7 +22,7 @@ const PostDetailsContent: React.FC = () => {
     const [bookmark, setBookMark] = useState<boolean>(false)
     const { tweets, tweetDetails, isBookMarked } = useAppSelector(store => store.tweet)
     const { quotes } = useAppSelector(store => store.quotes)
-    console.log(isBookMarked)
+    // console.log(isBookMarked)
     
     const dispatch = useAppDispatch()
     React.useEffect(()=> {

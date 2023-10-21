@@ -14,13 +14,13 @@ const Feed: React.FC = () => {
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
     
     
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
 
-    React.useEffect(() => {
-        dispatch(cleartweet({payload:"any"}))
-        dispatch(GetAllUserProfile())
-        dispatch(getAllTweet())
-    }, [])
+    // React.useEffect(() => {
+    //     dispatch(cleartweet({payload:"any"}))
+    //     dispatch(GetAllUserProfile())
+    //     dispatch(getAllTweet())
+    // }, [])
 
     return (
         <div className="w-100 h-100">
