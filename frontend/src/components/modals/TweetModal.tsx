@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import LoaderIndex from "../loaders";
 import UploadImage from "./UploadImage";
 import QuoteFeedCard from "./QuoteCard";
-import { GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
+import { GetSingleTweetDetails, getQuoteTweet } from "../../features/tweet/tweetReducer";
 import axios from "axios";
 import FeedImage from "../common/FeedImage";
 import { CreateTweetcomment } from "../../features/comment/commentReducer";
@@ -81,6 +81,7 @@ const TweetModal: React.FC<modalType> = ({ modal, setModal, type, id }) => {
   }
   useEffect(() => {
     if (!commentisLoading && commentisSuccess) {
+      dispatch(getQuoteTweet())
       setModal(false)
     }
   }, [commentisLoading, commentisSuccess, setModal])

@@ -79,7 +79,7 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
 
   useEffect(() => {
     if (!quoteisLoading && quoteisSuccess) {
-      dispatch(getQuoteTweet("any"))
+      dispatch(getQuoteTweet())
       setModal(false)
     }
   }, [quoteisLoading, quoteisSuccess, setModal])

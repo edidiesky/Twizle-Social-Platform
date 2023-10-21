@@ -47,6 +47,7 @@ const FeedCard = (props: feedcardtype) => {
     }
 
     const [tweet, setTweet] = useState<boolean>(false)
+    // console.log(tweet)
     const [deletemodal, setDeleteModal] = useState<boolean>(false)
     const [drop, setDrop] = useState<boolean>(false)
     const [quote, setQuote] = useState<boolean>(false)
@@ -205,7 +206,8 @@ const FeedCard = (props: feedcardtype) => {
                         quote={quote}
                         likelength={props?.tweet_likes?.length}
                         handleLikeTweet={handleLikeTweet}
-                        setQuote={setQuote} setQuoteModal={function (val: boolean): void {
+                        setQuote={setQuote} 
+                        setQuoteModal={function (val: boolean): void {
                             throw new Error('Function not implemented.');
                         }}
                     />
