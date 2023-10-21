@@ -13,7 +13,7 @@ import PollIcon from "../../assets/svg/poll";
 import WorldIcon from "../../assets/svg/world";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import UploadImage from "./UploadImage";
-import { CreateTweet, GetSingleTweetDetails } from "../../features/tweet/tweetReducer";
+import { CreateTweet, GetSingleTweetDetails, getQuoteTweet } from "../../features/tweet/tweetReducer";
 import QuoteFeedCard from "./QuoteCard";
 import { CreateQuote } from "../../features/quote/quoteReducer";
 import LoaderIndex from "../loaders";
@@ -79,6 +79,7 @@ const QuoteModal: React.FC<modalType> = ({ modal, setModal, id }) => {
 
   useEffect(() => {
     if (!quoteisLoading && quoteisSuccess) {
+      dispatch(getQuoteTweet("any"))
       setModal(false)
     }
   }, [quoteisLoading, quoteisSuccess, setModal])

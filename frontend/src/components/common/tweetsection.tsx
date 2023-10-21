@@ -11,9 +11,11 @@ import WorldIcon from '../../assets/svg/world';
 import { BiChevronDown } from 'react-icons/bi';
 import axios from 'axios';
 import { CreateTweet } from '../../features/tweet/tweetReducer';
+import LoaderIndex from '../loaders';
 
 const TweetFormSection = () => {
     const { userInfo } = useAppSelector(store => store.auth)
+    const { createtweetisLoading } = useAppSelector(store => store.tweet)
     const [active, setActive] = useState(true)
     const [text, setText] = useState<string>('')
     const [images, setImages] = useState<string[]>([])
@@ -59,11 +61,16 @@ const TweetFormSection = () => {
                 profile_image_url: userInfo?.profile_image_url,
             }
         }))
+        setText('')
+        setImages([])
         // setModal(false)
     }
 
     return (
         <TweetFormSectionStyles>
+            {
+                createtweetisLoading && <LoaderIndex/>
+            }
             <div style={{ gap: "3px" }} className="w-100 flex item-start">
                 <div className="image_wrapper">
                     {

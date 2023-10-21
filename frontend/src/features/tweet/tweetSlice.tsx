@@ -10,7 +10,8 @@ import {
   GetUserTweet,
   RePostATweet,
   getAllBookmarkedTweet,
-  BookMarkATweet
+  BookMarkATweet,
+  getQuoteTweet
 } from './tweetReducer'
 // const BookMarked = localStorage.getItem("isBookMarked");
 
@@ -53,7 +54,7 @@ interface tweetState {
 const initialState: tweetState = {
   tweetDetails: null,
 
-  tweets: tweetdata ? tweetdata : [],
+  tweets: tweetdata ? tweetdata:[],
   usertweets: [],
   bookmarks: [],
 
@@ -125,6 +126,21 @@ export const tweetSlice = createSlice({
       state.tweets = action.payload
     })
     builder.addCase(getAllTweet.rejected, (state, action) => {
+      state.tweetisSuccess = false
+      state.tweetisError = true
+      state.tweetisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
+
+    builder.addCase(getQuoteTweet.pending, (state, action) => {
+    })
+    builder.addCase(getQuoteTweet.fulfilled, (state, action) => {
+      state.tweets = action.payload
+    })
+    builder.addCase(getQuoteTweet.rejected, (state, action) => {
       state.tweetisSuccess = false
       state.tweetisError = true
       state.tweetisLoading = false

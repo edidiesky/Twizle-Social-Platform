@@ -31,9 +31,13 @@ const FeedCard = (props: feedcardtype) => {
     const now = moment();
     const hoursDifference = now.diff(createdAt, 'hours');
     const minsDifference = now.diff(createdAt, 'minutes');
+    const secondsDifference = now.diff(createdAt, 'seconds');
 
     let date;
-    if (hoursDifference < 1) {
+    if (secondsDifference < 0) {
+        date = `${secondsDifference}sec`;
+    }
+   else if (hoursDifference < 1) {
         date = `${minsDifference}min`;
     }
     else if (hoursDifference < 24) {
@@ -67,8 +71,10 @@ const FeedCard = (props: feedcardtype) => {
     }
 
     const handleQuoteModal = () => {
-        setQuoteModal(true)
+        
         setDrop(false)
+        setQuoteModal(true)
+        setQuote(false)
     }
 
     const isliked = props?.tweet_likes?.includes(userInfo?._id)

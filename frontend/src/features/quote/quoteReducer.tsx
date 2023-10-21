@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 const Quoteurl: string = `${import.meta.env.VITE_API_BASE_URLS}/Quote` as string;
-type Quotedatatype = {
+export type Quotedatatype = {
   quote_text?: string;
   quote_image?: any;
   _id?: string;
@@ -85,11 +85,6 @@ export const CreateQuote = createAsyncThunk<{
         QuoteData,
         config
       );
-      const response1 = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/tweet`,
-        config
-      );
-      localStorage.setItem("tweet", JSON.stringify(response1.data.tweet));
 
       return response2.data.quote;
 

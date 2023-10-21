@@ -11,6 +11,9 @@ import LoaderIndex from '../../loaders';
 
 const Feed: React.FC = () => {
     const { tweets, tweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
+    const { quoteisSuccess } = useAppSelector(store => store.quotes)
+    
+    
     const dispatch = useAppDispatch()
 
     React.useEffect(() => {
@@ -24,7 +27,7 @@ const Feed: React.FC = () => {
             <FeedStyles>
                 <div className="flex w-100 column">
                     {
-                        tweetisLoading ? <div className="flex py-2 w-100 justify-center">
+                        tweets?.length === 0 ? <div className="flex py-2 w-100 justify-center">
                          
                             <LoaderIndex type="small" />
 

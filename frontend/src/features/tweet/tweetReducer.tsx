@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+import { Quotedatatype } from "../quote/quoteReducer";
 
 const tweeturl: string = `${import.meta.env.VITE_API_BASE_URLS}/tweet`;
 type tweetdatatype = {
@@ -354,3 +355,26 @@ export const RePostATweet = createAsyncThunk<{
   }
 );
 
+
+
+export const getQuoteTweet = createAsyncThunk<string, void, {
+  rejectValue: KnownError,
+
+}>(
+  "getQuoteTweet",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(tweeturl);
+      localStorage.setItem("tweet", JSON.stringify(response.data.tweet));
+      const tweetData: string = JSON.parse(localStorage.getItem("tweet") || '') as string
+      // console.log(tweetData)
+      return tweetData;
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);

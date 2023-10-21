@@ -38,7 +38,7 @@ const FeedImage: React.FC<uploadType> = ({ images }) => {
     }
     if (images.length === 1) {
         return (
-            <FeedImageWrapperStyles >
+            <FeedImageWrapperStyles className="active">
                 <FeedImageStyles
                     className="active"
                 >
@@ -100,11 +100,14 @@ const FeedImageStyles = styled.div`
 width: 100%;
 display:grid;
 gap:3px;
-grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+grid-template-columns: repeat(2,1fr);
 min-height: 30rem;
 border-radius: 12px;
+&.active {
+grid-template-columns: repeat(1,1fr);
+
+}
 @media (max-width:780px) {
-grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
 min-height: 20rem;
 &.wrapper {
     min-height: 20rem;
@@ -118,7 +121,6 @@ min-height: 20rem;
 
 }
 @media (max-width:580px) {
-grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
 min-height: 20rem;
 &.wrapper {
     min-height: 20rem;
