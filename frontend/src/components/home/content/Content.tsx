@@ -12,7 +12,7 @@ const Content: React.FC = () => {
             {/* notification popup */}
             {/* <Notification/> */}
             <div className="forms w-100">
-                <TweetFormSection />
+                <TweetFormSection placeholder='What is happening?!' type='Home' />
             </div>
             <Feed />
         </ContentStyles>

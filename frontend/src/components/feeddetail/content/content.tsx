@@ -4,11 +4,6 @@ import Top from '../feedtop/top';
 import PostDetailsComments from './comments';
 import TweetFormSection from '../../common/tweetsection';
 import PostFeedCard from '../card';
-import { BiSolidBadgeCheck } from 'react-icons/bi'
-import { BiDotsHorizontalRounded } from 'react-icons/bi'
-
-import { HiOutlineChatBubbleOvalLeft } from 'react-icons/hi2'
-import { LiaRetweetSolid } from 'react-icons/lia'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { BookMarkATweet, GetSingleTweetDetails } from '../../../features/tweet/tweetReducer';
 import { Link, useParams } from 'react-router-dom';
@@ -110,7 +105,7 @@ const PostDetailsContent: React.FC = () => {
                 </div>
 
             </div>
-            <TweetFormSection />
+            <TweetFormSection placeholder='Post your reply' type='details' />
             <PostDetailsComments />
         </PostDetailsContentStyles>
     )

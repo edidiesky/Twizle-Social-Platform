@@ -61,12 +61,12 @@ export const CreateTweetcomment = createAsyncThunk<{
       };
       
         await axios.post(
-          `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}`,
+          `${import.meta.env.VITE_API_BASE_URLS}/comment/${messageData?.tweetid}`,
           messageData,
           config
         );
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/message/${messageData?.tweetid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/comment/${messageData?.tweetid}`,
         config
       )
       return response.data.reply;

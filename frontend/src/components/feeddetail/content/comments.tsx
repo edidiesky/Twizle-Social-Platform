@@ -51,7 +51,13 @@ const PostDetailsComments: React.FC = () => {
                     comment?.map((x: any, index: any) => {
                         return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
                             <div className="image_wrapper">
-                                <img src={x.user?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+
+                                {
+                                    x.user?.profile_image_url ?
+                                        <img src={x.user?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                        : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                                }
                                 <div className="image_gradient"></div>
                             </div>
 

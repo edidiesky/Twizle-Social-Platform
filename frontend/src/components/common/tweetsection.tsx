@@ -12,10 +12,14 @@ import { BiChevronDown } from 'react-icons/bi';
 import axios from 'axios';
 import { CreateTweet } from '../../features/tweet/tweetReducer';
 import LoaderIndex from '../loaders';
+import { CreateTweetcomment } from '../../features/comment/commentReducer';
 
-const TweetFormSection = () => {
+const TweetFormSection:React.FC<{
+    type?: string,
+    placeholder?: string,
+}> = ({ type, placeholder }) => {
     const { userInfo } = useAppSelector(store => store.auth)
-    const { createtweetisLoading } = useAppSelector(store => store.tweet)
+    const { createtweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
     const [active, setActive] = useState(true)
     const [text, setText] = useState<string>('')
     const [images, setImages] = useState<string[]>([])
@@ -50,6 +54,11 @@ const TweetFormSection = () => {
         }
     };
     const handlePost = () => {
+        type === 'details' ? dispatch(CreateTweetcomment({
+            reply_image: images,
+            text: text,
+            tweetid: tweetDetails?._id
+        })) :
         dispatch(CreateTweet({
             tweet_image: images,
             tweet_text: text,
@@ -85,7 +94,7 @@ const TweetFormSection = () => {
                 <div className="flex flex-1 column gap-1">
                     <div className={!active ? "flex tweetTop flex-1 column item-start gap-1 active" : "flex tweetTop flex-1 column item-start gap-1"}>
                         {
-                            !active && <div style={{ color: "rgb(29, 155, 240)", fontSize: "13.5px", gap: "2px" }} className="replyBtn1 flex item-center text-bold">
+                            !active && type !== 'details' && <div style={{ color: "rgb(29, 155, 240)", fontSize: "13.5px", gap: "2px" }} className="replyBtn1 flex item-center text-bold">
                                 Everyone <span className='flex item-center justify-center'><BiChevronDown fontSize={'24px'} /></span></div>
 
                         }
@@ -95,10 +104,10 @@ const TweetFormSection = () => {
                                 name={"text"}
                                 value={text}
                                 onChange={(e) => setText(e.target.value)}
-                                placeholder='What is happening?!' className="text w-100 text-light"></textarea>
+                                placeholder={placeholder} className="text w-100 text-light"></textarea>
                         </div>
                         {
-                            !active && <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
+                            !active && type !== 'details' && <div style={{ gap: "5px" }} className="flex replyBtn item-center gap-1">
                                 <WorldIcon />
                                 <span style={{ color: "rgb(29, 155, 240)", fontSize: "14px" }} className="fs-12 text-bold">Everyone can reply</span>
                             </div>
