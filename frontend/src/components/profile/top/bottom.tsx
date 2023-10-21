@@ -25,7 +25,7 @@ const ProfileBottomIndex: React.FC<modalType> = ({ setModal, setUnFollowModals }
   const date = moment(userDetails?.createdAt).format('MMM YYYY')
 
   const handleFollowUser = () => {
-    dispatch(FollowAndUnFollowAUser({ profiledata: userInfo?._id }))
+    dispatch(FollowAndUnFollowAUser({ profiledata: userDetails?._id }))
   }
 
 
@@ -122,6 +122,36 @@ const ProfileBottomStyles = styled.div`
     position: relative;
     a:hover {
       text-decoration: underline;
+    }
+
+        .btn.btn-3 {
+        padding: 1rem 1.5rem;
+        font-size: 14px;
+         @media (max-width:1080px) {
+                    font-size: 12px;
+        padding: 1rem 1.5rem;
+
+        }
+        &.active {
+            background-color: transparent !important;
+            color: var(--dark-1) !important;
+            border: 1px solid var(--border) !important;
+            &:hover {
+            border: 1px solid var(--red) !important;
+            background-color: #f5d1d1f9 !important;
+
+                .unfollow {
+                display: block;
+            }
+            .following {
+                display: none;
+            }
+            }
+            .unfollow {
+                display: none;
+                color: var(--red);
+            }
+        }
     }
     .avatar_profile {
       width:12rem;
