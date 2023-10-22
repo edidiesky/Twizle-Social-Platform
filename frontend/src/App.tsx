@@ -23,16 +23,17 @@ import ProtectRoute from "./utils/ProtectRoute";
 import LoaderIndex from "./components/loaders/index";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxtoolkit";
 import { getBackgroundTheme, getColorTheme } from "./features/theme/themeSlice";
+import ProfileIndex from "./screens/Profile";
 
 export default function App() {
   const [height, setHeight] = useState(0);
   const dispatch = useAppDispatch()
   const { backgroundtheme, colortheme } = useAppSelector(store => store.theme)
   // set the theme
-  React.useEffect(()=> {
+  React.useEffect(() => {
     dispatch(getBackgroundTheme('any'))
     dispatch(getColorTheme('any'))
-  },[])
+  }, [])
 
   // store the theme background and color in the local storage of the user broweser
   React.useEffect(() => {
@@ -45,7 +46,7 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
-          <Route index element={<Suspense fallback={<LoaderIndex />}>
+          <Route index element={<Suspense fallback={<></>}>
             <ProtectRoute>
               <Home />
             </ProtectRoute>
@@ -53,27 +54,27 @@ export default function App() {
           }
           />
           {/* quotes */}
-          <Route path="i/quote/:id" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="i/quote/:id" element={<Suspense fallback={<></>}>
             <ProtectRoute>
               <QuoteIndex />
             </ProtectRoute>
           </Suspense>
           }
           />
-          <Route path="i/bookmarks" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="i/bookmarks" element={<Suspense fallback={<></>}>
             <ProtectRoute>
               <Bookmarks />
             </ProtectRoute>
           </Suspense>
           }
           />
-          <Route path="i/flow/signup" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="i/flow/signup" element={<Suspense fallback={<></>}>
             <Auth />
           </Suspense>
           }
           />
           {/* serach */}
-          <Route path="search" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="search" element={<Suspense fallback={<></>}>
             <Search />
           </Suspense>
           }
@@ -86,28 +87,32 @@ export default function App() {
           }
           />
           {/* login route */}
-          <Route path="i/flow/login" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="i/flow/login" element={<Suspense fallback={<></>}>
             <Auth />
           </Suspense>
           }
           />
 
           {/* user profile route */}
-          <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
+          {/* <Route path=":name" element={<Suspense fallback={<></>}>
             <Profile />
           </Suspense>
+          }
+
+          /> */}
+          <Route path=":name" element={<ProfileIndex />
           }
 
           />
         </Route>
         {/* affilate */}
         <Route path={"/:name"} element={<AffilateLayoutIndex />}>
-          <Route path="followers" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="followers" element={<Suspense fallback={<></>}>
             <Followers />
           </Suspense>
           }
           />
-          <Route path="following" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="following" element={<Suspense fallback={<></>}>
             <Followings />
           </Suspense>
           }
@@ -115,12 +120,12 @@ export default function App() {
         </Route>
         {/* message */}
         <Route path={"/messages"} element={<MessageIndex />}>
-          <Route path="" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path="" element={<Suspense fallback={<></>}>
             <MessageList />
           </Suspense>
           }
           />
-          <Route path=":name" element={<Suspense fallback={<LoaderIndex />}>
+          <Route path=":name" element={<Suspense fallback={<></>}>
             <MessageContent />
           </Suspense>
           }
@@ -128,7 +133,7 @@ export default function App() {
         </Route>
 
         {/* tweet detail  route */}
-        <Route path=":name/status/:id" element={<Suspense fallback={<LoaderIndex />}>
+        <Route path=":name/status/:id" element={<Suspense fallback={<></>}>
           <TweetDetailIndex />
         </Suspense>
         }

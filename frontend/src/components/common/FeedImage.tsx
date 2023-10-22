@@ -137,7 +137,7 @@ min-height: 20rem;
 &.active {
     min-height: 100%;
     height: 100%;
-  border:1px solid rgb(207, 217, 222);
+  /* border:1px solid rgb(207, 217, 222); */
 
     .imageWrappers {
         border-radius: 12px;
