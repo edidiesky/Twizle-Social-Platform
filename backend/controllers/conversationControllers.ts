@@ -13,8 +13,8 @@ interface CustomInterface extends ExpressRequest {
 //  Public
 const createConversation = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   // const { userId } = req.user;
-  const senderId = req.body.sender
-  const receiverId = req.body.receiver
+  const { receiverId, senderId } = req.body
+  // console.log(receiverId, senderId)
   // check for any exusting conversation
   const existingConversations = await Conversation.find({
     $or: [
@@ -26,7 +26,7 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
   if (existingConversations.length !== 0) {
-     res.status(400).json({message:"Conversation exist" })
+    res.status(400).json({ message: "Conversation exist" })
   } else {
     const conversation = await Conversation.create({
       sender: senderId,
@@ -34,11 +34,11 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
     })
 
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation })
   }
 
- 
+
 
 });
 
@@ -53,8 +53,8 @@ const getUserConversation = asyncHandler(async (req: CustomInterface, res: Respo
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversations })
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.status(200).json({ conversations })
 });
 
 
@@ -85,7 +85,7 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
   }
 
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ conversation });
 });
 
@@ -95,7 +95,7 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 //  Public
 const DeleteConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
   res.status(200).json({ msg: "delete review controller" });
 });
 
@@ -106,9 +106,9 @@ const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Respon
   //   { readByBuyer: false, readBySeller: true },
   //   { new: true }
   // );
-//   res.setHeader("Content-Type", "text/html");
-// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
-//   res.status(200).json({ updatedConversation });
+  //   res.setHeader("Content-Type", "text/html");
+  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
+  //   res.status(200).json({ updatedConversation });
 });
 
 export {

@@ -125,7 +125,7 @@ export default function App() {
           </Suspense>
           }
           />
-          <Route path=":name" element={<Suspense fallback={<></>}>
+          <Route path=":id" element={<Suspense fallback={<></>}>
             <MessageContent />
           </Suspense>
           }

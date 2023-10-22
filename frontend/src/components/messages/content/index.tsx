@@ -22,16 +22,17 @@ const MessageContent: React.FC = () => {
   const senderId = id?.split('-')[0]
   const receiverId = id?.split('-')[1]
   // console.log(senderId, receiverId)
+  // create user conversation
   useEffect(() => {
     dispatch(Createconversation({ senderId: senderId, receiverId: receiverId }))
   }, [senderId, receiverId])
-  useEffect(() => {
-    dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
-  }, [senderId, receiverId])
-  useEffect(() => {
-    dispatch(GetSinglemessageDetails(conversationDetails?._id))
+  // useEffect(() => {
+  //   dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
+  // }, [senderId, receiverId])
+  // useEffect(() => {
+  //   dispatch(GetSinglemessageDetails(conversationDetails?._id))
 
-  }, [conversationDetails])
+  // }, [conversationDetails])
   // console.log(id?.split('-')[1], id?.split('-')[0])
 
   const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
