@@ -4,11 +4,13 @@ interface themeState {
   backgroundtheme: string,
   colortheme: string,
 }
+const backtheme = localStorage.getItem("theme");
+const colortheme = localStorage.getItem("colortheme");
 
 // Define the initial state using that type
 const initialState: themeState = {
-  backgroundtheme: '',
-  colortheme: '',
+  backgroundtheme:backtheme?backtheme: '',
+  colortheme: colortheme ? colortheme: '',
 
 }
 
@@ -21,7 +23,7 @@ export const themeSlice = createSlice({
       let theme: string = 'light-theme'
 
       if (theme === 'light-theme') {
-        const storedTheme = localStorage.getItem('light-theme');
+        const storedTheme = localStorage.getItem('theme');
 
         theme = storedTheme !== null ? storedTheme : 'light-theme';
         state.backgroundtheme = theme
@@ -34,7 +36,7 @@ export const themeSlice = createSlice({
       let theme: string = 'blue-theme'
 
       if (theme === 'blue-theme') {
-        const storedTheme = localStorage.getItem('blue-theme');
+        const storedTheme = localStorage.getItem('colortheme');
 
         theme = storedTheme !== null ? storedTheme : 'blue-theme';
         state.colortheme = theme

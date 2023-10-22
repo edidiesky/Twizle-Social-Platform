@@ -146,7 +146,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
 
                                                         <h4 className="fs-16 text_dark_grey text-bold flex column" style={{ gap: ".2rem" }}>
                                                             {x.display_name}
-                                                            <span className="block fs-14 text-dark text-light">
+                                                            <span className="block fs-14 text-grey text-light">
                                                                 {x.name}
                                                             </span>
                                                         </h4>

@@ -42,7 +42,7 @@ const PostFeedCard = () => {
                         </div>
                     </div>
                     <div className="flex-w-100 column gap-1">
-                        <h5 style={{ paddingBottom: "1rem" }} className="text-light family1 fs-18">
+                        <h5 style={{ paddingBottom: "1rem" }} className="text-light text-dark family1 fs-18">
                             {tweetDetails?.tweet_text}
                         </h5>
                         <div className="w-100 wrapper">
@@ -287,7 +287,6 @@ li {
 }
     h5 {
         font-size: 16px;
-        color: rgb(15, 20, 25);
         font-weight: 300;
         line-height: 20px;
         @media (max-width:580px) {

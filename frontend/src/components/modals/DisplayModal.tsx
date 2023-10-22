@@ -145,7 +145,7 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
                           <AiOutlineCheck />
                         </span>
                       </div>
-                      <span className="flex-1"> Default</span>
+                      <span style={{color:"#000"}} className="flex-1"> Default</span>
                     </div>
                     {/* blue */}
                     <div onClick={() => handleBackgroundTheme('dim-theme', 1)} className={`background_tab flex-1 text-white ${backgroundtab === 1 && `active`} tab1 fs-15 text-bold flex item-center justify-center gap-1`}>
