@@ -19,13 +19,15 @@ const MessageContent: React.FC = () => {
   const { conversationDetails } = useAppSelector(store => store.conversation)
   const { userInfo } = useAppSelector(store => store.auth)
   // console.log()
-  const senderId = id?.split('-')[0]
-  const receiverId = id?.split('-')[1]
-  // console.log(senderId, receiverId)
+  const receiverId = id?.split('-')[0]
+  const senderId = id?.split('-')[1]
+  // console.log(senderId, senderId)
   // create user conversation
   useEffect(() => {
-    dispatch(Createconversation({ senderId: senderId, receiverId: receiverId }))
-  }, [senderId, receiverId])
+    if (receiverId && senderId) {
+      dispatch(Createconversation({ senderId: senderId, receiverId: receiverId }))
+    }
+  }, [receiverId, senderId])
   // useEffect(() => {
   //   dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
   // }, [senderId, receiverId])
