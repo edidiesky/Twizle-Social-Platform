@@ -29,7 +29,7 @@ export const getAllconversation = createAsyncThunk<{
     try {
       const response = await axios.get(conversationurl);
       localStorage.setItem("conversation", JSON.stringify(response.data.conversation));
-      return response.data.conversation;
+      return response.data.conversations;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -61,10 +61,10 @@ export const Createconversation = createAsyncThunk<{
         config
       );
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/conversation/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
         config
       );
-      return response.data.conversation;
+      return response.data.conversations;
 
 
       // console.log(conversationData)
@@ -161,10 +161,10 @@ export const GetUserconversation = createAsyncThunk<{
         },
       };
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/conversation/user`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
         config
       );
-      return response.data.conversation;
+      return response.data.conversations;
       // console.log(Detailsdata)
 
     } catch (err: any) {

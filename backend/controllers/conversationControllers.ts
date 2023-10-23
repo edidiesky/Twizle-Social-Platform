@@ -26,7 +26,11 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
   if (existingConversations.length !== 0) {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
     res.status(200).json({ conversation: existingConversations })
+    return
   } else {
     const conversation = await Conversation.create({
       sender: senderId,
