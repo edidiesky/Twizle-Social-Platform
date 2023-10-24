@@ -16,7 +16,7 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
   const { receiverId, senderId } = req.body
   // console.log(receiverId, senderId)
   // check for any exusting conversation
-  const existingConversations = await Conversation.find({
+  const existingConversations = await Conversation.findOne({
     $or: [
       {
         sender: senderId,
@@ -25,7 +25,7 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
     ]
   }).populate("sender", " username bio display_name name profile_image_url")
     .populate("receiver", " username bio display_name name profile_image_url");
-  if (existingConversations.length !== 0) {
+  if (existingConversations) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 

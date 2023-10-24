@@ -24,10 +24,10 @@ const MessageContent: React.FC = () => {
   // console.log(senderId, senderId)
   // create user conversation
   useEffect(() => {
-   
-    dispatch(Createconversation({ senderId: senderId, receiverId: receiverId }))
 
-  }, [])
+    // dispatch(Createconversation({ senderId: id?.split('-')[1], receiverId: id?.split('-')[0] }))
+    console.log('hello')
+  }, [id])
   // useEffect(() => {
   //   dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
   // }, [senderId, receiverId])

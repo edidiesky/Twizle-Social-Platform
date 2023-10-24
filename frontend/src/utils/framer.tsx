@@ -72,64 +72,54 @@ export const flip = {
 
 export const slideUp = {
   hidden: {
-    transform: "translateY(100%)",
+    y: "100vh",
     opacity: 0,
-    transition: {
-      delay: 0.3,
-    },
+    transition: { delay: 0.3 },
   },
   visible: {
-    transform: "translateY(0)",
+    y: "0",
     opacity: 1,
-    transition: {
-      duration: 0.6,
-    },
+    transition: { duration: 0.4 },
   },
   exit: {
-    transform: "translateY(100%)",
+    y: "100vh",
     opacity: 0,
-    transition: {
-      duration: 0.5,
-    },
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
   },
 };
 
 export const dropin1 = {
   hidden: {
-    scale: 0,
-    top: "35%",
+    y: "100vh",
     opacity: 0,
-    visibility: "hidden",
+    transition: { delay: 0.3 },
   },
   visible: {
-    scale: 1,
-    top: "35%",
+    y: "0",
     opacity: 1,
-    visibility: "visible",
+    transition: { duration: 0.4 },
   },
   exit: {
-    scale: 0,
-    top: "35%",
+    y: "100vh",
     opacity: 0,
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
   },
 };
 export const dropin2 = {
   hidden: {
-   scale:0,
-   top:"45%",
+    y: "100vh",
     opacity: 0,
-    visibility: "hidden",
+    transition: { delay: 0.3 },
   },
   visible: {
-   scale:1,
-   top:"45%",
+    y: "0",
     opacity: 1,
-    visibility: "visible",
+    transition: { duration: 0.4 },
   },
   exit: {
-   scale:0,
-   top:"45%",
+    y: "100vh",
     opacity: 0,
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
   },
 };
 
