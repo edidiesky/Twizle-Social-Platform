@@ -7,12 +7,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       unique: true
     },
-  birthday: {
+    birthday: {
       type: String,
     },
     display_name: {
       type: String,
-      unique: true
+      // unique: true
     },
     bio: {
       type: String,
@@ -48,6 +48,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "PLease add a password value"],
     },
+    googleId: { type: String },
     country: {
       type: String,
     },

@@ -8,10 +8,10 @@ import User from "../models/User";
 // GET All User
 //  Public
 const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password,birthday} = req.body;
+  const { name, email, password, birthday } = req.body;
   //
   if (!email || !password || !name || !birthday) {
-    res.status(404);  
+    res.status(404);
     throw new Error("Please fill in the valid credentails");
   }
   // check if the user exist
@@ -30,8 +30,8 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
     birthday
   };
   const user = await User.create(Tempuser);
-
-  const jwtcode:Secret = 'hello'
+  delete user?.password
+  const jwtcode: Secret = 'hello'
   //
   const token = jwt.sign(
     {
@@ -41,10 +41,13 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
     jwtcode,
     { expiresIn: "12d" }
   );
+  
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({ user, token });
+  res.cookie("accessToken", token, {
+    httpOnly: true
+  }).status(200).json({ user });
 
 });
 
@@ -53,7 +56,7 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
   if (!email || !password) {
     res.status(404);
     throw new Error("Please fill in the valid credentails");
-  } 
+  }
   // Find the user in the database
 
   const user = await User.findOne({ email });
@@ -66,7 +69,7 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
     res.status(404);
     throw new Error("Please provide a valid password");
   }
-  const jwtcode:Secret = 'hello'
+  const jwtcode: Secret = 'hello'
   //
   const token = jwt.sign(
     {
@@ -79,7 +82,10 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({ user, token });
+  delete user?.password
+  res.cookie("accessToken", token, {
+    httpOnly: true
+  }).status(200).json({ user });
 });
 
 

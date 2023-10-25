@@ -1,14 +1,27 @@
 import express from "express";
-import path from "path";
+import jwt, { Secret } from "jsonwebtoken";
+import session from "express-session";
 import cors from "cors";
+import cookie from 'cookie-parser'
+import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
+import passport from "passport";
 import dotenv from "dotenv";
-
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import User from "./models/User";
 dotenv.config();
 
 const app = express();
 import { errorHandler, NotFound } from "./middleware/error-handler";
 
 import mongoose from "mongoose";
+app.use(
+  session({
+    secret: "session",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 app.use(
   cors({
     origin: process.env.WEB_ORIGIN,
@@ -19,8 +32,78 @@ app.use(
 // middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookie())
+app.use(passport.initialize());
+app.use(passport.session());
+
+const clienIdString: string = process.env.google_client_id as string
+const clienIdSecret: string = process.env.google_client_secret as string
+
+// generate passowrd
+// Generate a random password
+const generateRandomPassword = () => {
+  const length = 12; // Desired password length
+  return crypto.randomBytes(length).toString('base64').slice(0, length);
+};
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: clienIdString,
+      clientSecret: clienIdSecret,
+      callbackURL: "http://localhost:4000/auth/google/callback",
+      passReqToCallback: true,
+    },
+    async (req: any, accessToken: string, refreshToken: string, profile: any, cb: any) => {
+      try {
+        const randomPassword = generateRandomPassword();
+        const hashedPassword = await bcrypt.hash(randomPassword, 10); // Hash the password
+
+        const defaultUser = {
+          name: `${profile.name.givenName}`,
+          display_name: `${profile.name.givenName}` + Math.random().toString(36).slice(-8),
+          email: profile.emails[0].value,
+          profile_image_url: profile.photos[0].value,
+          googleId: profile.id,
+          password: hashedPassword,
+        }
+        const user = await User.findOne({ email: profile.emails[0].value })
+        if (!user) {
+          const newUser = new User(defaultUser)
+          await newUser.save()
+          const jwtcode: Secret = 'hello'
+
+          const token = jwt.sign(
+            {
+              userId: newUser?._id,
+            },
+            jwtcode,
+            { expiresIn: "12d" }
+          );
+          return cb(null, newUser, token)
+        } else {
+          return cb(null, user)
+
+        }
+      } catch (error: any) {
+        return cb(error, null)
+
+      }
+
+    }
+
+  )
+);
+passport.serializeUser((user: any, done) => {
+  done(null, user?._id);
+});
 
 
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err: any, user: any) => {
+    done(err, user);
+  });
+});
 // routes
 import usertweetRoute from "./routes/userTweetRoute";
 import userRoute from "./routes/userRoute";
@@ -33,6 +116,39 @@ import commentRoute from "./routes/commentRoute";
 
 
 // end points
+
+app.get(
+  "/auth/google/login",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
+  (req, res) => {
+    const jwtcode: Secret = 'hello'
+    const user: any = req.user as any
+
+    const token = jwt.sign(
+      {
+        userId: user?._id,
+      },
+      jwtcode,
+      { expiresIn: "12d" }
+    );
+    res.cookie('accessToken', token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 1 hour (maxAge is in milliseconds)
+      secure: true, // Set to true if using HTTPS
+      sameSite: 'strict', // Adjust this as needed for your use case
+    });
+
+  }
+);
+
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: process.env.WEB_ORIGIN, // Redirect to the user's profile page on success
+    failureRedirect: `${process.env.WEB_ORIGIN}/i/flow/signup`, // Redirect to the login page on failure
+  })
+);
 app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);
@@ -50,19 +166,6 @@ if (!mongoUrl) {
 
 mongoose.connect(mongoUrl);
 mongoose.connection.on('error', (error: Error) => console.log('Error'))
-
-
-// if (process.env.NODE_ENV !== "production") {
-//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-//   app.get("*", (req, res) =>
-//     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
-//   );
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("API is running....");
-//   });
-// }
 
 // // Middlewares
 app.use(NotFound);
