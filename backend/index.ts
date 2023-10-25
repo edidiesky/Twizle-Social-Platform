@@ -119,26 +119,7 @@ import commentRoute from "./routes/commentRoute";
 
 app.get(
   "/auth/google/login",
-  passport.authenticate("google", { scope: ["profile", "email"] }),
-  (req, res) => {
-    const jwtcode: Secret = 'hello'
-    const user: any = req.user as any
-
-    const token = jwt.sign(
-      {
-        userId: user?._id,
-      },
-      jwtcode,
-      { expiresIn: "12d" }
-    );
-    res.cookie('accessToken', token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 hour (maxAge is in milliseconds)
-      secure: true, // Set to true if using HTTPS
-      sameSite: 'strict', // Adjust this as needed for your use case
-    });
-
-  }
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 
@@ -147,7 +128,35 @@ app.get(
   passport.authenticate("google", {
     successRedirect: process.env.WEB_ORIGIN, // Redirect to the user's profile page on success
     failureRedirect: `${process.env.WEB_ORIGIN}/i/flow/signup`, // Redirect to the login page on failure
-  })
+  }),
+  (req, res) => {
+    if (req.isAuthenticated()) {
+      const user: any = req.user as any
+      // console.log(user)
+      const jwtcode: Secret = 'hello'
+      //
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          role: user.role,
+        },
+        jwtcode,
+        { expiresIn: "12d" }
+      );
+
+
+      res.setHeader("Content-Type", "text/html");
+      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+      res.cookie("accessToken", token, {
+        httpOnly: true
+      })
+      res.status(200).json({ user });
+
+    } else {
+      res.redirect(`${process.env.WEB_ORIGIN}/i/flow/signup`);
+    }
+  }
+
 );
 app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
