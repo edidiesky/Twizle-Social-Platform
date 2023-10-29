@@ -56,8 +56,8 @@ const generateRandomPassword = () => {
 //     },
 //     async (req: any, accessToken: string, refreshToken: string, profile: any, cb: any) => {
 //       try {
-//         const randomPassword = generateRandomPassword();
-//         const hashedPassword = await bcrypt.hash(randomPassword, 10); // Hash the password
+        // const randomPassword = generateRandomPassword();
+        // const hashedPassword = await bcrypt.hash(randomPassword, 10); // Hash the password
 
 //         const defaultUser = {
 //           name: `${profile.name.givenName}`,

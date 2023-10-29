@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserNotFollowed, GetAllUserProfile, GetUserProfile, GetUserSearch, UpdateProfile, loginUser, registerUser } from './authReducer'
+import { FollowAndUnFollowAUser, GetAllUserFollowers, GetAllUserFollowings, GetAllUserNotFollowed, GetAllUserProfile, GetUserProfile, GetUserSearch, GoogleOauth, UpdateProfile, loginUser, registerUser } from './authReducer'
 
 
 const userData = JSON.parse(localStorage.getItem("User") || 'false');
@@ -14,6 +14,10 @@ interface authState {
   registerisLoading?: boolean,
   registerisSuccess?: boolean,
   registerisError?: boolean,
+
+  googleOauthisLoading?: boolean,
+  googleOauthisSuccess?: boolean,
+  googleOauthisError?: boolean,
 
   profilepictureisLoading?: boolean,
   profilepictureisSuccess?: boolean,
@@ -129,6 +133,9 @@ export const authSlice = createSlice({
       state.registerisLoading = false
       state.userInfo = action.payload.user
       state.token = action.payload.token
+      state.showAlert = true
+      state.token = action.payload.token
+      state.alertText = 'Registration successfull... Redirecting Soon'
       localStorage.setItem("User", JSON.stringify(action.payload.user));
       localStorage.setItem("Usertoken", action.payload.token);
     })
@@ -150,7 +157,9 @@ export const authSlice = createSlice({
       state.loginisSuccess = true
       state.loginisLoading = false
       state.userInfo = action.payload.user
+      state.showAlert = true
       state.token = action.payload.token
+      state.alertText = 'Login Success... Redirecting Soon'
       localStorage.setItem("User", JSON.stringify(action.payload.user))
       localStorage.setItem("Usertoken", action.payload.token)
     })
@@ -164,6 +173,30 @@ export const authSlice = createSlice({
 
     })
 
+
+    // registration build case
+    builder.addCase(GoogleOauth.pending, (state, action) => {
+      state.googleOauthisLoading = true
+    })
+    builder.addCase(GoogleOauth.fulfilled, (state, action) => {
+      state.googleOauthisSuccess = true
+      state.googleOauthisLoading = false
+      state.userInfo = action.payload.user
+      state.showAlert = true
+      state.token = action.payload.token
+      state.alertText = 'Google Auth Success... Redirecting Soon'
+      localStorage.setItem("User", JSON.stringify(action.payload.user))
+      localStorage.setItem("Usertoken", action.payload.token)
+    })
+    builder.addCase(GoogleOauth.rejected, (state, action) => {
+      state.googleOauthisSuccess = false
+      state.googleOauthisError = true
+      state.googleOauthisLoading = false
+      state.showAlert = true
+      state.alertType = 'danger'
+      state.alertText = action.payload
+
+    })
     builder.addCase(UpdateProfile.pending, (state, action) => {
       state.userprofileisLoading = true
     })

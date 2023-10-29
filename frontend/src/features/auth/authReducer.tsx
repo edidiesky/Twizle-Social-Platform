@@ -79,6 +79,30 @@ export const loginUser = createAsyncThunk<authtype, { email?: string, password?:
   }
 );
 
+export const GoogleOauth = createAsyncThunk < authtype, { given_name?:string,picture?:string, email?: string, family_name?: string, name?: string }, {
+  rejectValue: KnownError,
+}>(
+  "GoogleOauth",
+  async (loginData, { rejectWithValue }) => {
+    try {
+
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/google/oauth`, loginData);
+      localStorage.setItem("User", JSON.stringify(response.data.user));
+      localStorage.setItem("Usertoken", response.data.token);
+      return {
+        token: response.data.token,
+        user: response.data.user
+      }
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
 
 
 // update user profile

@@ -55,9 +55,9 @@ const Message: React.FC<messageprops> = ({
         initial="hidden"
         animate={showAlert ? "visible" : "exit"}
         exit="exit"
-        className="gap-1 flex item-center justify-space"
+        className="gap-1 flex item-center justify-center"
       >
-        <div className="flex flex1 text-bold">{alertText}</div>
+        <div className="flex flex1 flex item-center justify-center  w-100 text-center text-light">{alertText}</div>
       </ErrorMessage>
     );
   }
@@ -66,11 +66,11 @@ const Message: React.FC<messageprops> = ({
     <MessageContent
       className={
         showAlert
-          ? "gap-1 flex item-center justify-space active"
-          : "gap-1 flex item-center justify-space"
+          ? "gap-1 flex item-center justify-center active"
+          : "gap-1 flex item-center justify-center"
       }
     >
-      <div className=" flex1 text-light text-center">{alertText}</div>
+      <div className="flex1 family1 flex item-center justify-center w-100 text-light text-center">{alertText}</div>
     </MessageContent>
   );
 }
@@ -81,15 +81,15 @@ const ErrorMessage = styled(motion.div)`
   padding: 15px 20px;
   background: #f906061d;
   color: #5b0404c9;
-  font-size: 13px;
+  font-size: 14px;
 `;
 const MessageContent = styled.div`
   min-width: 260px;
-  padding: 1.2rem 2rem;
+  padding: 1.5rem 2rem;
   background-color: var(--blue-1);
   z-index: 10000;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--white);
   transition: all 1s;
@@ -102,7 +102,7 @@ const MessageContent = styled.div`
   bottom: -100vh;
 
   &.active {
-    bottom: -2%;
+    bottom: 6%;
   /* bottom: -1000%; */
 
   } 

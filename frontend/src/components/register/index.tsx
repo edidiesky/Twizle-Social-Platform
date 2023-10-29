@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitter } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import RegsiterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
 import UsernameModal from "../modals/UsernameModal";
 import ProfilePictureModal from "../modals/ProfilePicture";
 import TwitterBanner from "../../assets/svg/twitterBanner";
-import { useAppSelector } from "../../hooks/reduxtoolkit";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import MyAnimatePresence from "../../utils/AnimatePresence";
-
+import { useGoogleLogin } from '@react-oauth/google'
+import axios from "axios";
+import { GoogleOauth } from "../../features/auth/authReducer";
+import LoaderIndex from "../loaders";
+import Message from "../loaders/Message";
+import { clearUserProfile } from "../../features/auth/authSlice";
 const Regsiters: React.FC = () => {
 
   const [registermodal, setRegisterModal] = useState<boolean>(false)
@@ -20,9 +25,51 @@ const Regsiters: React.FC = () => {
   const [profile, setProfile] = useState<boolean>(false)
 
   const [tab, setTab] = useState(0)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const {
+    googleOauthisLoading,
+    googleOauthisSuccess,
+    googleOauthisError,
+    alertText,
+    showAlert,
+    alertType,
+  } = useAppSelector(store => store.auth)
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      // console.log(tokenResponse);
+      const userInfo = await axios
+        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res: any) => res.data);
+      const { email, family_name, given_name, name, picture } = userInfo
+      dispatch(GoogleOauth({ email, family_name, given_name, name, picture }))
+    },
+    // flow: 'implicit', // implicit is the default
+  });
+
+  useEffect(() => {
+
+    if (googleOauthisSuccess) {
+      const interval = setTimeout(() => {
+        navigate('/')
+      }, 6000);
+
+      return () => clearTimeout(interval)
+
+    }
+  }, [googleOauthisSuccess, setTab])
+
+
 
   return (
     <RegsiterStyles style={{ overflow: "hidden" }}>
+
+      {
+        googleOauthisLoading && <LoaderIndex />
+      }
       {/* register modal */}
       <MyAnimatePresence
         initial={false} exitBeforeEnter
@@ -59,12 +106,17 @@ const Regsiters: React.FC = () => {
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
         <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
           <div className="flex column gap-1">
+            
+
             <div className="text-dark register_text text-heavy">Happening now</div>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
           </div>
           <div className="flex authWrapper column w-100 gap-1">
             <div className="flex w-100 column gap-1 item-start">
-              <div className="authBtn gap-2 flex fs-16 text-dark item-center">
+              <div className="w-100">
+                <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+              </div>
+              <div onClick={() => googleLogin()} className="authBtn gap-2 flex fs-16 text-dark item-center">
                 <FcGoogle fontSize={"24px"} />{" "}
                 <div className="w-100 text-center">Continue with Google</div>{" "}
               </div>

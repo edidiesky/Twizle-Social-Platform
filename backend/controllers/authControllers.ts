@@ -1,4 +1,5 @@
 // import bcrypt from "bcryptjs";
+import crypto from 'crypto'
 import bcrypt from "bcryptjs";
 import jwt, { Secret } from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
@@ -41,7 +42,7 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
     jwtcode,
     { expiresIn: "12d" }
   );
-  
+
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -87,10 +88,60 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
     httpOnly: true
   }).status(200).json({ user });
 });
+const generateRandomPassword = () => {
+  const length = 12; // Desired password length
+  return crypto.randomBytes(length).toString('base64').slice(0, length);
+};
+const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
+
+  // get the body from google
+  const { email, family_name, given_name, name, picture } = req.body
+  // check if already exist else login or else register
+  const userExist = await User.findOne({ email });
+  if (userExist) {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.status(200).json({ user: userExist });
+  }
+  // create a password for the user
+  const randomPassword = generateRandomPassword();
+  const salt = await bcrypt.genSalt(10);
+
+  const hashedPassword = await bcrypt.hash(randomPassword, salt);
+  const Tempuser = {
+    email,
+    password: hashedPassword,
+    name,
+    profile_image_url: picture,
+    display_name: `${given_name}` + Math.random().toString(36).slice(-8),
+  };
+  // create a token for the user
+
+  const user = await User.create(Tempuser);
+  delete user?.password
+  const jwtcode: Secret = 'hello'
+  //
+  const token = jwt.sign(
+    {
+      userId: user?._id,
+    },
+    jwtcode,
+    { expiresIn: "12d" }
+  );
+
+
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.cookie("accessToken", token, {
+    httpOnly: true
+  }).status(200).json({ user,token });
+
+});
 
 
 
 export {
   RegisterUser,
   LoginUser,
+  GoogleSignin
 };
