@@ -132,9 +132,7 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.cookie("accessToken", token, {
-    httpOnly: true
-  }).status(200).json({ user,token });
+  res.status(200).json({ user,token });
 
 });
 

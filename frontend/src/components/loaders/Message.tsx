@@ -88,8 +88,8 @@ const MessageContent = styled.div`
   padding: 1.5rem 2rem;
   background-color: var(--blue-1);
   z-index: 10000;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--white);
   transition: all 1s;
