@@ -351,3 +351,28 @@ export const GetUserSearch = createAsyncThunk < authtype, { authdata:string},{
     }
   }
 );
+
+// // get all user and tweet search by the user
+// export const getLoginAuthDetails = createAsyncThunk<authtype, { authdata: string }, {
+//   rejectValue: KnownError,
+// }>(
+//   "getLoginAuthDetails",
+//   async ({ authdata }, { rejectWithValue, getState }) => {
+
+//     try {
+      
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_API_BASE_URLS}/google/login/success`
+//       );
+//      console.log(response.user)
+
+//     } catch (err: any) {
+//       const message = err.response && err.response.data.message
+//         ? err.response.data.message
+//         : err.message
+//       return rejectWithValue(message);
+
+//     }
+//   }
+// );
+

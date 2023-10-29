@@ -24,11 +24,13 @@ import LoaderIndex from "./components/loaders/index";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxtoolkit";
 import { getBackgroundTheme, getColorTheme } from "./features/theme/themeSlice";
 import ProfileIndex from "./screens/Profile";
+// import { getLoginAuthDetails } from "./features/auth/authReducer";
 
 export default function App() {
   const [height, setHeight] = useState(0);
   const dispatch = useAppDispatch()
   const { backgroundtheme, colortheme } = useAppSelector(store => store.theme)
+  const { userInfo } = useAppSelector(store => store.auth)
   // set the theme
   React.useEffect(() => {
     dispatch(getBackgroundTheme('any'))
@@ -42,6 +44,13 @@ export default function App() {
     localStorage.setItem('theme', backgroundtheme);
     localStorage.setItem('colortheme', colortheme);
   }, [backgroundtheme, colortheme])
+  // store the theme background and color in the local storage of the user broweser
+  // React.useEffect(() => {
+  //   if (!userInfo) {
+  //     dispatch(getLoginAuthDetails(""))
+  //   }
+  // }, [userInfo])
+
   return (
     <div className="based" style={{ height }}>
       <Routes>

@@ -46,6 +46,121 @@ const generateRandomPassword = () => {
   return crypto.randomBytes(length).toString('base64').slice(0, length);
 };
 
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: clienIdString,
+//       clientSecret: clienIdSecret,
+//       callbackURL: "http://localhost:4000/auth/google/callback",
+//       passReqToCallback: true,
+//     },
+//     async (req: any, accessToken: string, refreshToken: string, profile: any, cb: any) => {
+//       try {
+//         const randomPassword = generateRandomPassword();
+//         const hashedPassword = await bcrypt.hash(randomPassword, 10); // Hash the password
+
+//         const defaultUser = {
+//           name: `${profile.name.givenName}`,
+//           display_name: `${profile.name.givenName}` + Math.random().toString(36).slice(-8),
+//           email: profile.emails[0].value,
+//           profile_image_url: profile.photos[0].value,
+//           googleId: profile.id,
+//           password: hashedPassword,
+//         }
+//         const user = await User.findOne({ email: profile.emails[0].value })
+//         if (!user) {
+//           const newUser = new User(defaultUser)
+//           await newUser.save()
+//           const jwtcode: Secret = 'hello'
+
+//           const token = jwt.sign(
+//             {
+//               userId: newUser?._id,
+//             },
+//             jwtcode,
+//             { expiresIn: "12d" }
+//           );
+//           return cb(null, newUser, token)
+//         } else {
+//           return cb(null, user)
+
+//         }
+//       } catch (error: any) {
+//         return cb(error, null)
+
+//       }
+
+//     }
+
+//   )
+// );
+// passport.serializeUser((user: any, done) => {
+//   done(null, user?._id);
+// });
+
+
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err: any, user: any) => {
+//     done(err, user);
+//   });
+// });
+// routes
+import usertweetRoute from "./routes/userTweetRoute";
+import userRoute from "./routes/userRoute";
+import authRoute from "./routes/authRoute";
+import quoteRoute from "./routes/quoteTweetRoute";
+// import uploadRoute from "./routes/uploadRoute";
+import conversationRoute from "./routes/conversationRoute";
+import messageRoute from "./routes/messageRoute";
+import commentRoute from "./routes/commentRoute";
+
+
+// end points
+
+// app.get(
+//   "/auth/google/login",
+//   passport.authenticate("google", { scope: ["profile", "email"] })
+// );
+
+
+// app.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: process.env.WEB_ORIGIN, // Redirect to the user's profile page on success
+//     failureRedirect: `${process.env.WEB_ORIGIN}/i/flow/signup`, // Redirect to the login page on failure
+//   }),
+//   (req, res) => {
+//     if (req.user) {
+//       const user: any = req.user as any
+//       // console.log(user)
+//       const jwtcode: Secret = 'hello'
+//       //
+//       const token = jwt.sign(
+//         {
+//           userId: user._id,
+//           role: user.role,
+//         },
+//         jwtcode,
+//         { expiresIn: "12d" }
+//       );
+
+
+//       res.setHeader("Content-Type", "text/html");
+//       res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//       res.cookie("accessToken", token, {
+//         httpOnly: true
+//       })
+//       res.status(200).json({ user });
+
+//     } else {
+//       res.redirect(`${process.env.WEB_ORIGIN}/i/flow/signup`);
+//     }
+//   }
+
+// );
+
+
+// passport
 passport.use(
   new GoogleStrategy(
     {
@@ -94,28 +209,13 @@ passport.use(
 
   )
 );
-passport.serializeUser((user: any, done) => {
-  done(null, user?._id);
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err: any, user: any) => {
-    done(err, user);
-  });
+passport.deserializeUser((user:any, done) => {
+  done(null, user);
 });
-// routes
-import usertweetRoute from "./routes/userTweetRoute";
-import userRoute from "./routes/userRoute";
-import authRoute from "./routes/authRoute";
-import quoteRoute from "./routes/quoteTweetRoute";
-// import uploadRoute from "./routes/uploadRoute";
-import conversationRoute from "./routes/conversationRoute";
-import messageRoute from "./routes/messageRoute";
-import commentRoute from "./routes/commentRoute";
-
-
-// end points
 
 app.get(
   "/auth/google/login",
@@ -126,38 +226,12 @@ app.get(
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: process.env.WEB_ORIGIN, // Redirect to the user's profile page on success
+    successRedirect: `${process.env.WEB_ORIGIN}/i/flow/signup`, // Redirect to the user's profile page on success
     failureRedirect: `${process.env.WEB_ORIGIN}/i/flow/signup`, // Redirect to the login page on failure
   }),
-  (req, res) => {
-    if (req.isAuthenticated()) {
-      const user: any = req.user as any
-      // console.log(user)
-      const jwtcode: Secret = 'hello'
-      //
-      const token = jwt.sign(
-        {
-          userId: user._id,
-          role: user.role,
-        },
-        jwtcode,
-        { expiresIn: "12d" }
-      );
-
-
-      res.setHeader("Content-Type", "text/html");
-      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-      res.cookie("accessToken", token, {
-        httpOnly: true
-      })
-      res.status(200).json({ user });
-
-    } else {
-      res.redirect(`${process.env.WEB_ORIGIN}/i/flow/signup`);
-    }
-  }
-
 );
+
+
 app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);
