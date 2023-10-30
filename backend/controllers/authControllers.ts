@@ -1,6 +1,7 @@
 // import bcrypt from "bcryptjs";
 import crypto from 'crypto'
 import bcrypt from "bcryptjs";
+import axios from 'axios'
 import jwt, { Secret } from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
@@ -146,10 +147,45 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
 
 });
 
+const GithubGetAccessToken = asyncHandler(async (req: Request, res: Response) => {
+  const githuburl = req.query.github;
+
+  try {
+    const response = await axios.post(
+      `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${githuburl}`
+    );
+
+    // Check if the response contains the data you need and send that data in the response.
+    const responseData = response.data; // Adjust this based on the actual response structure.
+
+    res.status(200).json({ data: responseData });
+  } catch (error) {
+    // Handle errors appropriately
+    console.error(error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
+
+
+const GithubGetUserData = asyncHandler(async (req: Request, res: Response) => {
+ const bearer =  req.get('Authorization')
+  const data = await axios.get(`https://api.github.com/user`,{
+    headers:{
+      "Authorization": bearer
+    }
+  })
+  console.log(data)
+
+  res.status(200).json({ data })
+});
+
+
 
 
 export {
   RegisterUser,
   LoginUser,
-  GoogleSignin
+  GoogleSignin,
+  GithubGetAccessToken,
+  GithubGetUserData
 };

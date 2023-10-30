@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
@@ -24,6 +25,8 @@ const Regsiters: React.FC = () => {
   const [username, setUsername] = useState<boolean>(false)
   const [profile, setProfile] = useState<boolean>(false)
 
+  const [githubaccesstoken, setGithubAccessToken] = useState('')
+
   const [tab, setTab] = useState(0)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -35,6 +38,8 @@ const Regsiters: React.FC = () => {
     showAlert,
     alertType,
   } = useAppSelector(store => store.auth)
+
+  // GOGGLE LOGIN
 
   const googleLogin = useGoogleLogin({
     onSuccess: async tokenResponse => {
@@ -62,6 +67,26 @@ const Regsiters: React.FC = () => {
     }
   }, [googleOauthisSuccess, setTab])
 
+  // GITHUB LOGIN
+
+  const HandleGithubLogin = () => {
+    window.location.assign(`https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}`)
+  }
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  const queryvalue: string = searchParams.get("code") as string;
+
+  useEffect(()=> {
+    if (queryvalue && localStorage.getItem('accessToken') === null) {
+      const data = axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${queryvalue}`)
+    
+      console.log(data)
+      const accessToken: string = data.access_token as string
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken)
+      }
+    }
+  }, [queryvalue])
 
 
   return (
@@ -106,7 +131,7 @@ const Regsiters: React.FC = () => {
       <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
         <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
           <div className="flex column gap-1">
-            
+
 
             <div className="text-dark register_text text-heavy">Happening now</div>
             <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
@@ -121,7 +146,7 @@ const Regsiters: React.FC = () => {
                 <div className="w-100 text-center">Continue with Google</div>{" "}
               </div>
 
-              <div className="authBtn gap-2 flex fs-16 text-dark item-center">
+              <div onClick={HandleGithubLogin} className="authBtn gap-2 flex fs-16 text-dark item-center">
                 <FaGithub fontSize={"24px"} />{" "}
                 <div className="w-100 text-center">Continue with Github</div>{" "}
               </div>
