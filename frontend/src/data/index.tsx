@@ -138,3 +138,26 @@ export const feedData = [
   },
 
 ];
+
+
+export const twitterList = [
+  'About',
+  'Download the X app',
+  'Help Center',
+  'Terms of Service',
+  'Privacy Policy',
+  'Cookie Policy',
+  'Accessibility',
+  'Ads info',
+  'Blog',
+  'Status',
+  'Careers',
+  'Brand Resources',
+  'Advertising',
+  'Marketing',
+  'X for Business',
+  'Developers',
+  'Directory',
+  '© 2023 X Corp',
+  'Settings',
+]

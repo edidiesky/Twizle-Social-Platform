@@ -18,6 +18,7 @@ import { GoogleOauth, getGithubAccesToken, getGithubUserProfile } from "../../fe
 import LoaderIndex from "../loaders";
 import Message from "../loaders/Message";
 import { clearUserProfile } from "../../features/auth/authSlice";
+import { twitterList } from '../../data';
 const Regsiters: React.FC = () => {
 
   const [registermodal, setRegisterModal] = useState<boolean>(false)
@@ -93,80 +94,91 @@ const Regsiters: React.FC = () => {
 
 
   return (
-    <RegsiterStyles style={{ overflow: "hidden" }}>
+    <div className="w-100 flex column gap-2">
+      <RegsiterStyles style={{ overflow: "hidden" }}>
 
-      {
-        googleOauthisLoading && <LoaderIndex />
-      }
-      {/* register modal */}
-      <MyAnimatePresence
-        initial={false} exitBeforeEnter
-      >
-        {registermodal && <RegsiterModal setTab={setTab} modal={registermodal}
-          setModal={setRegisterModal} />}
-      </MyAnimatePresence>
-      {/* login modal */}
-      <MyAnimatePresence
+        {
+          googleOauthisLoading && <LoaderIndex />
+        }
+        {/* register modal */}
+        <MyAnimatePresence
+          initial={false} exitBeforeEnter
+        >
+          {registermodal && <RegsiterModal setTab={setTab} modal={registermodal}
+            setModal={setRegisterModal} />}
+        </MyAnimatePresence>
+        {/* login modal */}
+        <MyAnimatePresence
 
-      >
-        {loginmodal && <LoginModal modal={loginmodal}
-          setModal={setLoginModal} />}
-      </MyAnimatePresence>
-      {/* username modal */}
-      <MyAnimatePresence
+        >
+          {loginmodal && <LoginModal modal={loginmodal}
+            setModal={setLoginModal} />}
+        </MyAnimatePresence>
+        {/* username modal */}
+        <MyAnimatePresence
 
-      >
-        {tab === 1 && <UsernameModal setTab={setTab} />}
-      </MyAnimatePresence>
+        >
+          {tab === 1 && <UsernameModal setTab={setTab} />}
+        </MyAnimatePresence>
 
-      {/* profile modal */}
-      <MyAnimatePresence
+        {/* profile modal */}
+        <MyAnimatePresence
 
-      >
-        {tab === 2 && <ProfilePictureModal modal={profile}
-          setModal={setProfile} />}
-      </MyAnimatePresence>
-
-
-      <div className="w-100 authleft flex item-center justify-center">
-        <TwitterBanner />
-      </div>
-      <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
-        <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
-          <div className="flex column gap-1">
+        >
+          {tab === 2 && <ProfilePictureModal modal={profile}
+            setModal={setProfile} />}
+        </MyAnimatePresence>
 
 
-            <div className="text-dark register_text text-heavy">Happening now</div>
-            <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
-          </div>
-          <div className="flex authWrapper column w-100 gap-1">
-            <div className="flex w-100 column gap-1 item-start">
-              <div className="w-100">
-                <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
-              </div>
-              <div onClick={() => googleLogin()} className="authBtn gap-2 flex fs-16 text-dark item-center">
-                <FcGoogle fontSize={"24px"} />{" "}
-                <div className="w-100 text-center">Continue with Google</div>{" "}
-              </div>
+        <div className="w-100 authleft flex item-center justify-center">
+          <TwitterBanner />
+        </div>
+        <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
+          <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
+            <div className="flex column gap-1">
 
-              <div onClick={HandleGithubLogin} className="authBtn gap-2 flex fs-16 text-dark item-center">
-                <FaGithub fontSize={"24px"} />{" "}
-                <div className="w-100 text-center">Continue with Github</div>{" "}
-              </div>
+
+              <div className="text-dark register_text text-heavy">Happening now</div>
+              <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
             </div>
-            <div className="option">or</div>
-            <div onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
-            <h5 className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
-          </div>
-          <div style={{ marginTop: "3rem" }} className="flex authWrapper column gap-2">
-            <h4 className="fs-18 text-extra-bold">Already have an account?</h4>
-            <div onClick={() => setLoginModal(true)} className="authBtn w-100 gap-2 flex fs-16 text-dark item-center">
-              <div className="w-100 text-center">Sign in</div>{" "}
+            <div className="flex authWrapper column w-100 gap-1">
+              <div className="flex w-100 column gap-1 item-start">
+                <div className="w-100">
+                  <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+                </div>
+                <div onClick={() => googleLogin()} className="authBtn gap-2 flex fs-15 text-bold text-dark item-center">
+                  <FcGoogle fontSize={"24px"} />{" "}
+                  <div className="w-100 text-center">Continue with Google</div>{" "}
+                </div>
+
+                <div onClick={HandleGithubLogin} className="authBtn gap-2 flex fs-15 text-bold text-dark item-center">
+                  <FaGithub fontSize={"24px"} />{" "}
+                  <div className="w-100 text-center">Continue with Github</div>{" "}
+                </div>
+              </div>
+              <div className="option">or</div>
+              <div onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
+              <h5 className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
+            </div>
+            <div style={{ marginTop: "3rem" }} className="flex authWrapper column gap-2">
+              <h4 className="fs-18 text-extra-bold">Already have an account?</h4>
+              <div onClick={() => setLoginModal(true)} className="authBtn btn_signin w-100 gap-2 flex fs-15 text-dark item-center">
+                <div className="w-100 text-center text-bold">Sign in</div>{" "}
+              </div>
             </div>
           </div>
         </div>
+      </RegsiterStyles>
+      <div className="w-100 py-1 flex item-center justify-center">
+        <div style={{flexWrap:"wrap"}} className="w-90 auto flex item-center justify-center">
+          {
+            twitterList.map((x?:any)=> {
+              return <div style={{margin:"4px 10px", fontSize:"13px"}} className="text-light text-grey">{x}</div>
+            })
+          }
+        </div>
       </div>
-    </RegsiterStyles>
+    </div>
   )
 }
 
@@ -211,7 +223,7 @@ const RegsiterStyles = styled.div`
   }
   }
   .authWrapper {
-    width: 55%;
+    width: 50%;
     @media (max-width:1080px) {
     width: 95%;
 
@@ -228,12 +240,16 @@ const RegsiterStyles = styled.div`
   }
   .authBtn {
     border: 1px solid var(--border1);
-    padding: 1rem 4rem;
+    padding: 8px 40px;
     border-radius: 40px;
     width: 100%;
     cursor: pointer;
+    &.btn_signin {
+    padding: 10px 40px;
+      color:var(--blue-1);
+    }
     &:hover {
-      background-color: var(--dark-grey-hover) !important;
+      background-color: var(--grey-4) !important;
     }
   }
   .option {
