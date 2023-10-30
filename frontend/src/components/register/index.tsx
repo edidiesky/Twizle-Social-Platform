@@ -67,6 +67,8 @@ const Regsiters: React.FC = () => {
     }
   }, [googleOauthisSuccess, setTab])
 
+  console.log(githubaccesstoken)
+
   // GITHUB LOGIN
 
   const HandleGithubLogin = () => {
@@ -78,15 +80,11 @@ const Regsiters: React.FC = () => {
 
   useEffect(()=> {
     if (queryvalue && localStorage.getItem('accessToken') === null) {
-      const data = axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${queryvalue}`)
-    
-      console.log(data)
-      const accessToken: string = data.access_token as string
-      if (accessToken) {
-        localStorage.setItem('accessToken', accessToken)
-      }
+      const response = axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${queryvalue}`, null)
+  
+      setGithubAccessToken(response.data)
     }
-  }, [queryvalue])
+  }, [])
 
 
   return (

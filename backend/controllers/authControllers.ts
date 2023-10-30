@@ -148,7 +148,7 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const GithubGetAccessToken = asyncHandler(async (req: Request, res: Response) => {
-  const githuburl = req.query.github;
+ const githuburl = req.query.github;
 
   try {
     const response = await axios.post(
@@ -158,7 +158,7 @@ const GithubGetAccessToken = asyncHandler(async (req: Request, res: Response) =>
     // Check if the response contains the data you need and send that data in the response.
     const responseData = response.data; // Adjust this based on the actual response structure.
 
-    res.status(200).json({ data: responseData });
+    res.status(200).json(responseData);
   } catch (error) {
     // Handle errors appropriately
     console.error(error);
