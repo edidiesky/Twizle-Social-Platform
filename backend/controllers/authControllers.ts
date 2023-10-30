@@ -176,7 +176,7 @@ const GithubGetUserData = asyncHandler(async (req: Request, res: Response) => {
   })
   console.log(data)
 
-  res.status(200).json({ data })
+  res.status(200).json(data)
 });
 
 

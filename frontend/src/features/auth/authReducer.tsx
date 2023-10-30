@@ -55,6 +55,52 @@ export const registerUser = createAsyncThunk<authtype, authtype, {
   }
 );
 
+export const getGithubAccesToken = createAsyncThunk<string, { githubcode ?:string}, {
+  rejectValue: KnownError,
+
+}>(
+  "getGithubAccesToken",
+  async ({githubcode}, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${githubcode}`, githubcode);
+      localStorage.setItem("accessToken", JSON.stringify(response.data.split('&')[0].split('=')[1]).toString());
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+export const getGithubUserProfile = createAsyncThunk<string, { githubcode?: string }, {
+  rejectValue: KnownError,
+
+}>(
+  "getGithubUserProfile",
+  async ({ githubcode }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/userData`, {
+        headers: {
+          authorization: `Bearer ${githubcode}`,
+        },
+      });
+      console.log(response.data)
+      // localStorage.setItem("accessToken", JSON.stringify(response.data.split('&')[0].split('=')[1]).toString());
+
+    } catch (err: any) {
+      const message = err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message
+      return rejectWithValue(message);
+
+    }
+  }
+);
+
+
 export const loginUser = createAsyncThunk<authtype, { email?: string, password?: string, name?: string }, {
   rejectValue: KnownError,
 }>(

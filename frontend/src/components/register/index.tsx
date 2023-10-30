@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import MyAnimatePresence from "../../utils/AnimatePresence";
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from "axios";
-import { GoogleOauth } from "../../features/auth/authReducer";
+import { GoogleOauth, getGithubAccesToken, getGithubUserProfile } from "../../features/auth/authReducer";
 import LoaderIndex from "../loaders";
 import Message from "../loaders/Message";
 import { clearUserProfile } from "../../features/auth/authSlice";
@@ -25,7 +25,7 @@ const Regsiters: React.FC = () => {
   const [username, setUsername] = useState<boolean>(false)
   const [profile, setProfile] = useState<boolean>(false)
 
-  const [githubaccesstoken, setGithubAccessToken] = useState('')
+  const [githubaccesstoken, setGithubAccessToken] = useState('access_token=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&scope=&token_type=bearer')
 
   const [tab, setTab] = useState(0)
   const navigate = useNavigate()
@@ -67,7 +67,7 @@ const Regsiters: React.FC = () => {
     }
   }, [googleOauthisSuccess, setTab])
 
-  console.log(githubaccesstoken)
+  // console.log(githubaccesstoken?.split('&')[0].split('=')[1].toString())
 
   // GITHUB LOGIN
 
@@ -78,11 +78,16 @@ const Regsiters: React.FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const queryvalue: string = searchParams.get("code") as string;
 
-  useEffect(()=> {
+  useEffect(() => {
     if (queryvalue && localStorage.getItem('accessToken') === null) {
-      const response = axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${queryvalue}`, null)
-  
-      setGithubAccessToken(response.data)
+      dispatch(getGithubAccesToken({ githubcode: queryvalue }))
+    }
+  }, [])
+
+  const accessToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getGithubUserProfile({ githubcode: accessToken }))
     }
   }, [])
 
