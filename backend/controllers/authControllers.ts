@@ -168,15 +168,23 @@ const GithubGetAccessToken = asyncHandler(async (req: Request, res: Response) =>
 
 
 const GithubGetUserData = asyncHandler(async (req: Request, res: Response) => {
- const bearer =  req.get('Authorization')
-  const data = await axios.get(`https://api.github.com/user`,{
-    headers:{
-      "Authorization": bearer
-    }
-  })
-  console.log(data)
+ 
 
-  res.status(200).json(data)
+  try {
+    const access_token = req.query.access_token
+    const response.data = await axios.get(`https://api.github.com/user`, {
+      headers: {
+        "Authorization": `Bearer ${access_token}`
+      }
+    })
+    console.log(response.data)
+
+    res.status(200).json(response.data)
+  } catch (error) {
+    // Handle errors appropriately
+    console.error(error);
+    res.status(500).json({ error: "An error occurred" });
+  }
 });
 
 

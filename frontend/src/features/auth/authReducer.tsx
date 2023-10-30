@@ -63,7 +63,13 @@ export const getGithubAccesToken = createAsyncThunk<string, { githubcode ?:strin
   async ({githubcode}, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/accessToken?github=${githubcode}`, githubcode);
-      localStorage.setItem("accessToken", JSON.stringify(response.data.split('&')[0].split('=')[1]).toString());
+
+      const accessToken = response.data.split('&')[0].split('=')[1];
+
+      // Store the access token in local storage.
+      localStorage.setItem("accessToken", accessToken);
+
+      return accessToken
 
     } catch (err: any) {
       const message = err.response && err.response.data.message
@@ -84,7 +90,7 @@ export const getGithubUserProfile = createAsyncThunk<string, { githubcode?: stri
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/auth/github/userData`, {
         headers: {
-          authorization: `Bearer ${githubcode}`,
+          Authorization: `Bearer ${githubcode}`,
         },
       });
       console.log(response.data)

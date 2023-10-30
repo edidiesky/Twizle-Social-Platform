@@ -89,7 +89,7 @@ const Regsiters: React.FC = () => {
     if (accessToken) {
       dispatch(getGithubUserProfile({ githubcode: accessToken }))
     }
-  }, [])
+  }, [accessToken])
 
 
   return (
