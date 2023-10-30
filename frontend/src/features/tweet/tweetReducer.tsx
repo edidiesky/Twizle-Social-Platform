@@ -64,7 +64,7 @@ export const getAllBookmarkedTweet = createAsyncThunk<{
           authorization: `Bearer ${auth.token}`,
         },
       };
-      const response = await axios.get('${import.meta.env.VITE_API_BASE_URLS}/tweet/bookmark', config);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URLS}/tweet/bookmark`, config);
       return response.data.bookmarkTweets;
     } catch (err: any) {
       const message = err.response && err.response.data.message

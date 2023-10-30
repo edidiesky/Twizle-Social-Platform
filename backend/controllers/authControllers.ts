@@ -99,9 +99,19 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
   // check if already exist else login or else register
   const userExist = await User.findOne({ email });
   if (userExist) {
+
+     const jwtcode: Secret = 'hello'
+  //
+  const token = jwt.sign(
+    {
+      userId: userExist?._id,
+    },
+    jwtcode,
+    { expiresIn: "12d" }
+  );
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ user: userExist });
+    res.status(200).json({ user: userExist, token });
   }
   // create a password for the user
   const randomPassword = generateRandomPassword();
