@@ -49,7 +49,7 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.cookie("accessToken", token, {
     httpOnly: true
-  }).status(200).json({ user });
+  }).status(200).json({ user, token });
 
 });
 
@@ -87,7 +87,7 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
   delete user?.password
   res.cookie("accessToken", token, {
     httpOnly: true
-  }).status(200).json({ user });
+  }).status(200).json({ user, token });
 });
 const generateRandomPassword = () => {
   const length = 12; // Desired password length

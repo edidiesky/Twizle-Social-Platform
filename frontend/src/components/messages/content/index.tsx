@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { MdAddReaction, MdOutlineAddCircle } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { IoSend } from 'react-icons/io5'
@@ -24,18 +24,12 @@ const MessageContent: React.FC = () => {
   // console.log(senderId, senderId)
   // create user conversation
   useEffect(() => {
+    dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
+  }, [senderId, receiverId])
+  useEffect(() => {
+    dispatch(GetSinglemessageDetails(conversationDetails?._id))
 
-    // dispatch(Createconversation({ senderId: id?.split('-')[1], receiverId: id?.split('-')[0] }))
-    console.log('hello')
-  }, [id])
-  // useEffect(() => {
-  //   dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
-  // }, [senderId, receiverId])
-  // useEffect(() => {
-  //   dispatch(GetSinglemessageDetails(conversationDetails?._id))
-
-  // }, [conversationDetails])
-  // console.log(id?.split('-')[1], id?.split('-')[0])
+  }, [conversationDetails])
 
   const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

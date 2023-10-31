@@ -18,9 +18,9 @@ const LeftContent: React.FC = () => {
 
 
     const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(GetSingleconversationDetails(userInfo?._id))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(GetSingleconversationDetails(userInfo?._id))
+    // }, [])
 
 
     return (
