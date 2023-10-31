@@ -23,15 +23,14 @@ const MessageStyles = styled.div`
     width: 100%;
     display:flex;
     gap:1rem;
-    /* height: 100vh;
-    overflow: auto; */
+    height: 100vh;
+    overflow: hidden;
     align-items: flex-start;
     @media (min-width:1380px) {
         max-width: 1380px;
         margin: 0 auto;
     }
     .content {
-        /* flex:1; */
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
         overflow:auto;

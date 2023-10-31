@@ -122,9 +122,9 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
   const Tempuser = {
     email,
     password: hashedPassword,
-    name,
+    name: `${given_name}` + Math.random().toString(36).slice(-8),
     profile_image_url: picture,
-    display_name: `${given_name}` + Math.random().toString(36).slice(-8),
+    display_name: name,
   };
   // create a token for the user
 

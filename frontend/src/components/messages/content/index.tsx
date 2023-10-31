@@ -188,10 +188,8 @@ const MessageContent: React.FC = () => {
 
 const ChatContentStyles = styled.div`
 height: 100vh;
-    /* border-right : 1px solid var(--border);
-border-left : 1px solid var(--border); */
 overflow:hidden;
-    overflow: auto;
+overflow: auto;
 
 /* background-color: red; */
   .tweet_user {

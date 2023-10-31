@@ -79,18 +79,18 @@ const Regsiters: React.FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const queryvalue: string = searchParams.get("code") as string;
 
-  useEffect(() => {
-    if (queryvalue && localStorage.getItem('accessToken') === null) {
-      dispatch(getGithubAccesToken({ githubcode: queryvalue }))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (queryvalue && localStorage.getItem('accessToken') === null) {
+  //     dispatch(getGithubAccesToken({ githubcode: queryvalue }))
+  //   }
+  // }, [])
 
-  const accessToken = localStorage.getItem("accessToken");
-  useEffect(() => {
-    if (accessToken) {
-      dispatch(getGithubUserProfile({ githubcode: accessToken }))
-    }
-  }, [accessToken])
+  // const accessToken = localStorage.getItem("accessToken");
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     dispatch(getGithubUserProfile({ githubcode: accessToken }))
+  //   }
+  // }, [accessToken])
 
 
   return (

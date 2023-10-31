@@ -24,13 +24,11 @@ const ListStyles = styled.div`
         border-right : 1px solid var(--border);
         border-left : 1px solid var(--border);
         height: 100vh;
-        overflow:auto;
+        /* overflow:auto; */
        
         .rightwrapper {
         width:95%;
-        min-height: 100vh;
-        border-right : 1px solid var(--border);
-        height: 100%;
+        height: 100vh;
         .header {
             width: 70%;
         }

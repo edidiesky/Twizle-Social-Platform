@@ -93,7 +93,7 @@ export const getGithubUserProfile = createAsyncThunk<string, { githubcode?: stri
           Authorization: `Bearer ${githubcode}`,
         },
       });
-      console.log(response.data)
+      return response.data
       // localStorage.setItem("accessToken", JSON.stringify(response.data.split('&')[0].split('=')[1]).toString());
 
     } catch (err: any) {
