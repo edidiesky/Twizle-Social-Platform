@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 import { errorHandler, NotFound } from "./middleware/error-handler";
 
-import mongoose from "mongoose";
+import mongoose, { Error } from "mongoose";
 app.use(
   session({
     secret: "session",
@@ -41,10 +41,6 @@ const clienIdSecret: string = process.env.google_client_secret as string
 
 // generate passowrd
 // Generate a random password
-const generateRandomPassword = () => {
-  const length = 12; // Desired password length
-  return crypto.randomBytes(length).toString('base64').slice(0, length);
-};
 
 // passport.use(
 //   new GoogleStrategy(
