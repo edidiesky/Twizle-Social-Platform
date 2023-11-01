@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import DisplayModal from '../components/modals/DisplayModal';
 import { useAppSelector } from '../hooks/reduxtoolkit';
 import MyAnimatePresence from '../utils/AnimatePresence';
+import NavBottomHeader from '../components/common/NavBottomHeader';
 
 const LayoutIndex: React.FC = () => {
     const { modal } = useAppSelector(store => store.tweet)
@@ -17,6 +18,7 @@ const LayoutIndex: React.FC = () => {
             {/* <DisplayModal/> */}
             <div className="w-100">
                 <Outlet />
+                
             </div>
         </>
     )

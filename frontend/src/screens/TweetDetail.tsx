@@ -7,6 +7,7 @@ const TweetDetailIndex: React.FC = () => {
   return (
     <TweetDetailStyles>
       <PostDetails />
+      
     </TweetDetailStyles>
   )
 }

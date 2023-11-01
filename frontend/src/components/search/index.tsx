@@ -10,7 +10,7 @@ import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
 import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FollowAndUnFollowAUser, GetUserSearch } from '../../features/auth/authReducer';
 import LoaderIndex from '../loaders';
 
@@ -58,10 +58,10 @@ const Search: React.FC = () => {
                                                             const active = userInfo?.followings?.includes(x?._id)
 
                                                             return <div className="w-100 connect_card flex item-start justify-space gap-1">
-                                                                <div className="image_wrapper">
+                                                                <Link to={`/${x?.name}`} className="image_wrapper">
                                                                     <img src={x?.profile_image_url ? x?.profile_image_url : `https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png`} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                                                     <div className="image_gradient"></div>
-                                                                </div>
+                                                                </Link>
                                                                 <div className="flex-1 flex column" style={{ gap: ".6rem" }}>
                                                                     <div className="w-100 flex item-center justify-space">
                                                                         <h4 className="fs-16 text-extra-bold flex column" style={{ gap: ".1rem" }}>

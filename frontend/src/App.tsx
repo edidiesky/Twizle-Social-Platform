@@ -24,6 +24,7 @@ import LoaderIndex from "./components/loaders/index";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxtoolkit";
 import { getBackgroundTheme, getColorTheme } from "./features/theme/themeSlice";
 import ProfileIndex from "./screens/Profile";
+import NavBottomHeader from "./components/common/NavBottomHeader";
 // import { getLoginAuthDetails } from "./features/auth/authReducer";
 
 export default function App() {
@@ -53,6 +54,7 @@ export default function App() {
 
   return (
     <div className="based" style={{ height }}>
+      <NavBottomHeader />
       <Routes>
         <Route path={"/"} element={<LayoutIndex />}>
           <Route index element={<Suspense fallback={<></>}>

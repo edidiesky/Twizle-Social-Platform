@@ -115,7 +115,7 @@
   --border: rgba(255, 255, 255, 0.1);
   --border1: rgba(255, 255, 255, 0.2);
   --top:rgba(20, 32, 43, 0.435);
-  --top1:rgb(20,32,43);
+  --top1:rgba(20, 32, 43, 0.665);
   --backdrop:rgba(49,59,69,.6);
   --shadow:rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
 }

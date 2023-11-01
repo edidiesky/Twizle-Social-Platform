@@ -169,6 +169,8 @@ const LeftSidebarStyles = styled.div`
     height: 100vh;
     
    position: sticky;
+    overflow:auto;
+
     /* border-right: 1px solid var(--border); */
 @media (max-width:780px) {
     overflow:auto;
@@ -182,10 +184,11 @@ const LeftSidebarStyles = styled.div`
 
   }
   @media (max-width:980px) {
-        flex: 0 0 150px;
+        flex: 0 0 120px;
   }
   @media (max-width:780px) {
-        flex: 0 0 120px;
+        flex: 0 0 80px;
+
   }
   @media (max-width:580px) {
         flex: 0 0 80px;

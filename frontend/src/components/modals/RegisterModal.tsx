@@ -234,6 +234,8 @@ const RegisterModalStyles = styled(motion.div)`
     padding: 0 .6rem;
     left: 2%;
     font-weight: normal;
+    background-color: var(--white);
+
   }
   }
   select {
@@ -243,6 +245,8 @@ const RegisterModalStyles = styled(motion.div)`
     border: 1px solid var(--grey-3);
     padding: 0 .6rem;
     border-radius: 5px;
+    background-color: var(--white);
+    color: var(--dark-1);
     option {
       font-size: 16px !important;
       padding:20px 10px !important;

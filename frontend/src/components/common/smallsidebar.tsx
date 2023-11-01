@@ -61,8 +61,8 @@ const SmallSidebarIndex = () => {
                 <div onClick={() => dispatch(offSidebar("any"))} className={sidebar ? "backdrop active" : "backdrop"}></div>
 
                 <div className={sidebar ? "sidebarWrapper active" : "sidebarWrapper"}>
-                    <div className="flex column w-100 leftwrapper auto gap-1">
-                        <div className="w-90 auto py-2 flex column gap-1">
+                    <div className="flex column w-90 leftwrapper auto gap-1">
+                        <div className="w-85 auto py-2 flex column gap-1">
                             {/* top small sidebar */}
                             <div className="w-100 flex item-center justify-space">
                                 <span>
@@ -94,7 +94,7 @@ const SmallSidebarIndex = () => {
                                         list.map((x, index) => {
                                             return (
                                                 <li className="list text-dark fs-20 flex item-center gap-4 text-bold" >
-                                                    <NavLink className='text-dark flex item-center gap-3 text-bold' to={x.path}>
+                                                    <NavLink className='text-dark flex w-100 item-center gap-3 text-bold' to={x.path}>
                                                         {x.icon}
                                                         <span className='span'>{x.title}</span>
                                                     </NavLink>

@@ -152,7 +152,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                                         </h4>
                                                     </div>
                                                     <div onClick={() => handleFollowUser(x?._id)}
-                                                        className={`btn ${active && `active`} text-extra-bold btn-3 fs-12 text-white`}>
+                                                        className={`btn ${active && `active`} text-bold btn-3 fs-11 text-white`}>
 
                                                         {
                                                             active ? <span className="following">Following</span> : "Follow"
@@ -171,13 +171,13 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             </div>
                         </div>
                         <div className="flex item-center w-85 auto fs-16 text-light flex-wrap" style={{ gap: ".5rem", paddingBottom: "2rem", color: "rgb(83, 100, 113)" }}>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 3px" }}>Terms of Service</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 3px" }}>Privacy Policy</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 1px" }}>Cookie Policy</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 1px" }}>Ads info</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 2px" }}>More</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px" }}>Edidiong Essien</Link>
-                            <Link to={'#'} className='text-light fs-12 text-grey2 links' style={{ margin: "1px 2px" }}>© 2023 Eddy Corp..</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize:"13px" }}>Terms of Service</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize:"13px" }}>Privacy Policy</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize:"13px" }}>Cookie Policy</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize:"13px" }}>Ads info</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize:"13px" }}>More</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px", fontSize: "13px" }}>Edidiong Essien</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize:"13px" }}>© 2023 Eddy Corp..</Link>
                         </div>
                         {/* <MessageTab setModal={function (val: boolean): void {
                         throw new Error('Function not implemented.');
@@ -206,7 +206,8 @@ const RightSidebarStyles = styled.div`
     }
     
     @media (max-width:780px) {
-        flex: .1;
+               display: none;
+
     }
     @media (max-width:680px) {
         display: none;
