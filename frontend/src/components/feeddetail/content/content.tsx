@@ -43,74 +43,83 @@ const PostDetailsContent: React.FC = () => {
             }
             <Top />
             {/* post feed card */}
-            <PostFeedCard />
+            {
+                tweetDetails && <PostFeedCard />
+            }
+            
             {/* data likes reviews comments */}
-            <div className="flex-100 column gap-1 fs-18 text-light text-grey text-light">
-                <div className="flex bottom fs-15 w-90 auto item-center gap-1">
-                    <span>7:24 AM · Jul 21, 2023</span>
-                    <span className="fs-14 text-grey text-light">·
-                        <span className="fs-14 text-bold text-dark">5,133</span>
-                        {" "}
-                        Views
-                    </span>
-                </div>
-                <div style={{borderBottom:"1px solid rgba(0,0,0,.1)"}} className="flex w-90 auto item-center gap-2 flex-wrap">
-                    <span className="fs-15 list text-grey text-light">
-                        <span className="fs-15 text-bold text-dark">50</span>
-                        {" "}
-                        Retweets
-                    </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-15 list text-grey text-light">
-                        <span className="fs-15 text-bold text-dark">{quotes?.length}</span>
-                        {" "}
-                        Quotes
-                    </Link> <span className="fs-15 list text-grey text-light">
-                        <span className="fs-15 text-bold text-dark">5</span>
-                        {" "}
-                        Likes
-                    </span>
-                    <span className="fs-15 list text-grey text-light">
-                        <span className="fs-15 text-bold text-dark">15</span>
-                        {" "}
-                        Bookmarks
-                    </span>
-                </div>
-                <div className="flex w-90 auto justify-space bottom bottom1 item-center w-90 gap-2">
-                    <div className="flex w-100 auto item-center fs-14 text-light feedtags_wrapper text-dark">
-                        <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon1 flex item-center justify-center">
-                                <MessageIcon type='large' />
-                            </div>
-                            23
-                        </div>
-                        <div className="flex iconwrapper flex-1 justify-center text_2 item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon2 flex item-center justify-center">
-                                <RetweetIcon type='large' />
-                            </div>
-                            144
-                        </div><div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
-                            <div className="icons icon3 flex item-center justify-center">
-                                <LikeIcon type='large' />
-                            </div>
-                            23
-                        </div>
-                        <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
-                            <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
-                                <BookmarkIcon isClicked={isBookMarked} type='large' />
-                            </div>
-                            {tweetDetails?.tweet_bookmarks?.length}
-                        </div>
-                       
+            {
+                tweetDetails && <div className="flex-100 column gap-1 fs-18 text-light text-grey text-light">
+                    <div className="flex bottom fs-15 w-90 auto item-center gap-1">
+                        <span>7:24 AM · Jul 21, 2023</span>
+                        <span className="fs-14 text-grey text-light">·
+                            <span className="fs-14 text-bold text-dark">5,133</span>
+                            {" "}
+                            Views
+                        </span>
                     </div>
-                    {/* <div className="flex iconwrapper item-center fs-16 text-light" style={{ gap: ".3rem" }}>
+                    <div style={{ borderBottom: "1px solid rgba(0,0,0,.1)" }} className="flex w-90 auto item-center gap-2 flex-wrap">
+                        <span className="fs-15 list text-grey text-light">
+                            <span className="fs-15 text-bold text-dark">50</span>
+                            {" "}
+                            Retweets
+                        </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-15 list text-grey text-light">
+                            <span className="fs-15 text-bold text-dark">{quotes?.length}</span>
+                            {" "}
+                            Quotes
+                        </Link> <span className="fs-15 list text-grey text-light">
+                            <span className="fs-15 text-bold text-dark">5</span>
+                            {" "}
+                            Likes
+                        </span>
+                        <span className="fs-15 list text-grey text-light">
+                            <span className="fs-15 text-bold text-dark">15</span>
+                            {" "}
+                            Bookmarks
+                        </span>
+                    </div>
+                    <div className="flex w-90 auto justify-space bottom bottom1 item-center w-90 gap-2">
+                        <div className="flex w-100 auto item-center fs-14 text-light feedtags_wrapper text-dark">
+                            <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon1 flex item-center justify-center">
+                                    <MessageIcon type='large' />
+                                </div>
+                                23
+                            </div>
+                            <div className="flex iconwrapper flex-1 justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon2 flex item-center justify-center">
+                                    <RetweetIcon type='large' />
+                                </div>
+                                144
+                            </div><div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                                <div className="icons icon3 flex item-center justify-center">
+                                    <LikeIcon type='large' />
+                                </div>
+                                23
+                            </div>
+                            <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                                <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
+                                    <BookmarkIcon isClicked={isBookMarked} type='large' />
+                                </div>
+                                {tweetDetails?.tweet_bookmarks?.length}
+                            </div>
+
+                        </div>
+                        {/* <div className="flex iconwrapper item-center fs-16 text-light" style={{ gap: ".3rem" }}>
                         <div className="icons icon1 flex item-center justify-center">
                             <HiOutlineChatBubbleOvalLeft fontSize={'20px'} />
                         </div>
                         23
                     </div> */}
-                </div>
+                    </div>
 
-            </div>
-            <TweetFormSection placeholder='Post your reply' type='details' />
+                </div>
+            }
+            {
+                tweetDetails && <TweetFormSection placeholder='Post your reply' type='details' />
+            }
+            
+            
             <PostDetailsComments />
         </PostDetailsContentStyles>
     )
