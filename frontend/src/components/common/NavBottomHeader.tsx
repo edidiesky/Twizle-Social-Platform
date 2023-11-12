@@ -1,6 +1,8 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styled from 'styled-components';
 
 import SearchIcon from '../../assets/svg/leftsidebaricons/search'
@@ -31,10 +33,33 @@ const list = [
 ]
 
 const NavBottomHeader: React.FC = () => {
+    const navHeaderRef = React.useRef(null)
+    const [isVisible, setIsVisible] = useState(false);
+    const [height, setHeight] = useState(0)
 
+ 
+    const listenToScroll = () => {
+        let heightToHideFrom = 200;
+        const winScroll = document.body.scrollTop ||
+            document.documentElement.scrollTop;
+        setHeight(winScroll);
 
+        if (winScroll > heightToHideFrom) {
+            isVisible && setIsVisible(false);
+        } else {
+            setIsVisible(true);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", listenToScroll);
+        return () =>
+            window.removeEventListener("scroll", listenToScroll);
+    }, [height])
+
+    // console.log(height)
     return (
-        <NavBottomHeaderStyles className="w-100">
+        <NavBottomHeaderStyles ref={navHeaderRef} className={isVisible?'w-100 active':"w-100"}>
             <div className="w-100 flex item-center justify-space">
                 {
                     list.map((x?: any) => {
@@ -59,6 +84,10 @@ const NavBottomHeaderStyles = styled.div`
    display: none;
    @media (max-width:580px) {
     display: flex;
+   }
+   &.active {
+   display: none;
+
    }
 `
 
