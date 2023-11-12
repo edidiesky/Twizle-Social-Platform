@@ -169,7 +169,7 @@ const LeftSidebarStyles = styled.div`
     height: 100vh;
     
    position: sticky;
-    overflow:auto;
+    /* overflow:auto; */
 
     /* border-right: 1px solid var(--border); */
 @media (max-width:780px) {

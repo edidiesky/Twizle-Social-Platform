@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -82,8 +83,8 @@ const DisplayModal: React.FC<modalType> = ({ modal, setModal, id }) => {
           </div> */}
 
 
-          <div className="flex w-100 py-2 column gap-1">
-            <div className="w-90 auto flex py-2 item-center justify-center column gap-1">
+          <div className="flex w-100 column gap-1">
+            <div className="w-90 auto flex py-1 item-center justify-center column gap-1">
               <h3 className="fs-24 w-100 text-center text-extra-bold">Customize your view
                 <span className="block fs-15 py-1 text-center text-grey text-light">
                   These settings affect all the X accounts on this browser.
@@ -282,7 +283,7 @@ const DisplayModalStyles = styled(motion.div)`
     }
   }
   .top {
-    height: 635px;
+    height: 595px;
     overflow:auto;
     border-radius: 20px;
     padding: 2rem 0;

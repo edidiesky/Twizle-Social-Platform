@@ -32,9 +32,11 @@ const FeedCard = (props: feedcardtype) => {
     const hoursDifference = now.diff(createdAt, 'hours');
     const minsDifference = now.diff(createdAt, 'minutes');
     const secondsDifference = now.diff(createdAt, 'seconds');
+    const timesecondsDifference = (60 - secondsDifference )
+    // console.log(secondsDifference - 60)
 
     let date;
-    if (secondsDifference < 0) {
+    if (timesecondsDifference > 10) {
         date = `${secondsDifference}sec`;
     }
    else if (hoursDifference < 1) {
