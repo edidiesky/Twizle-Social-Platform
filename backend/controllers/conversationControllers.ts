@@ -11,7 +11,7 @@ interface CustomInterface extends ExpressRequest {
 // POST
 // Create Conversation
 //  Public
-const createConversation = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+const createConversation = asyncHandler(async (req: CustomInterface, res: Response, next: NextFunction) => {
   // const { userId } = req.user;
   const { receiverId, senderId } = req.body
   // console.log(receiverId, senderId)
@@ -38,10 +38,19 @@ const createConversation = asyncHandler(async (req: Request, res: Response, next
 
   } else {
 
-    const conversation = await Conversation.create({
+    // create a users conversation
+    await Conversation.create({
       sender: senderId,
       receiver: receiverId
     })
+
+    // get the users conversation
+    const conversation = await Conversation.find({
+      $or: [{ sender: req.user?.userId }, { receiver: req.user?.userId }],
+    }).populate("sender", " username bio display_name name profile_image_url")
+      .populate("receiver", " username bio display_name name profile_image_url");
+
+
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation: conversation })
@@ -88,8 +97,9 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
     .populate("receiver", " username bio display_name name profile_image_url");
 
   if (!conversation) {
-    res.status(404);
-    throw new Error("Gig not found");
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.status(200).json({ conversation:null });
   }
 
   res.setHeader("Content-Type", "text/html");

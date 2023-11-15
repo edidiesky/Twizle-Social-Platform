@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Createmessage, GetSinglemessageDetails } from '../../../features/message/messageReducer';
 import moment from 'moment';
 import { Createconversation, GetUserconversationDetails } from '../../../features/conversation/conversationReducer';
+import ListContent from '../list';
 
 
 
@@ -18,17 +19,12 @@ const MessageContent: React.FC = () => {
   const { message } = useAppSelector(store => store.message)
   const { conversationDetails } = useAppSelector(store => store.conversation)
   const { userInfo } = useAppSelector(store => store.auth)
-  // console.log()
-  const receiverId = id?.split('-')[0]
-  const senderId = id?.split('-')[1]
-  // console.log(senderId, senderId)
-  // create user conversation
+ 
   useEffect(() => {
-    dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
-  }, [senderId, receiverId])
-  useEffect(() => {
-    dispatch(GetSinglemessageDetails(conversationDetails?._id))
-
+    if(conversationDetails) {
+      dispatch(GetSinglemessageDetails(conversationDetails?._id))
+    }
+   
   }, [conversationDetails])
 
   const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,137 +41,141 @@ const MessageContent: React.FC = () => {
   const receivercreatedAt = moment(conversationDetails?.receiver?.createdAt).format('MMMM, h:mm a')
   return (
     <ChatContentStyles className='flex flex-1 column item-center'>
-      <div className="chatWrapper w-100">
-        <div className="top2 w-100 auto ">
-          <div className="w-90 auto flex item-center justify-space">
-            <h3 className="fs-20 text-bold text-dark">
-              {
-                conversationDetails?.sender?._id !== userInfo?._id ?
-                  conversationDetails?.sender?.display_name : conversationDetails?.receiver?.display_name
-              }
+      {
+        conversationDetails ? <div className="chatWrapper w-100">
+          <div className="top2 w-100 auto ">
+            <div className="w-90 auto flex item-center justify-space">
+              <h3 className="fs-20 text-bold text-dark">
+                {
+                  conversationDetails?.sender?._id !== userInfo?._id ?
+                    conversationDetails?.sender?.display_name : conversationDetails?.receiver?.display_name
+                }
 
-            </h3>
+              </h3>
+
+            </div>
 
           </div>
-
-        </div>
-        {/* chat user profile and messages */}
-        <div className="flex chatWrap w-100 auto list auto column gap-1">
-          {
-            conversationDetails?.sender?._id !== userInfo?._id ? <Link to={`/${conversationDetails?.sender?.name}`} className="top w-90 auto flex column item-center justify-center gap-2">
-              <div className="flex column gap-1 item-center justify-center w-100">
-                <div className="image_wrapper">
-                  <div className="image_gradient"></div>
-                  <img src={conversationDetails?.sender?.profile_image_url} alt="" className="avatar_profile" />
+          {/* chat user profile and messages */}
+          <div className="flex chatWrap w-100 auto list auto column gap-1">
+            {
+              conversationDetails?.sender?._id !== userInfo?._id ? <Link to={`/${conversationDetails?.sender?.name}`} className="top w-90 auto flex column item-center justify-center gap-2">
+                <div className="flex column gap-1 item-center justify-center w-100">
+                  <div className="image_wrapper">
+                    <div className="image_gradient"></div>
+                    <img src={conversationDetails?.sender?.profile_image_url} alt="" className="avatar_profile" />
+                  </div>
+                  <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.sender?.display_name}
+                    <span className="block fs-14 text-grey text-light">@{conversationDetails?.sender?.name}</span>
+                  </h4>
                 </div>
-                <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.sender?.display_name}
-                  <span className="block fs-14 text-grey text-light">@{conversationDetails?.sender?.name}</span>
+                <h4 className="w-100 bio auto text-center fs-15 text-light text-dark">
+                  {conversationDetails?.sender?.bio}
                 </h4>
-              </div>
-              <h4 className="w-100 bio auto text-center fs-15 text-light text-dark">
-                {conversationDetails?.sender?.bio}
-              </h4>
-              <h4 className="w-85 auto text-center fs-14 text-light text-grey">
+                <h4 className="w-85 auto text-center fs-14 text-light text-grey">
 
-                Joined {sendercreatedAt}
-                ·
-                4,127 Followers
-              </h4>
-            </Link> : conversationDetails?.receiver?._id !== userInfo?._id ? <Link to={`/${conversationDetails?.receiver?.name}`} className="top w-90 auto flex column item-center justify-center gap-2">
-              <div className="flex column gap-1 item-center justify-center w-100">
-                <div className="image_wrapper">
-                  <div className="image_gradient"></div>
-                  <img src={conversationDetails?.receiver?.profile_image_url} alt="" className="avatar_profile" />
+                  Joined {sendercreatedAt}
+                  ·
+                  4,127 Followers
+                </h4>
+              </Link> : conversationDetails?.receiver?._id !== userInfo?._id ? <Link to={`/${conversationDetails?.receiver?.name}`} className="top w-90 auto flex column item-center justify-center gap-2">
+                <div className="flex column gap-1 item-center justify-center w-100">
+                  <div className="image_wrapper">
+                    <div className="image_gradient"></div>
+                    <img src={conversationDetails?.receiver?.profile_image_url} alt="" className="avatar_profile" />
+                  </div>
+                  <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.receiver?.display_name}
+                    <span className="block fs-14 text-grey text-light">@{conversationDetails?.receiver?.name}</span>
+                  </h4>
                 </div>
-                <h4 className="fs-16 text-center text-bold text-dark">{conversationDetails?.receiver?.display_name}
-                  <span className="block fs-14 text-grey text-light">@{conversationDetails?.receiver?.name}</span>
+                <h4 className="w-100 bio auto text-center fs-15 text-light text-dark">
+                  {conversationDetails?.receiver?.bio}
                 </h4>
-              </div>
-              <h4 className="w-100 bio auto text-center fs-15 text-light text-dark">
-                {conversationDetails?.receiver?.bio}
-              </h4>
-              <h4 className="w-85 auto text-center fs-14 text-light text-grey">
+                <h4 className="w-85 auto text-center fs-14 text-light text-grey">
 
-                Joined {receivercreatedAt}
-                ·
-                4,127 Followers
-              </h4>
-            </Link> : ''
-          }
+                  Joined {receivercreatedAt}
+                  ·
+                  4,127 Followers
+                </h4>
+              </Link> : ''
+            }
 
-          <div className="w-85 auto chatList column flex gap-2">
-            {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: any }) => {
-              const usermessage = x?.sender === userInfo?._id
-              const createdAt = moment(x?.createdAt).format('MMMM Do YYYY, h:mm a')
-              return (
-                <div className="flex ">
-                  <div className="chatCard flex w-100 column">
-                    {
-                      !usermessage ? <div className="flex column gap-1">
-                        <div className=" SenderChat">
-                          <h4 className="fs-14 text-grey text-light">
-                            {x?.message}
-                          </h4>
-                        </div>
-                        <div className=" flex gap-1">
-                          <h5 className="fs-14 text-light text-grey">
-                            {createdAt}
-                          </h5>
-                        </div>
-                      </div>
-                        : <div className="flex revieverWrapper column gap-1">
-                          <div className="flex wrap revieverWrapper column">
-                            <div className="recieverChat">
-                              <h4 className="fs-14 text-white text-light">
-                                {x?.message}
-                              </h4>
-                            </div>
-
+            <div className="w-85 auto chatList column flex gap-2">
+              {message?.map((x: { sender: any; createdAt: moment.MomentInput; message: any }) => {
+                const usermessage = x?.sender === userInfo?._id
+                const createdAt = moment(x?.createdAt).format('MMMM Do YYYY, h:mm a')
+                return (
+                  <div className="flex ">
+                    <div className="chatCard flex w-100 column">
+                      {
+                        !usermessage ? <div className="flex column gap-1">
+                          <div className=" SenderChat">
+                            <h4 className="fs-14 text-grey text-light">
+                              {x?.message}
+                            </h4>
                           </div>
                           <div className=" flex gap-1">
                             <h5 className="fs-14 text-light text-grey">
                               {createdAt}
                             </h5>
                           </div>
-
                         </div>
-                    }
+                          : <div className="flex revieverWrapper column gap-1">
+                            <div className="flex wrap revieverWrapper column">
+                              <div className="recieverChat">
+                                <h4 className="fs-14 text-white text-light">
+                                  {x?.message}
+                                </h4>
+                              </div>
 
+                            </div>
+                            <div className=" flex gap-1">
+                              <h5 className="fs-14 text-light text-grey">
+                                {createdAt}
+                              </h5>
+                            </div>
+
+                          </div>
+                      }
+
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-        {/* search */}
-        <div className="form_wrapper w-100 auto">
-          <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleCreateMessage(e)} action="" className="w-100 family1 auto flex item-center">
-            <div className="flex item-center">
-              <div className="icons flex item-center justify-center avatar">
-                <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
+          {/* search */}
+          <div className="form_wrapper w-100 auto">
+            <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleCreateMessage(e)} action="" className="w-100 family1 auto flex item-center">
+              <div className="flex item-center">
+                <div className="icons flex item-center justify-center avatar">
+                  <MdAddReaction className="fs-20" color={'var(--blue-1)'} />
+                </div>
+                <div className="icons flex item-center justify-center avatar">
+                  <MdOutlineAddCircle className="fs-20" color={'var(--blue-1)'} />
+                </div>
+                <div className="icons flex item-center justify-center avatar">
+                  <AiFillPicture className="fs-20" color={'var(--blue-1)'} />
+                </div>
               </div>
+              <input
+                type="text"
+                value={messages}
+                name='messages'
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessages(e.target.value)}
+                placeholder="Start a new Message"
+                className="input fs-15 flex-1 text-dark family1"
+              />
               <div className="icons flex item-center justify-center avatar">
-                <MdOutlineAddCircle className="fs-20" color={'var(--blue-1)'} />
+                <IoSend className="fs-20" color={'var(--blue-1)'} />
               </div>
-              <div className="icons flex item-center justify-center avatar">
-                <AiFillPicture className="fs-20" color={'var(--blue-1)'} />
-              </div>
-            </div>
-            <input
-              type="text"
-              value={messages}
-              name='messages'
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessages(e.target.value)}
-              placeholder="Start a new Message"
-              className="input fs-15 flex-1 text-dark family1"
-            />
-            <div className="icons flex item-center justify-center avatar">
-              <IoSend className="fs-20" color={'var(--blue-1)'} />
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
 
-      </div>
+        </div>
+          : <ListContent/>
+      }
+     
     </ChatContentStyles>
   )
 }

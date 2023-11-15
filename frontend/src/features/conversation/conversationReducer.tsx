@@ -60,11 +60,8 @@ export const Createconversation = createAsyncThunk<{
         conversationData,
         config
       );
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-        config
-      );
-      return response.data.conversations;
+     
+      return response2.data.conversation;
 
 
       // console.log(conversationData)

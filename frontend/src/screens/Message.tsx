@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import LeftSidebarIndex from '../components/common/LeftSidebar';
 import LeftContent from '../components/messages/content/leftcontent';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxtoolkit';
-import { Createconversation } from '../features/conversation/conversationReducer';
+import { Createconversation, GetUserconversation, GetUserconversationDetails } from '../features/conversation/conversationReducer';
 const MessageIndex: React.FC = () => {
   const { id } = useParams()
   const [messages, setMessages] = React.useState<string>('')
@@ -19,10 +19,17 @@ const MessageIndex: React.FC = () => {
   const senderId = id?.split('-')[1]
   // console.log(senderId, senderId)
   // create user conversation
-  React.useLayoutEffect(() => {
 
-    if (id) {
+  useEffect(() => {
+    if (senderId && receiverId) {
+      dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
+    }
+  }, [senderId, receiverId])
+  React.useEffect(() => {
+
+    if (!conversationDetails) {
       dispatch(Createconversation({ senderId: id?.split('-')[1], receiverId: id?.split('-')[0] }))
+      // dispatch(GetUserconversation(Detailsdata}))
     }
 
   }, [])
