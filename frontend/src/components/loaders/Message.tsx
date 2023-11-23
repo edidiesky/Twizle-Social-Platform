@@ -1,5 +1,6 @@
 import { Variants, motion } from "framer-motion";
 import React, { useEffect } from "react";
+import { CgDanger } from "react-icons/cg";
 import styled from "styled-components";
 import { errorMessage } from "../../utils/framer";
 // import { useDispatch } from "react-redux";
@@ -77,7 +78,7 @@ const Message: React.FC<messageprops> = ({
 
 const ErrorMessage = styled(motion.div)`
   min-width: 200px;
-  border-radius: 15px;
+  border-radius: 4px;
   padding: 15px 20px;
   background: #f906061d;
   color: #5b0404c9;
@@ -88,7 +89,7 @@ const MessageContent = styled.div`
   padding: 1.5rem 2rem;
   background-color: var(--blue-1);
   z-index: 10000;
-  border-radius: 15px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 600;
   color: var(--white);
