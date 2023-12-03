@@ -20,11 +20,11 @@ const Message: React.FC<messageprops> = ({
   // dispatch
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(handleClearAlert())
-    }, 10000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     dispatch(handleClearAlert())
+  //   }, 10000);
+  // }, []);
 
   const errorMessageVariants: Variants = {
     hidden: {

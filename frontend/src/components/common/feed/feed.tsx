@@ -13,7 +13,7 @@ import Message from '../../loaders/Message';
 const Feed: React.FC = () => {
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
     const { userInfo } = useAppSelector(store => store.auth)
-    const {tweets, userIdIncludedInTweetLikesArray, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
+    const { tweets, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
 
     const isBookmarked = tweetDetails?.tweet_bookmarks?.includes(userInfo?._id)
 
@@ -25,22 +25,27 @@ const Feed: React.FC = () => {
     //     dispatch(getAllTweet())
     // }, [])
 
+    React.useEffect(() => {
+        const timer = setTimeout(() => {dispatch(cleartweet("any")}, 4000)
+        return () => clearTimeout(timer)
+    }, [])
+
     return (
         <div className="w-100 h-100">
-            <Message 
-                handleClearAlert={dispatch(cleartweet("any"))}
-            showAlert={showAlert} alertText={isBookmarked?alertText:"Removed from your bookmarks"} alertType={alertType} />
+            <Message
+                // handleClearAlert={dispatch(cleartweet("any"))}
+                showAlert={showAlert} alertText={isBookmarked ? alertText : "Removed from your bookmarks"} alertType={alertType} />
 
             <FeedStyles>
                 <div className="flex w-100 column">
                     {
                         tweets?.length === 0 ? <div className="flex py-2 w-100 justify-center">
-                         
+
                             <LoaderIndex type="small" />
 
                         </div> : <>
                             {
-                                    tweets?.map((value: feedcardtype) => {
+                                tweets?.map((value: feedcardtype) => {
                                     return <FeedCard {...value} key={value?._id} />
                                 })
                             }
