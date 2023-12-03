@@ -19,16 +19,21 @@ const Feed: React.FC = () => {
 
     const dispatch = useAppDispatch()
 
-    // React.useEffect(() => {
-    //     dispatch(cleartweet({payload:"any"}))
-    //     dispatch(GetAllUserProfile())
-    //     dispatch(getAllTweet())
-    // }, [])
+
 
     React.useEffect(() => {
-        const timer = setTimeout(() => {dispatch(cleartweet("any")}, 4000)
-        return () => clearTimeout(timer)
-    }, [])
+        if (showAlert) {
+            const timeout = setTimeout(() => {
+                // dispatch(cleartweet("any"))
+                dispatch(cleartweet({ payload: "any" }))
+                 dispatch(getAllTweet())
+            }, 3000);
+
+            return () => clearTimeout(timeout)
+           
+        }
+       
+    }, [showAlert])
 
     return (
         <div className="w-100 h-100">
