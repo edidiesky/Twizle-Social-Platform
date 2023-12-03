@@ -12,10 +12,12 @@ import Message from '../../loaders/Message';
 
 const Feed: React.FC = () => {
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
+    const { userInfo } = useAppSelector(store => store.auth)
     const {tweets, userIdIncludedInTweetLikesArray, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
 
-    
-    // const dispatch = useAppDispatch()
+    const isBookmarked = tweetDetails?.tweet_bookmarks?.includes(userInfo?._id)
+
+    const dispatch = useAppDispatch()
 
     // React.useEffect(() => {
     //     dispatch(cleartweet({payload:"any"}))
@@ -25,7 +27,9 @@ const Feed: React.FC = () => {
 
     return (
         <div className="w-100 h-100">
-            <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+            <Message 
+                handleClearAlert={dispatch(cleartweet("any"))}
+            showAlert={showAlert} alertText={isBookmarked?alertText:"Removed from your bookmarks"} alertType={alertType} />
 
             <FeedStyles>
                 <div className="flex w-100 column">

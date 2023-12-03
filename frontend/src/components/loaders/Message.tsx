@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { CgDanger } from "react-icons/cg";
 import styled from "styled-components";
 import { errorMessage } from "../../utils/framer";
+import { useAppDispatch } from "../../hooks/reduxtoolkit";
 // import { useDispatch } from "react-redux";
 type messageprops = {
   showAlert?: boolean,
@@ -17,13 +18,13 @@ const Message: React.FC<messageprops> = ({
   handleClearAlert,
 }) => {
   // dispatch
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     dispatch(handleClearAlert())
-  //   }, 10000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(handleClearAlert())
+    }, 10000);
+  }, []);
 
   const errorMessageVariants: Variants = {
     hidden: {
