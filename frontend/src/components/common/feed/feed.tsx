@@ -8,11 +8,12 @@ import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet } from '../../../features/tweet/tweetSlice';
 import { GetAllUserProfile } from '../../../features/auth/authReducer';
 import LoaderIndex from '../../loaders';
+import Message from '../../loaders/Message';
 
 const Feed: React.FC = () => {
-    const { tweets, tweetisLoading, tweetDetails } = useAppSelector(store => store.tweet)
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
-    
+    const {tweets, userIdIncludedInTweetLikesArray, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
+
     
     // const dispatch = useAppDispatch()
 
@@ -24,6 +25,8 @@ const Feed: React.FC = () => {
 
     return (
         <div className="w-100 h-100">
+            <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+
             <FeedStyles>
                 <div className="flex w-100 column">
                     {

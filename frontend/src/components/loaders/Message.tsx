@@ -89,8 +89,8 @@ const MessageContent = styled.div`
   padding: 1.5rem 2rem;
   background-color: var(--blue-1);
   z-index: 10000;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 3px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--white);
   transition: all 1s;
@@ -103,7 +103,7 @@ const MessageContent = styled.div`
   bottom: -100vh;
 
   &.active {
-    bottom: 6%;
+    bottom: 5%;
   /* bottom: -1000%; */
 
   } 

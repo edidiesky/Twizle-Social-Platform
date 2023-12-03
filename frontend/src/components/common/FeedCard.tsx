@@ -9,8 +9,10 @@ import FollowIcon from '../../assets/svg/dropdownicons/follow';
 import ReportIcon from '../../assets/svg/dropdownicons/report';
 import BlockIcon from '../../assets/svg/dropdownicons/block';
 import MuteIcon from '../../assets/svg/dropdownicons/mute';
+import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
-import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet } from '../../features/tweet/tweetReducer';
+import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet, BookMarkATweet } from '../../features/tweet/tweetReducer';
 import ShareIcon from '../../assets/svg/feedcardicons/share';
 import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 import DeleteModal from '../modals/DeleteModal';
@@ -20,26 +22,26 @@ import moment from 'moment';
 import FeedCardBottom from './FeedCardBottom';
 import MyAnimatePresence from '../../utils/AnimatePresence';
 import { QuoteFeedCardStyles } from '../quote/QuoteCard';
+import Message from '../loaders/Message';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
-    const { userIdIncludedInTweetLikesArray, tweetDetails } = useAppSelector(store => store.tweet)
+    const { userIdIncludedInTweetLikesArray, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
-    // const date = moment(props?.createdAt).format('h')
 
     const createdAt = moment(props?.createdAt);
     const now = moment();
     const hoursDifference = now.diff(createdAt, 'hours');
     const minsDifference = now.diff(createdAt, 'minutes');
     const secondsDifference = now.diff(createdAt, 'seconds');
-    const timesecondsDifference = (60 - secondsDifference )
+    const timesecondsDifference = (60 - secondsDifference)
     // console.log(secondsDifference - 60)
 
     let date;
     if (timesecondsDifference > 10) {
         date = `${secondsDifference}sec`;
     }
-   else if (hoursDifference < 1) {
+    else if (hoursDifference < 1) {
         date = `${minsDifference}min`;
     }
     else if (hoursDifference < 24) {
@@ -74,7 +76,7 @@ const FeedCard = (props: feedcardtype) => {
     }
 
     const handleQuoteModal = () => {
-        
+
         setDrop(false)
         setQuoteModal(true)
         setQuote(false)
@@ -84,6 +86,7 @@ const FeedCard = (props: feedcardtype) => {
 
     return (
         <FeedCardStyles key={props._id}>
+           
             <MyAnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
@@ -127,6 +130,7 @@ const FeedCard = (props: feedcardtype) => {
                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
             </div>
             <div className="flex w-90 auto item-start feed_card_wrapper gap-1">
+                {/* profile image */}
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
                     <div className="image_gradient"></div>
                     {
@@ -136,29 +140,34 @@ const FeedCard = (props: feedcardtype) => {
 
                     }
                 </Link>
+                {/* tweet right card section */}
+                <div className="flex column flex-1 w-100" style={{ gap: '.7rem' }}>
+                    <div className="w-100 flex column gap-1">
+                        <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column w-100'>
+                            <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
+                                <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
+                                    {props?.tweet_user_id?.display_name}
+                                    <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                    <span style={{ fontSize: "15px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
+                                </div>
 
-                <div className="flex column flex-1" style={{ gap: '.7rem' }}>
-                    <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column '>
-                        <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                            <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
-                                {props?.tweet_user_id?.display_name}
-                                <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                <span style={{ fontSize: "15px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
-                            </div>
+                                {/* <span sty></span> */}
+                                <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
+                            </h4>
+                            <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
+                                {props.tweet_text}
+                            </h5>
 
-                            {/* <span sty></span> */}
-                            <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
-                        </h4>
-                        <h5 style={{ lineHeight: "20px" }} className="text_dark_grey fs-15 text-light family1">
-                            {props.tweet_text}
-                        </h5>
+                        </Link>
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
                                 <FeedImage images={props.tweet_image} />
                             </div>
                         }
-                    </Link>
+                    </div>
+
+                    {/* quoted tweet section of the tweet card */}
                     {
                         props?.quote_tweet_id && <QuoteFeedCardStyles >
                             <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
@@ -189,6 +198,7 @@ const FeedCard = (props: feedcardtype) => {
 
                                 </div>
                             </div>
+                            {/* quoted tweets */}
                             <div className="w-100">
                                 <div className="w-100">
                                     {
@@ -206,9 +216,10 @@ const FeedCard = (props: feedcardtype) => {
                         handleQuoteModal={handleQuoteModal}
                         setTweet={setTweet}
                         quote={quote}
+                        tweetDetail={props}
                         likelength={props?.tweet_likes?.length}
                         handleLikeTweet={handleLikeTweet}
-                        setQuote={setQuote} 
+                        setQuote={setQuote}
                         setQuoteModal={function (val: boolean): void {
                             throw new Error('Function not implemented.');
                         }}

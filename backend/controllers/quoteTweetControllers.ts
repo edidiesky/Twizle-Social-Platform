@@ -28,12 +28,12 @@ const LikeAndUnlikeAQuote = asyncHandler(async (req: CustomInterface, res: Respo
   if (!userIdIncludedInTweetLikesArray) {
     const updateTweet = await QuoteTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { quote_likes: userid } }, { new: true })
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet });
   } else {
-    const updateTweet = await QuoteTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { quote_likes: userid } },{new:true})
+    const updateTweet = await QuoteTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { quote_likes: userid } }, { new: true })
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet });
 
   }
@@ -58,19 +58,19 @@ const QuoteATweet = asyncHandler(async (req: CustomInterface, res: Response) => 
     tweet_user_id: req.user?.userId,
     quote_image,
     quote_text,
-    tweet_id:req.params.id,
+    tweet_id: req.params.id,
     quote_user_id: req.body.quote_user_id
   })
   const tweet = await UserTweet.create({
     tweet_user_id: req.user?.userId,
-    tweet_image:quote_image,
-    tweet_text:quote_text,
+    tweet_image: quote_image,
+    tweet_text: quote_text,
     quote_tweet_id: req.params.id,
     quote_user_id: req.body.quote_user_id
   })
   // console.log(tweet,quote)
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ quote, tweet });
 });
 
@@ -85,17 +85,17 @@ const GetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) =
     throw new Error("These quote does not exists");
   }
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({quote});
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.status(200).json({ quote });
 
 });
 
 
 const GetSingleTweetUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) => {
   // find the tweetand aggregate the tweet data
-  const quote = await QuoteTweet.find({ tweet_id: req.params.id})
-  .sort("-createdAt")
-  .populate('tweet_id', 'tweet_image tweet_text')
+  const quote = await QuoteTweet.find({ tweet_id: req.params.id })
+    .sort("-createdAt")
+    .populate('tweet_id', 'tweet_image tweet_text')
     .populate("tweet_user_id", " username bio display_name name profile_image_url").populate("quote_user_id", " username bio display_name name profile_image_url");
 
   // check if the quote exists
@@ -104,7 +104,7 @@ const GetSingleTweetUsersQuote = asyncHandler(async (req: CustomInterface, res: 
     throw new Error("These quote does not exists");
   }
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ quote });
 
 });
@@ -114,14 +114,14 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 // User
 const GetSingleUsersQuote = asyncHandler(async (req: CustomInterface, res: Response) => {
   // find the tweetand aggregate the tweet data
-  const tweet = await QuoteTweet.findOne({ tweet_user_id: req.user?.userId, _id:req.params.id }).populate('tweet_id', 'tweet_image tweet_text')
+  const tweet = await QuoteTweet.findOne({ tweet_user_id: req.user?.userId, _id: req.params.id }).populate('tweet_id', 'tweet_image tweet_text')
   // check if the tweet exists
   if (!tweet) {
     res.status(404);
     throw new Error("These tweet does not exists");
   }
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ tweet });
 
 });

@@ -1,5 +1,4 @@
-// import bcrypt from "bcryptjs";
-import crypto from 'crypto'
+
 import bcrypt from "bcryptjs";
 import axios from 'axios'
 import jwt, { Secret } from "jsonwebtoken";
@@ -90,8 +89,8 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
   }).status(200).json({ user, token });
 });
 const generateRandomPassword = () => {
-  const length = 12; // Desired password length
-  return crypto.randomBytes(length).toString('base64').slice(0, length);
+  const length = 6; // Desired password length
+  return Math.random().toString(6).slice(-8);
 };
 const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
 

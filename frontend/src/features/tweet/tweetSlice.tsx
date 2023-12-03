@@ -266,7 +266,7 @@ export const tweetSlice = createSlice({
       localStorage.setItem("isBookMarked", JSON.stringify(action.payload.userIdIncludedInBookmarksArray));
 
 
-      state.alertText = 'Tweet Update succesfully'
+      state.alertText = 'Added to your bookmarks'
       state.showAlert = true
       state.alertType = 'success'
     })
