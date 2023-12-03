@@ -230,6 +230,10 @@ const LeftSidebarStyles = styled.div`
     @media (max-width:1180px) {
         display: none;
     }
+    transition: all .5s;
+    &:hover {
+        opacity: .7;
+    }
     }
     .top {
         @media (max-width:1180px) {

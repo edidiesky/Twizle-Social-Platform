@@ -27,7 +27,7 @@ const Feed: React.FC = () => {
                 // dispatch(cleartweet("any"))
                 dispatch(cleartweet({ payload: "any" }))
                  dispatch(getAllTweet())
-            }, 3000);
+            }, 4000);
 
             return () => clearTimeout(timeout)
            
@@ -39,7 +39,7 @@ const Feed: React.FC = () => {
         <div className="w-100 h-100">
             <Message
                 // handleClearAlert={dispatch(cleartweet("any"))}
-                showAlert={showAlert} alertText={isBookmarked ? alertText : "Removed from your bookmarks"} alertType={alertType} />
+                showAlert={showAlert} alertText={isBookmarked ?  "Removed from your bookmarks" :!isBookmarked && alertText? alertText:""} alertType={alertType} />
 
             <FeedStyles>
                 <div className="flex w-100 column">

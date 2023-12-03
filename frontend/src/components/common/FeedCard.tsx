@@ -126,9 +126,7 @@ const FeedCard = (props: feedcardtype) => {
                     tweet && <TweetModal id={props?._id} setModal={setTweet} modal={tweet} />
                 }
             </MyAnimatePresence>
-            <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
-                <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
-            </div>
+            
             <div className="flex w-90 auto item-start feed_card_wrapper gap-1">
                 {/* profile image */}
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
@@ -143,22 +141,27 @@ const FeedCard = (props: feedcardtype) => {
                 {/* tweet right card section */}
                 <div className="flex column flex-1 w-100" style={{ gap: '.7rem' }}>
                     <div className="w-100 flex column gap-1">
-                        <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column w-100'>
-                            <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                                <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
-                                    {props?.tweet_user_id?.display_name}
-                                    <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                    <span style={{ fontSize: "15px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
-                                </div>
+                       <div className="w-100 flex item-start justify-space">
+                            <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column w-100'>
+                                <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
+                                    <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
+                                        {props?.tweet_user_id?.display_name}
+                                        <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                        <span style={{ fontSize: "15px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
+                                    </div>
 
-                                {/* <span sty></span> */}
-                                <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
-                            </h4>
-                            <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
-                                {props.tweet_text}
-                            </h5>
+                                    {/* <span sty></span> */}
+                                    <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
+                                </h4>
+                                <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
+                                    {props.tweet_text}
+                                </h5>
 
-                        </Link>
+                            </Link>
+                            <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
+                                <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
+                            </div>
+                       </div>
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
@@ -311,7 +314,7 @@ const FeedCardStyles = styled.div`
         top: 8px;
         z-index: 2000;
         cursor: pointer;
-        width: 370px;
+        width: 300px;
         border-radius: 10px;
         box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
         background-color: var(--white);
@@ -422,14 +425,10 @@ li {
         
     }
     .icons2 {
-        width: 4rem;
-        height: 4rem;
+        width: 3.5rem;
+        height: 3.5rem;
         border-radius: 50%;
         transition: all .5s;
-        position: absolute;
-        right: 2%;
-        top: 8px;
-        /* z-index:40; */
         cursor: pointer;
 
         svg {

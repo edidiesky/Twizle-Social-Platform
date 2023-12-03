@@ -220,6 +220,9 @@ export const tweetSlice = createSlice({
     builder.addCase(DeleteTweet.fulfilled, (state, action) => {
 
       state.tweets = state.tweets.filter((x: tweetDeleteType) => x._id !== action.payload);
+      state.alertText = 'Tweet deleted succesfully'
+      state.showAlert = true
+      state.alertType = 'success'
     })
     builder.addCase(DeleteTweet.rejected, (state, action) => {
       state.tweetisSuccess = false

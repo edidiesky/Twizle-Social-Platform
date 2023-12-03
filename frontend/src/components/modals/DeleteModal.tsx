@@ -11,7 +11,7 @@ type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
   modal?: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDeleteTweet:()=> void;
+  handleDeleteTweet: () => void;
 }
 
 const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }) => {
@@ -52,22 +52,22 @@ const DeleteModal: React.FC<modalType> = ({ modal, setModal, handleDeleteTweet }
         exit={"exit"}
         className={"deleteCard shadow"}
       >
-       <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
-          
+        <div className="center_content h-100 justify-space w-85 py-2 auto flex column gap-1">
+
           <div className="w-85 formwraper auto flex column gap-1">
             <h4 className="fs-24 text-dark text-start text-bold">Delete Post?
-            
-            <span className="block text-grey fs-15 text-light py-1">
-                This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from search results. 
-            </span>
+
+              <span className="block text-grey fs-15 text-light py-1">
+                This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from search results.
+              </span>
             </h4>
-          
-           <div className="flex column gap-1 w-100">
+
+            <div className="flex column gap-1 w-100">
               <div onClick={handleDeleteTweet} className="btn w-100 auto btn-2 fs-16 text-white text-extra-bold">Delete
               </div>
               <div onClick={() => setModal(false)} className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Cancel
               </div>
-           </div>
+            </div>
           </div>
 
         </div>
@@ -97,14 +97,17 @@ const DeleteModalStyles = styled(motion.div)`
   .btn.btn-2 {
     background-color:var(--red);
     padding:1.5rem !important;
-
+    transition: all .5s;
     cursor: pointer;
+     &:hover {
+      opacity:.7 !important;
+    }
   }
 
   .btn.btn-1 {
     padding:1rem 1.5rem !important;
     padding:1.5rem !important;
-
+    transition: all .5s;
     background-color: transparent !important;
     color: var(--dark-1);
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -112,6 +115,7 @@ const DeleteModalStyles = styled(motion.div)`
 
     &:hover {
       background-color: var(--grey-hover) !important;
+       opacity:.7;
     }
   }
   .label {
