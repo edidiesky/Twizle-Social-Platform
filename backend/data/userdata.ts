@@ -1,7 +1,66 @@
 import bcrypt from "bcryptjs";
 
 const userdata = [
-    // 5. Center Devils
+    // 5. Lebron
+    {
+        "name": "KingJames",
+        "display_name": "Lebron James",
+        "email": "KingJames@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
+        "bio": "EST. AKRON - ST.V/M Class of '03 http://LeBronJamesFamilyFoundation.org #IPROMISE",
+        "profile_banners": "https://pbs.twimg.com/profile_banners/23083404/1529843462/600x200",
+        "followers_count": 0,
+        "following_count": 0,
+
+        "createdAt": "1/14/2020",
+        "verified": true,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1421530540063092736/xqtcu8HX_400x400.jpg",
+        "language": "English",
+        "profession": "Community",
+        location: "Follow me for a cookie",
+        website: "feastables.com"
+    },
+    // 5. Mr Beast
+    {
+        "name": "MrBeast",
+        "display_name": "MrBeast.",
+        "email": "MrBeast@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
+        "bio": "X Super Official CEO",
+        "profile_banners": "https://pbs.twimg.com/profile_banners/2455740283/1601560191/600x200",
+        "followers_count": 0,
+        "following_count": 0,
+
+        "createdAt": "1/14/2020",
+        "verified": true,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/994592419705274369/RLplF55e_400x400.jpg",
+        "language": "English",
+        "profession": "Community",
+        location: "Follow me for a cookie",
+        website: "feastables.com"
+    },
+    // 5. MCallofDuty
+    {
+        "name": "CallofDuty",
+        "display_name": "CallofDuty.",
+        "email": "CallofDuty@gmail.com",
+        password: bcrypt.hashSync("12345", 10),
+
+        "bio": "ESRB Rating: MATURE with Blood and Gore, Use of Drugs, Intense Violence, Strong Language, and Suggestive Themes. Play Call of Duty #Warzone and #MW3 now 🔥",
+        "profile_banners": "https://pbs.twimg.com/profile_banners/290097288/1701381064/600x200",
+        "followers_count": 0,
+        "following_count": 0,
+
+        "createdAt": "1/14/2020",
+        "verified": true,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1669029786780598272/L6kr4ldh_400x400.jpg",
+        "language": "English",
+        "profession": "Community",
+        location: "Follow me for a cookie",
+        website: "feastables.com"
+    },
     {
         "name": "centredevils",
         "display_name": "centredevils.",
@@ -20,26 +79,6 @@ const userdata = [
         "profession": "Community",
         location: "Manchester, UK",
         website: "centredevils.co.uk"
-    },
-    // 5. Foode
-    {
-        "name": "",
-        "display_name": ".",
-        "email": "@gmail.com",
-        password: bcrypt.hashSync("12345", 10),
-
-        "bio": "",
-        "profile_banners": "",
-        "followers_count": 0,
-        "following_count": 0,
-      
-        "createdAt": "1/14/2011",
-        "verified": false,
-        "profile_image_url": "",
-        "language": "English",
-        "profession": "Community",
-        location: "Manchester, UK",
-        website: ""
     },
     // edidiesky
     {

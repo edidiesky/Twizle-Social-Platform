@@ -52,7 +52,7 @@ const LeftSidebarIndex = () => {
 
         }, {
             title: "Messages",
-            path: '/messages',
+            path: '/',
             icon: <MessageIcon />
 
         }, {
@@ -65,11 +65,6 @@ const LeftSidebarIndex = () => {
             title: "Communities",
             path: '',
             icon: <CommunitiesIcon />
-
-        }, {
-            title: "Verified",
-            path: '',
-            icon: <BadgeIcon />
 
         },
         {

@@ -3,10 +3,8 @@ import { feedcardtype } from '../../../types/feedtype';
 import React from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
-import { CircularProgress } from '@mui/material';
 import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet } from '../../../features/tweet/tweetSlice';
-import { GetAllUserProfile } from '../../../features/auth/authReducer';
 import LoaderIndex from '../../loaders';
 import Message from '../../loaders/Message';
 
@@ -26,20 +24,20 @@ const Feed: React.FC = () => {
             const timeout = setTimeout(() => {
                 // dispatch(cleartweet("any"))
                 dispatch(cleartweet({ payload: "any" }))
-                 dispatch(getAllTweet())
+                dispatch(getAllTweet())
             }, 4000);
 
             return () => clearTimeout(timeout)
-           
+
         }
-       
+
     }, [showAlert])
 
     return (
         <div className="w-100 h-100">
             <Message
                 // handleClearAlert={dispatch(cleartweet("any"))}
-                showAlert={showAlert} alertText={isBookmarked ?  "Removed from your bookmarks" :!isBookmarked && alertText? alertText:""} alertType={alertType} />
+                showAlert={showAlert} alertText={alertText ? alertText:!isBookmarked ? "Removed from your bookmarks" : alertText} alertType={alertType} />
 
             <FeedStyles>
                 <div className="flex w-100 column">

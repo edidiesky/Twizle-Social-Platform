@@ -351,6 +351,8 @@ const PostModalStyles = styled(motion.div)`
        max-width: 100vw;
     min-width: 100vw;
     border-radius: 0px;
+    min-height: 100vh;
+    margin:0;
 
     }
   }

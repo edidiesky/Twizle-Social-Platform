@@ -115,6 +115,8 @@ const FeedCard = (props: feedcardtype) => {
                     <li onClick={() => setDrop(false)} className="flex item-center gap-1"><MuteIcon /> Mute Alexander</li>
                     <li onClick={() => setDrop(false)} className="flex item-center gap-1"><BlockIcon /> Block Alexander</li>
                     <li onClick={() => setDrop(false)} className="flex item-center gap-1"><ReportIcon /> Report tweet</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><FollowIcon /> View Post Engagement</li>
+
                 </ul>
             </div>
             <MyAnimatePresence
@@ -173,42 +175,45 @@ const FeedCard = (props: feedcardtype) => {
                     {/* quoted tweet section of the tweet card */}
                     {
                         props?.quote_tweet_id && <QuoteFeedCardStyles >
-                            <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
-                                <div onClick={() => setDrop(false)} className="dropdown_background"></div>
-
-                            </div>
-                            <div className="flex w-100 auto item-start feed_card_wrapper gap-1">
-                                <div className="image_wrappers">
-                                    <div className="image_gradient"></div>
-                                    {
-                                        props?.quote_user_id?.profile_image_url ?
-                                            <img src={props?.quote_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
-                                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
-
-                                    }
-                                </div>
-
-                                <div className="flex column flex-1" style={{ gap: '.3rem' }}>
-                                    <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
-                                        {props?.quote_user_id?.display_name}
-                                        <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                        <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.quote_user_id?.name}</span>
-                                    </h4>
-                                    <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
-                                        {props?.quote_tweet_id?.tweet_text}
-                                    </h5>
-
+                            <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="w-100">
+                                <div className={drop ? "dropdownCard  flex column active" : "dropdownCard  flex column"}>
+                                    <div onClick={() => setDrop(false)} className="dropdown_background"></div>
 
                                 </div>
-                            </div>
-                            {/* quoted tweets */}
-                            <div className="w-100">
+                                <div className="flex w-100 auto item-start feed_card_wrapper gap-1">
+                                    <div className="image_wrappers">
+                                        <div className="image_gradient"></div>
+                                        {
+                                            props?.quote_user_id?.profile_image_url ?
+                                                <img src={props?.quote_user_id?.profile_image_url} alt="images-avatar" className="avatar_profile" />
+                                                : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar_profile" className="avatar_profile" />
+
+                                        }
+                                    </div>
+
+                                    <div className="flex column flex-1" style={{ gap: '.3rem' }}>
+                                        <h4 className="fs-16 text-dark text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
+                                            {props?.quote_user_id?.display_name}
+                                            <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
+                                            <span style={{ fontSize: "15px" }} className="text-light text-grey ">@{props?.quote_user_id?.name}</span>
+                                        </h4>
+                                        <h5 style={{ paddingBottom: "1rem", fontSize: "15px", lineHeight: "20px" }} className="text_dark_grey text-light family1">
+                                            {props?.quote_tweet_id?.tweet_text}
+                                        </h5>
+
+
+                                    </div>
+                                </div>
+                                {/* quoted tweets */}
                                 <div className="w-100">
-                                    {
-                                        props?.quote_tweet_id?.tweet_image?.length > 0 && <FeedImage images={props?.quote_tweet_id?.tweet_image} />
-                                    }
+                                    <div className="w-100">
+                                        {
+                                            props?.quote_tweet_id?.tweet_image?.length > 0 && <FeedImage images={props?.quote_tweet_id?.tweet_image} />
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                        </Link>
+                            
 
                         </QuoteFeedCardStyles>
                     }
