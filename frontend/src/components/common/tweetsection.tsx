@@ -80,7 +80,7 @@ const TweetFormSection:React.FC<{
             {
                 createtweetisLoading && <LoaderIndex/>
             }
-            <div style={{ gap: "3px" }} className="w-100 flex item-start">
+            <div style={{ gap: "3px" }} className="w-100 tweetformsection_wrapper flex item-start">
                 <div className="image_wrapper">
                     {
                         userInfo?.profile_image_url ?
@@ -91,8 +91,8 @@ const TweetFormSection:React.FC<{
 
                     <div className="image_gradient"></div>
                 </div>
-                <div className="flex flex-1 column gap-1">
-                    <div className={!active ? "flex tweetTop flex-1 column item-start gap-1 active" : "flex tweetTop flex-1 column item-start gap-1"}>
+                <div className="flex w-100 column gap-1">
+                    <div className={!active ? "flex tweetTop w-100 column item-start active" : "flex tweetTop w-100 column item-start"}>
                         {
                             !active && type !== 'details' && <div style={{ color: "rgb(29, 155, 240)", fontSize: "13.5px", gap: "2px" }} className="replyBtn1 flex item-center text-bold">
                                 Everyone <span className='flex item-center justify-center'><BiChevronDown fontSize={'24px'} /></span></div>
@@ -188,7 +188,7 @@ const TweetFormSection:React.FC<{
                                 <GiIcon />
                             </label>
                         </div>
-                        <button disabled={!text && images.length === 0} onClick={handlePost} className="btn btn-3 fs-14 text-extra-bold text-white">Post</button>
+                        <button disabled={!text && images.length === 0} onClick={handlePost} className="btn btn-3 fs-13 text-extra-bold text-white">Post</button>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,10 @@ const TweetFormSectionStyles = styled.div`
     padding: 1.5rem;
     border-bottom: 1px solid var(--border);
   font-family: "CustomFont2_light", sans-serif;
-
+.tweetformsection_wrapper{
+    display:grid;
+    grid-template-columns: .5fr 1fr;
+}
     .btn-3 {
         background-color: var(--blue-1) !important;
         opacity: .6;
@@ -275,8 +278,8 @@ border-bottom: 1px solid var(--border);
     }
     }
     .icons {
-        width: 4rem;
-        height: 4rem;
+        width: 3.5rem;
+        height: 3.5rem;
         border-radius: 50%;
         transition: all .5s;
 

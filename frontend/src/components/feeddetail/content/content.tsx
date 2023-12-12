@@ -59,21 +59,25 @@ const PostDetailsContent: React.FC = () => {
                         </span>
                     </div>
                     <div style={{ borderBottom: "1px solid rgba(0,0,0,.1)" }} className="flex w-90 auto item-center gap-2 flex-wrap">
-                        <span className="fs-15 list text-grey text-light">
-                            <span className="fs-15 text-bold text-dark">50</span>
+                        <span className="fs-14 list text-grey text-light">
+                            <span className="fs-14 text-bold text-dark">50</span>
                             {" "}
                             Retweets
-                        </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-15 list text-grey text-light">
-                            <span className="fs-15 text-bold text-dark">{quotes?.length}</span>
+                        </span> <Link to={`/i/quote/${tweetDetails?._id}`} className="fs-14 list text-grey text-light">
+                            <span className="fs-14 text-bold text-dark">{quotes?.length}</span>
                             {" "}
                             Quotes
-                        </Link> <span className="fs-15 list text-grey text-light">
-                            <span className="fs-15 text-bold text-dark">5</span>
+                        </Link> <span className="fs-14 list text-grey text-light">
+                            <span className="fs-14 text-bold text-dark">
+                                {tweetDetails?.tweet_likes?.length}
+                            </span>
                             {" "}
                             Likes
                         </span>
-                        <span className="fs-15 list text-grey text-light">
-                            <span className="fs-15 text-bold text-dark">15</span>
+                        <span className="fs-14 list text-grey text-light">
+                            <span className="fs-14 text-bold text-dark">
+                                {tweetDetails?.tweet_bookmarks?.length}
+                            </span>
                             {" "}
                             Bookmarks
                         </span>
@@ -95,7 +99,7 @@ const PostDetailsContent: React.FC = () => {
                                 <div className="icons icon3 flex item-center justify-center">
                                     <LikeIcon type='large' />
                                 </div>
-                                23
+                                {tweetDetails?.tweet_likes?.length}
                             </div>
                             <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
                                 <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
