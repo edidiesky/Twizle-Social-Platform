@@ -119,7 +119,7 @@ import commentRoute from "./routes/commentRoute";
 app.use("/api/v1/tweet", usertweetRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/upload", uploadRoute);
+// app.use("/api/v1/upload", uploadRoute);
 app.use("/api/v1/quote", quoteRoute);
 app.use("/api/v1/conversation", conversationRoute);
 app.use("/api/v1/message", messageRoute);
