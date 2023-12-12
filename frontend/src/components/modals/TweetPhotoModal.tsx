@@ -49,7 +49,7 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   }
 
   const HandleCloseTweetPhotoModal = () => {
-    dispatch(clearTweetId("any"))
+    // dispatch(clearTweetId("any"))
     dispatch(offTweetPhototModal("any"))
   }
   return (
