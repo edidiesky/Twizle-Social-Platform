@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import streamifier from "streamifier";
 dotenv.config();
 import cloudinary from "cloudinary";
 import multer from "multer";
@@ -39,13 +40,11 @@ router.post("/", upload.array("files", 4), async (req, res) => {
     }
 
     // Optionally, you can respond with the URLs of the uploaded images
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
     res.json({ success: true, message: "Images uploaded successfully", urls });
   } catch (error) {
     console.error("Error uploading images:", error);
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
     res
       .status(500)
       .json({ success: false, message: "Failed to upload images" });
@@ -59,13 +58,11 @@ router.post("/single", upload.single("files"), async (req, res) => {
 
     const result = await cloudinaryModule.uploader.upload(files?.path);
     // Optionally, you can respond with the URLs of the uploaded images
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
     res.json({ success: true, message: "Images uploaded successfully", urls: result?.secure_url });
   } catch (error) {
     console.error("Error uploading images:", error);
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
     res
       .status(500)
       .json({ success: false, message: "Failed to upload images" });
