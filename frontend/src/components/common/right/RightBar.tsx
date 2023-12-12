@@ -64,7 +64,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                     } */}
                         <div className="verfiy_wrapper w-90 auto flex column item-start gap-1">
                             <h3 className="text-extra-bold">Subscribe to Premium</h3>
-                            <h4 className="fs-16 text-extra-bold">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
+                            <h4 className="fs-16 text-light">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</h4>
                             <div className="btn text-extra-bold btn-3 fs-16 text-white">Get Verfied</div>
                         </div>
                         {

@@ -116,14 +116,14 @@ import commentRoute from "./routes/commentRoute";
 
 
 
-app.use("/api/v1/tweet", usertweetRoute);
-app.use("/api/v1/user", userRoute);
-app.use("/api/v1/auth", authRoute);
-// app.use("/api/v1/upload", uploadRoute);
-app.use("/api/v1/quote", quoteRoute);
-app.use("/api/v1/conversation", conversationRoute);
-app.use("/api/v1/message", messageRoute);
-app.use("/api/v1/comment", commentRoute);
+app.use("tweet", usertweetRoute);
+app.use("user", userRoute);
+app.use("auth", authRoute);
+// app.use("upload", uploadRoute);
+app.use("quote", quoteRoute);
+app.use("conversation", conversationRoute);
+app.use("message", messageRoute);
+app.use("comment", commentRoute);
 
 
 const mongoUrl = process.env.MONGO_URL;
