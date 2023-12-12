@@ -1,14 +1,15 @@
 import React from 'react';
 type iconType = {
-    type?: string
+    type?: string,
+    color?: string,
 }
-const MessageIcon: React.FC<iconType> = ({ type }) => {
+const MessageIcon: React.FC<iconType> = ({ type, color }) => {
 
     if (type === 'large') {
         return (
             <span style={{
                 width: "23px",
-                color: "var(--grey-1)",
+                color:color?color: "var(--grey-1)",
                 height: "23px",
 
                 position: "relative",
@@ -35,7 +36,7 @@ const MessageIcon: React.FC<iconType> = ({ type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-1)",
+            color:color?color: "var(--grey-1)",
             height: "1.25em",
             position: "relative",
             fill:  "currentcolor",

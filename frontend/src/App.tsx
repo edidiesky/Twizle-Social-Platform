@@ -154,7 +154,9 @@ export default function App() {
         {/* tweet Details Photo */}
         {/* tweet detail  route */}
         <Route path=":name/status/:id/photo" element={<Suspense fallback={<></>}>
-          <TweetPhotoModal />
+          <TweetPhotoModal setModal={function (val: boolean): void {
+            throw new Error("Function not implemented.");
+          } } />
         </Suspense>
         }
         />

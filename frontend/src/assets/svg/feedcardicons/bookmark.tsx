@@ -2,14 +2,15 @@ import React from 'react';
 type iconType = {
     isClicked?: boolean,
     type?: string,
+    color?: string,
 }
-const BookmarkIcon: React.FC<iconType> = ({ isClicked, type }) => {
+const BookmarkIcon: React.FC<iconType> = ({ isClicked, type, color }) => {
 
 
     return (
         <span style={{
             width: "18px",
-            color: "var(--grey-1)",
+            color: color ? color: "var(--grey-1)",
             height: "18px",
             position: "relative",
             fill: isClicked ? 'var(--blue-1)' : "currentcolor",

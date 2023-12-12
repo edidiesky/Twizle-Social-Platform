@@ -2,13 +2,14 @@ import React from 'react';
 type iconType = {
 
     type?: string,
+    color?: string,
 }
-const DownloadIcon: React.FC<iconType> = ({ type }) => {
+const DownloadIcon: React.FC<iconType> = ({ type, color }) => {
     if (type === 'large') {
         return (
             <span style={{
                 width: "23px",
-                color: "var(--grey-3)",
+                color: color ? color : "var(--grey-3)",
                 height: "23px",
 
                 position: "relative",
@@ -37,7 +38,7 @@ const DownloadIcon: React.FC<iconType> = ({ type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-3)",
+            color: color ? color : "var(--grey-3)",
             height: "1.25em",
 
             position: "relative",

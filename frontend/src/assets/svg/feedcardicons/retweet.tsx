@@ -1,15 +1,16 @@
 import React from 'react';
 type iconType = {
     isClicked?: boolean,
-    type?:string,
+    type?: string,
+    color?: string,
 }
-const RetweetIcon: React.FC<iconType> = ({ isClicked, type }) => {
+const RetweetIcon: React.FC<iconType> = ({ isClicked, type, color }) => {
 
     if(type === 'large') {
         return (
             <span style={{
                 width: "18px",
-                color: "var(--grey-1)",
+                color: color?color:"var(--grey-1)",
                 height: "18px",
                 position: "relative",
                 fill:  "currentcolor",
@@ -37,7 +38,7 @@ const RetweetIcon: React.FC<iconType> = ({ isClicked, type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: "var(--grey-1)",
+            color: color?color:"var(--grey-1)",
             height: "1.25em",
             position: "relative",
             fill: isClicked ? "blue" : "currentcolor",

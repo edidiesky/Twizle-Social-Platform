@@ -1,14 +1,16 @@
 import React from 'react';
 type iconType = {
     isClicked?: boolean,
-    type?: string
+    type?: string,
+    color?: string,
+
 }
-const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
+const LikeIcon: React.FC<iconType> = ({ isClicked, type, color }) => {
     if (type === 'large') {
         return (
             <span style={{
                 width: "23px",
-                color: "var(--grey-1)",
+                color: color ? color: "var(--grey-1)",
                 height: "23px",
 
                 position: "relative",
@@ -39,7 +41,7 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type }) => {
     return (
         <span style={{
             width: "1.25em",
-            color: isClicked ? 'red' : "var(--grey-1)",
+            color: color ? color: 'red',
             height: "1.25em",
             position: "relative",
             fill: isClicked ? "var(--red)" : "var(--grey-1)",

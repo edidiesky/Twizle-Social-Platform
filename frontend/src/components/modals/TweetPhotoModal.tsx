@@ -18,6 +18,7 @@ import { GetSingleQuoteTweetDetails } from "../../features/quote/quoteReducer";
 import PostFeedCard from "../feeddetail/card";
 import PostDetailsComments from "../feeddetail/content/comments";
 import TweetFormSection from "../common/tweetsection";
+import FeedCardBottom from "../common/FeedCardBottom";
 
 type modalType = {
   modal?: boolean;
@@ -64,11 +65,44 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
         className={"TweetPhotoModalCard shadow"}
       >
         <div className="TweetPhotoModalCard_left w-100 flex item-center justify-center">
-          <div className="TweetPhotoModalCard_left_wrapper flex column gap-2">
+          <div className="TweetPhotoModalCard_left_wrapper flex column gap-1">
             <div className="w-100">
               <img src={tweetDetails?.tweet_image[0 ]} alt="" className="w-100" />
             </div>
-            <div className="w-100 flex item-center gap-2"></div>
+            <div className="w-100 flex item-center gap-2">
+              <div className="flex w-100 column fs-18 text-light text-grey text-light">
+                
+                <div className="flex w-90 auto justify-space py-1 item-center w-90 gap-2">
+                  <div className="flex w-100 auto item-center fs-14 text-light feedtags_wrapper text-white">
+                    <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
+                      <div className="icons icon1 flex item-center justify-center">
+                        <MessageIcon type='large' color={"#fff"} />
+                      </div>
+                      23
+                    </div>
+                    <div className="flex iconwrapper flex-1 justify-center text_2 item-center" style={{ gap: ".3rem" }}>
+                      <div className="icons icon2 flex item-center justify-center">
+                        <RetweetIcon type='large' color={"#fff"} />
+                      </div>
+                      144
+                    </div><div className="flex iconwrapper flex-1 justify-center text-3 item-center" style={{ gap: ".3rem" }}>
+                      <div className="icons icon3 flex item-center justify-center">
+                        <LikeIcon type='large' color={"#fff"} />
+                      </div>
+                      {tweetDetails?.tweet_likes?.length}
+                    </div>
+                    <div className="flex iconwrapper flex-1 justify-center item-center" style={{ gap: ".3rem" }}>
+                      <div onClick={handleBookMark} className="icons icon1 flex item-center justify-center">
+                        <BookmarkIcon isClicked={isBookMarked} color={"#fff"} type='large' />
+                      </div>
+                      {tweetDetails?.tweet_bookmarks?.length}
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
         {/* tweet photo modal card right */}
