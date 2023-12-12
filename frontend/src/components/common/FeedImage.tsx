@@ -1,62 +1,90 @@
 import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { Link } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import styled from "styled-components";
 
 type uploadType = {
-    images: string[]
+    images: string[],
+    id?: string,
+    name?: string,
 }
 
-const FeedImage: React.FC<uploadType> = ({ images }) => {
+const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
 
     if (images.length === 3) {
         return (
-            <FeedImageWrapperStyles>
-                <FeedImageStyles
-                    className="lenght1"
-                >
-                    <div className="imageWrapper lenght1 images w-100" key={1}>
-                        <img src={images[0]} alt="" className="image images" />
-                        <div className="imagegradient w-100 h-100"></div>
-                    </div>
-                    <FeedImageStyles className="thirdImageWrapper">
-                        {
-                            images.slice(1, 3).map((x, index) => {
-                                return <div className="imageWrapper w-100" key={index}>
-                                    <img src={x} alt="" className="image" />
-                                    <div className="imagegradient w-100 h-100"></div>
+            <Link to={`/${name}/status/${id}/photo`}>
+                <FeedImageWrapperStyles>
+                    <FeedImageStyles
+                        className="lenght1"
+                    >
+                        <div className="imageWrapper lenght1 images w-100" key={1}>
+                            <img src={images[0]} alt="" className="image images" />
+                            <div className="imagegradient w-100 h-100"></div>
+                        </div>
+                        <FeedImageStyles className="thirdImageWrapper">
+                            {
+                                images.slice(1, 3).map((x, index) => {
+                                    return <div className="imageWrapper w-100" key={index}>
+                                        <img src={x} alt="" className="image" />
+                                        <div className="imagegradient w-100 h-100"></div>
 
-                                </div>
-                            })
-                        }
+                                    </div>
+                                })
+                            }
+                        </FeedImageStyles>
+
                     </FeedImageStyles>
-
-                </FeedImageStyles>
-            </FeedImageWrapperStyles>
+                </FeedImageWrapperStyles>
+            </Link>
             // <h2>hello</h2>
         );
     }
     if (images.length === 1) {
         return (
-            <FeedImageWrapperStyles className="active">
-                <FeedImageStyles
-                    className="active"
-                >
-                    <div className="imageWrappers firstImageWrapper h-100 w-100">
-                        <img src={images[0]} alt="" className="image w-100 h-100" />
+            <Link to={`/${name}/status/${id}/photo`}>
+                <FeedImageWrapperStyles className="active">
+                    <FeedImageStyles
+                        className="active"
+                    >
+                        <div className="imageWrappers firstImageWrapper h-100 w-100">
+                            <img src={images[0]} alt="" className="image w-100 h-100" />
 
-                        {/* <div className="imagegradient absolute w-100 h-100"></div> */}
-                    </div>
-                </FeedImageStyles>
-            </FeedImageWrapperStyles>
+                            {/* <div className="imagegradient absolute w-100 h-100"></div> */}
+                        </div>
+                    </FeedImageStyles>
+                </FeedImageWrapperStyles>
+            </Link>
             // <h2>hello</h2>
         );
     }
-    if(images.length === 4) {
+    if (images.length === 4) {
         return (
+            <Link to={`/${name}/status/${id}/photo`}>
+                <FeedImageWrapperStyles>
+                    <FeedImageStyles
+                        className="wrapper"
+                    >
+                        {
+                            images.map((x, index) => {
+                                return <div className="imageWrapper w-100" key={index}>
+                                    <img src={x} alt="" className="image" />
+
+                                    <div className="imagegradient w-100 h-100"></div>
+                                </div>
+                            })
+                        }
+                    </FeedImageStyles>
+                </FeedImageWrapperStyles>
+            </Link>
+            // <h2>hello</h2>
+        );
+    }
+    return (
+        <Link to={`/${name}/status/${id}/photo`}>
             <FeedImageWrapperStyles>
                 <FeedImageStyles
-                className="wrapper"
                 >
                     {
                         images.map((x, index) => {
@@ -69,24 +97,7 @@ const FeedImage: React.FC<uploadType> = ({ images }) => {
                     }
                 </FeedImageStyles>
             </FeedImageWrapperStyles>
-            // <h2>hello</h2>
-        );
-    }
-    return (
-        <FeedImageWrapperStyles>
-            <FeedImageStyles
-            >
-                {
-                    images.map((x, index) => {
-                        return <div className="imageWrapper w-100" key={index}>
-                            <img src={x} alt="" className="image" />
-
-                            <div className="imagegradient w-100 h-100"></div>
-                        </div>
-                    })
-                }
-            </FeedImageStyles>
-        </FeedImageWrapperStyles>
+        </Link>
         // <h2>hello</h2>
     );
 }

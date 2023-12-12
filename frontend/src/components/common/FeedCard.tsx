@@ -167,7 +167,7 @@ const FeedCard = (props: feedcardtype) => {
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
-                                <FeedImage images={props.tweet_image} />
+                                <FeedImage images={props.tweet_image} id={props?._id} name={props?.tweet_user_id?.name} />
                             </div>
                         }
                     </div>
