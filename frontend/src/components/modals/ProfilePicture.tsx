@@ -46,7 +46,7 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
             "Content-Type": "multipart/form-data",
           },
         };
-        const { data } = await axios.post("/api/v1/upload/single", formData, config);
+        const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/upload/single`, formData, config);
 
 
         setImage(data.urls)

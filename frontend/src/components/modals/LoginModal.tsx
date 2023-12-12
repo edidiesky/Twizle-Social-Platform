@@ -41,7 +41,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
 
   useEffect(() => {
     if (loginisSuccess) {
-    const timeout = setTimeout(() => {
+      const timeout = setTimeout(() => {
         navigate('/')
       }, 3000);
 
@@ -78,10 +78,10 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
               <div onClick={() => setModal(false)} className="icons flex item-center justify-center"><RxCross2 fontSize={'20px'} /></div>
             </div>
           </div>
-        </div> 
+        </div>
         <div className="center_content h-100 justify-space w-85 auto flex column gap-1">
           <div style={{ width: "70%" }} className="hidden w-85 auto">
-          
+
           </div>
           <div className="w-85 formwraper auto flex column gap-3">
             <h4 className="fs-35 text-dark text-center text-extra-bold">Sign in to Twitter</h4>
@@ -104,12 +104,12 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
                   <FormInput required={true} state={password} type='password' label={'Password'} setState={setPassword} />
 
                 </div>
-                  <div className="btn_wrapper flex column gap-1 w-100">
-                    <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
-                    <button disabled={loginisSuccess || !password || !email} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
-                    </button>
-                  </div>
-                
+                <div className="btn_wrapper flex column gap-1 w-100">
+                  <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+                  <button disabled={loginisSuccess || !password || !email} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
+                  </button>
+                </div>
+
               </form>
 
 
@@ -140,6 +140,9 @@ const RegisterModalStyles = styled(motion.div)`
   .formwraper {
     padding-bottom: 3rem;
     width: 70%;
+        @media (max-width:580px) {
+      width: 90%;
+    }
   }
   .btn_wrapper{
     margin-top: 3rem;
@@ -286,6 +289,12 @@ const RegisterModalStyles = styled(motion.div)`
     }
     @media (max-width:580px) {
       width: 90%;
+      min-height:100vh;
+    max-width: 100vw;
+    min-width: 100vw;
+    border-radius:0;
+
+
     }
 
   }

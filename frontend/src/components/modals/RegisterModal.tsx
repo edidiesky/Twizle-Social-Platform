@@ -328,11 +328,13 @@ const RegisterModalStyles = styled(motion.div)`
     @media (max-width:980px) {
       width: 70%;
     }
-    @media (max-width:480px) {
-     
-       max-width: 100vw;
+        @media (max-width:580px) {
+      width: 90%;
+      min-height:100vh;
+    max-width: 100vw;
     min-width: 100vw;
-    border-radius: 0px;
+    border-radius:0;
+
 
     }
 

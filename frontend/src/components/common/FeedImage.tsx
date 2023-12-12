@@ -152,6 +152,7 @@ min-height: 20rem;
 
 }
 &.thirdImageWrapper {
+    grid-template-columns: 1fr;
     .imageWrapper {
            &:nth-child(1) {
         border-top-right-radius: 12px;

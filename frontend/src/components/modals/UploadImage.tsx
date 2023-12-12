@@ -4,13 +4,13 @@ import { RxCross2 } from "react-icons/rx";
 import styled from "styled-components";
 
 type uploadType = {
-    images: string[], 
+    images: string[],
     setImages: (value: string[]) => void
 }
 
-const UploadImage: React.FC<uploadType> = ({images, setImages}) => {
-   
-    const handleDeleteListUpload = (listindex?:Number) => {
+const UploadImage: React.FC<uploadType> = ({ images, setImages }) => {
+
+    const handleDeleteListUpload = (listindex?: Number) => {
         const result = images.filter((x, index) => index !== listindex);
         setImages(result);
     };
@@ -52,7 +52,7 @@ const UploadImage: React.FC<uploadType> = ({images, setImages}) => {
                     return <div className="imageWrapper w-100" key={index}>
                         <img src={x} alt="" className="image" />
                         <div
-                            onClick={()=>handleDeleteListUpload(index)}
+                            onClick={() => handleDeleteListUpload(index)}
                             className="icon delete"
                         >
                             <RxCross2 />
@@ -73,6 +73,11 @@ display:grid;
 gap:7px;
 grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     height: 30rem;
+
+&.lenght1 {
+    grid-template-columns: 1fr 1fr;
+
+}
 
 &.lenght1 {
     grid-template-columns: 1fr 1fr;
