@@ -25,6 +25,7 @@ import { useAppDispatch, useAppSelector } from "./hooks/reduxtoolkit";
 import { getBackgroundTheme, getColorTheme } from "./features/theme/themeSlice";
 import ProfileIndex from "./screens/Profile";
 import NavBottomHeader from "./components/common/NavBottomHeader";
+import TweetPhotoModal from "./components/modals/TweetPhotoModal";
 // import { getLoginAuthDetails } from "./features/auth/authReducer";
 
 export default function App() {
@@ -150,6 +151,13 @@ export default function App() {
         }
         />
 
+        {/* tweet Details Photo */}
+        {/* tweet detail  route */}
+        <Route path=":name/status/:id/photo" element={<Suspense fallback={<></>}>
+          <TweetPhotoModal />
+        </Suspense>
+        }
+        />
       </Routes>
     </div>
   );
