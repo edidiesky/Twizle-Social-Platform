@@ -3,6 +3,8 @@ import { BsThreeDots } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
+import { getTweetId, onTweetPhototModal } from "../../features/tweet/tweetSlice";
 
 type uploadType = {
     images: string[],
@@ -11,10 +13,16 @@ type uploadType = {
 }
 
 const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
+  const dispatch = useAppDispatch()
+
+  const handlePhotoModal = ()=> {
+      dispatch(getTweetId(id))
+      dispatch(onTweetPhototModal("any"))
+  }
 
     if (images.length === 3) {
         return (
-            <Link to={`/${name}/status/${id}/photo`}>
+            <div onClick={()=> handlePhotoModal()}>
                 <FeedImageWrapperStyles>
                     <FeedImageStyles
                         className="lenght1"
@@ -37,13 +45,13 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
 
                     </FeedImageStyles>
                 </FeedImageWrapperStyles>
-            </Link>
+            </div>
             // <h2>hello</h2>
         );
     }
     if (images.length === 1) {
         return (
-            <Link to={`/${name}/status/${id}/photo`}>
+            <div onClick={()=> handlePhotoModal()}>
                 <FeedImageWrapperStyles className="active">
                     <FeedImageStyles
                         className="active"
@@ -55,13 +63,13 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
                         </div>
                     </FeedImageStyles>
                 </FeedImageWrapperStyles>
-            </Link>
+            </div>
             // <h2>hello</h2>
         );
     }
     if (images.length === 4) {
         return (
-            <Link to={`/${name}/status/${id}/photo`}>
+            <div onClick={()=> handlePhotoModal()}>
                 <FeedImageWrapperStyles>
                     <FeedImageStyles
                         className="wrapper"
@@ -77,12 +85,12 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
                         }
                     </FeedImageStyles>
                 </FeedImageWrapperStyles>
-            </Link>
+            </div>
             // <h2>hello</h2>
         );
     }
     return (
-        <Link to={`/${name}/status/${id}/photo`}>
+        <div onClick={()=> handlePhotoModal()}>
             <FeedImageWrapperStyles>
                 <FeedImageStyles
                 >
@@ -97,7 +105,7 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
                     }
                 </FeedImageStyles>
             </FeedImageWrapperStyles>
-        </Link>
+        </div>
         // <h2>hello</h2>
     );
 }

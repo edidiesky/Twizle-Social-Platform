@@ -80,7 +80,7 @@ const TweetFormSection:React.FC<{
             {
                 createtweetisLoading && <LoaderIndex/>
             }
-            <div style={{ gap: "3px" }} className="w-100 tweetformsection_wrapper flex item-start">
+            <div style={{ gap: "10px" }} className="w-100 tweetformsection_wrapper flex item-start">
                 <div className="image_wrapper">
                     {
                         userInfo?.profile_image_url ?
@@ -203,7 +203,7 @@ const TweetFormSectionStyles = styled.div`
   font-family: "CustomFont2_light", sans-serif;
 .tweetformsection_wrapper{
     display:grid;
-    grid-template-columns: .5fr 1fr;
+    grid-template-columns: 40px 1fr;
 }
     .btn-3 {
         background-color: var(--blue-1) !important;

@@ -19,32 +19,38 @@ import PostFeedCard from "../feeddetail/card";
 import PostDetailsComments from "../feeddetail/content/comments";
 import TweetFormSection from "../common/tweetsection";
 import FeedCardBottom from "../common/FeedCardBottom";
+import { clearTweetId, offTweetPhototModal } from "../../features/tweet/tweetSlice";
 
 type modalType = {
   modal?: boolean;
   setModal: (val: boolean) => void;
-  setTab?: any
+  setTab?: any,
 }
 
 const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
-  const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
   const { commentisLoading, commentisSuccess } = useAppSelector(store => store.comment)
-  const { id } = useParams()
+ 
   const [bookmark, setBookMark] = useState<boolean>(false)
 
-  const { tweets, tweetDetails, isBookMarked } = useAppSelector(store => store.tweet)
+  const { tweets, tweetDetails, isBookMarked, tweet_photo_id } = useAppSelector(store => store.tweet)
   const { quotes } = useAppSelector(store => store.quotes)
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   React.useEffect(() => {
-    dispatch(GetSingleTweetDetails({ Detailsdata: id }))
-  }, [id, commentisSuccess])
-  React.useEffect(() => {
-    dispatch(GetSingleQuoteTweetDetails({ Detailsdata: id }))
-  }, [id])
+    if (tweet_photo_id) {
+      dispatch(GetSingleTweetDetails({ Detailsdata: tweet_photo_id }))
+      dispatch(GetSingleQuoteTweetDetails({ Detailsdata: tweet_photo_id }))
+    }
+
+  }, [tweet_photo_id, commentisSuccess])
   const handleBookMark = () => {
-    dispatch(BookMarkATweet({ Detailsdata: id }))
+    dispatch(BookMarkATweet({ Detailsdata: tweet_photo_id }))
+  }
+
+  const HandleCloseTweetPhotoModal = ()=> {
+    dispatch(clearTweetId("any"))
+    dispatch(offTweetPhototModal("any"))
   }
   return (
     <TweetPhotoModalStyles
@@ -53,15 +59,18 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      <div onClick={() => setModal(false)} className="cancel_icon text-dark flex item-center justify-center">
+      <div onClick={HandleCloseTweetPhotoModal} className="cancel_icon text-dark flex item-center justify-center">
         <RxCross2 fontSize={'20px'} />
       </div>
-      <div className="backdrop" onClick={() => setModal(false)}></div>
+      <div className="backdrop" onClick={HandleCloseTweetPhotoModal}></div>
       {/* {
         uploading && <LoaderIndex/>
       } */}
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, visibility: "hidden" }}
+        exit={{ opacity: 0, visibility: "hidden" }}
+        animate={{ opacity: 1, visibility: "visible" }}
         className={"TweetPhotoModalCard shadow"}
       >
         <div className="TweetPhotoModalCard_left w-100 flex item-center justify-center">
@@ -190,7 +199,7 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
           }
           <PostDetailsComments />
         </div>
-      </div>
+      </motion.div>
     </TweetPhotoModalStyles>
     // <h2>hello</h2>
   );
@@ -205,7 +214,7 @@ const TweetPhotoModalStyles = styled(motion.div)`
     left: 50%;
     transform: translateX(-50%);
   display: flex;
-  z-index: 3800;
+  z-index: 100800;
   align-items: center;
   justify-content: center;
   top: 0;
@@ -217,7 +226,7 @@ const TweetPhotoModalStyles = styled(motion.div)`
         position:absolute;
         left:1%;
         top: 3%;
-    z-index:45;
+    z-index:55;
     cursor:pointer;
     svg {
       color:#fff;

@@ -33,6 +33,7 @@ interface tweetState {
   tweetisSuccess?: boolean,
   tweetisError?: boolean,
 
+  tweet_photo_id?:string,
   createtweetisLoading?: boolean,
   createtweetisSuccess?: boolean,
   createtweetisError?: boolean,
@@ -41,7 +42,8 @@ interface tweetState {
   showAlert?: boolean,
   alertType?: string,
 
-  modal?:boolean,
+  modal?: boolean,
+  tweetphotomodal? :boolean,
   sidebar?:boolean,
   userIdIncludedInTweetLikesArray?:boolean
 
@@ -57,6 +59,7 @@ const initialState: tweetState = {
   tweets: tweetdata ? tweetdata:[],
   usertweets: [],
   bookmarks: [],
+  tweet_photo_id: '',
 
 
   tweetisLoading: false,
@@ -106,6 +109,21 @@ export const tweetSlice = createSlice({
       state.modal = false
     },
 
+    onTweetPhototModal: (state, action) => {
+      state.tweetphotomodal = true
+    },
+    offTweetPhototModal: (state, action) => {
+      state.tweetphotomodal = false
+    },
+
+    getTweetId: (state, action) => {
+      state.tweet_photo_id = action.payload
+    },
+
+
+    clearTweetId: (state, action) => {
+      state.tweet_photo_id = 'action.payload'
+    },
     // toggle sidebar
     ToggleSidebar: (state, action) => {
       state.sidebar = !state.sidebar
@@ -352,7 +370,8 @@ export const tweetSlice = createSlice({
   },
 })
 
-export const { cleartweet, ToggelDisplayModal, offDisplayModal, ToggleSidebar, offSidebar } = tweetSlice.actions
+export const { cleartweet, ToggelDisplayModal, offDisplayModal, ToggleSidebar,
+  offSidebar, onTweetPhototModal, offTweetPhototModal, getTweetId, clearTweetId } = tweetSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.tweet.value

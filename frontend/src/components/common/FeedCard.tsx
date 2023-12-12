@@ -23,10 +23,11 @@ import FeedCardBottom from './FeedCardBottom';
 import MyAnimatePresence from '../../utils/AnimatePresence';
 import { QuoteFeedCardStyles } from '../quote/QuoteCard';
 import Message from '../loaders/Message';
+import TweetPhotoModal from '../modals/TweetPhotoModal';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
-    const { userIdIncludedInTweetLikesArray, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
+    const { userIdIncludedInTweetLikesArray,tweetphotomodal, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
 
     const createdAt = moment(props?.createdAt);
@@ -86,7 +87,6 @@ const FeedCard = (props: feedcardtype) => {
 
     return (
         <FeedCardStyles key={props._id}>
-           
             <MyAnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
@@ -167,7 +167,7 @@ const FeedCard = (props: feedcardtype) => {
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
-                                <FeedImage images={props.tweet_image} id={props?._id} name={props?.tweet_user_id?.name} />
+                                <FeedImage id={props?._id} images={props.tweet_image} name={props?.tweet_user_id?.name} />
                             </div>
                         }
                     </div>
@@ -208,7 +208,7 @@ const FeedCard = (props: feedcardtype) => {
                                 <div className="w-100">
                                     <div className="w-100">
                                         {
-                                            props?.quote_tweet_id?.tweet_image?.length > 0 && <FeedImage images={props?.quote_tweet_id?.tweet_image} />
+                                            props?.quote_tweet_id?.tweet_image?.length > 0 && <FeedImage id={props?._id} images={props?.quote_tweet_id?.tweet_image} />
                                         }
                                     </div>
                                 </div>

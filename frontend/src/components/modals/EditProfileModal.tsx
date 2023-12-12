@@ -105,7 +105,7 @@ const AuthModal: React.FC<modalType> = ({ modal, setModal }) => {
         const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/upload/single`, formData, config);
 
 
-        setImage(data.urls)
+        setBanner(data.urls)
         setAlert(true);
         setUploading(false);
       } catch (err) {
@@ -425,8 +425,8 @@ overflow:auto;
     @media (max-width:980px) {
       width: 70%;
     }
-    @media (max-width:480px) {
-      width: 90%;
+    @media (max-width:580px) {
+      width: 100vw;
        max-width: 100vw;
     min-width: 100vw;
     border-radius: 0px;
