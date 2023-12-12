@@ -16,11 +16,11 @@ import {
 // const BookMarked = localStorage.getItem("isBookMarked");
 
 interface tweetDeleteType {
-_id?:string
+  _id?: string
 }
 
 const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
-const photo_tweet_id = localStorage.getItem("photo_tweet_id") 
+const photo_tweet_id = localStorage.getItem("photo_tweet_id")
 
 // Define a type for the tweet state
 interface tweetState {
@@ -34,7 +34,7 @@ interface tweetState {
   tweetisSuccess?: boolean,
   tweetisError?: boolean,
 
-  tweet_photo_id?:string,
+  tweet_photo_id?: string,
   createtweetisLoading?: boolean,
   createtweetisSuccess?: boolean,
   createtweetisError?: boolean,
@@ -44,9 +44,9 @@ interface tweetState {
   alertType?: string,
 
   modal?: boolean,
-  tweetphotomodal? :boolean,
-  sidebar?:boolean,
-  userIdIncludedInTweetLikesArray?:boolean
+  tweetphotomodal?: boolean,
+  sidebar?: boolean,
+  userIdIncludedInTweetLikesArray?: boolean
 
 
 
@@ -57,10 +57,10 @@ interface tweetState {
 const initialState: tweetState = {
   tweetDetails: null,
 
-  tweets: tweetdata ? tweetdata:[],
+  tweets: tweetdata ? tweetdata : [],
   usertweets: [],
   bookmarks: [],
-  tweet_photo_id: photo_tweet_id ? photo_tweet_id: '',
+  tweet_photo_id: photo_tweet_id ? photo_tweet_id : '',
 
 
   tweetisLoading: false,
@@ -83,7 +83,7 @@ const initialState: tweetState = {
   createtweetisLoading: false,
   createtweetisSuccess: false,
   createtweetisError: false,
-  userIdIncludedInTweetLikesArray:false
+  userIdIncludedInTweetLikesArray: false
 
 }
 
@@ -105,7 +105,7 @@ export const tweetSlice = createSlice({
     },
     ToggelDisplayModal: (state, action) => {
       state.modal = !state.modal
-    }, 
+    },
     offDisplayModal: (state, action) => {
       state.modal = false
     },
@@ -292,7 +292,7 @@ export const tweetSlice = createSlice({
       localStorage.setItem("isBookMarked", JSON.stringify(action.payload.userIdIncludedInBookmarksArray));
 
 
-      state.alertText = 'Added to your bookmarks'
+      state.alertText = state.isBookMarked === false ? 'Removed from your bookmarks' : 'Added to your bookmarks'
       state.showAlert = true
       state.alertType = 'success'
     })
@@ -313,11 +313,12 @@ export const tweetSlice = createSlice({
     builder.addCase(LikeAndUnlikeATweet.fulfilled, (state, action) => {
       state.tweetisSuccess = true
       state.tweetDetails = action.payload.tweetDetails
+      state.isLiked = action.payload.userIdIncludedInTweetLikesArray
       state.tweets = action.payload.tweet
       localStorage.setItem("tweet", JSON.stringify(action.payload.tweet));
 
       state.userIdIncludedInTweetLikesArray = action.payload.userIdIncludedInTweetLikesArray
-      state.alertText = 'Tweet Update succesfully'
+      state.alertText = state.isLiked ? 'Tweet Liked succesfully' : "Tweet Unliked Successfully"
       state.showAlert = true
       state.alertType = 'success'
     })

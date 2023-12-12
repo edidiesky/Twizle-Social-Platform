@@ -68,7 +68,7 @@ const Message: React.FC<messageprops> = ({
     <MessageContent
       className={
         showAlert
-          ? "gap-1 flex item-center justify-center active"
+          ? "gap-1 flex item-center justify-center massageactive"
           : "gap-1 flex item-center justify-center"
       }
     >
@@ -103,7 +103,7 @@ const MessageContent = styled.div`
   /* transform: translateY(-1000%); */
   bottom: -100vh;
 
-  &.active {
+  &.massageactive {
     bottom: 5%;
   /* bottom: -1000%; */
 

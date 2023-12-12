@@ -36,31 +36,36 @@ const Feed: React.FC = () => {
     }, [showAlert])
 
     return (
-        <div className="w-100 h-100">
+
+        <>
             <Message
-                // handleClearAlert={dispatch(cleartweet("any"))}
-                showAlert={showAlert} alertText={alertText ? alertText:!isBookmarked ? "Removed from your bookmarks" : alertText} alertType={alertType} />
+                showAlert={showAlert} alertText={alertText} alertType={alertType} />
 
-            <FeedStyles>
-                <div className="flex w-100 column">
-                    {
-                        tweets?.length === 0 ? <div className="flex py-2 w-100 justify-center">
+            <div className="w-100 h-100">
 
-                            <LoaderIndex type="small" />
 
-                        </div> : <>
-                            {
-                                tweets?.map((value: feedcardtype) => {
-                                    return <FeedCard {...value} key={value?._id} />
-                                })
-                            }
-                        </>
-                    }
+                <FeedStyles>
+                    <div className="flex w-100 column">
+                        {
+                            tweets?.length === 0 ? <div className="flex py-2 w-100 justify-center">
 
-                </div>
-            </FeedStyles>
+                                <LoaderIndex type="small" />
 
-        </div>
+                            </div> : <>
+                                {
+                                    tweets?.map((value: feedcardtype) => {
+                                        return <FeedCard {...value} key={value?._id} />
+                                    })
+                                }
+                            </>
+                        }
+
+                    </div>
+                </FeedStyles>
+
+            </div>
+        </>
+
     )
 }
 

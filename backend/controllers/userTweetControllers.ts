@@ -132,14 +132,14 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
 
     res.setHeader("Content-Type", "text/html");
 res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ updateTweet });
+    res.status(200).json({ updateTweet,userIdIncludedInTweetLikesArray });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
 
 
     res.setHeader("Content-Type", "text/html");
 res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ updateTweet });
+    res.status(200).json({ updateTweet,userIdIncludedInTweetLikesArray });
 
   }
   // // const userIdIncludedInTweetLikesArray = await UserTweet.
