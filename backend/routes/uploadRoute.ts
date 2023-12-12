@@ -30,7 +30,7 @@ router.post("/", upload.array("files", 4), async (req, res) => {
       // Check if 'result' has a 'secure_url' property
       if (result && result?.secure_url) {
         // Explicitly cast 'result.secure_url' to string
-        const secureUrl: string = result?.secure_url as unknown as string;
+        const secureUrl: never = result?.secure_url as unknown as never;
         urls.push(secureUrl);
       } else {
         // Handle the case where 'secure_url' is not present in the response
