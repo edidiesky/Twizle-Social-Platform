@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { RxCross2 } from 'react-icons/rx'
 import { Link, useParams } from 'react-router-dom';
 import MessageIcon from '../../assets/svg/feedcardicons/message';
 import RetweetIcon from '../../assets/svg/feedcardicons/retweet';
@@ -51,6 +52,9 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
+      <div onClick={() => setModal(false)} className="cancel_icon text-dark flex item-center justify-center">
+        <RxCross2 fontSize={'20px'} />
+      </div>
       <div className="backdrop" onClick={() => setModal(false)}></div>
       {/* {
         uploading && <LoaderIndex/>
@@ -59,7 +63,14 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
       <div
         className={"TweetPhotoModalCard shadow"}
       >
-        <div className="TweetPhotoModalCard_left w-100 flex item-center justify-center"></div>
+        <div className="TweetPhotoModalCard_left w-100 flex item-center justify-center">
+          <div className="TweetPhotoModalCard_left_wrapper flex column gap-2">
+            <div className="w-100">
+              <img src={tweetDetails?.tweet_image[0 ]} alt="" className="w-100" />
+            </div>
+            <div className="w-100 flex item-center gap-2"></div>
+          </div>
+        </div>
         {/* tweet photo modal card right */}
         <div className="TweetPhotoModalCard_right flex column gap-1">
 
@@ -164,7 +175,21 @@ const TweetPhotoModalStyles = styled(motion.div)`
   align-items: center;
   justify-content: center;
   top: 0;
- 
+  .cancel_icon {
+  background:rgba(0, 0, 0, 0.7) !important;
+   width: 4rem !important;
+        height: 4rem !important;
+        border-radius: 50%;
+        position:absolute;
+        left:1%;
+        top: 3%;
+    z-index:45;
+    cursor:pointer;
+    svg {
+      color:#fff;
+    }
+  }
+
         .iconwrapper {
         transition: all .5s;
             font-size: 14px;

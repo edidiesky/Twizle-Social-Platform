@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const TweetCommentSchema = new mongoose.Schema(
   {
     content: { type: String, required: true },
-    parentId: { type: tmongoose.Schema.Types.ObjectId, ref: 'UserTweet' },
+    parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserTweet' },
   },
   { timestamps: true }
 );
