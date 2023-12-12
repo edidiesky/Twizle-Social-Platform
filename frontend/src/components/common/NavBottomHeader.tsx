@@ -82,7 +82,7 @@ const NavBottomHeaderStyles = styled.div`
    z-index: 200000;
    left: 0;
    display: none;
-   @media (max-width:580px) {
+   @media (max-width:480px) {
     display: flex;
    }
    &.active {

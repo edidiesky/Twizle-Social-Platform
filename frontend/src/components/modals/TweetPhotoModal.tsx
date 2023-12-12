@@ -325,7 +325,12 @@ const TweetPhotoModalStyles = styled(motion.div)`
     height:100vh;
     z-index:50;
     width:100%;
-     @media (max-width:580px) {
+     @media (max-width:1080px) {
+            grid-template-columns:1fr 40vw;
+
+      }
+
+       @media (max-width:680px) {
             grid-template-columns:1fr;
 
       }
@@ -358,9 +363,11 @@ const TweetPhotoModalStyles = styled(motion.div)`
       background:var(--white);
       box-shadow:var(--shadow);
       overflow:auto;
-      @media (max-width:580px) {
+      @media (max-width:680px) {
         display:none;
       }
+
+      
     }
   }
 `;

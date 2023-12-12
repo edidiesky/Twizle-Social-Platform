@@ -13,16 +13,16 @@ type uploadType = {
 }
 
 const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
-  const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
-  const handlePhotoModal = ()=> {
-      dispatch(getTweetId(id))
-      dispatch(onTweetPhototModal("any"))
-  }
+    const handlePhotoModal = () => {
+        dispatch(getTweetId(id))
+        dispatch(onTweetPhototModal("any"))
+    }
 
     if (images.length === 3) {
         return (
-            <div onClick={()=> handlePhotoModal()}>
+            <div onClick={() => handlePhotoModal()}>
                 <FeedImageWrapperStyles>
                     <FeedImageStyles
                         className="lenght1"
@@ -51,7 +51,7 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
     }
     if (images.length === 1) {
         return (
-            <div onClick={()=> handlePhotoModal()}>
+            <div onClick={() => handlePhotoModal()}>
                 <FeedImageWrapperStyles className="active">
                     <FeedImageStyles
                         className="active"
@@ -69,10 +69,10 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
     }
     if (images.length === 4) {
         return (
-            <div onClick={()=> handlePhotoModal()}>
+            <div onClick={() => handlePhotoModal()}>
                 <FeedImageWrapperStyles>
                     <FeedImageStyles
-                        className="wrapper"
+                        className="wrapper_four"
                     >
                         {
                             images.map((x, index) => {
@@ -90,7 +90,7 @@ const FeedImage: React.FC<uploadType> = ({ images, id, name }) => {
         );
     }
     return (
-        <div onClick={()=> handlePhotoModal()}>
+        <div onClick={() => handlePhotoModal()}>
             <FeedImageWrapperStyles>
                 <FeedImageStyles
                 >
@@ -129,7 +129,9 @@ grid-template-columns: repeat(1,1fr);
 }
 @media (max-width:780px) {
 min-height: 20rem;
-&.wrapper {
+&.wrapper_four {
+grid-template-columns: repeat(2,1fr);
+
     min-height: 20rem;
     /* min-height: 100%; */
       .imageWrapper {
@@ -140,17 +142,7 @@ min-height: 20rem;
 }
 
 }
-@media (max-width:580px) {
-min-height: 20rem;
-&.wrapper {
-    min-height: 20rem;
-    /* min-height: 100%; */
-      .imageWrapper {
-    @media (max-width: 780px) {
-      height: 15rem !important;
-    }
-}
-}
+
 
 }
 
@@ -240,6 +232,6 @@ min-height: 20rem;
         border-bottom-left-radius: 12px;
       }
     }
-  }
+  
     
 `

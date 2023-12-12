@@ -20,6 +20,7 @@ _id?:string
 }
 
 const tweetdata = JSON.parse(localStorage.getItem("tweet") || 'false');
+const photo_tweet_id = localStorage.getItem("photo_tweet_id") 
 
 // Define a type for the tweet state
 interface tweetState {
@@ -59,7 +60,7 @@ const initialState: tweetState = {
   tweets: tweetdata ? tweetdata:[],
   usertweets: [],
   bookmarks: [],
-  tweet_photo_id: '',
+  tweet_photo_id: photo_tweet_id ? photo_tweet_id: '',
 
 
   tweetisLoading: false,
@@ -117,11 +118,16 @@ export const tweetSlice = createSlice({
     },
 
     getTweetId: (state, action) => {
+      localStorage.setItem("photo_tweet_id", action.payload);
+      console.log(action.payload)
+
       state.tweet_photo_id = action.payload
     },
 
 
     clearTweetId: (state, action) => {
+      localStorage.removeItem("photo_tweet_id");
+
       state.tweet_photo_id = 'action.payload'
     },
     // toggle sidebar

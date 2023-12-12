@@ -7,19 +7,20 @@ import { AnimatePresence } from 'framer-motion';
 import TweetModal from '../modals/TweetModal';
 import { useAppSelector } from '../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
+import FeedImage from '../common/FeedImage';
 
 const PostFeedCard = () => {
     const [tweet, setTweet] = useState(false)
     const { tweetDetails } = useAppSelector(store => store.tweet)
 
     const [drop, setDrop] = useState(false)
-   
+
     return (
         <FeedCardStyles key={tweetDetails?.tweet_id}>
-           
-           
+
+
             <div className="flex w-90 auto item-start justify-space feed_card_wrapper gap-1">
-                <div className="flex column gap-1">
+                <div className="flex column gap-1 w-100">
                     <div className="flex-1 item-center flex gap-1">
                         <Link to={`/${tweetDetails?.tweet_user_id?.name}`} className="image_wrapper">
                             <div className="image_gradient"></div>
@@ -46,11 +47,18 @@ const PostFeedCard = () => {
                             {tweetDetails?.tweet_text}
                         </h5>
                         <div className="w-100 wrapper">
+
                             {
+                                tweetDetails.tweet_image?.length > 0 && <div className="w-100 wrapper">
+
+                                    <FeedImage id={tweetDetails?._id} images={tweetDetails.tweet_image} name={tweetDetails?.tweet_user_id?.name} />
+                                </div>
+                            }
+                            {/* {
                                 tweetDetails?.tweet_image.map((x:any, index?:any) => {
                                     return <img key={index} style={{ borderRadius: "10px" }} src={x} alt="" className="w-100 h-100" />
                                 })
-                            }
+                            } */}
                         </div>
 
                     </div>
