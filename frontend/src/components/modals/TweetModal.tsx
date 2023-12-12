@@ -60,7 +60,7 @@ const TweetModal: React.FC<modalType> = ({ modal, setModal, type, id }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/v1/upload", formData, config);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URLS}/upload`, formData, config);
 
       setImages(data.urls);
       setAlert(true);

@@ -170,7 +170,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
 
               
                 <div className="btn_wrapper flex column gap-1 w-100">
-                  <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+                  {/* <Message showAlert={showAlert} alertText={alertText} alertType={alertType} /> */}
                   <button disabled={registerisSuccess || !email || !password || !name || !birthday} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
                   </button>
                 </div>
