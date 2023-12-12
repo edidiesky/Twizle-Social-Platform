@@ -114,6 +114,7 @@ export default FeedImage
 const FeedImageWrapperStyles = styled.div`
    width: 100%;
   border-radius: 12px;
+  cursor:pointer;
  `
 const FeedImageStyles = styled.div`
 width: 100%;

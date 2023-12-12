@@ -29,7 +29,7 @@ type modalType = {
 
 const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   const { commentisLoading, commentisSuccess } = useAppSelector(store => store.comment)
- 
+
   const [bookmark, setBookMark] = useState<boolean>(false)
 
   const { tweets, tweetDetails, isBookMarked, tweet_photo_id } = useAppSelector(store => store.tweet)
@@ -48,16 +48,22 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     dispatch(BookMarkATweet({ Detailsdata: tweet_photo_id }))
   }
 
-  const HandleCloseTweetPhotoModal = ()=> {
+  const HandleCloseTweetPhotoModal = () => {
     dispatch(clearTweetId("any"))
     dispatch(offTweetPhototModal("any"))
   }
   return (
     <TweetPhotoModalStyles
       as={motion.div}
-      initial={{ opacity: 0, visibility: "hidden" }}
-      exit={{ opacity: 0, visibility: "hidden" }}
-      animate={{ opacity: 1, visibility: "visible" }}
+      initial={{
+        opacity: 0, visibility: "hidden"
+      }}
+      exit={{ opacity: 0, visibility: "hidden", transition: { duration: .3 } }}
+      animate={{
+        opacity: 1, visibility: "visible", transition: {
+          delay: 0.3,
+        },
+      }}
     >
       <div onClick={HandleCloseTweetPhotoModal} className="cancel_icon text-dark flex item-center justify-center">
         <RxCross2 fontSize={'20px'} />
@@ -68,19 +74,25 @@ const TweetPhotoModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
       } */}
 
       <motion.div
-        initial={{ opacity: 0, visibility: "hidden" }}
-        exit={{ opacity: 0, visibility: "hidden" }}
-        animate={{ opacity: 1, visibility: "visible" }}
+        initial={{
+          opacity: 0, visibility: "hidden"
+        }}
+        exit={{ opacity: 0, visibility: "hidden", transition: { duration: .1 } }}
+        animate={{
+          opacity: 1, visibility: "visible", transition: {
+            delay: 0.1,
+          },
+        }}
         className={"TweetPhotoModalCard shadow"}
       >
         <div className="TweetPhotoModalCard_left w-100 flex item-center justify-center">
-          <div className="TweetPhotoModalCard_left_wrapper flex column gap-1">
-            <div className="w-100">
-              <img src={tweetDetails?.tweet_image[0 ]} alt="" className="w-100" />
+          <div className="TweetPhotoModalCard_left_wrapper flex item-center auto justify-center column gap-1">
+            <div className="w-100 photo_image_wrapper flex item-center auto justify-center">
+              <img src={tweetDetails?.tweet_image[0]} alt="" className="w-100" />
             </div>
             <div className="w-100 flex item-center gap-2">
               <div className="flex w-100 column fs-18 text-light text-grey text-light">
-                
+
                 <div className="flex w-90 auto justify-space py-1 item-center w-90 gap-2">
                   <div className="flex w-100 auto item-center fs-14 text-light feedtags_wrapper text-white">
                     <div className="flex iconwrapper flex-1 item-center" style={{ gap: ".3rem" }}>
@@ -228,6 +240,11 @@ const TweetPhotoModalStyles = styled(motion.div)`
         top: 3%;
     z-index:55;
     cursor:pointer;
+    transition:all .4s;
+    &:hover {
+  background:rgba(0, 0, 0, 0.5) !important;
+
+    }
     svg {
       color:#fff;
     }
@@ -304,13 +321,35 @@ const TweetPhotoModalStyles = styled(motion.div)`
   .TweetPhotoModalCard {
     display:grid;
     grid-template-columns:1fr 25vw;
-    grid-gap:5rem;
+    grid-gap:.5rem;
     height:100vh;
     z-index:50;
     width:100%;
+     @media (max-width:580px) {
+            grid-template-columns:1fr;
+
+      }
     .TweetPhotoModalCard_left {
       height:100%;
       width:100%;
+      max-height:100vh;
+      .TweetPhotoModalCard_left_wrapper {
+        height:100%;
+        width:100%;
+        margin:0 auto;
+        padding:1rem;
+        .photo_image_wrapper {
+          height:90%;
+          width:100%;
+          img {
+            height:100%;
+            width:100%;
+            min-width:100%;
+            object-fit:cover;
+
+          }
+        }
+      }
     }
 
     .TweetPhotoModalCard_right {
@@ -319,6 +358,9 @@ const TweetPhotoModalStyles = styled(motion.div)`
       background:var(--white);
       box-shadow:var(--shadow);
       overflow:auto;
+      @media (max-width:580px) {
+        display:none;
+      }
     }
   }
 `;

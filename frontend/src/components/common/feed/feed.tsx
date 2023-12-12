@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { getAllTweet } from '../../../features/tweet/tweetReducer';
-import { cleartweet } from '../../../features/tweet/tweetSlice';
+import { cleartweet, clearTweetId } from '../../../features/tweet/tweetSlice';
 import LoaderIndex from '../../loaders';
 import Message from '../../loaders/Message';
 
@@ -24,6 +24,8 @@ const Feed: React.FC = () => {
             const timeout = setTimeout(() => {
                 // dispatch(cleartweet("any"))
                 dispatch(cleartweet({ payload: "any" }))
+                dispatch(clearTweetId("any"))
+
                 dispatch(getAllTweet())
             }, 4000);
 
