@@ -151,10 +151,10 @@ const Regsiters: React.FC = () => {
                   <div className="w-100 text-center">Continue with Google</div>{" "}
                 </div>
 
-                <div onClick={HandleGithubLogin} className="authBtn gap-2 flex fs-15 text-bold text-dark item-center">
+                {/* <div onClick={HandleGithubLogin} className="authBtn gap-2 flex fs-15 text-bold text-dark item-center">
                   <FaGithub fontSize={"24px"} />{" "}
                   <div className="w-100 text-center">Continue with Github</div>{" "}
-                </div>
+                </div> */}
               </div>
               <div className="option">or</div>
               <div onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
