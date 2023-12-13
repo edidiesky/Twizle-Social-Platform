@@ -50,10 +50,6 @@
     },
     {
       "src": "/(.*)",
-      "dest": "index.ts"
-    },
-    {
-      "src": "/(.*)",
       "dest": "/frontend/dist/index.html"
     }
   ]
