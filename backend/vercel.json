@@ -5,6 +5,10 @@
     {
       "src": "index.ts",
       "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/dist/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -47,6 +51,10 @@
     {
       "src": "/(.*)",
       "dest": "index.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/dist/index.html"
     }
   ]
 }
