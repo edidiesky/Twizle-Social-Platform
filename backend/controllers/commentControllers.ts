@@ -29,8 +29,8 @@ const createReply = asyncHandler(async (req: CustomInterface, res: Response) => 
     reply_image: req.body.reply_image
   })
 
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ reply })
 
 })
@@ -56,8 +56,8 @@ const createReplyComment = asyncHandler(async (req: CustomInterface, res: Respon
     parentComment: comment?._id
   })
 
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ reply })
 
 })
@@ -78,8 +78,8 @@ const getAllReply = asyncHandler(async (req: CustomInterface, res: Response) => 
     parentComment: null,
   }).populate('user', 'username bio display_name name profile_image_url')
 
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ reply })
 });
 
@@ -120,8 +120,8 @@ const getSingleCommentReply = asyncHandler(async (req: CustomInterface, res: Res
     return replies
   }
   const hierarchyReplies = await getCommentReplies(replyid)
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({
     reply: hierarchyReplies
   })

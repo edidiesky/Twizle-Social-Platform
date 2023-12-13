@@ -28,8 +28,8 @@ const createMessage = asyncHandler(async (req: CustomInterface, res: Response) =
     lastMessage: req.body.message
   }, { new: true })
 
-res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+// res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ message });
 })
 
@@ -45,8 +45,8 @@ const getAllMessageofAConversation = asyncHandler(async (req: CustomInterface, r
     throw new Error("Message not found");
   }
 
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ message });
 });
 
@@ -55,8 +55,8 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 // GET All Message
 //  Public
 const DeleteMessage = asyncHandler(async (req: CustomInterface, res: Response) => {
-  res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   res.setHeader("Content-Type", "text/html");
+// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ msg: "delete review controller" });
 });
 

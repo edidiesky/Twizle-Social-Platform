@@ -27,13 +27,13 @@ const LikeAndUnlikeAQuote = asyncHandler(async (req: CustomInterface, res: Respo
   const userIdIncludedInTweetLikesArray = tweet.quote_likes.includes(userid)
   if (!userIdIncludedInTweetLikesArray) {
     const updateTweet = await QuoteTweet.findOneAndUpdate({ _id: req.params.id }, { $push: { quote_likes: userid } }, { new: true })
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    // res.setHeader("Content-Type", "text/html");
+    // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet });
   } else {
     const updateTweet = await QuoteTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { quote_likes: userid } }, { new: true })
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    // res.setHeader("Content-Type", "text/html");
+    // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet });
 
   }
