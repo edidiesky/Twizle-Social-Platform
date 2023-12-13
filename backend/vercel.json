@@ -5,10 +5,6 @@
     {
       "src": "index.ts",
       "use": "@vercel/node"
-    },
-    {
-      "src": "frontend/dist/**/*",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
