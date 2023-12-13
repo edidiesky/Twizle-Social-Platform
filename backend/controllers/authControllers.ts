@@ -44,8 +44,8 @@ const RegisterUser = asyncHandler(async (req: Request, res: Response) => {
   );
 
 
-  // res.setHeader("Content-Type", "text/html");
-  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.cookie("accessToken", token, {
     httpOnly: true
   }).status(200).json({ user, token });
@@ -81,8 +81,8 @@ const LoginUser = asyncHandler(async (req: Request, res: Response) => {
     { expiresIn: "12d" }
   );
 
-  // res.setHeader("Content-Type", "text/html");
-  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   delete user?.password
   res.cookie("accessToken", token, {
     httpOnly: true
@@ -140,8 +140,8 @@ const GoogleSignin = asyncHandler(async (req: Request, res: Response) => {
   );
 
 
-  // res.setHeader("Content-Type", "text/html");
-  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ user,token });
 
 });

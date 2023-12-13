@@ -32,8 +32,8 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
   // console.log(existingConversations?.length)
   
   if (existingConversations) {
-    // res.setHeader("Content-Type", "text/html");
-    // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation:existingConversations })
 
   } else {
@@ -51,8 +51,8 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
       .populate("receiver", " username bio display_name name profile_image_url");
 
 
-    // res.setHeader("Content-Type", "text/html");
-    // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation: conversation })
   }
 
@@ -97,8 +97,8 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
     .populate("receiver", " username bio display_name name profile_image_url");
 
   if (!conversation) {
-    // res.setHeader("Content-Type", "text/html");
-    // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ conversation:null });
   }
 
