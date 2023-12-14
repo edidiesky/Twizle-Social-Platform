@@ -99,7 +99,12 @@ const Search: React.FC = () => {
                 {
                   userSearchResult?.map((user?: any) => {
                     return <div className="search_tab w-100 flex item-center">
-                      <img src={user?.profile_image_url} alt="profile_avatar" className="avatar_large" />
+                      {
+                        user?.profile_image_url ?
+                          <img src={user?.profile_image_url} alt="images-avatar" className="avatar_large" />
+                          : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="avatar_large" className="avatar_large" />
+
+                      }
                       <h4 className="fs-16 text-dark text-extra-bold">
                         {user?.name}
 
