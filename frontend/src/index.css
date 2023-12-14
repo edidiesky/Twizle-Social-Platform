@@ -32,7 +32,15 @@
   /* font-family: "Twitter_Minor", sans-serif; */
 
 }
-
+  .drop_background {
+    position:fixed;
+    z-index:10;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vw;
+    /* background:red; */
+  }
 
 * {
   text-decoration: none;
