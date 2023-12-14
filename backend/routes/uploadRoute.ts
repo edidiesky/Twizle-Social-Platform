@@ -15,7 +15,7 @@ cloudinaryModule.config({
 
 const router = express.Router();
 // Configure Multer
-// const upload = multer({ dest: 'airbnb/' });
+const upload = multer({ dest: 'airbnb/' });
 
 // router.post("/", upload.array("files", 4), async (req, res) => {
 //   try {
