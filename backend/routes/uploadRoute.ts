@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cloudinary from "cloudinary";
-// import multer from "multer";
+import multer from "multer";
 
 const cloudinaryModule = cloudinary.v2;
 // // console.log(process.env.cloud_name);
