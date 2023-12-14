@@ -1,17 +1,17 @@
 import express from "express";
-// import dotenv from "dotenv";
-// dotenv.config();
-// import cloudinary from "cloudinary";
+import dotenv from "dotenv";
+dotenv.config();
+import cloudinary from "cloudinary";
 // import multer from "multer";
 
-// const cloudinaryModule = cloudinary.v2;
+const cloudinaryModule = cloudinary.v2;
 // // console.log(process.env.cloud_name);
 
-// cloudinaryModule.config({
-//   cloud_name: process.env.cloud_name,
-//   api_key: process.env.cloud_key,
-//   api_secret: process.env.cloud_secret,
-// });
+cloudinaryModule.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.cloud_key,
+  api_secret: process.env.cloud_secret,
+});
 
 const router = express.Router();
 // Configure Multer
