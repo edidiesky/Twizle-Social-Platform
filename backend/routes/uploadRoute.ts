@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cloudinary from "cloudinary";
+import cloudinaryStorage, { Options } from "multer-storage-cloudinary";
+
 import multer from "multer";
 
 const cloudinaryModule = cloudinary.v2;
@@ -13,10 +15,23 @@ cloudinaryModule.config({
   api_secret: process.env.cloud_secret,
 });
 
+
+interface CustomOptions extends Options {
+  destination: string;
+}
+
+
 const router = express.Router();
 // Configure Multer
 // const upload = multer({ dest: 'airbnb/' });
-const storage = multer.memoryStorage();
+const storage = cloudinaryStorage({
+  cloudinary: cloudinaryModule,
+  destination: "airbnb", // Specify the folder in Cloudinary
+  allowedFormats: ["jpg", "jpeg", "png"],
+  transformation: [{ width: 500, height: 500, crop: "limit" }],
+} as CustomOptions);
+
+
 const upload = multer({ storage });
 router.post("/", upload.array("files", 4), async (req, res) => {
   try {
