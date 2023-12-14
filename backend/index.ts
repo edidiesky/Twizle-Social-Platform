@@ -112,7 +112,7 @@ const clienIdSecret: string = process.env.google_client_secret as string
 // // import uploadRoute from "./routes/uploadRoute";
 // import conversationRoute from "./routes/conversationRoute";
 // import messageRoute from "./routes/messageRoute";
-import commentRoute from "./routes/commentRoute";
+// import commentRoute from "./routes/commentRoute";
 
 
 
@@ -123,7 +123,7 @@ import commentRoute from "./routes/commentRoute";
 // app.use("/api/v1/quote", quoteRoute);
 // app.use("/api/v1/conversation", conversationRoute);
 // app.use("/api/v1/message", messageRoute);
-app.use("/api/v1/comment", commentRoute);
+// app.use("/api/v1/comment", commentRoute);
 
 
 const mongoUrl = process.env.MONGO_URL;
