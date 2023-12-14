@@ -21,6 +21,11 @@ const Search: React.FC = () => {
     navigate(`/search?q=${search}`)
   }
 
+  const handleOffDropDown = ()=> {
+    setDebouncedValue('')
+    setDropDown(false)
+  }
+
   React.useEffect(() => {
     const timer = setTimeout(() => setDebouncedValue(search), 500)
     return () => clearTimeout(timer)
@@ -61,7 +66,7 @@ const Search: React.FC = () => {
   console.log(dropdown)
   return (
     <>
-      {dropdown && <div onClick={() => setDropDown(false)} className="drop_background"></div>}
+      {dropdown && <div onClick={handleOffDropDown} className="drop_background"></div>}
       <SearchContainer>
         <div className="w-90 form_wrapper auto flex column gap-1">
           <div onClick={() => setDropDown(true)} className="w-100">
