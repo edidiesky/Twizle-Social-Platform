@@ -105,14 +105,14 @@ const clienIdSecret: string = process.env.google_client_secret as string
 
 
 // routes
-// import usertweetRoute from "./routes/userTweetRoute";
-// import userRoute from "./routes/userRoute";
-// import authRoute from "./routes/authRoute";
-// import quoteRoute from "./routes/quoteTweetRoute";
-// // import uploadRoute from "./routes/uploadRoute";
-// import conversationRoute from "./routes/conversationRoute";
-// import messageRoute from "./routes/messageRoute";
-// import commentRoute from "./routes/commentRoute";
+import usertweetRoute from "./routes/userTweetRoute";
+import userRoute from "./routes/userRoute";
+import authRoute from "./routes/authRoute";
+import quoteRoute from "./routes/quoteTweetRoute";
+// import uploadRoute from "./routes/uploadRoute";
+import conversationRoute from "./routes/conversationRoute";
+import messageRoute from "./routes/messageRoute";
+import commentRoute from "./routes/commentRoute";
 
 
 
