@@ -118,14 +118,14 @@ const Regsiters: React.FC = () => {
         </MyAnimatePresence>
         {/* username modal */}
         <MyAnimatePresence
-
+          initial={false} exitBeforeEnter
         >
           {modaltab === 1 && <UsernameModal setTab={setTab} />}
         </MyAnimatePresence>
 
         {/* profile modal */}
         <MyAnimatePresence
-
+          initial={false} exitBeforeEnter
         >
           {modaltab === 2 && <ProfilePictureModal modal={profile}
             setModal={setProfile} />}
