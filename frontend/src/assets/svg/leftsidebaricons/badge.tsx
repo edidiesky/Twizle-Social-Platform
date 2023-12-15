@@ -5,8 +5,8 @@ type iconType = {
 const BadgeIcon: React.FC<iconType> = ({ isClicked }) => {
     return (
         <span style={{
-            width: "27px",
-            height: "27px",
+            width: "2.7rem",
+            height: "2.7rem",
             // color: " rgba(231,233,234,1.00)",
             color: "var(--dark-1)",
             position: "relative",

@@ -24,7 +24,7 @@ const SmallSidebarIndex = () => {
     const list = [
         {
             title: "Profile",
-            path: '/',
+            path: `/${userInfo?.name}`,
             icon: <ProfileIcon />
         }, {
             title: "Verified",
@@ -38,8 +38,8 @@ const SmallSidebarIndex = () => {
 
         }, {
             title: "Bookmarks",
-            path: '',
-            icon: <BookmarkIcon />
+            path: '/i/bookmarks',
+            icon: <BookmarkIcon color={"var(--dark-1)"} size={"24px"} />
 
         }, {
             title: "Messages",
@@ -68,8 +68,8 @@ const SmallSidebarIndex = () => {
                                 <span>
                                     {
                                         userInfo?.profile_image_url ?
-                                            <img src={userInfo?.profile_image_url} alt="images-avatar" className="avatar" />
-                                            : <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
+                                            <img src={userInfo?.profile_image_url} onClick={() => dispatch(offSidebar("any"))} alt="images-avatar" className="avatar" />
+                                            : <img onClick={() => dispatch(offSidebar("any"))} src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="images-avatar" className="avatar" />
 
                                     }
                                 </span>
@@ -93,7 +93,7 @@ const SmallSidebarIndex = () => {
                                     {
                                         list.map((x, index) => {
                                             return (
-                                                <li className="list text-dark fs-20 flex item-center gap-4 text-bold" >
+                                                <li onClick={() => dispatch(offSidebar("any"))} className="list text-dark fs-20 flex item-center gap-4 text-bold" >
                                                     <NavLink className='text-dark flex w-100 item-center gap-3 text-bold' to={x.path}>
                                                         {x.icon}
                                                         <span className='span'>{x.title}</span>

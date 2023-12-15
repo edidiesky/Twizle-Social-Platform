@@ -8,9 +8,9 @@ const DownloadIcon: React.FC<iconType> = ({ type, color }) => {
     if (type === 'large') {
         return (
             <span style={{
-                width: "23px",
+                width: "2.2rem",
                 color: color ? color : "var(--grey-3)",
-                height: "23px",
+                height: "2.2rem",
 
                 position: "relative",
                 fill: "currentcolor",

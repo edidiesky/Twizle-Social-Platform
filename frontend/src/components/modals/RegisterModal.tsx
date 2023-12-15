@@ -62,21 +62,14 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   useEffect(() => {
     if (registerisSuccess) {
       const interval = setTimeout(() => {
+        setModal(false)
         dispatch(handlModalTab(1))
+         
       }, 3000)
       return () => clearTimeout(interval)
 
-    }
-  }, [registerisSuccess])
-   useEffect(()=> {
-    if (registerisSuccess) {
-      const interval = setTimeout(()=> {
-        setModal(false)
-      }, 3000)
-      return () => clearTimeout(interval)
     }
   }, [registerisSuccess, setModal])
-
 
 
   return (

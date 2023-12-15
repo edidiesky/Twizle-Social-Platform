@@ -9,9 +9,9 @@ const LikeIcon: React.FC<iconType> = ({ isClicked, type, color }) => {
     if (type === 'large') {
         return (
             <span style={{
-                width: "23px",
+                width: "2.3rem",
                 color: color ? color: "var(--grey-1)",
-                height: "23px",
+                height: "2.3rem",
 
                 position: "relative",
                 fill: isClicked ? "var(--red)" : "var(--grey-1)",

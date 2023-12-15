@@ -6,9 +6,9 @@ const ShareIcon: React.FC<iconType> = ({ type }) => {
     if (type === 'large') {
         return (
             <span style={{
-                width: "23px",
+                width: "2.3rem",
                 color: "var(--grey-1)",
-                height: "23px",
+                height: "2.3rem",
 
                 position: "relative",
                 fill: "currentcolor",

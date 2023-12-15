@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styled from 'styled-components';
@@ -63,9 +63,9 @@ const NavBottomHeader: React.FC = () => {
             <div className="w-100 flex item-center justify-space">
                 {
                     list.map((x?: any) => {
-                        return <li className='flex-1 flex item-center justify-center'>
+                        return <Link to={x?.path} className='flex-1 flex item-center justify-center'>
                             {x.icon}
-                        </li>
+                        </Link>
                     })
                 }
             </div>

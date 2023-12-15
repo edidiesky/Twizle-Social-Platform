@@ -9,9 +9,9 @@ const RetweetIcon: React.FC<iconType> = ({ isClicked, type, color }) => {
     if(type === 'large') {
         return (
             <span style={{
-                width: "18px",
+                width: "1.8rem",
                 color: color?color:"var(--grey-1)",
-                height: "18px",
+                height: "1.8rem",
                 position: "relative",
                 fill:  "currentcolor",
                 display: "inline-block",
