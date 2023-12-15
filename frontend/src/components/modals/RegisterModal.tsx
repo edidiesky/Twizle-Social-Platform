@@ -58,14 +58,6 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     setPassword('')
     setModal(false)
   }
-   useEffect(()=> {
-    if (registerisSuccess) {
-      const interval = setTimeout(()=> {
-        setModal(false)
-      }, 2000)
-      return () => clearTimeout(interval)
-    }
-  }, [registerisSuccess, setModal])
 
   useEffect(() => {
     if (registerisSuccess) {
@@ -73,9 +65,19 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
         dispatch(handlModalTab(1))
       }, 3000)
       return () => clearTimeout(interval)
-      
+
     }
   }, [registerisSuccess])
+   useEffect(()=> {
+    if (registerisSuccess) {
+      const interval = setTimeout(()=> {
+        setModal(false)
+      }, 3000)
+      return () => clearTimeout(interval)
+    }
+  }, [registerisSuccess, setModal])
+
+
 
   return (
     <RegisterModalStyles

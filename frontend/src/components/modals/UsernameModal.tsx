@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { BsTwitter } from 'react-icons/bs'
 import { slideUp } from "../utils/framer"
 import FormInput from "../form/input";
 import Message from "../loaders/Message";
