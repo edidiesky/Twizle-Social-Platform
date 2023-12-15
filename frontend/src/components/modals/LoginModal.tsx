@@ -105,7 +105,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
 
                 </div>
                 <div className="btn_wrapper flex column gap-1 w-100">
-                  <Message showAlert={showAlert} alertText={alertText} alertType={alertType} />
+                  {/* <Message showAlert={showAlert} alertText={alertText} alertType={alertType} /> */}
                   <button disabled={loginisSuccess || !password || !email} type="submit" className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Next
                   </button>
                 </div>

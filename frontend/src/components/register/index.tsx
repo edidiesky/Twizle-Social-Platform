@@ -156,9 +156,9 @@ const Regsiters: React.FC = () => {
                   <div className="w-100 text-center">Continue with Github</div>{" "}
                 </div> */}
               </div>
-              <div className="option">or</div>
-              <div onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
-              <h5 className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
+              {/* <div className="option">or</div> */}
+              <div style={{marginTop:"2rem"}} onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
+              <h5 style={{lineHeight:"1.5"}} className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
             </div>
             <div style={{ marginTop: "3rem" }} className="flex authWrapper column gap-2">
               <h4 className="fs-18 text-extra-bold">Already have an account?</h4>
@@ -198,7 +198,7 @@ const RegsiterStyles = styled.div`
      @media (max-width:780px) {
     display: flex;
     /* flex-direction: column-reverse; */
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 5rem;
     width: 90%;
@@ -223,9 +223,14 @@ const RegsiterStyles = styled.div`
   }
   }
   .authWrapper {
-    width: 50%;
+    width: 300px;
     @media (max-width:1080px) {
-    width: 95%;
+    width: 55%;
+
+    }
+
+     @media (max-width:680px) {
+    width: 60%;
 
     }
   }
@@ -240,10 +245,13 @@ const RegsiterStyles = styled.div`
   }
   .authBtn {
     border: 1px solid var(--border1);
-    padding: 8px 40px;
+    padding: .7rem 4rem;
     border-radius: 40px;
     width: 100%;
     cursor: pointer;
+    @media (max-width:780px) {
+
+    }
     &.btn_signin {
     padding: 10px 40px;
       color:var(--blue-1);
