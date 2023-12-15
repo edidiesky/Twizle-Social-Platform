@@ -311,7 +311,7 @@ const FeedCardStyles = styled.div`
     }
     h5 {
         font-weight: 600;
-        font-size: 15px;
+        font-size: 1.5rem;
     }
     .dropdownCard {
         position: absolute;
