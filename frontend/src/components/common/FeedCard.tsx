@@ -146,10 +146,10 @@ const FeedCard = (props: feedcardtype) => {
                        <div className="w-100 flex item-start justify-space">
                             <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column w-100'>
                                 <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                                    <div style={{ gap: ".3rem" }} className="tweet_user flex item-center">
+                                    <div style={{ fontSize: "15px",gap: ".3rem" }}  className="tweet_user flex item-center">
                                         {props?.tweet_user_id?.display_name}
                                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                        <span style={{ fontSize: "15px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
+                                        <span style={{ fontSize: "14px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
                                     </div>
 
                                     {/* <span sty></span> */}
