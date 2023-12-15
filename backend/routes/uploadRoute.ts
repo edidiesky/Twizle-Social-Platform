@@ -40,7 +40,7 @@ router.post("/", upload.array("files", 4), async (req, res) => {
 
 
     // Use a loop to upload each file to Cloudinary
-    const urls = [];
+    const urls: string[] = [];
     for (const file of files) {
       const result = await cloudinaryModule.uploader.upload(file.path);
       // Check if 'result' has a 'secure_url' property
