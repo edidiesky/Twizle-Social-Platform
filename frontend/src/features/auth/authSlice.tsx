@@ -44,7 +44,7 @@ interface authState {
   userSearchResult?: any,
   tweetSearchResult?: any,
   notfollowedUsers?: any,
-  modaltab?:any,
+  modaltab:number,
 
 
 }
