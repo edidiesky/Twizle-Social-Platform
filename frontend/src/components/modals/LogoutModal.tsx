@@ -39,7 +39,7 @@ const LogoutModal: React.FC<modalType> = ({setModal }) => {
             <div style={{marginBottom:"15px"}} className="w-100 flex item-center justify-center">
               <TwitterIcon type={'small'}/>
             </div>
-            <h4 className="fs-20 text-dark text-start text-bold">Log out of Twitter?
+            <h4 className="fs-20 text-dark text-start text-bold">Log out of Weeters?
             
             <span className="block text-grey fs-14 text-light py-1">
                 You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account. 
