@@ -73,7 +73,7 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {
       }, 4000);
 
       return () => clearTimeout(timeoutId)
-      /(2)
+     
     }
   }, [userprofileisSuccess])
   const handleProfileImage =()=> {
