@@ -9,7 +9,7 @@ import TwitterIcon from "../../assets/svg/twitter";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import { UpdateProfile } from "../../features/auth/authReducer";
 import { useNavigate } from "react-router-dom";
-import { clearUserProfile } from "../../features/auth/authSlice";
+import { clearUserProfile, handlModalTab } from "../../features/auth/authSlice";
 
 
 const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) => {
@@ -30,14 +30,15 @@ const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) =>
    
     if (userprofileisSuccess) {
     const interval = setTimeout(() => {
-      setTab(2)
+      dispatch(handlModalTab(2))
+
       }, 3500);
 
       return () => clearTimeout(interval)
       
     }
     dispatch(clearUserProfile("any"))
-  }, [userprofileisSuccess, setTab])
+  }, [userprofileisSuccess])
 
   return (
     <UsernameModalStyles

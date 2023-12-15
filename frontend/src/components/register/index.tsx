@@ -38,7 +38,8 @@ const Regsiters: React.FC = () => {
     alertText,
     showAlert,
     alertType,
-    userInfo
+    userInfo,
+    modaltab
   } = useAppSelector(store => store.auth)
 
   // GOGGLE LOGIN
@@ -119,14 +120,14 @@ const Regsiters: React.FC = () => {
         <MyAnimatePresence
 
         >
-          {tab === 1 && <UsernameModal setTab={setTab} />}
+          {modaltab === 1 && <UsernameModal setTab={setTab} />}
         </MyAnimatePresence>
 
         {/* profile modal */}
         <MyAnimatePresence
 
         >
-          {tab === 2 && <ProfilePictureModal modal={profile}
+          {modaltab === 2 && <ProfilePictureModal modal={profile}
             setModal={setProfile} />}
         </MyAnimatePresence>
 

@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxtoolkit";
 import LoaderIndex from "../loaders";
 import { registerUser } from "../../features/auth/authReducer";
 import { Monthdata, Yeardata } from "../../data/selectdata";
+import { handlModalTab } from "../../features/auth/authSlice";
 
 type modalType = {
   modal?: boolean;
@@ -69,12 +70,12 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
   useEffect(() => {
     if (registerisSuccess) {
       const interval = setTimeout(() => {
-        setTab(1)
+        dispatch(handlModalTab(1))
       }, 3000)
       return () => clearTimeout(interval)
       
     }
-  }, [registerisSuccess, setTab])
+  }, [registerisSuccess])
 
   return (
     <RegisterModalStyles

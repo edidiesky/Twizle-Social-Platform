@@ -15,10 +15,9 @@ import LoaderIndex from "../loaders";
 type modalType = {
   modal?: boolean;
   setModal: (val: boolean) => void;
-  setTab?: any
 }
 
-const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
+const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal }) => {
   const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
   const navigate = useNavigate()
 
@@ -74,9 +73,9 @@ const ProfilePictureModal: React.FC<modalType> = ({ modal, setModal, setTab }) =
       }, 4000);
 
       return () => clearTimeout(timeoutId)
-      // setTab(2)
+      /(2)
     }
-  }, [userprofileisSuccess, setTab])
+  }, [userprofileisSuccess])
   const handleProfileImage =()=> {
     if(profilepicture) {
       dispatch(UpdateProfile({ profile_image_url: profilepicture, _id: userInfo?._id }))

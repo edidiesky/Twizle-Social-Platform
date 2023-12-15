@@ -43,7 +43,8 @@ interface authState {
   followings?: any,
   userSearchResult?: any,
   tweetSearchResult?: any,
-  notfollowedUsers?: any
+  notfollowedUsers?: any,
+  modaltab?:any,
 
 
 }
@@ -60,6 +61,7 @@ const initialState: authState = {
   registerisLoading: false,
   registerisSuccess: false,
   registerisError: false,
+  modaltab:0,
 
   loginisLoading: false,
   loginisSuccess: false,
@@ -121,6 +123,9 @@ export const authSlice = createSlice({
       state.showAlert = false;
       state.alertText = "";
     },
+    handlModalTab :(state,action) =>{
+      state.modaltab = action.payload
+    }
   },
 
   extraReducers: (builder) => {
@@ -371,7 +376,7 @@ export const authSlice = createSlice({
   },
 })
 
-export const { clearUserProfile, ClearUserInfo } = authSlice.actions
+export const { clearUserProfile, ClearUserInfo, handlModalTab } = authSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.auth.value
