@@ -49,7 +49,7 @@ const PostDetailsContent: React.FC = () => {
             
             {/* data likes reviews comments */}
             {
-                tweetDetails && <div className="flex-100 column gap-1 fs-18 text-light text-grey text-light">
+                tweetDetails && <div className="flex-100 column gap-1 fs-15 text-light text-grey text-light">
                     <div className="flex bottom fs-15 w-90 auto item-center gap-1">
                         <span>7:24 AM · Jul 21, 2023</span>
                         <span className="fs-14 text-grey text-light">·
@@ -151,7 +151,7 @@ const PostDetailsContentStyles = styled.div`
             }
         }
         .fs-15 {
-            font-size: 15px;
+            font-size: 1.5rem;
         }
         .iconwrapper {
         transition: all .5s;

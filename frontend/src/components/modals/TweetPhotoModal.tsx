@@ -226,7 +226,7 @@ const TweetPhotoModalStyles = styled(motion.div)`
     left: 50%;
     transform: translateX(-50%);
   display: flex;
-  z-index: 100800;
+  z-index: 200800;
   align-items: center;
   justify-content: center;
   top: 0;
@@ -312,10 +312,6 @@ const TweetPhotoModalStyles = styled(motion.div)`
     height: 100%;
     width: 100%;
     z-index:40;
-     @media (max-width:480px) {
-     display: none;
-
-    }
   }
 
   .TweetPhotoModalCard {
