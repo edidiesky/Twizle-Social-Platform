@@ -61,7 +61,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     if (registerisSuccess) {
       const interval = setTimeout(()=> {
         setModal(false)
-      }, 3000)
+      }, 2000)
       return () => clearTimeout(interval)
     }
   }, [registerisSuccess, setModal])
@@ -70,7 +70,7 @@ const RegsiterModal: React.FC<modalType> = ({ modal, setModal, setTab }) => {
     if (registerisSuccess) {
       const interval = setTimeout(() => {
         setTab(1)
-      }, 5000)
+      }, 3000)
       return () => clearTimeout(interval)
       
     }

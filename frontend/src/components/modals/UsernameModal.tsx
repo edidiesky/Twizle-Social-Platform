@@ -31,7 +31,7 @@ const UsernameModal: React.FC<{ setTab: (val?: any) => void }> = ({ setTab }) =>
     if (userprofileisSuccess) {
     const interval = setTimeout(() => {
       setTab(2)
-      }, 4000);
+      }, 3500);
 
       return () => clearTimeout(interval)
       

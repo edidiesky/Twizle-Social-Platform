@@ -38,6 +38,7 @@ const Regsiters: React.FC = () => {
     alertText,
     showAlert,
     alertType,
+    userInfo
   } = useAppSelector(store => store.auth)
 
   // GOGGLE LOGIN
