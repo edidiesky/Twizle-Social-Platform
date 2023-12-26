@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import styled from 'styled-components'
 import { styled as styleds } from '@mui/material/styles';
 
 const InputTextField = styleds(TextField)(({ theme }) => ({
@@ -25,9 +24,7 @@ const InputTextField = styleds(TextField)(({ theme }) => ({
     },
   },
   '& .MuiOutlinedInput-input': {
-    padding: '24px 10px',
-    paddingBottom:"7px",
-    
+    marginTop: "10px",
     fontSize: '16px',
     fontWeight: 'Normal',
     fontFamily: "CustomFont_Normal, sans-serif",
@@ -75,9 +72,7 @@ const AreaTextField = styleds(TextField)(({ theme }) => ({
     },
   },
   '& .MuiOutlinedInput-input': {
-    padding: '14px 0px',
-    paddingBottom: "7px",
-
+    marginTop: "10px",
     fontSize: '17px',
     fontWeight: 'Normal',
     fontFamily: "CustomFont_Normal, sans-serif",
