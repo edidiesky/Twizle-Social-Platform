@@ -227,8 +227,8 @@ const DisplayModalStyles = styled(motion.div)`
     }
   }
   .icons1 {
-     width: 3.5rem;
-    height: 3.5rem;
+     /* width: 3.5rem;
+    height: 3.5rem; */
     border-radius: 50%;
      &:hover {
        background-color:rgba(207, 217, 222,.9);
@@ -243,8 +243,8 @@ const DisplayModalStyles = styled(motion.div)`
     /* background-color: var(--dark-grey-hover); */
     .icon_check {
       border: 2px solid var(--grey-1);
-      width: 60%;
-      height: 60%;
+      width: 2rem;
+      height: 2rem;
       border-radius: 50%;
       &.active {
         opacity: 1;
@@ -292,6 +292,9 @@ const DisplayModalStyles = styled(motion.div)`
     background-color: var(--grey-2);
     padding:1.4rem;
     border-radius: 13px;
+    @media (max-width:580px) {
+      /* flex-direction: column; */
+    }
   }
   .replyBtn {
     padding:4px 10px;
@@ -347,6 +350,11 @@ const DisplayModalStyles = styled(motion.div)`
 
     position: relative;
     margin-top:2rem;
+    @media (max-width:690px) {
+       max-width: 100%;
+    min-width: 100%;
+    height: 100vh;
+    }
   }
    .image_wrapper {
       width:4.5rem;

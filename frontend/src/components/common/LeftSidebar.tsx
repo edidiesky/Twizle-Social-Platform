@@ -4,8 +4,8 @@ import { CiCircleMore } from 'react-icons/ci'
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom'
-import ActiveLink from './activelink'
-import TweetModal from '../modals/TweetModal'
+import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
+
 import SearchIcon from '../../assets/svg/leftsidebaricons/search'
 import HomeIcon from '../../assets/svg/leftsidebaricons/home'
 import NotificationIcon from '../../assets/svg/leftsidebaricons/notification'
@@ -23,6 +23,8 @@ import Logoutdropdown from './logoutdropdown';
 import TwitterIcon from '../../assets/svg/twitter';
 import TweetIcon from '../../assets/svg/leftsidebaricons/tweet';
 import MyAnimatePresence from '../../utils/AnimatePresence';
+import { ToggelDisplayModal } from '../../features/tweet/tweetSlice';
+import { AiOutlineSetting } from 'react-icons/ai';
 
 
 const LeftSidebarIndex = () => {
@@ -41,11 +43,14 @@ const LeftSidebarIndex = () => {
             title: "Home",
             path: '/',
             icon: <HomeIcon />
-        }, {
+        }, 
+        {
             title: "Explore",
-            path: '/explore',
+            path: '/',
             icon: <SearchIcon />
-        }, {
+        }, 
+        
+        {
             title: "Notifications",
             path: '',
             icon: <NotificationIcon />
@@ -62,11 +67,12 @@ const LeftSidebarIndex = () => {
 
         },
         {
-            title: "Communities",
-            path: '',
-            icon: <CommunitiesIcon />
+            title: "Bookmarks",
+            path: '/i/bookmarks',
+            icon: <BookmarkIcon size='24px' color='var(--text-dark)' />
 
         },
+        // BookmarkIcon
         {
             title: "Profile    ",
             path: `/${userInfo?.name}`,
@@ -74,6 +80,10 @@ const LeftSidebarIndex = () => {
 
         },
     ]
+
+    const handleModal = () => {
+        dispatch(ToggelDisplayModal('any'))
+    }
 
     return (
         <>
@@ -110,12 +120,13 @@ const LeftSidebarIndex = () => {
                                     })
                                 }
                                 <li className="list relative text-dark flex item-center gap-2 text-light" >
-                                    {drop && <Moredropdown setDrop={setDrop} />}
-                                    <div onClick={() => setDrop(true)} className="w-100 flex w-100 item-center gap-2">
-                                        <CiCircleMore fontSize={'20px'} />
-                                        <span className='span'>More</span>
-                                    </div>
+                                    <div onClick={handleModal} className="setting_list1 text-light text-dark w-100 flex item-center gap-2">
+                                        <span className='fs-14'>
+                                            <AiOutlineSetting style={{ fontSize: "3rem" }} />
+                                        </span>
+                                        <span>Display</span>
 
+                                    </div>
                                 </li>
                                 <div onClick={() => setTweet(true)} className="">
                                     <TweetIcon />

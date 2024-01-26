@@ -69,7 +69,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
         exit={"exit"}
         className={"deleteCard shadow"}
       >
-        <Message showAlert={showAlert} alertText={alertText} />
+        {/* <Message showAlert={showAlert} alertText={alertText} /> */}
 
         {/* edit profile top */}
         <div className="flex Logintop w-100 auto ">
