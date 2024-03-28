@@ -154,7 +154,7 @@ const GithubGetAccessToken = asyncHandler(async (req: Request, res: Response) =>
       `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${githuburl}`
     );
 
-    // Check if the response contains the data you need and send that data in the response.
+    // Check if the response contain the data you need and send that data in the response.
     const responseData = response.data; // Adjust this based on the actual response structure.
 
     res.status(200).json(responseData);
