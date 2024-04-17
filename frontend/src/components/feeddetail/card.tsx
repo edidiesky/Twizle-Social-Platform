@@ -42,7 +42,7 @@ const PostFeedCard = () => {
 
                         </div>
                     </div>
-                    <div className="flex flex-1 column gap-1">
+                    <div className="flex column gap-1">
                         <h5 style={{ paddingBottom: "1rem" }} className="text-light text-dark family1 fs-18">
                             {tweetDetails?.tweet_text}
                         </h5>
