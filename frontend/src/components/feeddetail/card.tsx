@@ -32,7 +32,7 @@ const PostFeedCard = () => {
                             }
                         </Link>
 
-                        <div className="flex column flex-1" style={{ gap: '.1rem' }}>
+                        <div className="flex column" style={{ gap: '.1rem' }}>
                             <h4 className="fs-16 text-extra-bold flex item-center" style={{ gap: '.2rem' }}>
                                 {tweetDetails?.tweet_user_id?.display_name}
                                 <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
@@ -42,7 +42,7 @@ const PostFeedCard = () => {
 
                         </div>
                     </div>
-                    <div className="flex-w-100 column gap-1">
+                    <div className="flex flex-1 column gap-1">
                         <h5 style={{ paddingBottom: "1rem" }} className="text-light text-dark family1 fs-18">
                             {tweetDetails?.tweet_text}
                         </h5>
