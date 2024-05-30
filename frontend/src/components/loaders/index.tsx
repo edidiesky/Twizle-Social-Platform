@@ -73,6 +73,28 @@ const LoaderIndex: React.FC<{ type?: string, skeleton?: string }> = ({ type, ske
       </div>
     );
   }
+  if (type === "rightBar") {
+    return (
+      <div className="w-100 px-2 flex column gap-1">
+        <div className="flex w-100 gap-1">
+          <div className="flex flex-1 item-center gap-1">
+            <Skeleton circle width={40} height={40} />
+            <div className="flex w-100 column">
+              <Skeleton
+                width={"75%"}
+                height={10}
+              />
+              <Skeleton
+                width={"35%"}
+                height={5}
+              />
+            </div>
+            <Skeleton circle width={30} height={20} />
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       className="flex item-center justify-center column gap-1"

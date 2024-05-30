@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Search from './Search';
+import Skeleton from "react-loading-skeleton";
 import { chatData } from '../../../data/chatData';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Link } from 'react-router-dom';
@@ -98,7 +99,7 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                             {
                                                 userInfo?._id !== tweetDetails?.tweet_user_id?._id && <div className="">
                                                     {
-                                                            isFollowed ? <div onClick={() => setUnfollowModal(true)}
+                                                        isFollowed ? <div onClick={() => setUnfollowModal(true)}
                                                             className="btn active text-extra-bold btn-3 fs-14 text-white">
                                                             <span className="following">Following</span>
                                                             <span className="unfollow">Unfollow</span>
@@ -126,8 +127,12 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                                 Who to follow</h3>
                             <div className="flex column w-100">
                                 {
-                                    userprofileisLoading ? <div className="flex justify-center">
-                                        <LoaderIndex type='small' />
+                                    userprofileisLoading ? <div className="flex column gap-1 justify-center">
+                                        {
+                                            Array(5).fill("").map((x, index) => {
+                                                return <LoaderIndex key={index} type='rightBar' />
+                                            })
+                                        }
                                     </div> : <>
                                         {
                                             notfollowedUsers?.slice(0, 3).map((x: any, index: any) => {
@@ -171,13 +176,13 @@ const RightSidebarIndex: React.FC<Rightbar> = ({ types }) => {
                             </div>
                         </div>
                         <div className="flex item-center w-85 auto fs-16 text-light flex-wrap" style={{ gap: ".5rem", paddingBottom: "2rem", color: "rgb(83, 100, 113)" }}>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize:"13px" }}>Terms of Service</Link>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize:"13px" }}>Privacy Policy</Link>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize:"13px" }}>Cookie Policy</Link>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize:"13px" }}>Ads info</Link>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize:"13px" }}>More</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize: "13px" }}>Terms of Service</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 3px", fontSize: "13px" }}>Privacy Policy</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize: "13px" }}>Cookie Policy</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 1px", fontSize: "13px" }}>Ads info</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize: "13px" }}>More</Link>
                             <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px", fontSize: "13px" }}>Edidiong Essien</Link>
-                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize:"13px" }}>© 2023 Eddy Corp..</Link>
+                            <Link to={'#'} className='text-light text-grey2 links' style={{ margin: "1px 2px", fontSize: "13px" }}>© 2023 Eddy Corp..</Link>
                         </div>
                         {/* <MessageTab setModal={function (val: boolean): void {
                         throw new Error('Function not implemented.');
