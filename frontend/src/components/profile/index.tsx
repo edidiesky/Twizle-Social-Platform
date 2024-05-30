@@ -103,7 +103,7 @@ const Profile: React.FC = () => {
                             </h2>
                         </div> : <div className="w-100 h-100 wrapper">
                             {
-                                !tweetisLoading ? <div className="flex py-2 column w-100 justify-center">
+                                tweetisLoading ? <div className="flex py-2 column w-100 justify-center">
                                         {
                                             Array(8).fill("").map((arr, index) => {
                                                 return <LoaderIndex key={index} type={'skeleton'} />
