@@ -1,6 +1,7 @@
 import React, { useState, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import {
   Home,
   LayoutIndex,

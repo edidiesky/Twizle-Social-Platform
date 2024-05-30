@@ -200,7 +200,7 @@ const RegisterModalStyles = styled(motion.div)`
   .formwraper {
   }
   .btn_wrapper {
-    margin-top: 7rem;
+    margin-top: 4rem;
      .btn.btn-1 {
     border: none;
     outline: none;
@@ -287,15 +287,11 @@ const RegisterModalStyles = styled(motion.div)`
     }
   }
   .backdrop {
-    background: var(--backdrop1);
+    background: var(--backdrop);
 
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: 100%;
-     @media (max-width:480px) {
-     display: none;
-
-    }
   }
   .Regsitertop {
   z-index: 3000;
@@ -315,7 +311,7 @@ const RegisterModalStyles = styled(motion.div)`
     width: 600px;
     display: flex;
     flex-direction: column;
-    background: var(--white);
+  background: var(--white);
     box-shadow:var(--shadow);
     position: relative;
     min-height: 60rem;

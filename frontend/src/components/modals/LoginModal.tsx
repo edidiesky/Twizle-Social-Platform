@@ -84,7 +84,7 @@ const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
 
           </div>
           <div className="w-85 formwraper auto flex column gap-3">
-            <h4 className="fs-35 text-dark text-center text-extra-bold">Sign in to Twitter</h4>
+            <h4 className="fs-35 text-dark text-center text-extra-bold">Sign in to Twizzle</h4>
             <div className="flex w-100 column" style={{ gap: "10px" }}>
               <div className="flex w-100 column gap-2 item-start">
                 <div className="authBtn gap-2 flex fs-16 text-dark item-center">

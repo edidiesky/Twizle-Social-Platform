@@ -63,7 +63,7 @@ const Search: React.FC = () => {
   }
 
 
-  console.log(dropdown)
+  // console.log(dropdown)
   return (
     <>
       {dropdown && <div onClick={handleOffDropDown} className="drop_background"></div>}

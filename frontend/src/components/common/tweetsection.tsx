@@ -188,7 +188,7 @@ const TweetFormSection:React.FC<{
                                 <GiIcon />
                             </label>
                         </div>
-                        <button disabled={!text && images.length === 0} onClick={handlePost} className="btn btn-3 fs-13 text-extra-bold text-white">Post</button>
+                        <button disabled={!text && images.length === 0} onClick={handlePost} className="btn btn-3 fs-13 text-extra-bold text-dark">Post</button>
                     </div>
                 </div>
             </div>

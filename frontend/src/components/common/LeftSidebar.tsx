@@ -43,13 +43,13 @@ const LeftSidebarIndex = () => {
             title: "Home",
             path: '/',
             icon: <HomeIcon />
-        }, 
+        },
         {
             title: "Explore",
             path: '/',
             icon: <SearchIcon />
-        }, 
-        
+        },
+
         {
             title: "Notifications",
             path: '',
@@ -60,12 +60,7 @@ const LeftSidebarIndex = () => {
             path: '/',
             icon: <MessageIcon />
 
-        }, {
-            title: "Lists",
-            path: '',
-            icon: <ListIcon />
-
-        },
+        }, 
         {
             title: "Bookmarks",
             path: '/i/bookmarks',
@@ -99,7 +94,7 @@ const LeftSidebarIndex = () => {
 
                 <div className="flex column w-100 justify-space leftwrapper auto gap-1">
                     <div className="leftTop w-85 auto flex column">
-                        <div className="flex w-100 column">
+                        <div className="flex w-100 column gap-1">
                             <div className="flex top w-100">
                                 <Link to={'/'} className="icon flex item-center justify-center">
                                     <TwitterIcon type={'small'} />
@@ -133,7 +128,7 @@ const LeftSidebarIndex = () => {
                                 </div>
 
                             </ul>
-                            <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Tweet</div>
+                            <div onClick={() => setTweet(true)} className="btn fs-18 text-white text-bold">Post</div>
                         </div>
                     </div>
                     <div className="w-85 sidebarbottom relative auto">
@@ -175,6 +170,7 @@ const LeftSidebarStyles = styled.div`
     height: 100vh;
     
    position: sticky;
+   padding-top:1rem;
     /* overflow:auto; */
 
     /* border-right: 1px solid var(--border); */
@@ -193,11 +189,11 @@ const LeftSidebarStyles = styled.div`
         flex: 0 0 120px;
   }
   @media (max-width:780px) {
-        flex: 0 0 80px;
+        flex: 0 0 120px;
 
   }
   @media (max-width:580px) {
-        flex: 0 0 80px;
+        flex: 0 0 120px;
   }
     @media (max-width:480px) {
         display: none;

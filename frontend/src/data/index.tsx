@@ -113,7 +113,7 @@ export const feedData = [
     tweet_user_id: 6,
     profile_name: "The champion",
     username: "amadgewick5",
-    tweet_text: `X will soon pay creators THE MOST out of any platform.\n\nBut growing on X is still very time consuming, most creators will miss out.\n\nBookmark these ChatGPT Prompt Engineering templates to gain a massive advantage on X. 🧵👇`,
+    tweet_text: `Twizzlewill soon pay creators THE MOST out of any platform.\n\nBut growing on Twizzleis still very time consuming, most creators will miss out.\n\nBookmark these ChatGPT Prompt Engineering templates to gain a massive advantage on X. 🧵👇`,
     timestamp: "10/24/2022",
     retweet_count: 818,
     favorite_count: 56,
@@ -142,7 +142,7 @@ export const feedData = [
 
 export const twitterList = [
   'About',
-  'Download the X app',
+  'Download the Twizzleapp',
   'Help Center',
   'Terms of Service',
   'Privacy Policy',
@@ -155,9 +155,9 @@ export const twitterList = [
   'Brand Resources',
   'Advertising',
   'Marketing',
-  'X for Business',
+  'Twizzlefor Business',
   'Developers',
   'Directory',
-  '© 2023 X Corp',
+  '© 2023 TwizzleCorp',
   'Settings',
 ]

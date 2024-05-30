@@ -56,12 +56,12 @@
   box-sizing: border-box;
 }
 :root {
-  --grey-1: rgb(113, 118, 123);
+  /* --grey-1: rgb(113, 118, 123);
   --grey-3:rgb(83, 100, 113);
   --dark-1: rgb(0, 0, 0);
   --primary: #e4c590;
   --background_2: #0e0d0c;
-  --blue-1: #1D9BF0;
+  --blue-1: #007bff;
   --grey-3:#CFD9DE;
   --grey-2: #f7f7f9;
   --grey-4:#EFF3F4;
@@ -77,18 +77,54 @@
   --backdrop: rgba(0, 0, 0, 0.4);
   --backdrop1: rgba(0, 0, 0, 0.4);
   --red:rgb(244, 33, 46);
-  --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+  --shadow:rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px; */
+
+    --white: rgb(0, 0, 0);
+  --grey-4:#202327;
+  --grey-3:#eff3f4;
+  --blue-1: #007bff;
+
+  --dark-1: #eff3f4;
+  --dark-grey: #eff3f4;
+  --dark-grey-hover: #f9f9f90f;
+  --grey-hover: #f9f9f90f;
+  --grey-hover1: #f9f9f90b;
+  --grey-3:#425364;
+  --grey-2: #16181C;
+  --grey-1: rgb(139, 152, 165);
+  --border: rgba(255, 255, 255, 0.1);
+  --border1: rgba(255, 255, 255, 0.2);
+  --top:rgba(0, 0, 0, 0.65);
+  --top1:rgba(0, 0, 0, 0.65);
+  --backdrop:rgba(49,59,69,.6);
+  --shadow:rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+}
+
+.react-loading-skeleton {
+    --base-color: var(--grey-2) !important;
+    --highlight-color: var(--grey-3) !important;
+    --animation-duration: 1.5s;
+    --animation-direction: normal;
+    --pseudo-element-display: block;
+    background-color: var(--base-color);
+    width: 100%;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    line-height: 1;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
 }
 .light-theme {
   --grey-1: rgb(113, 118, 123);
   --grey-3:rgb(83, 100, 113);
   --dark-1: rgb(0, 0, 0);
   --primary: #e4c590;
-  --blue-1: #1D9BF0;
+  --blue-1: #007bff;
   --grey-4:#EFF3F4;
 
   --background_2: #0e0d0c;
-  --blue-1: #1D9BF0;
+  --blue-1: #007bff;
   --grey-3:#CFD9DE;
   --grey-2: #f7f7f9;
   --white: #fff;
@@ -110,7 +146,7 @@
   --white: rgb(20,32,43);
   --grey-4:#273340;
   --grey-3:#eff3f4;
-  --blue-1: #1D9BF0;
+  --blue-1: #007bff;
   
   --dark-1: #eff3f4;
   --dark-grey: #eff3f4;
@@ -132,7 +168,7 @@
   --white: rgb(0, 0, 0);
   --grey-4:#202327;
   --grey-3:#eff3f4;
-  --blue-1: #1D9BF0;
+  --blue-1: #007bff;
 
   --dark-1: #eff3f4;
   --dark-grey: #eff3f4;
@@ -764,7 +800,7 @@ html {
 
 @media (max-width: 1080px) {
   html {
-    font-size: 50%;
+    font-size: 60%;
     scroll-behavior: smooth;
   }
   p {

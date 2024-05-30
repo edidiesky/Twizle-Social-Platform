@@ -2,6 +2,7 @@ import FeedCard from '../FeedCard';
 import { feedcardtype } from '../../../types/feedtype';
 import React from 'react';
 import styled from 'styled-components';
+import Skeleton from "react-loading-skeleton";
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { getAllTweet } from '../../../features/tweet/tweetReducer';
 import { cleartweet, clearTweetId } from '../../../features/tweet/tweetSlice';
@@ -11,9 +12,7 @@ import Message from '../../loaders/Message';
 const Feed: React.FC = () => {
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
     const { userInfo } = useAppSelector(store => store.auth)
-    const { tweets, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
-
-    const isBookmarked = tweetDetails?.tweet_bookmarks?.includes(userInfo?._id)
+    const { tweets, tweetDetails, alertText, alertType, showAlert, tweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
@@ -47,9 +46,14 @@ const Feed: React.FC = () => {
                 <FeedStyles>
                     <div className="flex w-100 column">
                         {
-                            tweets?.length === 0 ? <div className="flex py-2 w-100 justify-center">
+                            tweets?.length === 0 ? <div className="grid gap-2">
 
-                                <LoaderIndex type="small" />
+                                {/* <LoaderIndex type="small" /> */}
+                                {
+                                    Array(8).fill("").map((arr, index) => {
+                                        return <LoaderIndex type={'skeleton'} />
+                                    })
+                                }
 
                             </div> : <>
                                 {

@@ -19,17 +19,17 @@ const LayoutIndex: React.FC = () => {
                 {modal && <DisplayModal modal={modal} />}
             </MyAnimatePresence>
 
-             <MyAnimatePresence
+            <MyAnimatePresence
 
             >
                 {tweetphotomodal && <TweetPhotoModal setModal={function (val: boolean): void {
                     throw new Error('Function not implemented.');
-                } } />}
+                }} />}
             </MyAnimatePresence>
             {/* <DisplayModal/> */}
             <div className="w-100">
                 <Outlet />
-                
+
             </div>
         </>
     )

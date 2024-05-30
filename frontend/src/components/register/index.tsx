@@ -130,18 +130,16 @@ const Regsiters: React.FC = () => {
           {modaltab === 2 && <ProfilePictureModal modal={profile}
             setModal={setProfile} />}
         </MyAnimatePresence>
-
-
         <div className="w-100 authleft flex item-center justify-center">
           <TwitterBanner />
         </div>
-        <div className="w-100 auth_right flex item-center justify-center h-100 gap-2 flex column ">
-          <div className="w-85 auto auth_right_content h-100 flex item-start justify-center gap-2 column">
+        <div className="w-100 auth_right flex item-center  justify-center h-100 gap-2 flex column ">
+          <div className="w-85 auto auth_right_content h-100 flex justify-center  gap-2 column">
             <div className="flex column gap-1">
 
 
-              <div className="text-dark register_text text-heavy">Happening now</div>
-              <h3 className="fs-35 py-1 text-extra-bold">Join today.</h3>
+              <div className="text-center register_text text-heavy">Check it Now!</div>
+              <h3 className="fs-35 py-1 text-center text-extra-bold">Join today.</h3>
             </div>
             <div className="flex authWrapper column w-100 gap-1">
               <div className="flex w-100 column gap-1 item-start">
@@ -159,8 +157,8 @@ const Regsiters: React.FC = () => {
                 </div> */}
               </div>
               {/* <div className="option">or</div> */}
-              <div style={{marginTop:"2rem"}} onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
-              <h5 style={{lineHeight:"1.5"}} className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
+              <div style={{ marginTop: "2rem" }} onClick={() => setRegisterModal(true)} className="btn btn-2 fs-16 text-bold text-white">Create account</div>
+              <h5 style={{ lineHeight: "1.5" }} className="fs-12 text-grey text-light">By signing up, you agree to the <span className="text-blue">Terms of Service</span> and <span className="text-blue">Privacy Policy</span>, including Cookie Use.</h5>
             </div>
             <div style={{ marginTop: "3rem" }} className="flex authWrapper column gap-2">
               <h4 className="fs-18 text-extra-bold">Already have an account?</h4>
@@ -170,12 +168,14 @@ const Regsiters: React.FC = () => {
             </div>
           </div>
         </div>
+     
+
       </RegsiterStyles>
       <div className="w-100 py-1 flex item-center justify-center">
-        <div style={{flexWrap:"wrap"}} className="w-90 auto flex item-center justify-center">
+        <div style={{ flexWrap: "wrap" }} className="w-90 auto flex item-center justify-center">
           {
-            twitterList.map((x?:any)=> {
-              return <div style={{margin:"4px 10px", fontSize:"13px"}} className="text-light text-grey">{x}</div>
+            twitterList.map((x?: any) => {
+              return <div style={{ margin: "4px 10px", fontSize: "13px" }} className="text-light text-grey">{x}</div>
             })
           }
         </div>
@@ -187,21 +187,14 @@ const Regsiters: React.FC = () => {
 const RegsiterStyles = styled.div`
   width: 100%;
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   min-height: 100vh;
-  @media (max-width:980px) {
-    display: flex;
-    /* flex-direction: column-reverse; */
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
-  }
+  padding: 10rem 0;
   .auth_right_content {
+     align-items: center;
+    justify-content: center;
      @media (max-width:780px) {
     display: flex;
-    /* flex-direction: column-reverse; */
-    align-items: flex-start;
-    justify-content: center;
     gap: 5rem;
     width: 90%;
   }
@@ -219,20 +212,14 @@ const RegsiterStyles = styled.div`
   .register_text {
     font-size: 64px;
     font-weight: bold;
-  /* font-family: "Twitter_Minor", sans-serif; */
     @media (max-width:1080px) {
     font-size: 50px;
   }
   }
   .authWrapper {
-    width: 300px;
+    width: 400px;
     @media (max-width:1080px) {
-    width: 55%;
-
-    }
-
-     @media (max-width:680px) {
-    width: 60%;
+    width: 75%;
 
     }
   }
@@ -240,11 +227,7 @@ const RegsiterStyles = styled.div`
     padding: 1.2rem 2rem !important;
     opacity:1 !important;
   }
-  .authleft {
-    @media (max-width:780px) {
-      display: none;
-    }
-  }
+
   .authBtn {
     border: 1px solid var(--border1);
     padding: .7rem 4rem;
@@ -255,7 +238,6 @@ const RegsiterStyles = styled.div`
 
     }
     &.btn_signin {
-    padding: 10px 40px;
       color:var(--blue-1);
     }
     &:hover {
