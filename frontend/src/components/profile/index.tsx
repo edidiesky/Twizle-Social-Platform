@@ -16,6 +16,7 @@ import { feedcardtype } from '../../types/feedtype';
 import FeedCard from '../common/FeedCard';
 import MyAnimatePresence from '../../utils/AnimatePresence';
 import UnFollowModal from '../modals/UnFollowModal';
+import LoaderIndex from '../loaders';
 
 type Rightbar = {
     type: String
@@ -102,8 +103,12 @@ const Profile: React.FC = () => {
                             </h2>
                         </div> : <div className="w-100 h-100 wrapper">
                             {
-                                tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                                    <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
+                                !tweetisLoading ? <div className="flex py-2 column w-100 justify-center">
+                                        {
+                                            Array(8).fill("").map((arr, index) => {
+                                                return <LoaderIndex key={index} type={'skeleton'} />
+                                            })
+                                        }
                                 </div> : <>
                                     {
                                         usertweets?.map((value: feedcardtype) => {
