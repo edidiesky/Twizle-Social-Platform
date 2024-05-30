@@ -5,9 +5,7 @@ import styled from 'styled-components';
 import Bookmarks from '../components/bookmarks';
 const BookmarksIndex: React.FC = () => {
   return (
-    <BookmarksStyles>
-      <Bookmarks />
-    </BookmarksStyles>
+    <Bookmarks />
   )
 }
 
@@ -15,7 +13,7 @@ const BookmarksIndex: React.FC = () => {
 const BookmarksStyles = styled.div`
   width: 100%;
   position: relative;
-  overflow: auto;
+  /* overflow: hidden; */
 `
 
 export default BookmarksIndex

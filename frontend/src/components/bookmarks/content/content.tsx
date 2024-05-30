@@ -1,42 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { useAppSelector } from '../../../hooks/reduxtoolkit';
-import { CircularProgress } from '@material-ui/core';
 import { BsThreeDots } from 'react-icons/bs';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
+import { feedcardtype } from '../../../types/feedtype';
+import FeedCard from '../../common/FeedCard';
+import { getAllBookmarkedTweet } from '../../../features/tweet/tweetReducer';
+import LoaderIndex from '../../loaders';
 type SetStateProp<T> = React.Dispatch<React.SetStateAction<T>>
 type modalType = {
     setModal?: SetStateProp<Boolean>;
 }
 
-const Top: React.FC<modalType> = ({ setModal }) => {
-    const [drop, setDrop] = React.useState(false)
+const Content: React.FC<modalType> = ({ setModal }) => {
+    const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
+    const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
 
-    const {  userInfo } = useAppSelector(store => store.auth)
-    const { tweets, tweetisLoading } = useAppSelector(store => store.tweet)
+    const dispatch = useAppDispatch()
+
+    React.useEffect(() => {
+        dispatch(getAllBookmarkedTweet())
+    }, [])
 
     return (
-        <TopStyles className="w-100">
+        <div className="w-100 flex py-2 column">
 
-            <div className='w-90 auto flex item-center gap-2 justify-space'>
-                <h3 className="fs-18 text-extra-bold text-dark">Bookmarks
-                    <span style={{marginTop:"1px"}} className="flex item-center gap-1 fs-12 text-light text-dark">
-                       @{userInfo?.email}</span>
-                </h3>
-                {/* <div className="flex relative">
-                    <div className={drop ? "bookmarkdropdownCard flex column active" : "bookmarkdropdownCard  flex column"}>
-                        <div onClick={() => setDrop(false)} className="dropdown_background"></div>
-                        <ul onClick={() => setDrop(false)} className="flex column w-100">
-                            <li className="flex item-center fs-15 text-dark text-extra-bold gap-1">
-                               Clear all Bookmarks</li>
-                       </ul>
+            {
+                bookmarks?.length === 0 ? <>
+                    <div className="flex w-85 auto py-2 item-center justify-center">
+                        <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
+                            @{userInfo?.display_name} <br /> you have no bookmarks
+
+                            <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
+                        </h2>
                     </div>
-                    <div onClick={() => setDrop(true)} className="icons flex item-center justify-center"><BsThreeDots color='var(--dark-1)' fontSize={'20px'} /></div>
-                </div> */}
-                
-            </div>
+                </> : <div className="w-100">
+                    {
+                        tweetisLoading ? <div className="flex column gap-1 justify-center">
+                            {
+                                Array(8).fill("").map((arr, index) => {
+                                    return <LoaderIndex type={'skeleton'} />
+                                })
+                            }
+                        </div> : <>
+                            {
+                                bookmarks?.map((value: feedcardtype) => {
+                                    return <FeedCard {...value} key={value._id} />
+                                })
+                            }
+                        </>
+                    }
+                </div>
+            }
 
-        </TopStyles>
+        </div>
     )
 }
 
@@ -47,13 +64,12 @@ const TopStyles = styled.div`
   top: 0;
   background-color: var(--top);
   z-index: 300;
-  /* overflow: hidden; */
   /* padding: 1rem 0; */
   backdrop-filter: blur(12px);
   padding:1rem 0;
   border-bottom: 1px solid var(--border);
   /* backdrop-filter: c; */
-   .bookmarkdropdownCard {
+   .dropdownCard {
         position: absolute;
         right: 2%;
         top: 8px;
@@ -117,4 +133,4 @@ const TopStyles = styled.div`
     }
 `
 
-export default Top
+export default Content

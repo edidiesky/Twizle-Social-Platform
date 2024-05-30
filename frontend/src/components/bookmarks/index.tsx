@@ -1,66 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CircularProgress } from '@mui/material';
 import RightSidebarIndex from '../common/right/RightBar';
 import LeftSidebarIndex from '../common/LeftSidebar';
 import Top from './top/top';
-import AuthModal from '../modals/EditProfileModal';
-import { AnimatePresence } from 'framer-motion';
-import { getAllBookmarkedTweet } from '../../features/tweet/tweetReducer';
-import { feedcardtype } from '../../types/feedtype';
-import FeedCard from '../common/FeedCard';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
+import Content from './content/content';
 
 const Bookmarks: React.FC = () => {
     const [tab, setTab] = useState(0)
     const feed = false
     // console.log(name)
     const [modal, setModal] = React.useState<Boolean>(false)
-
-    const { userInfo, userprofileisSuccess } = useAppSelector(store => store.auth)
-    const { bookmarks, tweetisLoading } = useAppSelector(store => store.tweet)
-
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(getAllBookmarkedTweet())
-    }, [])
     return (
         <ProfileStyles>
             {/* top bar of user profile */}
             <LeftSidebarIndex />
-            <div className="flex-1 flex wrapper item-center">
-                <div className="flex flex-1 wraps column ">
-                    <Top />
-
-                    <div className="w-100 flex py-2 column">
-
-                        {
-                            bookmarks?.length === 0 ? <div className="flex w-85 auto py-2 item-center justify-center">
-                                <h2 style={{ lineHeight: "1.3", width: "60%" }} className="fs-24 w-85 auto text-extra-bold">
-                                    @{userInfo?.display_name} <br /> you have no bookmarks
-
-                                    <span className="text-light fs-14 block text-grey">When they do, their posts will show up here.</span>
-                                </h2>
-                            </div> : <div className="w-100">
-                                {
-                                    tweetisLoading ? <div className="flex py-2 w-100 justify-center">
-                                        <CircularProgress style={{ width: '30px', height: '30px', fontSize: '30px' }} color="primary" />
-                                    </div> : <>
-                                        {
-                                            bookmarks?.map((value: feedcardtype) => {
-                                                return <FeedCard {...value} key={value._id} />
-                                            })
-                                        }
-                                    </>
-                                }
-                            </div>
-                        }
-
-                    </div>
-                </div>
-                <RightSidebarIndex />
+            <div className="flex-1 wraps flex column">
+                <Top />
+                <Content />
             </div>
+            <RightSidebarIndex />
             {/* User feeds */}
         </ProfileStyles>
     )
@@ -71,6 +29,7 @@ const ProfileStyles = styled.div`
     display:flex;
     gap:1rem;
     height: 100vh;
+    position:sticky;
     overflow: auto;
     align-items: flex-start;
     border-right: 1px solid var(--border);
@@ -112,7 +71,7 @@ const ProfileStyles = styled.div`
             }
         }
     }
-    .wrapper {
+    .wrappers {
         height: 100vh;
     } 
     .wraps {

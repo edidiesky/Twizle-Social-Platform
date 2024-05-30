@@ -46,12 +46,12 @@ const Feed: React.FC = () => {
                 <FeedStyles>
                     <div className="flex w-100 column">
                         {
-                            tweets?.length === 0 ? <div className="grid gap-2">
+                            tweetisLoading ? <div className="grid gap-2">
 
                                 {/* <LoaderIndex type="small" /> */}
                                 {
                                     Array(8).fill("").map((arr, index) => {
-                                        return <LoaderIndex type={'skeleton'} />
+                                        return <LoaderIndex key={index} type={'skeleton'} />
                                     })
                                 }
 

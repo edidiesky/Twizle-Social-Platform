@@ -107,15 +107,15 @@ const FeedCard = (props: feedcardtype) => {
                 <ul style={{ fontSize: "14.6px" }} className="flex column w-100 text-bold">
                     {
                         checkifUser && <li onClick={handledeleteModal} style={{ color: "rgb(244, 33, 46)" }} className="flex text-extra-bold item-center gap-1">
-                            <DeleteIcon />Delete</li>
+                            <DeleteIcon />Delete Post</li>
+                    }
+                    {
+                        checkifUser && <li onClick={handledeleteModal} className="flex text-extra-bold item-center gap-1">
+                            <DeleteIcon />Edit Post</li>
                     }
 
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><IntrestIcon /> Not interested in this tweet</li>
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><FollowIcon />  Follow Alexander</li>
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><MuteIcon /> Mute Alexander</li>
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><BlockIcon /> Block Alexander</li>
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><ReportIcon /> Report tweet</li>
-                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><FollowIcon /> View Post Engagement</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><IntrestIcon /> Not interested in this Post</li>
+                    <li onClick={() => setDrop(false)} className="flex item-center gap-1"><FollowIcon /> View Post</li>
 
                 </ul>
             </div>
@@ -321,7 +321,7 @@ const FeedCardStyles = styled.div`
         cursor: pointer;
         width: 300px;
         border-radius: 10px;
-        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+        box-shadow: var(--shadow);
         background-color: var(--white);
         height: 0;
         transition: all .3s;    
@@ -330,7 +330,7 @@ const FeedCardStyles = styled.div`
         &.card1 {
         width: 110px;
         right: -40%;
-        box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+        box-shadow: var(--shadow);
         &.active {
             ul {
             li {
@@ -382,7 +382,7 @@ const FeedCardStyles = styled.div`
             background-color: transparent;
         }
         &.active {
-              height: 300px;
+              height: fit-content;
              min-height: fit-content;
 
             @media (max-width:400px) {
