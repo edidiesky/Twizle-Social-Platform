@@ -39,7 +39,7 @@ const LogoutModal: React.FC<modalType> = ({setModal }) => {
             <div style={{marginBottom:"15px"}} className="w-100 flex item-center justify-center">
               <TwitterIcon type={'small'}/>
             </div>
-            <h4 className="fs-20 text-dark text-start text-bold">Log out of Weeters?
+            <h4 className="fs-20 text-dark text-start text-bold">Log out of Twizzle?
             
             <span className="block text-grey fs-14 text-light py-1">
                 You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account. 
@@ -47,7 +47,7 @@ const LogoutModal: React.FC<modalType> = ({setModal }) => {
             </h4>
           
            <div className="flex column gap-1 w-100">
-              <div onClick={handleLogOut} className="btn w-100 auto btn-2 fs-16 text-white text-extra-bold">Logout
+              <div onClick={handleLogOut} className="btn w-100 auto btn-2 fs-16 text-dark text-extra-bold">Logout
               </div>
               <Link to={'/'} onClick={() => setModal(false)} className="btn w-100 auto btn-1 fs-16 text-white text-extra-bold">Cancel
               </Link>
@@ -79,7 +79,7 @@ const LogoutModalStyles = styled.div`
     /* width: 70%; */
   }
   .btn.btn-2 {
-    background-color:var(--dark-1);
+    background-color:var(--blue-1);
     padding:1.5rem !important;
 
     cursor: pointer;

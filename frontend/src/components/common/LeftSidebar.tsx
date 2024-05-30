@@ -40,12 +40,12 @@ const LeftSidebarIndex = () => {
     }, [userInfo])
     const list = [
         {
-            title: "Home",
+            title: "Dashboard",
             path: '/',
             icon: <HomeIcon />
         },
         {
-            title: "Explore",
+            title: "Search",
             path: '/',
             icon: <SearchIcon />
         },

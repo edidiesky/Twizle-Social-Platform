@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { ThreeDots } from "react-loader-spinner";
 const LoaderIndex: React.FC<{ type?: string, skeleton?: string }> = ({ type, skeleton }) => {
 
   if (type === "small") {
@@ -7,7 +8,15 @@ const LoaderIndex: React.FC<{ type?: string, skeleton?: string }> = ({ type, ske
       <div
         className="flex item-center justify-center"
       >
-        <div className="loading small"></div>
+        <ThreeDots
+          height="60"
+          width="60"
+          radius="10"
+          color={"var(--dark-1)"}
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          visible={true}
+        />
       </div>
     );
   }
@@ -74,7 +83,15 @@ const LoaderIndex: React.FC<{ type?: string, skeleton?: string }> = ({ type, ske
         background: "rgba(255, 255, 255, 0.422)"
       }}
     >
-      <div className="loading small"></div>
+      <ThreeDots
+        height="60"
+        width="60"
+        radius="10"
+        color={"var(--dark-1)"}
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        visible={true}
+      />
     </div>
   );
 }
