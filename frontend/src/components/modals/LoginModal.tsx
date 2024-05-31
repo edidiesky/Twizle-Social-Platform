@@ -22,8 +22,8 @@ type modalType = {
 const LoginModal: React.FC<modalType> = ({ modal, setModal }) => {
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('CallofDuty@gmail.com');
+  const [password, setPassword] = useState('12345');
   const { loginisLoading, loginisSuccess,
 
     alertText,
