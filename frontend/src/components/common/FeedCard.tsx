@@ -174,10 +174,14 @@ const FeedCard = (props: feedcardtype) => {
                                 {
                                     editinput ? <Link to={'#'} className="w-100">
                                         <div className="w-100 edit_tweet_form flex column gap-1 jusify-space">
-                                            <input onChange={(e) => setEditInputTweet(e?.target?.value)} value={editinputtweet} name='editinputtweet' type="text" className="input fs-15 text-light family1 w-100 text_dark_grey" />
+                                            <textarea 
+                                            onChange={(e) => setEditInputTweet(e?.target?.value)} 
+                                            value={editinputtweet} name='editinputtweet'
+                                            style={{minHeight:"7rem"}}
+                                                className="input fs-15 text-light family1 w-100 text-white" />
                                             <div className="flex items-center justify-end w-100 gap-1">
-                                                <div onClick={() => setEditInput(false)} className="btn btn_1 fs-14 font-bold family1">Cancel</div>
-                                                <div onClick={handleEditTweet} className="btn fs-14 font-bold family1 text_dark_grey">Edit Post</div>
+                                                <div onClick={() => setEditInput(false)} className="btn btn_1 fs-14 text-grey font-bold family1">Cancel</div>
+                                                <div onClick={handleEditTweet} className="btn fs-14 font-bold family1 text-white">Edit Post</div>
                                             </div>
                                         </div>
                                     </Link> : <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
@@ -272,7 +276,7 @@ const FeedCard = (props: feedcardtype) => {
 const FeedCardStyles = styled.div`
     width: 100%;
     padding: 1.7rem .7rem;
-    padding-bottom:.6rem;
+padding-bottom:.6rem;
    position: relative;
     border-bottom: 1px solid var(--border);
     &:hover {
@@ -281,7 +285,7 @@ const FeedCardStyles = styled.div`
     .edit_tweet_form{
         padding:2rem 1.5rem;
         border-radius: 20px;
-        background-color: var(--dark-grey-hover);
+        background-color: var(--grey-1);
         margin: 10px 0;
     }
     .tweet_user {
