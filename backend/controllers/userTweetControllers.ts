@@ -22,8 +22,8 @@ const GetAllTweet = asyncHandler(async (req: CustomInterface, res: Response) => 
     .populate('quote_user_id', " username bio display_name name profile_image_url")
 
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ tweet });
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.status(200).json({ tweet });
 
 });
 
@@ -58,7 +58,7 @@ const RePostATweet = asyncHandler(async (req: CustomInterface, res: Response) =>
 
 
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ tweet });
 
 });
@@ -78,7 +78,7 @@ const GetSingleTweet = asyncHandler(async (req: CustomInterface, res: Response) 
   }
 
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ tweet, userIdIncludedInBookmarksArray, userIdIncludedInTweetLikesArray });
 });
 
@@ -86,7 +86,7 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 // GET 
 // Get user's tweet
 const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const tweet = await UserTweet.find({ tweet_user_id:req?.params?.id}).sort("-createdAt")
+  const tweet = await UserTweet.find({ tweet_user_id: req?.params?.id }).sort("-createdAt")
     .populate("tweet_user_id", " username bio display_name name profile_image_url")
     .populate('quote_tweet_id', 'tweet_image tweet_text')
     .populate('quote_user_id', " username bio display_name name profile_image_url")
@@ -100,7 +100,7 @@ const GetUserTweet = asyncHandler(async (req: CustomInterface, res: Response) =>
 
   // const tweet = tweets?.concat(quote!)
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ tweet });
 });
 
@@ -108,7 +108,18 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 //PUT
 // ADMIN
 const UpdateTweet = asyncHandler(async (req: ExpressRequest, res: Response) => {
-  res.status(200).send('Get user Tweet');
+  // find the tweet
+  const tweet = await UserTweet.findById({ _id: req.params.id })
+  // check if the tweet exists
+  if (!tweet) {
+    res.status(404);
+    throw new Error("This tweet does not exists");
+  }
+  // delete the tweet
+  const newtweet = await UserTweet.findByIdAndUpdate({ _id: req.params.id }, {
+    ...req.body
+  }, { new: true })
+  res.status(200).json({ tweet: newtweet })
 });
 
 //PUT
@@ -131,15 +142,15 @@ const LikeAndUnlikeATweet = asyncHandler(async (req: CustomInterface, res: Respo
 
 
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ updateTweet,userIdIncludedInTweetLikesArray });
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.status(200).json({ updateTweet, userIdIncludedInTweetLikesArray });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_likes: userid } }, { new: true })
 
 
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ updateTweet,userIdIncludedInTweetLikesArray });
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.status(200).json({ updateTweet, userIdIncludedInTweetLikesArray });
 
   }
   // // const userIdIncludedInTweetLikesArray = await UserTweet.
@@ -167,14 +178,14 @@ const BookMarkATweet = asyncHandler(async (req: CustomInterface, res: Response) 
     const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
 
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
   } else {
     const updateTweet = await UserTweet.findOneAndUpdate({ _id: req.params.id }, { $pull: { tweet_bookmarks: userid } }, { new: true })
     const userIdIncludedInBookmarksArray = updateTweet?.tweet_bookmarks?.includes(userid)
 
     res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.status(200).json({ updateTweet, userIdIncludedInBookmarksArray });
 
   }
@@ -196,7 +207,7 @@ const getAllBookMarks = asyncHandler(async (req: CustomInterface, res: Response)
 
   // Return the bookmarked tweets
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ bookmarkTweets: tweets });
 });
 
@@ -220,7 +231,7 @@ const CreateTweet = asyncHandler(async (req: CustomInterface, res: Response) => 
     tweet_text
   })
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ tweet });
 
 })

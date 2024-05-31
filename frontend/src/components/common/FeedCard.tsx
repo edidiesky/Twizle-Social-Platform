@@ -12,7 +12,7 @@ import MuteIcon from '../../assets/svg/dropdownicons/mute';
 import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
-import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet, BookMarkATweet } from '../../features/tweet/tweetReducer';
+import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet, BookMarkATweet, UpdateTweet } from '../../features/tweet/tweetReducer';
 import ShareIcon from '../../assets/svg/feedcardicons/share';
 import DeleteIcon from '../../assets/svg/dropdownicons/delete';
 import DeleteModal from '../modals/DeleteModal';
@@ -81,6 +81,15 @@ const FeedCard = (props: feedcardtype) => {
     const handleEditInput = () => {
         setEditInput(true)
         setDrop(false)
+    }
+
+    const handleEditTweet = () => {
+        dispatch(UpdateTweet({
+            tweet_text: editinputtweet,
+            _id: props?._id
+        }))
+        setEditInput(false)
+        // setDrop(false)
     }
 
     const handleQuoteModal = () => {
@@ -168,11 +177,11 @@ const FeedCard = (props: feedcardtype) => {
                                             <input onChange={(e) => setEditInputTweet(e?.target?.value)} value={editinputtweet} name='editinputtweet' type="text" className="input fs-15 text-light family1 w-100 text_dark_grey" />
                                             <div className="flex items-center justify-end w-100 gap-1">
                                                 <div onClick={() => setEditInput(false)} className="btn btn_1 fs-14 font-bold family1">Cancel</div>
-                                                <div className="btn fs-14 font-bold family1 text_dark_grey">Edit Post</div>
+                                                <div onClick={handleEditTweet} className="btn fs-14 font-bold family1 text_dark_grey">Edit Post</div>
                                             </div>
                                         </div>
                                     </Link> : <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
-                                        {props.tweet_text}
+                                        {editinputtweet}
                                     </h5>
                                 }
 

@@ -111,11 +111,12 @@ export const CreateTweet = createAsyncThunk<{
   }
 );
 
+
 // update User tweet
 export const UpdateTweet = createAsyncThunk<{
   rejectValue: KnownError,
 }, tweetdatatype>(
-  "UpdateDetails",
+  "UpdateTweet",
   async (Detailsdata, { rejectWithValue, getState }) => {
 
     try {
@@ -128,11 +129,11 @@ export const UpdateTweet = createAsyncThunk<{
         },
       };
       const response = await axios.put(
-        `${import.meta.env.VITE_API_BASE_URLS}/tweet/Details/${Detailsdata?._id}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/tweet/${Detailsdata?._id}`,
         Detailsdata,
         config
       );
-      return response.data;
+      return response.data.tweet;
 
     } catch (err: any) {
       const message = err.response && err.response.data.message
