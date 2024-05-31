@@ -96,7 +96,7 @@ const LeftSidebarIndex = () => {
                     <div className="leftTop w-85 auto flex column">
                         <div className="flex w-100 column gap-1">
                             <div className="flex top w-100">
-                                <Link to={'/'} className="icon flex item-center justify-center">
+                                <Link to={'/'} className=" flex item-center justify-center">
                                     <TwitterIcon type={'small'} />
                                 </Link>
                             </div>
@@ -104,7 +104,7 @@ const LeftSidebarIndex = () => {
                                 {
                                     list.map((x, index) => {
                                         return (
-                                            <li className="list text-dark flex item-center gap-2 text-light" >
+                                            <li key={index} className="list text-dark flex item-center gap-2 text-light" >
                                                 <NavLink className='text-dark flex item-center gap-2 text-light' to={x.path}>
                                                     {x.icon}
                                                     <span className='span'>{x.title}</span>
