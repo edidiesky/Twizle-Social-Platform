@@ -130,11 +130,9 @@ const Regsiters: React.FC = () => {
           {modaltab === 2 && <ProfilePictureModal modal={profile}
             setModal={setProfile} />}
         </MyAnimatePresence>
-        <div className="w-100 authleft flex item-center justify-center">
-          <TwitterBanner />
-        </div>
         <div className="w-100 auth_right flex item-center  justify-center h-100 gap-2 flex column ">
           <div className="w-85 auto auth_right_content h-100 flex justify-center  gap-2 column">
+            <TwitterBanner />
             <div className="flex column gap-1">
 
 
