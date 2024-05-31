@@ -56,6 +56,7 @@ const FeedCard = (props: feedcardtype) => {
     const [deletemodal, setDeleteModal] = useState<boolean>(false)
     const [drop, setDrop] = useState<boolean>(false)
     const [quote, setQuote] = useState<boolean>(false)
+    const [editinput, setEditInput] = useState<boolean>(false)
     const [quotemodal, setQuoteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const handleLikeTweet = () => {
@@ -73,6 +74,11 @@ const FeedCard = (props: feedcardtype) => {
     }
     const handledeleteModal = () => {
         setDeleteModal(true)
+        setDrop(false)
+    }
+
+    const handleEditInput = () => {
+        setEditInput(true)
         setDrop(false)
     }
 
@@ -110,7 +116,7 @@ const FeedCard = (props: feedcardtype) => {
                             <DeleteIcon />Delete Post</li>
                     }
                     {
-                        checkifUser && <li onClick={handledeleteModal} className="flex text-extra-bold item-center gap-1">
+                        checkifUser && <li onClick={handleEditInput} className="flex text-extra-bold item-center gap-1">
                             <DeleteIcon />Edit Post</li>
                     }
 
@@ -155,9 +161,14 @@ const FeedCard = (props: feedcardtype) => {
                                     {/* <span sty></span> */}
                                     <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
                                 </h4>
-                                <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
-                                    {props.tweet_text}
-                                </h5>
+                                {
+                                    editinput ? <div className="w-100">
+                                        <div className="w-100 edit_tweet_form"></div>
+                                    </div> : <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
+                                        {props.tweet_text}
+                                    </h5>
+                                }
+                               
 
                             </div>
                             <Link to={'#'} onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
