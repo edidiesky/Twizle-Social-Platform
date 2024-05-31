@@ -34,6 +34,10 @@ interface tweetState {
   tweetisSuccess?: boolean,
   tweetisError?: boolean,
 
+  gettingtweetisLoading?: boolean,
+  gettingtweetisSuccess?: boolean,
+  gettingtweetisError?: boolean,
+
   tweet_photo_id?: string,
   createtweetisLoading?: boolean,
   createtweetisSuccess?: boolean,
@@ -66,6 +70,10 @@ const initialState: tweetState = {
   tweetisLoading: false,
   tweetisSuccess: false,
   tweetisError: false,
+
+  gettingtweetisLoading: false,
+  gettingtweetisSuccess: false,
+  gettingtweetisError: false,
   isBookMarked: false,
   isLiked: false,
   modal: false,
@@ -141,17 +149,17 @@ export const tweetSlice = createSlice({
   extraReducers: (builder) => {
     // registration build case
     builder.addCase(getAllTweet.pending, (state, action) => {
-      state.tweetisLoading = true
+      state.gettingtweetisLoading = true
     })
     builder.addCase(getAllTweet.fulfilled, (state, action) => {
-      state.tweetisSuccess = true
-      state.tweetisLoading = false
+      state.gettingtweetisSuccess = true
+      state.gettingtweetisLoading = false
       state.tweets = action.payload
     })
     builder.addCase(getAllTweet.rejected, (state, action) => {
-      state.tweetisSuccess = false
+      state.gettingtweetisSuccess = false
       state.tweetisError = true
-      state.tweetisLoading = false
+      state.gettingtweetisLoading = false
       state.showAlert = true
       state.alertType = 'danger'
       state.alertText = action.payload

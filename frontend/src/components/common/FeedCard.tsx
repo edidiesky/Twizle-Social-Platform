@@ -129,7 +129,7 @@ const FeedCard = (props: feedcardtype) => {
                 }
             </MyAnimatePresence>
             
-            <div className="flex w-90 auto item-start feed_card_wrapper gap-1">
+            <div className="flex w-90 auto item-start feed_card_wrap gap-1">
                 {/* profile image */}
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
                     <div className="image_gradient"></div>
@@ -141,10 +141,10 @@ const FeedCard = (props: feedcardtype) => {
                     }
                 </Link>
                 {/* tweet right card section */}
-                <div className="flex column flex-1 w-100" style={{ gap: '.7rem' }}>
-                    <div className="w-100 flex column gap-1">
-                       <div className="w-100 flex item-start justify-space">
-                            <Link style={{ gap: '.5rem' }} to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className='flex-1 flex column w-100'>
+                <div className="flex w-100 column" style={{ gap: '.7rem' }}>
+                    <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex w-100 column gap-1">
+                        <div className="w-100 flex feed_card_wrap_top item-start justify-space">
+                            <div style={{ gap: '.5rem' }} className='flex w-100 column'>
                                 <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
                                     <div style={{ fontSize: "15px",gap: ".3rem" }}  className="tweet_user flex item-center">
                                         {props?.tweet_user_id?.display_name}
@@ -159,10 +159,10 @@ const FeedCard = (props: feedcardtype) => {
                                     {props.tweet_text}
                                 </h5>
 
-                            </Link>
-                            <div onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
-                                <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
                             </div>
+                            <Link to={'#'} onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
+                                <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
+                            </Link>
                        </div>
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
@@ -170,7 +170,7 @@ const FeedCard = (props: feedcardtype) => {
                                 <FeedImage id={props?._id} images={props.tweet_image} name={props?.tweet_user_id?.name} />
                             </div>
                         }
-                    </div>
+                    </Link>
 
                     {/* quoted tweet section of the tweet card */}
                     {
@@ -266,6 +266,14 @@ const FeedCardStyles = styled.div`
     max-width: 150px;
   }
   
+    }
+    .feed_card_wrap_top {
+         display: grid;
+        grid-template-columns: 1fr 3.5rem;
+    }
+    .feed_card_wrap {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
     }
      .image_wrapper {
       width:5rem;

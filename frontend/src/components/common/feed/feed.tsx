@@ -12,7 +12,7 @@ import Message from '../../loaders/Message';
 const Feed: React.FC = () => {
     const { quoteisSuccess } = useAppSelector(store => store.quotes)
     const { userInfo } = useAppSelector(store => store.auth)
-    const { tweets, tweetDetails, alertText, alertType, showAlert, tweetisLoading } = useAppSelector(store => store.tweet)
+    const { tweets, tweetDetails, alertText, alertType, showAlert, gettingtweetisLoading } = useAppSelector(store => store.tweet)
 
     const dispatch = useAppDispatch()
 
@@ -46,7 +46,7 @@ const Feed: React.FC = () => {
                 <FeedStyles>
                     <div className="flex w-100 column">
                         {
-                            tweetisLoading ? <div className="grid gap-2">
+                            gettingtweetisLoading ? <div className="grid gap-2">
 
                                 {/* <LoaderIndex type="small" /> */}
                                 {

@@ -207,7 +207,7 @@ const RightSidebarStyles = styled.div`
         flex: .6;
     }
     @media (max-width:980px) {
-        flex: .26;
+        flex: .1;
     }
     
     @media (max-width:780px) {
