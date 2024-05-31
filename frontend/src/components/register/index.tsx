@@ -136,7 +136,7 @@ const Regsiters: React.FC = () => {
             <div className="flex column gap-1">
 
 
-              <div className="text-center register_text text-heavy">Check it Out!</div>
+              <div className="text-center register_text text-heavy">What is popping!</div>
               <h3 className="fs-35 py-1 text-center text-extra-bold">Join today.</h3>
             </div>
             <div className="flex authWrapper column w-100 gap-1">
