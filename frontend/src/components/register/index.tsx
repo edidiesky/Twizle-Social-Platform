@@ -224,13 +224,13 @@ const RegsiterStyles = styled.div`
     }
   }
   .btn {
-    padding: 1.2rem 2rem !important;
+    padding: 1.5rem 2rem !important;
     opacity:1 !important;
   }
 
   .authBtn {
     border: 1px solid var(--border1);
-    padding: .7rem 4rem;
+    padding: 1.5rem 4rem;
     border-radius: 40px;
     width: 100%;
     cursor: pointer;
