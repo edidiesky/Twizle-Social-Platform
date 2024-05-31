@@ -138,7 +138,7 @@ const Regsiters: React.FC = () => {
             <div className="flex column gap-1">
 
 
-              <div className="text-center register_text text-heavy">Check it Now!</div>
+              <div className="text-center register_text text-heavy">Check it Out!</div>
               <h3 className="fs-35 py-1 text-center text-extra-bold">Join today.</h3>
             </div>
             <div className="flex authWrapper column w-100 gap-1">
@@ -210,7 +210,7 @@ const RegsiterStyles = styled.div`
   }
   
   .register_text {
-    font-size: 64px;
+    font-size: 54px;
     font-weight: bold;
     @media (max-width:1080px) {
     font-size: 50px;

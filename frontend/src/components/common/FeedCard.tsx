@@ -27,7 +27,7 @@ import TweetPhotoModal from '../modals/TweetPhotoModal';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
-    const { userIdIncludedInTweetLikesArray,tweetphotomodal, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
+    const { userIdIncludedInTweetLikesArray, tweetphotomodal, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
 
     const createdAt = moment(props?.createdAt);
@@ -57,6 +57,7 @@ const FeedCard = (props: feedcardtype) => {
     const [drop, setDrop] = useState<boolean>(false)
     const [quote, setQuote] = useState<boolean>(false)
     const [editinput, setEditInput] = useState<boolean>(false)
+    const [editinputtweet, setEditInputTweet] = useState<string>(props?.tweet_text)
     const [quotemodal, setQuoteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const handleLikeTweet = () => {
@@ -134,7 +135,7 @@ const FeedCard = (props: feedcardtype) => {
                     tweet && <TweetModal id={props?._id} setModal={setTweet} modal={tweet} />
                 }
             </MyAnimatePresence>
-            
+
             <div className="flex w-90 auto item-start feed_card_wrap gap-1">
                 {/* profile image */}
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
@@ -152,7 +153,7 @@ const FeedCard = (props: feedcardtype) => {
                         <div className="w-100 flex feed_card_wrap_top item-start justify-space">
                             <div style={{ gap: '.5rem' }} className='flex w-100 column'>
                                 <h4 className="fs-16 text-dark text-extra-bold relative flex item-center" style={{ gap: '.4rem' }}>
-                                    <div style={{ fontSize: "15px",gap: ".3rem" }}  className="tweet_user flex item-center">
+                                    <div style={{ fontSize: "15px", gap: ".3rem" }} className="tweet_user flex item-center">
                                         {props?.tweet_user_id?.display_name}
                                         <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
                                         <span style={{ fontSize: "14px" }} className="text-light text-grey">@{props?.tweet_user_id?.name}</span>
@@ -162,19 +163,25 @@ const FeedCard = (props: feedcardtype) => {
                                     <span style={{ fontSize: "15px" }} className="date text-light text-grey ">{date}</span>
                                 </h4>
                                 {
-                                    editinput ? <div className="w-100">
-                                        <div className="w-100 edit_tweet_form"></div>
-                                    </div> : <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
+                                    editinput ? <Link to={'#'} className="w-100">
+                                        <div className="w-100 edit_tweet_form flex column gap-1 jusify-space">
+                                            <input onChange={(e) => setEditInputTweet(e?.target?.value)} value={editinputtweet} name='editinputtweet' type="text" className="input fs-15 text-light family1 w-100 text_dark_grey" />
+                                            <div className="flex items-center justify-end w-100 gap-1">
+                                                <div onClick={() => setEditInput(false)} className="btn btn_1 fs-14 font-bold family1">Cancel</div>
+                                                <div className="btn fs-14 font-bold family1 text_dark_grey">Edit Post</div>
+                                            </div>
+                                        </div>
+                                    </Link> : <h5 style={{ lineHeight: "20px" }} className="text_dark_grey w-100 fs-15 text-light family1">
                                         {props.tweet_text}
                                     </h5>
                                 }
-                               
+
 
                             </div>
                             <Link to={'#'} onClick={() => setDrop(true)} className="icons2 flex item-center justify-center">
                                 <BiDotsHorizontalRounded fontSize={'20px'} color='var(--dark-grey)' />
                             </Link>
-                       </div>
+                        </div>
                         {
                             props.tweet_image?.length > 0 && <div className="w-100 wrapper">
 
@@ -223,8 +230,8 @@ const FeedCard = (props: feedcardtype) => {
                                         }
                                     </div>
                                 </div>
-                        </Link>
-                            
+                            </Link>
+
 
                         </QuoteFeedCardStyles>
                     }
@@ -262,6 +269,12 @@ const FeedCardStyles = styled.div`
     &:hover {
         background-color: var(--dark-grey-hover);
     }
+    .edit_tweet_form{
+        padding:2rem 1.5rem;
+        border-radius: 20px;
+        background-color: var(--dark-grey-hover);
+        margin: 10px 0;
+    }
     .tweet_user {
         overflow: hidden;
   text-overflow: ellipsis;
@@ -277,6 +290,13 @@ const FeedCardStyles = styled.div`
     max-width: 150px;
   }
   
+    }
+    .btn {
+        padding: 10px 20px !important;
+        &.btn_1 {
+            background-color:  var(--dark-grey);
+            /* color: var(--dark-1); */
+        }
     }
     .feed_card_wrap_top {
          display: grid;
