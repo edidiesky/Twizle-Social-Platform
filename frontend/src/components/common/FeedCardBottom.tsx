@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import RetweetIcon from '../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../assets/svg/feedcardicons/like';
 import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
@@ -51,7 +52,7 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
     return (
 
 
-        <div className="w-100 flex item-center">
+        <Link to={'#'} className="w-100 flex item-center">
             <div className="flex item-center w-100 gap-2">
                 <div className="flex item-center w-100 auto gap-2">
                     <div
@@ -107,7 +108,7 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
 
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

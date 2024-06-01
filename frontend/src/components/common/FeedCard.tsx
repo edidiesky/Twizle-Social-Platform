@@ -6,10 +6,6 @@ import { Link } from 'react-router-dom';
 import TweetModal from '../modals/TweetModal';
 import IntrestIcon from '../../assets/svg/dropdownicons/interest';
 import FollowIcon from '../../assets/svg/dropdownicons/follow';
-import ReportIcon from '../../assets/svg/dropdownicons/report';
-import BlockIcon from '../../assets/svg/dropdownicons/block';
-import MuteIcon from '../../assets/svg/dropdownicons/mute';
-import BookmarkIcon from '../../assets/svg/feedcardicons/bookmark';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxtoolkit';
 import { DeleteTweet, LikeAndUnlikeATweet, RePostATweet, BookMarkATweet, UpdateTweet } from '../../features/tweet/tweetReducer';
@@ -145,7 +141,7 @@ const FeedCard = (props: feedcardtype) => {
                 }
             </MyAnimatePresence>
 
-            <div className="flex w-90 auto item-start feed_card_wrap gap-1">
+            <Link to={`/${props?.tweet_user_id?.name}/status/${props._id}`} className="flex w-90 auto item-start feed_card_wrap gap-1">
                 {/* profile image */}
                 <Link to={`/${props?.tweet_user_id?.name}`} className="image_wrapper">
                     <div className="image_gradient"></div>
@@ -196,10 +192,10 @@ const FeedCard = (props: feedcardtype) => {
                             </Link>
                         </div>
                         {
-                            props.tweet_image?.length > 0 && <div className="w-100 wrapper">
+                            props.tweet_image?.length > 0 && <Link to={`#`} className="w-100 wrapper">
 
                                 <FeedImage id={props?._id} images={props.tweet_image} name={props?.tweet_user_id?.name} />
-                            </div>
+                            </Link>
                         }
                     </Link>
 
@@ -266,7 +262,7 @@ const FeedCard = (props: feedcardtype) => {
 
                 </div>
 
-            </div>
+            </Link>
 
 
         </FeedCardStyles>
