@@ -19,6 +19,8 @@ import LoaderIndex from '../../loaders';
 const PostDetailsContent: React.FC = () => {
     const {id} = useParams()
     const { commentisLoading, commentisSuccess } = useAppSelector(store => store.comment)
+    // const { comment } = useAppSelector(store => store.comment)
+
     const [bookmark, setBookMark] = useState<boolean>(false)
     const { tweets, tweetDetails, isBookMarked } = useAppSelector(store => store.tweet)
     const { quotes } = useAppSelector(store => store.quotes)

@@ -17,6 +17,7 @@ const Content: React.FC = () => {
         dispatch(clearTweetId("any"))
         dispatch(cleartweet({ payload: "any" }))
         dispatch(GetAllUserProfile())
+      
         dispatch(getAllTweet())
     }, [])
 

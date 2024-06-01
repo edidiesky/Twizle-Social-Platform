@@ -35,6 +35,7 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
     tweetDetail
 }) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
+    const { comment } = useAppSelector(store => store.comment)
     const { tweetDetails, tweets, userIdIncludedInTweetLikesArray } = useAppSelector(store => store.tweet)
     const dispatch = useAppDispatch()
 
@@ -46,6 +47,7 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
 
     const isBookmarked = tweetDetail?.tweet_bookmarks?.includes(userInfo?._id)
     const handleBookMark = () => {
+        
         dispatch(BookMarkATweet({ Detailsdata: tweetDetail?._id }))
     }
 
@@ -61,6 +63,9 @@ const FeedCardBottom: React.FC<FeedCardBottomType> = ({
                             <div className="icons icon1 flex item-center justify-center">
                                 <MessageIcon />
                             </div>
+                            {
+                                comment?.length
+                            }
                             {/* 23 */}
                         </div>
                         <div className="flex iconwrapper flex-1 relative justify-center text_2 item-center" style={{ gap: ".3rem" }}>

@@ -23,7 +23,7 @@ import TweetPhotoModal from '../modals/TweetPhotoModal';
 
 const FeedCard = (props: feedcardtype) => {
     const { userDetails, userInfo } = useAppSelector(store => store.auth)
-    const { userIdIncludedInTweetLikesArray, tweetphotomodal, tweetDetails, alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
+    const { alertText, alertType, showAlert } = useAppSelector(store => store.tweet)
     const checkifUser = props?.tweet_user_id?._id === userInfo?._id
 
     const createdAt = moment(props?.createdAt);

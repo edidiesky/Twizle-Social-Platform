@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BiSolidBadgeCheck, BiDotsHorizontalRounded } from 'react-icons/bi'
+import { Link } from 'react-router-dom';
 import RetweetIcon from '../../../assets/svg/feedcardicons/retweet';
 import LikeIcon from '../../../assets/svg/feedcardicons/like';
 import StatIcon from '../../../assets/svg/feedcardicons/stat';
@@ -50,7 +51,7 @@ const PostDetailsComments: React.FC = () => {
                 {
                     comment?.map((x: any, index: any) => {
                         return <div key={index} className="postCard w-100 flex item-start justify-space gap-1">
-                            <div className="image_wrapper">
+                            <Link to={`/${x?.user?.name}`} className="image_wrapper">
 
                                 {
                                     x.user?.profile_image_url ?
@@ -59,7 +60,7 @@ const PostDetailsComments: React.FC = () => {
 
                                 }
                                 <div className="image_gradient"></div>
-                            </div>
+                            </Link>
 
                             <div className="flex flex-1 column gap-1">
                                 <div className="flex item-start justify-space gap-1 w-100 " style={{ gap: ".3rem" }}>
