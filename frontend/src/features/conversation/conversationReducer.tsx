@@ -195,9 +195,9 @@ export const GetUserconversationDetails = createAsyncThunk<
             authorization: `Bearer ${auth.token}`,
           },
         };
-        console.log(Detailsdata)
+        // console.log(Detailsdata)
         const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URLS}/conversation/${Detailsdata?.senderId}/${Detailsdata?.receiverId}`,
+          `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
           config
         );
         return response.data.conversation;

@@ -27,7 +27,9 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
         receiver: senderId
       },
     ]
-  })
+  }).populate("sender", " username bio display_name name profile_image_url")
+    .populate("receiver", " username bio display_name name profile_image_url");
+
 
   // console.log(existingConversations?.length)
 
