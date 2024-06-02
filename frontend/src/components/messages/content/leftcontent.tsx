@@ -49,7 +49,7 @@ const LeftContent: React.FC = () => {
 
                 <div className="flex column w-100">
                     {
-                        
+
                         conversation?.length === 0 ? <div className="w-85 auto flex column">
                             <h3 className="fs-30 text-extra-bold">Welcome to your inbox!
                                 <span className="text-light py-1 block fs-16 text-grey">Drop a line, share posts and more with private conversations between you and others on X. </span>
@@ -59,7 +59,7 @@ const LeftContent: React.FC = () => {
                             </div>
                         </div> : <div className="w-100">
                             {
-                                conversation?.map((x:any, index:any) => {
+                                conversation?.map((x: any, index: any) => {
                                     const updatedAt = moment(x?.updatedAt);
                                     const now = moment();
                                     const hoursDifference = now.diff(updatedAt, 'hours');
@@ -78,7 +78,7 @@ const LeftContent: React.FC = () => {
                                     }
 
                                     return x?.sender?._id !== userInfo?._id && <NavLink
-                                        
+
                                         to={`/messages/${x?.sender?._id}-${x?.receiver?._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
@@ -99,48 +99,7 @@ const LeftContent: React.FC = () => {
                                     </NavLink>
                                 })
                             }
-                            {
-                                conversation?.map((x:any, index:any) => {
-                                    const updatedAt = moment(x?.updatedAt);
-                                    const now = moment();
-                                    const hoursDifference = now.diff(updatedAt, 'hours');
-                                    const minsDifference = now.diff(updatedAt, 'minutes');
 
-                                    let date;
-                                    if (hoursDifference < 1) {
-                                        date = `${minsDifference}min`;
-                                    }
-                                    else if (hoursDifference < 24) {
-                                        date = `${hoursDifference}hr`;
-                                    } else if (hoursDifference > 24) {
-                                        date = updatedAt.format('MMMD');
-                                    } else {
-                                        date = updatedAt.format('MMMD');
-                                    }
-
-                                    return x?.receiver?._id !== userInfo?._id && <NavLink
-                                        
-                                        to={`/messages/${x?.sender?._id}-${ x?.receiver?._id }`} key={index} className="messageCard w-100 flex item-start justify-space">
-                                        <div className="flex item-start gap-1">
-                                            <div className="image_wrapper">
-                                                <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
-                                                <div className="image_gradient"></div>
-                                            </div>
-                                            <div className="flex  flex-1 item-start column " style={{ gap: ".4rem" }}>
-                                                <h4 className="fs-16  text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
-                                                    <span className='tweet_user'>{x?.receiver?.display_name}</span>
-                                                    {/* <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span> */}
-                                                    <span className="text-light fs-14 tweet_user text-grey ">@{x?.receiver?.name}</span>
-                                                    <span className="text-light fs-15 text-grey date">{date}</span>
-
-                                                </h4>
-                                                <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
-
-                                            </div>
-                                        </div>
-                                    </NavLink>
-                                })
-                            }
                         </div>
                     }
                     {/* if sender */}

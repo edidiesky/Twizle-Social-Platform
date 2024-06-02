@@ -16,7 +16,7 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
   const { receiverId, senderId } = req.body
   // console.log(receiverId, senderId)
   // check for any exusting conversation
-  const existingConversations = await Conversation.findOne({
+  const existingConversations = await Conversation.find({
     $or: [
       {
         sender: senderId,
@@ -30,11 +30,11 @@ const createConversation = asyncHandler(async (req: CustomInterface, res: Respon
   })
 
   // console.log(existingConversations?.length)
-  
-  if (existingConversations) {
+
+  if (existingConversations[0] !== undefined) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversation:existingConversations })
+    res.status(200).json({ conversation: existingConversations })
 
   } else {
 
@@ -99,7 +99,7 @@ const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Res
   if (!conversation) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversation:null });
+    res.status(200).json({ conversation: null });
   }
 
   res.setHeader("Content-Type", "text/html");
