@@ -20,16 +20,15 @@ type KnownError = {
   errorMessage: string;
 }
 
-export const getAllconversation = createAsyncThunk<{
+export const getAllUserConversation = createAsyncThunk<{
   rejectValue: KnownError,
 
 }>(
-  "getAllconversation",
+  "getAllUserConversation",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(conversationurl);
-      localStorage.setItem("conversation", JSON.stringify(response.data.conversation));
-      return response.data.conversations;
+      return response.data.conversation;
     } catch (err: any) {
       const message = err.response && err.response.data.message
         ? err.response.data.message
@@ -60,7 +59,7 @@ export const Createconversation = createAsyncThunk<{
         conversationData,
         config
       );
-     
+
       return response2.data.conversation;
 
 
@@ -142,73 +141,3 @@ export const GetSingleconversationDetails = createAsyncThunk<conversationPayload
   }
 );
 
-// Get User conversation
-export const GetUserconversation = createAsyncThunk<{
-  rejectValue: KnownError,
-}, conversationdatatype>(
-  "GetUserconversation",
-  async (Detailsdata, { rejectWithValue, getState }) => {
-
-    try {
-      const { auth } = getState() as { auth: { conversationInfo: { _id: String }, token: string } };
-
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-        config
-      );
-      return response.data.conversations;
-      // console.log(Detailsdata)
-
-    } catch (err: any) {
-      const message = err.response && err.response.data.message
-        ? err.response.data.message
-        : err.message
-      return rejectWithValue(message);
-
-    }
-  }
-);
-
-
-
-// Get User conversation
-export const GetUserconversationDetails = createAsyncThunk<
- {
-    rejectValue: KnownError,
-  }, {
-    receiverId: any;
-    senderId: any;
-}>(
-    "GetUserconversationDetails",
-    async (Detailsdata, { rejectWithValue, getState }) => {
-
-      try {
-        const { auth } = getState() as { auth: { userInfo: { _id: String }, token: string } };
-
-        const config = {
-          headers: {
-            authorization: `Bearer ${auth.token}`,
-          },
-        };
-        // console.log(Detailsdata)
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-          config
-        );
-        return response.data.conversation;
-        // console.log(Detailsdata)
-
-      } catch (err: any) {
-        const message = err.response && err.response.data.message
-          ? err.response.data.message
-          : err.message
-        return rejectWithValue(message);
-
-      }
-    }
-  );

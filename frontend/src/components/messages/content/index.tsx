@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
 import { Createmessage, GetSinglemessageDetails } from '../../../features/message/messageReducer';
 import moment from 'moment';
-import { Createconversation, GetUserconversationDetails } from '../../../features/conversation/conversationReducer';
+import { Createconversation } from '../../../features/conversation/conversationReducer';
 import ListContent from '../list';
 
 
@@ -20,12 +20,12 @@ const MessageContent: React.FC = () => {
   const { conversationDetails } = useAppSelector(store => store.conversation)
   const { userInfo } = useAppSelector(store => store.auth)
  
-  useEffect(() => {
-    if(conversationDetails) {
-      dispatch(GetSinglemessageDetails(conversationDetails?._id))
-    }
+  // useEffect(() => {
+  //   if(conversationDetails) {
+  //     dispatch(GetSinglemessageDetails(conversationDetails?._id))
+  //   }
    
-  }, [conversationDetails])
+  // }, [conversationDetails])
 
   const handleCreateMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

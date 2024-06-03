@@ -1,16 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import {
   Createconversation, 
   Deleteconversation, 
   GetSingleconversationDetails, 
-  GetUserconversation,
-  GetUserconversationDetails,
+  getAllUserConversation,
 } from './conversationReducer'
-const BookMarked = localStorage.getItem("isBookMarked");
-const conversation = JSON.parse(localStorage.getItem("conversation") || 'false');
-
-
 // Define a type for the conversation state
 interface conversationState {
   conversationDetails?: any,
@@ -21,10 +15,6 @@ interface conversationState {
   isBookMarked?: Boolean,
   conversationisSuccess?: Boolean,
   conversationisError?: Boolean,
-
-  // conversationisLoading?: Boolean,
-  // conversationisSuccess?: Boolean,
-  // conversationisError?: Boolean,
 
   alertText?: any,
   showAlert?: Boolean,
@@ -37,7 +27,7 @@ interface conversationState {
 const initialState: conversationState = {
   conversationDetails: null,
 
-  conversation: conversation ? conversation: [],
+  conversation: [],
   bookmarks: [],
 
 
@@ -46,11 +36,6 @@ const initialState: conversationState = {
   conversationisError: false,
   isBookMarked: false,
   isLiked: false,
-
-  // conversationisLoading: false,
-  // conversationisSuccess: false,
-  // conversationisError: false,
-
   alertText: '',
   showAlert: false,
   alertType: '',
@@ -75,27 +60,6 @@ export const conversationSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // // registration build case
-    builder.addCase(GetUserconversation.pending, (state, action) => {
-      state.conversationisLoading = true
-    })
-    builder.addCase(GetUserconversation.fulfilled, (state, action) => {
-      state.conversationisSuccess = true
-      state.conversationisLoading = false
-      state.conversation = action.payload
-    })
-    builder.addCase(GetUserconversation.rejected, (state, action) => {
-      state.conversationisSuccess = false
-      state.conversationisError = true
-      state.conversationisLoading = false
-      state.showAlert = true
-      state.alertType = 'danger'
-      state.alertText = action.payload
-
-    })
-
-
-
     // create user conversation
     builder.addCase(Createconversation.pending, (state, action) => {
       state.conversationisLoading = true
@@ -160,18 +124,15 @@ export const conversationSlice = createSlice({
 
     })
 
-    builder.addCase(GetUserconversationDetails.pending, (state, action) => {
+    builder.addCase(getAllUserConversation.pending, (state, action) => {
       state.conversationisLoading = true
     })
-    builder.addCase(GetUserconversationDetails.fulfilled, (state, action) => {
+    builder.addCase(getAllUserConversation.fulfilled, (state, action) => {
       state.conversationisSuccess = true
       state.conversationisLoading = false
-      state.conversationDetails = action.payload
-      state.alertText = 'conversation Update succesfully'
-      state.showAlert = true
-      state.alertType = 'success'
+      state.conversation = action.payload
     })
-    builder.addCase(GetUserconversationDetails.rejected, (state, action) => {
+    builder.addCase(getAllUserConversation.rejected, (state, action) => {
       state.conversationisSuccess = false
       state.conversationisError = true
       state.conversationisLoading = false
