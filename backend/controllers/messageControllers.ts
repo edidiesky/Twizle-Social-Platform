@@ -15,21 +15,19 @@ interface CustomInterface extends ExpressRequest {
 //  Public
 const createMessage = asyncHandler(async (req: CustomInterface, res: Response) => {
   const userId = req.user?.userId
-  const userBodyId = req.body.userId
   const conversationId = req.params.id
-  
+
   const message = await Message.create({
     conversationId: conversationId,
     sender: userId,
     message: req.body.message,
-    isSender:userId === userBodyId? true: false
   });
   await Conversation.findOneAndUpdate({ _id: conversationId }, {
     lastMessage: req.body.message
   }, { new: true })
 
-res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ message });
 })
 
@@ -46,7 +44,7 @@ const getAllMessageofAConversation = asyncHandler(async (req: CustomInterface, r
   }
 
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ message });
 });
 
@@ -56,7 +54,7 @@ res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 //  Public
 const DeleteMessage = asyncHandler(async (req: CustomInterface, res: Response) => {
   res.setHeader("Content-Type", "text/html");
-res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.status(200).json({ msg: "delete review controller" });
 });
 
@@ -67,8 +65,8 @@ const UpdateMessage = asyncHandler(async (req: CustomInterface, res: Response) =
   //   { readByBuyer: false, readBySeller: true },
   //   { new: true }
   // );
-//   res.setHeader("Content-Type", "text/html");
-// res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
+  //   res.setHeader("Content-Type", "text/html");
+  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
   // res.status(200).json({ updatedMessage });
 });
 
