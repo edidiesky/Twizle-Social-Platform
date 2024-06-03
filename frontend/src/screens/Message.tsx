@@ -21,10 +21,10 @@ const MessageIndex: React.FC = () => {
   // create user conversation
 
   useEffect(() => {
-    if (senderId && receiverId) {
+    if (id) {
       dispatch(GetUserconversationDetails({ senderId: senderId, receiverId: receiverId }))
     }
-  }, [senderId, receiverId])
+  }, [id])
   React.useEffect(() => {
 
     if (!conversationDetails) {

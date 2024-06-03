@@ -3,17 +3,23 @@ import mongoose from "mongoose";
 // a structure of the Chat
 const ConversationSchema = new mongoose.Schema(
   {
-    sender: {
+    users: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    receiver: {
+      required: true,
+      ref: 'User',
+    }],
+    messages: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+      required: true,
+      ref: 'Message',
+    }],
     lastMessage: {
-      type: String
-    }
+      type: String,
+      default: ''
+    },
+    lastMessageAt: { type: Date, default: Date.now },
+    isGroup: { type: Boolean, default: false },
+
   },
   { timestamps: true }
 );

@@ -18,9 +18,9 @@ const LeftContent: React.FC = () => {
 
 
     const dispatch = useAppDispatch()
-    // useEffect(() => {
-    //     dispatch(GetSingleconversationDetails(userInfo?._id))
-    // }, [])
+    useEffect(() => {
+        dispatch(GetSingleconversationDetails(userInfo?._id))
+    }, [])
 
 
     return (
@@ -76,20 +76,21 @@ const LeftContent: React.FC = () => {
                                     } else {
                                         date = updatedAt.format('MMMD');
                                     }
+                                    const userConversations = x?.sender?._id !== userInfo?._id
 
-                                    return x?.sender?._id !== userInfo?._id && <NavLink
+                                    return <NavLink
 
                                         to={`/messages/${x?.sender?._id}-${x?.receiver?._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
-                                                <img src={x.sender?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                                                <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                                 <div className="image_gradient"></div>
                                             </div>
                                             <div className="flex flex-1 column item-start" style={{ gap: ".4rem" }}>
                                                 <h4 className="fs-16 tweet_user text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
-                                                    {x?.sender?.display_name}
+                                                    {x?.receiver?.display_name}
                                                     <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                                    <span className="text-light fs-14 text-grey">@{x?.sender?.name}</span>
+                                                    <span className="text-light fs-14 text-grey">@{x?.receiver?.name}</span>
                                                     <span className="text-light date fs-15 text-grey">{date}</span>
                                                 </h4>
                                                 <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
@@ -223,7 +224,8 @@ const LeftContentStyles = styled.div`
         width: 100%;
     padding:1.5rem 2rem;
     &.active {
-        background-color: #F4F6F7;
+        /* background-color: #F4F6F7; */
+         background-color: var(--dark-grey-hover);
         position: relative;
         &::after {
             content: '';

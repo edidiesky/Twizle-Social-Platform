@@ -12,68 +12,46 @@ interface CustomInterface extends ExpressRequest {
 // Create Conversation
 //  Public
 const createConversation = asyncHandler(async (req: CustomInterface, res: Response, next: NextFunction) => {
-  // const { userId } = req.user;
-  const { receiverId, senderId } = req.body
-  // console.log(receiverId, senderId)
-  // check for any exusting conversation
-  const existingConversations = await Conversation.find({
+
+  const senderId = req.user?.userId
+  const { lastMessage, receiverId } = req.body
+  const existingConversation = await Conversation.findOne({
     $or: [
-      {
-        sender: senderId,
-        receiver: receiverId
-      },
-      {
-        sender: receiverId,
-        receiver: senderId
-      },
+      { users: { $all: [senderId, receiverId] } },
+      { users: { $all: [receiverId, senderId] } },
     ]
-  }).populate("sender", " username bio display_name name profile_image_url")
-    .populate("receiver", " username bio display_name name profile_image_url");
-
-
-  // console.log(existingConversations?.length)
-
-  if (existingConversations[0] !== undefined) {
+  })
+  if (existingConversation) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversation: existingConversations })
-
+    res.status(200).json({ conversation: existingConversation });
   } else {
-
-    // create a users conversation
-    await Conversation.create({
-      sender: senderId,
-      receiver: receiverId
+    const conversation = await Conversation.create({
+      lastMessage,
+      users: [senderId, receiverId]
     })
-
-    // get the users conversation
-    const conversation = await Conversation.find({
-      $or: [{ sender: req.user?.userId }, { receiver: req.user?.userId }],
-    }).populate("sender", " username bio display_name name profile_image_url")
-      .populate("receiver", " username bio display_name name profile_image_url");
-
-
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversation: conversation })
+    res.status(200).json({ conversation: conversation });
   }
-
-
 });
 
 // GET Review of the user conversation
 //  Public
 // send the conversation Id only
 const getUserConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  let userIdToRemove = "64f692e2374ae635be60219c"; // The _id to remove
-
-  const conversations = await Conversation.find({
-    $or: [{ sender: req.user?.userId }, { receiver: req.user?.userId }],
-  }).populate("sender", " username bio display_name name profile_image_url")
-    .populate("receiver", " username bio display_name name profile_image_url");
+  const senderId = req.user?.userId
+  const receiverId = req.params.id
+  // const { lastMessage, receiverId } = req.body
+  const existingConversation = await Conversation.findOne({
+    $or: [
+      { users: { $all: [senderId, receiverId] } },
+      { users: { $all: [receiverId, senderId] } },
+    ]
+  })
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({ conversations })
+  res.status(200).json({ conversation: existingConversation });
 });
 
 
@@ -81,16 +59,16 @@ const getUserConversation = asyncHandler(async (req: CustomInterface, res: Respo
 //  Public
 // send the conversation Id only
 const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const { receiverId, senderId } = req.params;
+  const { receiverId } = req.params;
   // // find the Gig
   const conversation = await Conversation.findOne({
     $or: [
       {
-        sender: senderId,
+        sender: req.user?.userId,
         receiver: receiverId
       },
       {
-        receiver: senderId,
+        receiver: req.user?.userId,
         sender: receiverId
       }
     ]
@@ -120,15 +98,6 @@ const DeleteConversation = asyncHandler(async (req: CustomInterface, res: Respon
 });
 
 const UpdateConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  // // updating the Conversation
-  // const updatedConversation = await Conversation.findByOneAndUpdate(
-  //   { Id: req.params.Id },
-  //   { readByBuyer: false, readBySeller: true },
-  //   { new: true }
-  // );
-  //   res.setHeader("Content-Type", "text/html");
-  // res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");// 
-  //   res.status(200).json({ updatedConversation });
 });
 
 export {
