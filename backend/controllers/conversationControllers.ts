@@ -58,42 +58,16 @@ const getUserConversation = asyncHandler(async (req: CustomInterface, res: Respo
       $in: [senderId]
     }
   }).populate("users", " username bio display_name name profile_image_url")
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({ conversation: existingConversation });
-});
 
+  const filteredConversations = existingConversation.filter((conversation?:any) => {
+    const receiverIndex = conversation.users.some((user?:any) => user._id.toString() === req.user?.userId);
+    return receiverIndex;
+  });
 
-// GET All Gig
-//  Public
-// send the conversation Id only
-const getSingleConversation = asyncHandler(async (req: CustomInterface, res: Response) => {
-  const { receiverId } = req.params;
-  // // find the Gig
-  const conversation = await Conversation.findOne({
-    $or: [
-      {
-        sender: req.user?.userId,
-        receiver: receiverId
-      },
-      {
-        receiver: req.user?.userId,
-        sender: receiverId
-      }
-    ]
-  })
-    .populate("sender", " username bio display_name name profile_image_url")
-    .populate("receiver", " username bio display_name name profile_image_url");
-
-  if (!conversation) {
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ conversation: null });
-  }
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.status(200).json({ conversation });
+  res.status(200).json({ conversations: filteredConversations });
 });
 
 
@@ -113,6 +87,5 @@ export {
   createConversation,
   getUserConversation,
   DeleteConversation,
-  getSingleConversation,
   UpdateConversation,
 };

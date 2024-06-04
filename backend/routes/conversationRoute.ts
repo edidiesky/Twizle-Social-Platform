@@ -6,12 +6,11 @@ import {
 import {
   getUserConversation,
   DeleteConversation,
-  getSingleConversation,
   UpdateConversation,
   createConversation
 } from "../controllers/conversationControllers";
 
-router.get("/:senderId/:receiverId", authMiddleware, getSingleConversation);
+// router.get("/:senderId/:receiverId", authMiddleware, getSingleConversation);
 router.get("/", authMiddleware, getUserConversation);
 router.post("/", authMiddleware, createConversation);
 

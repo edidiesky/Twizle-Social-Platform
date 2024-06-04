@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import { FiSettings } from 'react-icons/fi'
-import { BiSolidBadgeCheck, BiBarChart, BiDotsHorizontalRounded } from 'react-icons/bi'
+import { BiSolidBadgeCheck,} from 'react-icons/bi'
 import { GoSearch } from 'react-icons/go'
 import { LuMailPlus } from 'react-icons/lu'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxtoolkit';
@@ -18,11 +18,17 @@ const LeftContent: React.FC = () => {
 
 
     const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(GetSingleconversationDetails(userInfo?._id))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(GetSingleconversationDetails(userInfo?._id))
+    // }, [])
+    const usersConversation = conversation?.map((convo?: any) => convo?.users)
 
+    const filteredConversations = conversation.filter((conversation?: any) => {
+        const receiverIndex = conversation.users.some((user?: any) => user._id.toString() === userInfo?._id);
+        return receiverIndex;
+    });
 
+    console.log(...usersConversation)
     return (
         <LeftContentStyles>
             <div className="flex column w-100 column gap-2">
@@ -41,7 +47,7 @@ const LeftContent: React.FC = () => {
 
                 </div>
                 {
-                    conversation?.length !== 0 && <div className="search w-90 auto flex item-center justify-center gap-1">
+                    usersConversation?.length !== 0 && <div className="search w-90 auto flex item-center justify-center gap-1">
                         <GoSearch fontSize={'20px'} color='var(--grey-1)' />
                         <input type="text" placeholder='Search direct messages' className='searchinput' />
                     </div>
@@ -50,7 +56,7 @@ const LeftContent: React.FC = () => {
                 <div className="flex column w-100">
                     {
 
-                        conversation?.length === 0 ? <div className="w-85 auto flex column">
+                        usersConversation?.length === 0 ? <div className="w-85 auto flex column">
                             <h3 className="fs-30 text-extra-bold">Welcome to your inbox!
                                 <span className="text-light py-1 block fs-16 text-grey">Drop a line, share posts and more with private conversations between you and others on X. </span>
                             </h3>
@@ -59,7 +65,7 @@ const LeftContent: React.FC = () => {
                             </div>
                         </div> : <div className="w-100">
                             {
-                                conversation?.map((x: any, index: any) => {
+                                usersConversation?.map((x: any, index: any) => {
                                     const updatedAt = moment(x?.updatedAt);
                                     const now = moment();
                                     const hoursDifference = now.diff(updatedAt, 'hours');
@@ -76,21 +82,20 @@ const LeftContent: React.FC = () => {
                                     } else {
                                         date = updatedAt.format('MMMD');
                                     }
-                                    const userConversations = x?.sender?._id !== userInfo?._id
 
                                     return <NavLink
 
                                         to={`/messages/${x?.sender?._id}-${x?.receiver?._id}`} key={index} className="messageCard w-100 flex item-start justify-space">
                                         <div className="flex item-start gap-1">
                                             <div className="image_wrapper">
-                                                <img src={x.receiver?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
+                                                <img src={x?.profile_image_url} alt="tweet_comment_image" className="avatar_profile w-100 h-100" />
                                                 <div className="image_gradient"></div>
                                             </div>
                                             <div className="flex flex-1 column item-start" style={{ gap: ".4rem" }}>
                                                 <h4 className="fs-16 tweet_user text-bold text_dark_grey flex item-center" style={{ gap: '.2rem' }}>
-                                                    {x?.receiver?.display_name}
+                                                    {x?.display_name}
                                                     <span className='flex item-center'><BiSolidBadgeCheck color={'var(--blue-1)'} /></span>
-                                                    <span className="text-light fs-14 text-grey">@{x?.receiver?.name}</span>
+                                                    <span className="text-light fs-14 text-grey">@{x?.name}</span>
                                                     <span className="text-light date fs-15 text-grey">{date}</span>
                                                 </h4>
                                                 <h5 className="fs-14 text-light text-grey">{x.lastMessage}</h5>
